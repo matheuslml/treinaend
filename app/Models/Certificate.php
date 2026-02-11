@@ -33,5 +33,5 @@ class Certificate extends Model implements Auditable
     public function officialDiaries(): BelongsToMany
     {
         return $this->belongsToMany(OfficialDiary::class);
-    }
+    }//
 }

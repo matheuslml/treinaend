@@ -27,7 +27,7 @@ class Registration extends Model implements Auditable
         'qualification',
         'front_certificate',
         'back_certificate'
-    ];
+    ];//
 
     protected $dates = [
         'expires_at',

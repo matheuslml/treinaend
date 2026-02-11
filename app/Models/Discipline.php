@@ -22,7 +22,7 @@ class Discipline extends Model implements Auditable
         'name',
         'order',
         'days'
-    ];
+    ];//
 
     protected $dates = [
         'expires_at',

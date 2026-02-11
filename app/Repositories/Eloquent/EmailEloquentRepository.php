@@ -12,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 
 class EmailEloquentRepository extends parentAlias
 {
-    #[Pure]
+    //#[Pure]
     public function __construct()
     {
         parent::__construct(new Email());

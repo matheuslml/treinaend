@@ -12,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 
 class ActCreateEloquentRepository extends EloquentRepository
 {
-    //#[Pure]
+    ////#[Pure]
     public function __construct()
     {
         parent::__construct(new Act());

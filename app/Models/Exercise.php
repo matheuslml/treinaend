@@ -23,7 +23,7 @@ class Exercise extends Model implements Auditable
         'answers',
         'correct_answer',
         'type'
-    ];
+    ];//
 
     protected $dates = [
         'expires_at',
