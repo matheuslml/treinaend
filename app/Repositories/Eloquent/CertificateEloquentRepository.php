@@ -2,7 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\About;
+use App\Models\Certificate;
 use App\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -10,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
 
-class AboutEloquentRepository extends EloquentRepository
+class CertificateEloquentRepository extends EloquentRepository
 {
     //#[Pure]
     public function __construct()
     {
-        parent::__construct(new About());
+        parent::__construct(new Certificate());
     }
 
     public function get(): Collection
@@ -23,12 +23,12 @@ class AboutEloquentRepository extends EloquentRepository
         return parent::get();
     }
 
-    public function create(array $data): About | Model
+    public function create(array $data): Certificate | Model
     {
         return parent::create($data);
     }
 
-    public function find($id): About | Model
+    public function find($id): Certificate | Model
     {
         return parent::find($id);
     }
@@ -38,22 +38,22 @@ class AboutEloquentRepository extends EloquentRepository
         return parent::withTrashed();
     }
 
-    public function update($id, array $data): About | Model
+    public function update($id, array $data): Certificate | Model
     {
         return parent::update($id, $data);
     }
 
-    public function delete($id): About | Model
+    public function delete($id): Certificate | Model
     {
         return parent::delete($id);
     }
 
-    public function restore($id): About | Model
+    public function restore($id): Certificate | Model
     {
         return parent::restore($id);
     }
 
-    public function forceDelete($id): About | Model
+    public function forceDelete($id): Certificate | Model
     {
         return parent::forceDelete($id);
     }

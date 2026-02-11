@@ -38,6 +38,26 @@ use App\Repositories\Eloquent\UnitCreateEloquentRepository;
 use App\Repositories\Eloquent\UnitUpdateEloquentRepository;
 use App\Repositories\Eloquent\UserEloquentRepository;
 
+//TREINAEND -------------------------------------------------------------
+use App\Repositories\Eloquent\CertificateEloquentRepository;
+use App\Repositories\Eloquent\CertificateCreateEloquentRepository;
+use App\Repositories\Eloquent\CertificateUpdateEloquentRepository;
+use App\Repositories\Eloquent\ExerciseEloquentRepository;
+use App\Repositories\Eloquent\ExerciseCreateEloquentRepository;
+use App\Repositories\Eloquent\ExerciseUpdateEloquentRepository;
+use App\Repositories\Eloquent\LessonEloquentRepository;
+use App\Repositories\Eloquent\LessonCreateEloquentRepository;
+use App\Repositories\Eloquent\LessonUpdateEloquentRepository;
+use App\Repositories\Eloquent\RegistrationEloquentRepository;
+use App\Repositories\Eloquent\RegistrationCreateEloquentRepository;
+use App\Repositories\Eloquent\RegistrationUpdateEloquentRepository;
+use App\Repositories\Eloquent\SupportMaterialEloquentRepository;
+use App\Repositories\Eloquent\SupportMaterialCreateEloquentRepository;
+use App\Repositories\Eloquent\SupportMaterialUpdateEloquentRepository;
+use App\Repositories\Eloquent\DisciplineEloquentRepository;
+use App\Repositories\Eloquent\DisciplineCreateEloquentRepository;
+use App\Repositories\Eloquent\DisciplineUpdateEloquentRepository;
+
 //SEMAS -------------------------------------------------------------
 use App\Repositories\Eloquent\ShortcutWebEloquentRepository;
 use App\Repositories\Eloquent\ShortcutWebCreateEloquentRepository;
@@ -274,6 +294,26 @@ use App\Services\UnitService;
 use App\Services\UnitCreateService;
 use App\Services\UnitUpdateService;
 use App\Services\UserService;
+
+//TREINAEND ---------------------------------------------------------
+use App\Services\CertificateService;
+use App\Services\CertificateCreateService;
+use App\Services\CertificateUpdateService;
+use App\Services\ExerciseService;
+use App\Services\ExerciseCreateService;
+use App\Services\ExerciseUpdateService;
+use App\Services\LessonService;
+use App\Services\LessonCreateService;
+use App\Services\LessonUpdateService;
+use App\Services\RegistrationService;
+use App\Services\RegistrationCreateService;
+use App\Services\RegistrationUpdateService;
+use App\Services\SupportMaterialService;
+use App\Services\SupportMaterialCreateService;
+use App\Services\SupportMaterialUpdateService;
+use App\Services\DisciplineService;
+use App\Services\DisciplineCreateService;
+use App\Services\DisciplineUpdateService;
 
 //SEMAS ---------------------------------------------------------
 use App\Services\ShortcutWebService;
@@ -515,6 +555,30 @@ class EloquentRepositoryProvider extends ServiceProvider
         UserService::class => UserEloquentRepository::class,
         GenreService::class => GenreEloquentRepository::class,
         MatrialStatusService::class => MatrialStatusEloquentRepository::class,
+        //TREINAEND ---------------------------------------------------------
+        CertificateService::class => CertificateEloquentRepository::class,
+        CertificateCreateService::class => CertificateCreateEloquentRepository::class,
+        CertificateUpdateService::class => CertificateUpdateEloquentRepository::class,
+
+        ExerciseService::class => ExerciseEloquentRepository::class,
+        ExerciseCreateService::class => ExerciseCreateEloquentRepository::class,
+        ExerciseUpdateService::class => ExerciseUpdateEloquentRepository::class,
+
+        LessonService::class => LessonEloquentRepository::class,
+        LessonCreateService::class => LessonCreateEloquentRepository::class,
+        LessonUpdateService::class => LessonUpdateEloquentRepository::class,
+
+        RegistrationService::class => RegistrationEloquentRepository::class,
+        RegistrationCreateService::class => RegistrationCreateEloquentRepository::class,
+        RegistrationUpdateService::class => RegistrationUpdateEloquentRepository::class,
+
+        SupportMaterialService::class => SupportMaterialEloquentRepository::class,
+        SupportMaterialCreateService::class => SupportMaterialCreateEloquentRepository::class,
+        SupportMaterialUpdateService::class => SupportMaterialUpdateEloquentRepository::class,
+
+        DisciplineService::class => DisciplineEloquentRepository::class,
+        DisciplineCreateService::class => DisciplineCreateEloquentRepository::class,
+        DisciplineUpdateService::class => DisciplineUpdateEloquentRepository::class,
         //FIPAC ---------------------------------------------------------
         OrganizationService::class => OrganizationEloquentRepository::class,
         OrganizationCreateService::class => OrganizationCreateEloquentRepository::class,
