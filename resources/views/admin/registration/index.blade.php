@@ -44,13 +44,31 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="title">Alunos <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="users">Alunos <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <select class="form-select" id="active" name="active" required >
+                      <select class="select2 form-select" id="users" name="users[]" multiple>
+                        <optgroup label="Selecione">
+                          @foreach($users as  $user)
+                            <option value="{{ $user->id }}" >{{ $user->name }}</option>
+                          @endforeach
+                        </optgroup>
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="payment_form">Forma de Pagamento<tag data-bs-toggle="tooltip" title="Forma de Pagamento"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="payment_form" name="payment_form" required >
                       <option value="" class="">Selecione</option>
-                      <option value="0"  >Bloquear</option>
-                      <option value="1"  >Ativar</option>
+                      <option value="Não Pago"  >Não Pago</option>
+                      <option value="Depósito/Cheque"  >Depósito/Cheque</option>
+                      <option value="PagSeguro" selected >Pagseguro</option>
+                      <option value="Transferência"  >Transferência</option>
                     </select>
                   </div>
                 </div>
@@ -58,74 +76,48 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="sub_title">Sub Título <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="payment_status">Status do Pagamento<tag data-bs-toggle="tooltip" title="Status do Pagamento"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <input type="text" id="sub_title" class="form-control" name="sub_title" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="numero da ordem do banner giratorio EX:1,2,3"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="number" id="order" class="form-control" name="order" required />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Link<tag data-bs-toggle="tooltip" title="Link de direcionamento para outra pagina"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <input type="text" id="link" class="form-control" name="link"  />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Imagem Comp.<strong>*</strong><tag data-bs-toggle="tooltip" title="Tamanho: 1280 x 720 px, centralizar informações para melhor adaptação no computador"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <input type="file" class="form-control" id="banner_lg" name="banner_lg" >
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Imagem Celular<strong>*</strong><tag data-bs-toggle="tooltip" title="Tamanho: 900 x 1600 px, centralizar informações para melhor adaptação no celular"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <input type="file" class="form-control" id="banner_sm" name="banner_sm" >
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="content">Conteúdo <tag data-bs-toggle="tooltip" title="Breve descrição, não obrigatória."><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <textarea id="content" class="form-control" name="content"  ></textarea>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="active">Status<strong>*</strong></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <select class="form-select" id="active" name="active" required >
+                    <select class="form-select" id="payment_status" name="payment_status" required >
                       <option value="" class="">Selecione</option>
-                      <option value="0"  >Bloquear</option>
-                      <option value="1"  >Ativar</option>
+                      <option value="S"  >Pago</option>
+                      <option value="N" selected >Não Pago</option>
                     </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="payment_value">Valor Pago<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control current-balance" placeholder="10,000.00" id="payment_value" name="payment_value" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="qualification">Qualificação<strong>*</strong></label>
+                  </div>
+                  <div class="col-sm-9">
+                    <select class="form-select" id="qualification" name="qualification" required >
+                      <option value="" class="">Selecione</option>
+                      <option value="S" selected >Sim</option>
+                      <option value="N"  >Não</option>
+                    </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="information">Observação <tag data-bs-toggle="tooltip" title="Breve descrição, não obrigatória."><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                    <textarea id="information" class="form-control" name="information"  ></textarea>
                   </div>
                 </div>
               </div>
@@ -213,6 +205,9 @@
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
+<script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+<script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
+<script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
 @endsection
 
 @section('page-script')
@@ -220,4 +215,5 @@
   <script src="{{ asset(mix('js/scripts/tables/registrations.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
+<script src="{{ asset(mix('js/scripts/forms/expense-input-mask.js')) }}"></script>
 @endsection

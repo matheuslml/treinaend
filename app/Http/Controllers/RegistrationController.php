@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\User;
 use App\Services\RegistrationService;
 use App\Services\RegistrationCreateService;
 use App\Services\RegistrationUpdateService;
@@ -36,7 +37,8 @@ class RegistrationController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             //$registrations = Registration::with('person')->latest()->get();
             $registrations = Registration::latest()->get();
-            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright'));
+            $users = User::latest()->get();
+            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright', 'users'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -52,15 +54,10 @@ class RegistrationController extends Controller
         }
         try {
             DB::beginTransaction();
-            $fileData = array_merge(
-                $request->toArray(),
-                [
-                    'active'  => 1
-                ]
-            );
-            $this->registrationCreateService->create($fileData);
 
-            flash('Categoria criada com sucesso!')->success();
+            $this->registrationCreateService->create($request->toArray());
+
+            flash('Matrícula criada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){

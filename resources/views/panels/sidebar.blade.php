@@ -158,11 +158,12 @@ $configData = Helper::applClasses();
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="message-circle"></i>
-          <span class="menu-title text-truncate">Certificados</span>
+          <span class="menu-title text-truncate">Matrículas
+          </span>
         </a>
         <ul class="menu-content">
           <li >
-            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+            <a href="{{ route('matriculas.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
               <span class="menu-item text-truncate">Listar</span>
             </a>
