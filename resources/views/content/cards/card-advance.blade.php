@@ -290,7 +290,7 @@
       </div>
     </div>
   </div>
-  <!--/ Developer Meetup Card -->
+  <!--/ Developer Meetup Card   -->
 
   <!-- Profile Card -->
   <div class="col-lg-4 col-md-6 col-12">

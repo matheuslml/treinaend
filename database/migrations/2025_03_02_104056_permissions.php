@@ -32,6 +32,15 @@ class Permissions extends Migration
     public function up(): void
     {
 
+        // TREINAEND
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu do Aluno', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu da Treinaend', 'guard_name' => 'web']);
+
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Sobre', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Sobre', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Sobre', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Sobre', 'guard_name' => 'web']);
+
         // Transparência
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Sobre', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Sobre', 'guard_name' => 'web']);

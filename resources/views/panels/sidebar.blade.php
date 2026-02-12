@@ -48,14 +48,14 @@ $configData = Helper::applClasses();
           </li>
         </ul>
       </li>
-      @can('Ver Menu de Ouvidoria')
+      @can('Ver Menu do Aluno')
       <li class="navigation-header">
-        <span>Treinaend</span>
+        <span>Painel do Aluno</span>
         <i data-feather="more-horizontal"></i>
       </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="message-circle"></i>
+          <i data-feather="file-text"></i>
           <span class="menu-title text-truncate">Exercício</span>
         </a>
         <ul class="menu-content">
@@ -121,6 +121,172 @@ $configData = Helper::applClasses();
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="message-circle"></i>
           <span class="menu-title text-truncate">Material de Apoio</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Acesso</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Requisições</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      @endcan
+      @can('Ver Menu da Treinaend')
+      <li class="navigation-header">
+        <span>Treinaend</span>
+        <i data-feather="more-horizontal"></i>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="message-circle"></i>
+          <span class="menu-title text-truncate">Certificados</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Acesso</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Requisições</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="message-circle"></i>
+          <span class="menu-title text-truncate">Disciplinas</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Acesso</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Requisições</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="message-circle"></i>
+          <span class="menu-title text-truncate">Exercícios</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Acesso</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Requisições</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="message-circle"></i>
+          <span class="menu-title text-truncate">Materiais de Apoio</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Acesso</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Tipos de Requisições</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="message-circle"></i>
+          <span class="menu-title text-truncate">Matrículas</span>
         </a>
         <ul class="menu-content">
           <li >

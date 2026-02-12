@@ -20,13 +20,13 @@
 <!-- Dashboard Analytics Start -->
 <section id="dashboard-analytics">
 
-  <div class="row match-height" hidden>
+  <div class="row match-height" >
     <div class="col-lg-3 col-sm-6 col-12">
       <div class="card">
         <div class="card-header">
           <div>
             <h2 class="fw-bolder mb-0">00</h2>
-            <p class="card-text">RAS Abertos</p>
+            <p class="card-text">Exercícios Feitos</p>
           </div>
           <div class="avatar bg-light-primary p-50 m-0">
             <div class="avatar-content">
@@ -41,7 +41,7 @@
         <div class="card-header">
           <div>
             <h2 class="fw-bolder mb-0">00</h2>
-            <p class="card-text">Total de RAS</p>
+            <p class="card-text">Total de Exercícios</p>
           </div>
           <div class="avatar bg-light-success p-50 m-0">
             <div class="avatar-content">
@@ -92,9 +92,8 @@
     </div>
   </div>
   <!--/ Profile Card -->
-
   <!-- Developer Meetup Card -->
-  <div class="col-lg-4 col-md-6 col-12" hidden>
+  <div class="col-lg-4 col-md-6 col-12">
     <div class="card card-developer-meetup">
       <div class="meetup-img-wrapper rounded-top text-center">
         <img src="{{asset('images/illustration/email.svg')}}" alt="Meeting Pic" height="170" />
@@ -102,23 +101,35 @@
       <div class="card-body">
         <div class="meetup-header d-flex align-items-center">
           <div class="meetup-day">
+            <h6 class="mb-0">THU</h6>
             <h3 class="mb-0">{{ date('d') }}</h3>
           </div>
           <div class="my-auto">
-            <h4 class="card-title mb-25">RAS do dia</h4>
-            <p class="card-text mb-0">apenas os RAS do dia de hoje</p>
+            <h4 class="card-title mb-25">Data da Prova</h4>
+            <p class="card-text mb-0">Se prepare antecipadamente</p>
+          </div>
+        </div>
+        <div class="d-flex flex-row meetings">
+          <div class="avatar bg-light-primary rounded me-1">
+            <div class="avatar-content">
+              <i data-feather="calendar" class="avatar-icon font-medium-3"></i>
+            </div>
+          </div>
+          <div class="content-body">
+            <h6 class="mb-0">Sat, May 25, 2020</h6>
+            <small>10:AM to 6:PM</small>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <!--/ Developer Meetup Card -->
+  <!--/ Developer Meetup Card   -->
 
   <!-- Employee Task Card -->
-  <div class="col-lg-4 col-md-6 col-12" hidden>
+  <div class="col-lg-4 col-md-6 col-12" >
     <div class="card card-employee-task">
       <div class="card-header">
-        <h4 class="card-title">Lista de RAS</h4>
+        <h4 class="card-title">Lista de Exercícios</h4>
         <a href=""><i data-feather="calendar" class="font-medium-3 cursor-pointer"></i></a>
       </div>
       <div class="card-body">
