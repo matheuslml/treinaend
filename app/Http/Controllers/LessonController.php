@@ -27,7 +27,7 @@ class LessonController extends Controller
 
     public function index(): View
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Lições')) {
             return view('pages.not-authorized');
         }
 
@@ -48,7 +48,7 @@ class LessonController extends Controller
     public function store(
         LessonRequest $request
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Lições')) {
             return view('pages.not-authorized');
         }
         try {
@@ -73,7 +73,7 @@ class LessonController extends Controller
 
     public function show($lesson_id)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Lições')) {
             return view('pages.not-authorized');
         }
 
@@ -93,7 +93,7 @@ class LessonController extends Controller
     public function update(
         LessonRequest $request, $lesson_id
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Lições')) {
             return view('pages.not-authorized');
         }
         try {
@@ -113,7 +113,7 @@ class LessonController extends Controller
 
     public function destroy($lesson)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Lições')) {
             return view('pages.not-authorized');
         }
 

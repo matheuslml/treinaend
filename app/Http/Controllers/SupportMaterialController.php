@@ -27,7 +27,7 @@ class SupportMaterialController extends Controller
 
     public function index(): View
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
 
@@ -48,7 +48,7 @@ class SupportMaterialController extends Controller
     public function store(
         SupportMaterialRequest $request
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
         try {
@@ -73,7 +73,7 @@ class SupportMaterialController extends Controller
 
     public function show($supportMaterial_id)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
 
@@ -93,7 +93,7 @@ class SupportMaterialController extends Controller
     public function update(
         SupportMaterialRequest $request, $supportMaterial_id
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
         try {
@@ -113,7 +113,7 @@ class SupportMaterialController extends Controller
 
     public function destroy($supportMaterial)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
 

@@ -124,7 +124,7 @@ $configData = Helper::applClasses();
         </a>
         <ul class="menu-content">
           <li >
-            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+            <a href="{{ route('disciplinas.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
               <span class="menu-item text-truncate">Listar</span>
             </a>

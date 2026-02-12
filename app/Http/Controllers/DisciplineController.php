@@ -27,7 +27,7 @@ class DisciplineController extends Controller
 
     public function index(): View
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Disciplinas')) {
             return view('pages.not-authorized');
         }
 
@@ -48,7 +48,7 @@ class DisciplineController extends Controller
     public function store(
         DisciplineRequest $request
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Disciplinas')) {
             return view('pages.not-authorized');
         }
         try {
@@ -73,7 +73,7 @@ class DisciplineController extends Controller
 
     public function show($discipline_id)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Disciplinas')) {
             return view('pages.not-authorized');
         }
 
@@ -93,7 +93,7 @@ class DisciplineController extends Controller
     public function update(
         DisciplineRequest $request, $discipline_id
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Disciplinas')) {
             return view('pages.not-authorized');
         }
         try {
@@ -113,7 +113,7 @@ class DisciplineController extends Controller
 
     public function destroy($discipline)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Disciplinas')) {
             return view('pages.not-authorized');
         }
 

@@ -24,9 +24,9 @@ class CertificateController extends Controller
         protected CertificateUpdateService $certificateUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Certificados')) {
             return view('pages.not-authorized');
         }
 
@@ -35,11 +35,12 @@ class CertificateController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $categories = Certificate::with('news')->latest()->get();
-            return view('admin.news.Certificate_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            $certificates = Certificate::with('news')->latest()->get();
+            dd($certificates);
+            return view('admin.certificate.index', ['pageConfigs' => $pageConfigs], compact('certificates', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
-
-            flash('Erro ao procurar as Categorias Cadastradas!')->error();
+            dd($throwable);
+            flash('Erro ao procurar as Certificados Cadastrados!')->error();
             return redirect()->back()->withInput();
         }
     }
@@ -120,7 +121,7 @@ class CertificateController extends Controller
             $for_delete = Certificate::find($certificate);
             $for_delete->delete();
             flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_categorias');
+            return redirect('/noticia_Certificados');
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao deletar a Categoria!')->error();

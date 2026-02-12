@@ -11,7 +11,6 @@ use App\Models\Copyright;
 use App\Services\RegistrationService;
 use App\Services\RegistrationCreateService;
 use App\Services\RegistrationUpdateService;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -25,9 +24,9 @@ class RegistrationController extends Controller
         protected RegistrationUpdateService $registrationUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Matrículas')) {
             return view('pages.not-authorized');
         }
 
@@ -35,12 +34,12 @@ class RegistrationController extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-
-            $categories = Registration::with('news')->latest()->get();
-            return view('admin.news.Registration_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            //$registrations = Registration::with('person')->latest()->get();
+            $registrations = Registration::latest()->get();
+            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
-
-            flash('Erro ao procurar as Categorias Cadastradas!')->error();
+            dd($throwable);
+            flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
     }
@@ -48,7 +47,7 @@ class RegistrationController extends Controller
     public function store(
         RegistrationRequest $request
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Matrículas')) {
             return view('pages.not-authorized');
         }
         try {
@@ -73,7 +72,7 @@ class RegistrationController extends Controller
 
     public function show($registration_id)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Matrículas')) {
             return view('pages.not-authorized');
         }
 
@@ -93,7 +92,7 @@ class RegistrationController extends Controller
     public function update(
         RegistrationRequest $request, $registration_id
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Matrículas')) {
             return view('pages.not-authorized');
         }
         try {
@@ -113,7 +112,7 @@ class RegistrationController extends Controller
 
     public function destroy($registration)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Matrículas')) {
             return view('pages.not-authorized');
         }
 
@@ -121,7 +120,7 @@ class RegistrationController extends Controller
             $for_delete = Registration::find($registration);
             $for_delete->delete();
             flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_categorias');
+            return redirect('/noticia_Matrículas');
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao deletar a Categoria!')->error();

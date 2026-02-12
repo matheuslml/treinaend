@@ -27,7 +27,7 @@ class ExerciseController extends Controller
 
     public function index(): View
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Ver e Listar Exercícios')) {
             return view('pages.not-authorized');
         }
 
@@ -48,7 +48,7 @@ class ExerciseController extends Controller
     public function store(
         ExerciseRequest $request
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Exercícios')) {
             return view('pages.not-authorized');
         }
         try {
@@ -73,7 +73,7 @@ class ExerciseController extends Controller
 
     public function show($exercise_id)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Exercícios')) {
             return view('pages.not-authorized');
         }
 
@@ -93,7 +93,7 @@ class ExerciseController extends Controller
     public function update(
         ExerciseRequest $request, $exercise_id
     ){
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Exercícios')) {
             return view('pages.not-authorized');
         }
         try {
@@ -113,7 +113,7 @@ class ExerciseController extends Controller
 
     public function destroy($exercise)
     {
-        if (! Gate::allows('Editar Certificado')) {
+        if (! Gate::allows('Editar Exercícios')) {
             return view('pages.not-authorized');
         }
 
