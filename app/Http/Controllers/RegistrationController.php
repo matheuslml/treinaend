@@ -116,11 +116,10 @@ class RegistrationController extends Controller
         try{
             $for_delete = Registration::find($registration);
             $for_delete->delete();
-            flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_Matrículas');
+            flash('Matrícula deletada com sucesso!')->success();
+            return redirect('/matriculas');
         } catch (\Exception $exception) {
-            dd($exception);
-            flash('Erro ao deletar a Categoria!')->error();
+            flash('Erro ao deletar a Matrícula!')->error();
             return redirect()->back()->withInput();
         }
     }
