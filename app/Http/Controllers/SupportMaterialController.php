@@ -105,16 +105,22 @@ class SupportMaterialController extends Controller
         }
     }
 
-    public function destroy($supportMaterial)
+    public function destroy($support_material_id)
     {
         if (! Gate::allows('Editar Materiais de Apoio')) {
             return view('pages.not-authorized');
         }
 
         try{
-            $for_delete = SupportMaterial::find($supportMaterial);
-            $for_delete->delete();
-            flash('Material de Apoio deletado com sucesso!')->success();
+            DB::beginTransaction();
+
+                $for_delete = SupportMaterial::find($support_material_id);
+                $old_path = storage_path() . '/app/public/files/material_apoio/' . str_replace("material_apoio/", "", $for_delete->url);
+                $for_delete->delete();
+                unlink($old_path);
+
+                flash('Material de Apoio deletado com sucesso!')->success();
+            DB::commit();
             return redirect('/materiais_de_apoio');
         } catch (\Exception $exception) {
             dd($exception);
