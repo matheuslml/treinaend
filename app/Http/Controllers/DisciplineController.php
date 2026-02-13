@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DisciplineRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Exercise;
 use App\Services\DisciplineService;
 use App\Services\DisciplineCreateService;
 use App\Services\DisciplineUpdateService;
@@ -73,11 +74,13 @@ class DisciplineController extends Controller
 
         try{
             $discipline_selected = $this->disciplineService->show($discipline_id);
+            $exercises = Exercise::where('discipline_id',$discipline_id)->latest()->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.discipline.show', compact('discipline_selected', 'unit', 'copyright'));
+            return view('admin.discipline.show', compact('discipline_selected', 'unit', 'copyright', 'exercises'));
         } catch (\Exception $exception) {
-            flash('Erro ao buscar o Tipo de Acesso!')->error();
+            dd($exception);
+            flash('Erro ao buscar a Disciplina!')->error();
             return redirect()->back()->withInput();
         }
     }

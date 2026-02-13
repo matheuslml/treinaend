@@ -19,7 +19,7 @@
 <!-- Advanced Search -->
 <section id="advanced-search-datatable">
   <div class="row">
-    <div class="col-md-8 col-12">
+    <div class="col-md-4 col-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Editar Disciplina</h4>
@@ -91,6 +91,80 @@
         </div>
       </div>
     </div>
+    <div class="col-md-8 col-12">
+      <div class="card">
+        <div class="card-header border-bottom">
+          <h4 class="card-title">Exercícios Cadastrados - Busca Avançada</h4>
+        </div>
+        <hr class="my-0" />
+        <div class="card-datatable">
+        @if (count($exercises) >= 1)
+          <table class="dt-advanced-search table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>Imagem</th>
+                <th>Tipo</th>
+                <th>Questões</th>
+                <th>Correta</th>
+                <th>Registrado em</th>
+                <th>Sistema</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <th></th>
+                <th>Imagem</th>
+                <th>Tipo</th>
+                <th>Questões</th>
+                <th>Correta</th>
+                <th>Registrado em</th>
+                <th>Sistema</th>
+              </tr>
+            </tfoot>
+            <tbody>
+              @php $i = 0; @endphp
+              @foreach($exercises as $exercise)
+                @if($i == 0)
+                  @php $i = 1; @endphp
+                  <tr class="odd">
+                @else
+                  @php $i = 0; @endphp
+                  <tr class="even">
+                @endif
+                    <td class="control sorting_1" tabindex="0" ></td>
+                    <td style="display: none;">
+                        <img
+                            src="{{ asset('storage/files/exercise/' . $exercise->file) }}" 
+                            class="me-75"
+                            height="20"
+                            width="20"
+                            alt="Angular"
+                        />
+                        <span class="fw-bold">Angular Project</span>
+                    </td>
+                    <td style="display: none;">{{ $exercise->type }}</td>
+                    <td style="display: none;">{{ $exercise->answers }}</td>
+                    <td style="display: none;">{{ $exercise->correct_answer  }}</td>
+                    <td style="display: none;">{{isset($exercise->created_at) ? (($exercise->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
+                    <td style="display: none;">
+                      <a href="{{ route('exercicios.show', $exercise->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
+                    </td>
+                  </tr>
+              @endforeach
+            </tbody>
+          </table>
+          @else
+            <div class="alert alert-warning" role="alert">
+              <h4 class="alert-heading">Aviso</h4>
+              <div class="alert-body">
+                Não existem Exercícios Armazenados.
+              </div>
+            </div>
+          @endif
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 <!-- users list ends -->
@@ -115,4 +189,5 @@
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
+  <script src="{{ asset(mix('js/scripts/tables/exercises.js')) }}"></script>
 @endsection
