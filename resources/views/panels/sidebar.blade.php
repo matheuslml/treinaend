@@ -226,17 +226,6 @@ $configData = Helper::applClasses();
             </a>
           </li>
           <li >
-            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Acesso</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Requisições</span>
-            </a>
-          </li>
         </ul>
       </li>
       <li class="nav-item  ">

@@ -73,10 +73,10 @@
                     <label class="col-form-label" for="icon">Ícone<tag data-bs-toggle="tooltip" title="Ícone"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <select class="form-select" id="icon" name="icon" required >
-                      <option value="" class="">Selecione</option>
-                      <option value="reader" selected >Texto</option>
-                      <option value="powerpoint"  >Slides</option>
+                    <label class="form-label" for="select2-icons">Icons</label>
+                    <select data-placeholder="Select a state..." class="select2-icons form-select" id="select2-icons" name="icon">
+                        <option value="reader" data-icon="file-text">Texto</option>
+                        <option value="powerpoint" data-icon="image">Slides</option>
                     </select>
                   </div>
                 </div>
@@ -84,14 +84,10 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="payment_status">Status do Pagamento<tag data-bs-toggle="tooltip" title="Status do Pagamento"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="payment_status">Arquivo<tag data-bs-toggle="tooltip" title="link"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <select class="form-select" id="payment_status" name="payment_status" required >
-                      <option value="" class="">Selecione</option>
-                      <option value="S"  >Pago</option>
-                      <option value="N" selected >Não Pago</option>
-                    </select>
+                      <input type="file" class="form-control" id="link" name="link" >
                   </div>
                 </div>
               </div>
@@ -101,7 +97,9 @@
                     <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control "  id="order" name="order" />
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="touchspin" value="1" id="order" name="order" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -192,9 +190,10 @@
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
-<script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
-<script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
-<script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
+  <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
 @endsection
 
 @section('page-script')
@@ -202,4 +201,5 @@
   <script src="{{ asset(mix('js/scripts/tables/support_materials.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
+  <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
 @endsection

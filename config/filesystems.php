@@ -42,6 +42,14 @@ return [
             'visibility' => 'public',
         ],
 
+        //treinaend
+        'material_apoio' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/files'),
+            'url' => env('APP_URL').'/storage/files',
+            'visibility' => 'public',
+        ],
+
         'images' => [
             'driver' => 'local',
             'root' => storage_path('app/public/images/profile'),

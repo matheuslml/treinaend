@@ -12,7 +12,6 @@ use App\Models\Discipline;
 use App\Services\SupportMaterialService;
 use App\Services\SupportMaterialCreateService;
 use App\Services\SupportMaterialUpdateService;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
@@ -26,7 +25,7 @@ class SupportMaterialController extends Controller
         protected SupportMaterialUpdateService $supportMaterialUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Materiais de Apoio')) {
             return view('pages.not-authorized');
@@ -36,11 +35,11 @@ class SupportMaterialController extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $disciplines = Discipline::latest()->get();
+            $disciplines = Discipline::orderBy('name', 'asc')->get();
             $support_materials = SupportMaterial::latest()->get();
             return view('admin.support_material.index', ['pageConfigs' => $pageConfigs], compact('support_materials', 'unit', 'copyright', 'disciplines'));
         } catch (\Throwable $throwable) {
-
+            dd($throwable);
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
         }
@@ -54,20 +53,14 @@ class SupportMaterialController extends Controller
         }
         try {
             DB::beginTransaction();
-            $fileData = array_merge(
-                $request->toArray(),
-                [
-                    'active'  => 1
-                ]
-            );
-            $this->supportMaterialCreateService->create($fileData);
+            $this->supportMaterialCreateService->create($request->toArray());
 
-            flash('Categoria criada com sucesso!')->success();
+            flash('Material de Suporte criado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-            flash('Erro Cadastrar!')->error();
+            flash('Erro Cadastrar o Material de Suporte!')->error();
             return redirect()->back()->withInput();
         }
     }
