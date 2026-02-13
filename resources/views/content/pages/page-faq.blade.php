@@ -8,7 +8,7 @@
 @endsection
 
 @section('content')
-<!-- search header -->
+<!-- searcha header -->
 <section id="faq-search-filter">
   <div class="card faq-search" style="background-image: url('')">
     <div class="card-body text-center">

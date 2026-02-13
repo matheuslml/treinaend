@@ -54,88 +54,10 @@ $configData = Helper::applClasses();
         <i data-feather="more-horizontal"></i>
       </li>
       <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="file-text"></i>
-          <span class="menu-title text-truncate">Exercício</span>
+        <a href="{{ route('disciplines_student_index') }}" class="d-flex align-items-center" target="_self">
+          <i data-feather="book"></i>
+          <span class="menu-title text-truncate">Disciplinas</span>
         </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Acesso</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Requisições</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="message-circle"></i>
-          <span class="menu-title text-truncate">Prova</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Acesso</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Requisições</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="message-circle"></i>
-          <span class="menu-title text-truncate">Material de Apoio</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('materiais_de_apoio.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-        </ul>
       </li>
       @endcan
       @can('Ver Menu da Treinaend')

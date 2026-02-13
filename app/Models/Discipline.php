@@ -29,9 +29,9 @@ class Discipline extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function lessons(): HasMany
+    public function exercises(): HasMany
     {
-        return $this->hasMany(Lesson::class, 'discipline_id');
+        return $this->hasMany(Exercise::class, 'discipline_id');
     }
 
     public function person(): BelongsToMany

@@ -81,6 +81,7 @@ use App\Http\Controllers\ProjectProgressController;
 use App\Http\Controllers\ProjectResponsibleController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShortcutWebController;
+use App\Http\Controllers\StudentPainel;
 use App\Http\Controllers\SupportMaterialController;
 use App\Http\Controllers\WebFooterController;
 use App\Http\Controllers\WebFooterLogoController;
@@ -134,6 +135,9 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);
     Route::resource('/matriculas', RegistrationController::class);
+    //Main - Treinaend - Student painel -----------------------------------------------------------------
+    Route::get('disciplines_student_index', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
+    Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
 
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);
