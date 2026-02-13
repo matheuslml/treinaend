@@ -115,7 +115,7 @@ class SupportMaterialController extends Controller
             DB::beginTransaction();
 
                 $for_delete = SupportMaterial::find($support_material_id);
-                $old_path = storage_path() . '/app/public/files/material_apoio/' . str_replace("material_apoio/", "", $for_delete->url);
+                $old_path = storage_path() . '/app/public/files/material_apoio/' . str_replace("material_apoio/", "", $for_delete->link);
                 $for_delete->delete();
                 unlink($old_path);
 
