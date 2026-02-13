@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
 
-class ActRequest extends FormRequest
+class DisciplineRequest extends FormRequest
 {
     /**
      * Determine if the BiddingModality is authorized to make this request.

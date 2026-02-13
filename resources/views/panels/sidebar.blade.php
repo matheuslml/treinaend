@@ -145,12 +145,12 @@ $configData = Helper::applClasses();
       </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="message-circle"></i>
+          <i data-feather="book"></i>
           <span class="menu-title text-truncate">Disciplinas</span>
         </a>
         <ul class="menu-content">
           <li >
-            <a href="{{ route('ouvidoria_manifestacoes.index') }}" class="d-flex align-items-center" target="_self">
+            <a href="{{ route('disciplinas.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
               <span class="menu-item text-truncate">Listar</span>
             </a>
@@ -159,18 +159,6 @@ $configData = Helper::applClasses();
             <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
               <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_acessos.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Acesso</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('ouvidoria_requisicoes.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Tipos de Requisições</span>
             </a>
           </li>
         </ul>
