@@ -19,7 +19,7 @@
 <!-- Advanced Search -->
 <section id="advanced-search-datatable">
   <div class="row">
-    <div class="col-md-12 col-12">
+    <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header">
           <h4 class="card-title">Editar Matrícula</h4>
@@ -61,15 +61,15 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="title">Sub Título <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="payment_form">Forma de Pagamento<tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <select class="form-select" id="payment_form" name="payment_form" required >
                       <option value="" class="">Selecione</option>
-                      <option value="Não Pago"  >Não Pago</option>
-                      <option value="Depósito/Cheque"  >Depósito/Cheque</option>
-                      <option value="PagSeguro" selected >Pagseguro</option>
-                      <option value="Transferência"  >Transferência</option>
+                      <option value="Não Pago" {{ $registration_selected->payment_form == "Não Pago" ? 'selected' : '' }}  >Não Pago</option>
+                      <option value="Depósito/Cheque" {{ $registration_selected->payment_form == "Depósito/Cheque" ? 'selected' : '' }} >Depósito/Cheque</option>
+                      <option value="PagSeguro" {{ $registration_selected->payment_form == "PagSeguro" ? 'selected' : '' }} >Pagseguro</option>
+                      <option value="Transferência" {{ $registration_selected->payment_form == "Transferência" ? 'selected' : '' }} >Transferência</option>
                     </select>
                   </div>
                 </div>
@@ -77,13 +77,13 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="order">Ordem <tag data-bs-toggle="tooltip" title="Ordem a aparecer no banner giratorio EX: 1,2,3..."><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="order">Status do Pagamento <tag data-bs-toggle="tooltip" title="Status do Pagamento"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <select class="form-select" id="payment_status" name="payment_status" required >
                       <option value="" class="">Selecione</option>
-                      <option value="S"  >Pago</option>
-                      <option value="N" selected >Não Pago</option>
+                      <option value="S" {{ $registration_selected->payment_status == "S" ? 'selected' : '' }} >Pago</option>
+                      <option value="N" {{ $registration_selected->payment_status == "N" ? 'selected' : '' }} >Não Pago</option>
                     </select>
                   </div>
                 </div>
@@ -91,23 +91,23 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Link <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="payment_value">Valor Pago <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control current-balance" placeholder="10,000.00" id="payment_value" name="payment_value" />
+                      <input type="text" class="form-control current-balance" placeholder="10,000.00" id="payment_value" name="payment_value" value="{{ $registration_selected->payment_value  }}" />
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Alterar Imagem Comp. <tag data-bs-toggle="tooltip" title=" Tamanho: 1280 x 720 px, centralizar informções"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="qualification">Qualificação <tag data-bs-toggle="tooltip" title=" "><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <select class="form-select" id="qualification" name="qualification" required >
                       <option value="" class="">Selecione</option>
-                      <option value="S" selected >Sim</option>
-                      <option value="N"  >Não</option>
+                      <option value="S" {{ $registration_selected->qualification == "S" ? 'selected' : '' }} >Sim</option>
+                      <option value="N" {{ $registration_selected->qualification == "N" ? 'selected' : '' }} >Não</option>
                     </select>
                   </div>
                 </div>
@@ -115,7 +115,7 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Imagem Comp. <tag data-bs-toggle="tooltip" title=" Tamanho: 1280 x 720 px, centralizar informções"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="link">Informação <tag data-bs-toggle="tooltip" title=" "><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <textarea id="information" class="form-control" name="information"  ></textarea>
