@@ -23,7 +23,11 @@ class SupportMaterialUpdateService
         try {
             DB::beginTransaction();
 
-            $this->supportMaterialService->update($request, $supportMaterial_id);
+                if (isset($request['link'])) {
+                    dd($request);
+                }else{
+                    $this->supportMaterialService->update($request, $supportMaterial_id);
+                }
             DB::commit();
         } catch (Exception $exception) {
             //Bugsnag::notifyException($exception);

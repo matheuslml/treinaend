@@ -22,7 +22,7 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Editar Matrícula</h4>
+          <h4 class="card-title">Editar Materia de Apoio</h4>
         </div>
         <div class="card-body">
           @include('flash::message')
@@ -38,7 +38,7 @@
                 </div>
             </div>
           @endif
-          <form class="form form-horizontal" method="POST" action="{{ route('matriculas.update', $registration_selected->id) }}" enctype="multipart/form-data">
+          <form class="form form-horizontal" method="POST" action="{{ route('materiais_de_apoio.update', $support_material_selected->id) }}" enctype="multipart/form-data">
             @csrf()
               @method('PUT')
             <div class="row">
@@ -48,10 +48,10 @@
                     <label class="col-form-label" for="title">Título <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <select class="select2 form-select" id="person_id" name="person_id">
+                      <select class="select2 form-select" id="discipline_id" name="discipline_id">
                         <optgroup label="Selecione">
-                          @foreach($people as  $person)
-                            <option value="{{ $person->id }}" {{ (in_array($person->id, old('person', [])) || isset($people) && $registration_selected->person->id == $person->id) ? 'selected' : '' }} >{{ $person->full_name }}</option>
+                          @foreach($disciplines as  $discipline)
+                            <option value="{{ $discipline->id }}" {{ (in_array($discipline->id, old('discipline', [])) || isset($disciplines) && $support_material_selected->discipline->id == $discipline->id) ? 'selected' : '' }} >{{ $discipline->name }}</option>
                           @endforeach
                         </optgroup>
                       </select>
@@ -61,15 +61,23 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="payment_form">Forma de Pagamento<tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="title">Título<tag data-bs-toggle="tooltip" title="Nome do Material de Apoio"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <select class="form-select" id="payment_form" name="payment_form" required >
-                      <option value="" class="">Selecione</option>
-                      <option value="Não Pago" {{ $registration_selected->payment_form == "Não Pago" ? 'selected' : '' }}  >Não Pago</option>
-                      <option value="Depósito/Cheque" {{ $registration_selected->payment_form == "Depósito/Cheque" ? 'selected' : '' }} >Depósito/Cheque</option>
-                      <option value="PagSeguro" {{ $registration_selected->payment_form == "PagSeguro" ? 'selected' : '' }} >Pagseguro</option>
-                      <option value="Transferência" {{ $registration_selected->payment_form == "Transferência" ? 'selected' : '' }} >Transferência</option>
+                      <input type="text" class="form-control" id="title" name="title" value="{{ $support_material_selected->title }}" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="icon">Ícone<tag data-bs-toggle="tooltip" title="Ícone"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                    <label class="form-label" for="select2-icons">Icons</label>
+                    <select data-placeholder="Select a state..." class="select2-icons form-select" id="select2-icons" name="icon">
+                        <option value="reader" data-icon="file-text" {{ $support_material_selected->icon == "reader" ? 'selected' : '' }} >Texto</option>
+                        <option value="powerpoint" data-icon="image" {{ $support_material_selected->icon == "powerpoint" ? 'selected' : '' }} >Slides</option>
                     </select>
                   </div>
                 </div>
@@ -77,59 +85,33 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="order">Status do Pagamento <tag data-bs-toggle="tooltip" title="Status do Pagamento"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="payment_status">Subir novo Arquivo<tag data-bs-toggle="tooltip" title="link"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <select class="form-select" id="payment_status" name="payment_status" required >
-                      <option value="" class="">Selecione</option>
-                      <option value="S" {{ $registration_selected->payment_status == "S" ? 'selected' : '' }} >Pago</option>
-                      <option value="N" {{ $registration_selected->payment_status == "N" ? 'selected' : '' }} >Não Pago</option>
-                    </select>
+                      <input type="file" class="form-control" id="link" name="link" >
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="payment_value">Valor Pago <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control payment_value" placeholder="10,000.00" id="payment_value" name="payment_value" value="{{ str_replace('.',',', $registration_selected->payment_value)  }}" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="qualification">Qualificação <tag data-bs-toggle="tooltip" title=" "><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <select class="form-select" id="qualification" name="qualification" required >
-                      <option value="" class="">Selecione</option>
-                      <option value="S" {{ $registration_selected->qualification == "S" ? 'selected' : '' }} >Sim</option>
-                      <option value="N" {{ $registration_selected->qualification == "N" ? 'selected' : '' }} >Não</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="link">Informação <tag data-bs-toggle="tooltip" title=" "><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <textarea id="information" class="form-control" name="information"  >{{ $registration_selected->information }}</textarea>
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="touchspin" value="{{ $support_material_selected->order }}" id="order" name="order" />
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-12 mt-2">
                 <button type="submit" class="btn btn-primary me-1" style="position: relative; float: left;">Editar</button>
                 </form>
-                <form method="POST" name="form-delete" action="{{ route('matriculas.destroy', $registration_selected->id) }}">
+                <form method="POST" name="form-delete" action="{{ route('materiais_de_apoio.destroy', $support_material_selected->id) }}">
                     @csrf()
                     @method('delete')
                     <button type="submit" class="btn btn-danger" style="position: relative; float: left;"
-                      onclick="return confirm('Tem certeza que deseja deletar a Matrícula?');">Deletar
+                      onclick="return confirm('Tem certeza que deseja deletar a Materia de Apoio?');">Deletar
                     </button>
                 </form>
               </div>
@@ -153,11 +135,12 @@
 <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
 <script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
 <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
+  <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
 @endsection
 
 @section('page-script')
   {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
-<script src="{{ asset(mix('js/scripts/forms/registration-input-mask.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
 @endsection
