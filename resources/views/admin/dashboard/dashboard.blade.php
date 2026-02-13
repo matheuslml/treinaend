@@ -130,7 +130,7 @@
     <div class="card card-employee-task">
       <div class="card-header">
         <h4 class="card-title">Lista de Exercícios</h4>
-        <a href=""><i data-feather="calendar" class="font-medium-3 cursor-pointer"></i></a>
+        <a href=""><i data-feather="book-open" class="font-medium-3 cursor-pointer"></i></a>
       </div>
       <div class="card-body">
       </div>

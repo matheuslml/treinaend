@@ -2,10 +2,12 @@
 
 namespace App\Services;
 
+use App\Models\Exercise;
 use Bugsnag\BugsnagLaravel\Facades\Bugsnag;
 use Exception;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ExerciseCreateService
 {
@@ -19,7 +21,16 @@ class ExerciseCreateService
     {
         try {
             DB::beginTransaction();
-            $this->exerciseService->create($request);
+
+            $pathfile = Storage::disk('exercise')->put('exercise', $request['file']);
+
+            Exercise::create([
+                'discipline_id' => $request['discipline_id'],
+                'file' => $pathfile,
+                'answers' => $request['answers'],
+                'correct_answer' => $request['correct_answer'],
+                'type' => $request['type']
+            ]);
 
             DB::commit();
         } catch (Exception $exception) {

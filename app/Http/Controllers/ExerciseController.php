@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ExerciseRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Discipline;
 use App\Services\ExerciseService;
 use App\Services\ExerciseCreateService;
 use App\Services\ExerciseUpdateService;
@@ -25,7 +26,7 @@ class ExerciseController extends Controller
         protected ExerciseUpdateService $exerciseUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Exercícios')) {
             return view('pages.not-authorized');
@@ -35,11 +36,10 @@ class ExerciseController extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-
-            $categories = Exercise::with('news')->latest()->get();
-            return view('admin.news.Exercise_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            $disciplines = Discipline::orderBy('name', 'asc')->get();
+            $exercises = Exercise::latest()->get();
+            return view('admin.exercise.index', ['pageConfigs' => $pageConfigs], compact('exercises', 'unit', 'copyright', 'disciplines'));
         } catch (\Throwable $throwable) {
-
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
         }
@@ -51,21 +51,20 @@ class ExerciseController extends Controller
         if (! Gate::allows('Editar Exercícios')) {
             return view('pages.not-authorized');
         }
+        if(!isset($request->file)){
+            flash('Escolha uma Imagem para o Exercício!')->error();
+            return redirect()->back()->withInput();
+        }
         try {
             DB::beginTransaction();
-            $fileData = array_merge(
-                $request->toArray(),
-                [
-                    'active'  => 1
-                ]
-            );
-            $this->exerciseCreateService->create($fileData);
+            $this->exerciseCreateService->create($request->toArray());
 
             flash('Categoria criada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
+dd($throwable);
             flash('Erro Cadastrar!')->error();
             return redirect()->back()->withInput();
         }
