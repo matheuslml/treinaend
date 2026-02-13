@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\SupportMaterialRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Discipline;
 use App\Services\SupportMaterialService;
 use App\Services\SupportMaterialCreateService;
 use App\Services\SupportMaterialUpdateService;
@@ -35,9 +36,9 @@ class SupportMaterialController extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-
-            $categories = SupportMaterial::with('news')->latest()->get();
-            return view('admin.news.SupportMaterial_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            $disciplines = Discipline::latest()->get();
+            $support_materials = SupportMaterial::latest()->get();
+            return view('admin.support_material.index', ['pageConfigs' => $pageConfigs], compact('support_materials', 'unit', 'copyright', 'disciplines'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
@@ -78,11 +79,11 @@ class SupportMaterialController extends Controller
         }
 
         try{
-            $categories = SupportMaterial::with('news')->latest()->get();
+            $support_materials = SupportMaterial::with('news')->latest()->get();
             $supportMaterial_selected = $this->supportMaterialService->show($supportMaterial_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.SupportMaterial_show', compact('SupportMaterial_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.support_material.show', compact('SupportMaterial_selected', 'support_materials', 'unit', 'copyright'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -121,7 +122,7 @@ class SupportMaterialController extends Controller
             $for_delete = SupportMaterial::find($supportMaterial);
             $for_delete->delete();
             flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_categorias');
+            return redirect('/materiais_de_apoio');
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao deletar a Categoria!')->error();
