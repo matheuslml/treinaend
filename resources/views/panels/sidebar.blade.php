@@ -152,7 +152,7 @@ $configData = Helper::applClasses();
           <li >
             <a href="{{ route('disciplinas.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
+              <span class="menu-item text-truncate">Listar / Cadastrar</span>
             </a>
           </li>
           <li >
@@ -172,7 +172,7 @@ $configData = Helper::applClasses();
           <li >
             <a href="{{ route('exercicios.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
+              <span class="menu-item text-truncate">Listar / Cadastrar</span>
             </a>
           </li>
           <li >
@@ -192,7 +192,7 @@ $configData = Helper::applClasses();
           <li >
             <a href="{{ route('materiais_de_apoio.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
+              <span class="menu-item text-truncate">Listar / Cadastrar</span>
             </a>
           </li>
           <li >
@@ -213,7 +213,7 @@ $configData = Helper::applClasses();
           <li >
             <a href="{{ route('matriculas.index') }}" class="d-flex align-items-center" target="_self">
               <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
+              <span class="menu-item text-truncate">Listar / Cadastrar</span>
             </a>
           </li>
           <li >
