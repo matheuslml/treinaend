@@ -16,7 +16,7 @@ return new class extends Migration
             $table->integer('person_id')->constrained('people')->nullable();
             $table->string('payment_form')->nullable();
             $table->enum('payment_status', ['S', 'N', 'NãoNPagoNpelaNBASF', ''])->default('N')->nullable();
-            $table->decimal('payment_value',10,2)->nullable();
+            $table->float('payment_value', 16, 2)->nullable();
             $table->string('code')->nullable();
             $table->string('information')->nullable();
             $table->enum('qualification', ['S', 'N', ''])->default('N')->nullable();

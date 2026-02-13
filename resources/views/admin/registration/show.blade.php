@@ -48,7 +48,7 @@
                     <label class="col-form-label" for="title">Título <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <select class="select2 form-select" id="person" name="person" multiple>
+                      <select class="select2 form-select" id="person_id" name="person_id">
                         <optgroup label="Selecione">
                           @foreach($people as  $person)
                             <option value="{{ $person->id }}" {{ (in_array($person->id, old('person', [])) || isset($people) && $registration_selected->person->id == $person->id) ? 'selected' : '' }} >{{ $person->full_name }}</option>
@@ -94,7 +94,7 @@
                     <label class="col-form-label" for="payment_value">Valor Pago <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control current-balance" placeholder="10,000.00" id="payment_value" name="payment_value" value="{{ $registration_selected->payment_value  }}" />
+                      <input type="text" class="form-control payment_value" placeholder="10,000.00" id="payment_value" name="payment_value" value="{{ str_replace('.',',', $registration_selected->payment_value)  }}" />
                   </div>
                 </div>
               </div>
@@ -118,7 +118,7 @@
                     <label class="col-form-label" for="link">Informação <tag data-bs-toggle="tooltip" title=" "><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <textarea id="information" class="form-control" name="information"  ></textarea>
+                    <textarea id="information" class="form-control" name="information"  >{{ $registration_selected->information }}</textarea>
                   </div>
                 </div>
               </div>
@@ -159,5 +159,5 @@
   {{-- Page js files --}}
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
-<script src="{{ asset(mix('js/scripts/forms/expense-input-mask.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/forms/registration-input-mask.js')) }}"></script>
 @endsection

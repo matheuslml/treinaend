@@ -22,12 +22,18 @@ class RegistrationUpdateService
 
         try {
             DB::beginTransaction();
+            $strings_1 = ['.', 'R$ ', ','];
+            $strings_2 = ['', '', '.'];
+            $replacements = array(
+                "payment_value" => floatval(str_replace($strings_1, $strings_2, $request['payment_value']))
+            );
 
-            $this->registrationService->update($request, $registration_id);
+            $changed = array_replace($request, $replacements);
+
+            $this->registrationService->update($changed, $registration_id);
             DB::commit();
         } catch (Exception $exception) {
             //Bugsnag::notifyException($exception);
-            dd($exception);
             DB::rollBack();
             throw new Exception($exception);
         }
