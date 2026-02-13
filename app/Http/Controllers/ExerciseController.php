@@ -64,7 +64,6 @@ class ExerciseController extends Controller
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-dd($throwable);
             flash('Erro Cadastrar!')->error();
             return redirect()->back()->withInput();
         }
@@ -77,13 +76,12 @@ dd($throwable);
         }
 
         try{
-            $categories = Exercise::with('news')->latest()->get();
+            $disciplines = Discipline::orderBy('name', 'asc')->get();
             $exercise_selected = $this->exerciseService->show($exercise_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.Exercise_show', compact('Exercise_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.exercise.show', compact('exercise_selected', 'disciplines', 'unit', 'copyright'));
         } catch (\Exception $exception) {
-            dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
         }
@@ -104,7 +102,6 @@ dd($throwable);
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-
             flash('Erro ao editar!')->error();
             return redirect()->back()->withInput();
         }
@@ -117,13 +114,18 @@ dd($throwable);
         }
 
         try{
-            $for_delete = Exercise::find($exercise);
-            $for_delete->delete();
-            flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_categorias');
+            DB::beginTransaction();
+
+                $for_delete = Exercise::find($exercise);
+                $old_path = storage_path() . '/app/public/files/exercise/' . str_replace("exercise/", "", $for_delete->file);
+                $for_delete->delete();
+                unlink($old_path);
+
+                flash('Exercício deletado com sucesso!')->success();
+            DB::commit();
+            return redirect('/exercicios');
         } catch (\Exception $exception) {
-            dd($exception);
-            flash('Erro ao deletar a Categoria!')->error();
+            flash('Erro ao deletar o Exercício!')->error();
             return redirect()->back()->withInput();
         }
     }

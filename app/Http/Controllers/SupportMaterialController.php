@@ -39,7 +39,6 @@ class SupportMaterialController extends Controller
             $support_materials = SupportMaterial::latest()->get();
             return view('admin.support_material.index', ['pageConfigs' => $pageConfigs], compact('support_materials', 'unit', 'copyright', 'disciplines'));
         } catch (\Throwable $throwable) {
-            dd($throwable);
             flash('Erro ao procurar as Material de Apoios Cadastradas!')->error();
             return redirect()->back()->withInput();
         }
@@ -78,7 +77,6 @@ class SupportMaterialController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             return view('admin.support_material.show', compact('support_material_selected', 'disciplines', 'unit', 'copyright'));
         } catch (\Exception $exception) {
-            dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
         }
@@ -123,7 +121,6 @@ class SupportMaterialController extends Controller
             DB::commit();
             return redirect('/materiais_de_apoio');
         } catch (\Exception $exception) {
-            dd($exception);
             flash('Erro ao deletar o Material de Apoio!')->error();
             return redirect()->back()->withInput();
         }

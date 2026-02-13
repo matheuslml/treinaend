@@ -23,11 +23,30 @@ class ExerciseUpdateService
         try {
             DB::beginTransaction();
 
-            $this->exerciseService->update($request, $exercise_id);
+                if (isset($request['file'])) {
+
+                    $pathfile = Storage::disk('exercise')->put('exercise', $request['file']);
+                    $exercise = Exercise::find($exercise_id);
+                    $old_path = storage_path() . '/app/public/files/exercise/' . str_replace("exercise/", "", $exercise->file);
+
+                    Exercise::updateOrCreate(
+                        ['id' => $exercise_id],
+                        [
+                            'discipline_id' => $request['discipline_id'],
+                            'answers' => $request['answers'],
+                            'file' => $pathfile,
+                            'correct_answer' => $request['correct_answer'],
+                            'type' => $request['type']
+                        ]
+                    );
+
+                    unlink($old_path);
+                }else{
+                    $this->exerciseService->update($request, $exercise_id);
+                }
             DB::commit();
         } catch (Exception $exception) {
             //Bugsnag::notifyException($exception);
-            dd($exception);
             DB::rollBack();
             throw new Exception($exception);
         }
