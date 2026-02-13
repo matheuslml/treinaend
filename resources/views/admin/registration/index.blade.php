@@ -44,13 +44,13 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="users">Alunos <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="people">Alunos <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <select class="select2 form-select" id="users" name="users[]" multiple>
+                      <select class="select2 form-select" id="people" name="people[]" multiple>
                         <optgroup label="Selecione">
-                          @foreach($users as  $user)
-                            <option value="{{ $user->id }}" >{{ $user->name }}</option>
+                          @foreach($people as  $person)
+                            <option value="{{ $person->id }}" >{{ isset($person->full_name) ? $person->full_name : '' }}</option>
                           @endforeach
                         </optgroup>
                       </select>
@@ -170,7 +170,7 @@
                   <tr class="even">
                 @endif
                     <td class="control sorting_1" tabindex="0" ></td>
-                    <td style="display: none;">{{ $registration->person_id }}</td>
+                    <td style="display: none;">{{ isset($registration->person->full_name) ? $registration->person->full_name : ''}}</td>
                     <td style="display: none;">{{ $registration->code }}</td>
                     <td style="display: none;">{{ $registration->payment_status == "S" ? 'Pago' : ($registration->payment_status == "N" ? 'Não Pago' : $registration->payment_status)  }}</td>
                     <td style="display: none;">{{isset($registration->created_at) ? (($registration->created_at)->format('d/m/Y H:m:s')) : ''}}</td>

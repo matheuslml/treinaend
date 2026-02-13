@@ -29,11 +29,11 @@ class RegistrationCreateService
 
             $changed = array_replace($request, $replacements);
 
-            foreach($changed['users'] as $user){
+            foreach($changed['people'] as $person){
                 $registration = array_merge(
                 $changed,
                 [
-                    'person_id'  => $user
+                    'person_id'  => $person
                 ]
                 );
 

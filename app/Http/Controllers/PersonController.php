@@ -18,7 +18,6 @@ use App\Models\Country;
 use App\Models\Departament;
 use App\Models\DepartamentPerson;
 use App\Models\Document;
-use App\Models\DocumentType;
 use App\Models\Email;
 use App\Models\Genre;
 use App\Models\MatrialStatus;

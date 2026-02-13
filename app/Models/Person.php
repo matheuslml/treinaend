@@ -25,9 +25,9 @@ class Person extends Model implements Auditable
     use AuditableTrait;
 
 
-    protected $table = 'person';
+    protected $table = 'people';
 
-    protected $cascadeDeletes = ['documents', 'addresses', 'personable'];
+    protected $cascadeDeletes = ['documents', 'addresses'];
 
     protected $fillable = [
         'full_name',
@@ -43,11 +43,6 @@ class Person extends Model implements Auditable
         'birthdate',
         'deleted_at'
     ];
-
-    public function personable(): MorphTo
-    {
-        return $this->morphTo('personable');
-    }
 
     public function emails(): HasMany
     {

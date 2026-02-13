@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Person;
 use App\Models\User;
 use App\Services\RegistrationService;
 use App\Services\RegistrationCreateService;
@@ -35,10 +36,9 @@ class RegistrationController extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            //$registrations = Registration::with('person')->latest()->get();
             $registrations = Registration::latest()->get();
-            $users = User::latest()->get();
-            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright', 'users'));
+            $people = Person::latest()->get();
+            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright', 'people'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -74,11 +74,11 @@ class RegistrationController extends Controller
         }
 
         try{
-            $categories = Registration::with('news')->latest()->get();
+            $people = Person::latest()->get();
             $registration_selected = $this->registrationService->show($registration_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.Registration_show', compact('Registration_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.registration.show', compact('registration_selected', 'people', 'unit', 'copyright'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
