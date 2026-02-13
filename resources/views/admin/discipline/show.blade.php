@@ -135,13 +135,11 @@
                     <td class="control sorting_1" tabindex="0" ></td>
                     <td style="display: none;">
                         <img
-                            src="{{ asset('storage/files/exercise/' . $exercise->file) }}" 
+                            src="{{ asset('storage/files/' . $exercise->file) }}"
                             class="me-75"
-                            height="20"
-                            width="20"
+                            height="250"
                             alt="Angular"
                         />
-                        <span class="fw-bold">Angular Project</span>
                     </td>
                     <td style="display: none;">{{ $exercise->type }}</td>
                     <td style="display: none;">{{ $exercise->answers }}</td>
