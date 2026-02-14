@@ -38,4 +38,9 @@ class Discipline extends Model implements Auditable
     {
         return $this->belongsToMany(Person::class);
     }
+
+    public function support_materials(): HasMany
+    {
+        return $this->hasMany(SupportMaterial::class, 'discipline_id');
+    }
 }

@@ -6,8 +6,10 @@ use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Models\Exercise;
 use App\Models\ExerciseUser;
+use App\Models\SupportMaterial;
 use App\Models\Unit;
 use App\Models\User;
+use Detection\MobileDetect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -57,11 +59,11 @@ class StudentPainel extends Controller
                                     ->with(['users' => function($q) use ($userId) { $q->where('user_id', $userId); }])
                                     ->get();
 
-            /*foreach ($exercises_dones as $done){
-                $answer = $exercise->users->first()->pivot->answer ?? null;
-                echo "Exercise {$exercise->id} - Answer: {$answer}";
-            }*/
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones'));
+            $support_materials = SupportMaterial::where('discipline_id', $discipline_id)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -92,5 +94,29 @@ class StudentPainel extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function download_support_material($support_material_id)
+    {
+        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+            return view('pages.not-authorized');
+        }*/
+
+        try{
+            $detect = new MobileDetect();
+            $isMobile = $detect->isMobile();
+            $support_material = SupportMaterial::find($support_material_id);
+            if($isMobile){
+                return response()->download('storage/files/material_apoio/' . $support_material->url, 'file.pdf');
+            }else{
+                $url_redirect = asset('storage/files/material_apoio/' . $support_material->url);
+                return redirect()->to($url_redirect);
+            }
+
+        } catch (\Throwable $throwable) {
+            flash('Erro ao fazer o Download!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
 }
+
 
