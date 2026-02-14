@@ -137,7 +137,7 @@
                         <img
                             src="{{ asset('storage/files/' . $exercise->file) }}"
                             class="me-75"
-                            height="250"
+                            height="60"
                             alt="Angular"
                         />
                     </td>
