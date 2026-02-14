@@ -63,7 +63,13 @@ class StudentPainel extends Controller
                                     ->orderBy('order', 'asc')
                                     ->get();
 
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials'));
+            $exam_questions = Exercise::where('discipline_id', $discipline_id)
+                                    ->whereIn('type', ['P', 'A'])
+                                    ->inRandomOrder()
+                                    ->limit(10)
+                                    ->get();
+
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
