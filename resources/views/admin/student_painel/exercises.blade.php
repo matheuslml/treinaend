@@ -39,7 +39,7 @@
       <div class="faq-navigation d-flex justify-content-between flex-column mb-2 mb-md-0">
         <!-- pill tabs navigation -->
         <ul class="nav nav-pills nav-left flex-column" role="tablist">
-          <!-- exercise -->
+          <!-- open exercise -->
           <li class="nav-item">
             <a
               class="nav-link active"
@@ -49,8 +49,23 @@
               aria-expanded="true"
               role="tab"
             >
-              <i data-feather="credit-card" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Exercício</span>
+              <i data-feather="book-open" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Exercício em Aberto</span>
+            </a>
+          </li>
+
+          <!-- exercise done -->
+          <li class="nav-item">
+            <a
+              class="nav-link"
+              id="exercise-done"
+              data-bs-toggle="pill"
+              href="#faq-exercise-done"
+              aria-expanded="false"
+              role="tab"
+            >
+              <i data-feather="check-circle" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Exercício Realizado</span>
             </a>
           </li>
 
@@ -64,7 +79,7 @@
               aria-expanded="false"
               role="tab"
             >
-              <i data-feather="shopping-bag" class="font-medium-3 me-1"></i>
+              <i data-feather="file-text" class="font-medium-3 me-1"></i>
               <span class="fw-bold">Material de Apoio</span>
             </a>
           </li>
@@ -79,7 +94,7 @@
               aria-expanded="false"
               role="tab"
             >
-              <i data-feather="refresh-cw" class="font-medium-3 me-1"></i>
+              <i data-feather="clock" class="font-medium-3 me-1"></i>
               <span class="fw-bold">Prova</span>
             </a>
           </li>
@@ -100,36 +115,73 @@
         <!-- exercise panel -->
         <div role="tabpanel" class="tab-pane active" id="faq-exercise" aria-labelledby="exercise" aria-expanded="true">
           <!-- icon and header -->
-            @foreach ($exercises as $exercise)
-                <div class="col-md-6 col-lg-6">
-                    <div class="card">
-                        <img
-                            src="{{ asset('storage/files/' . $exercise->file) }}"
-                            class="img-fluid"
-                        />
-                        <div class="card-body">
-                            <form class="form form-horizontal" method="POST" action="{{ route('matriculas.store') }}">
-                                @csrf()
-                                <div class="row">
-                                    <label class="" for="type">Selecione<tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
-                                    <div class="col-sm-4">
-                                        <select class="form-select" id="payment_form" name="payment_form" required >
-                                            <option value="" class="">Selecione</option>
-                                            <option value="Não Pago"  >Não Pago</option>
-                                            <option value="Depósito/Cheque"  >Depósito/Cheque</option>
-                                            <option value="PagSeguro" selected >Pagseguro</option>
-                                            <option value="Transferência"  >Transferência</option>
-                                        </select>
+            <div class="row match-height">
+                @foreach ($exercises as $exercise)
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card">
+                            <img
+                                src="{{ asset('storage/files/' . $exercise->file) }}"
+                                class="card-img-top"
+                            />
+                            <div class="card-body">
+                                <form class="form form-horizontal" method="POST" action="{{ route('student_answer_exercise') }}">
+                                    @csrf()
+                                    <input type="text"  id="exercise_id" name="exercise_id" value="{{ $exercise->id }}" hidden />
+                                    <div class="row">
+                                        <label class="" for="type">Selecione<tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
+                                        <div class="col-sm-8">
+                                            @php
+                                                $quantity = $exercise->answers;
+                                                $i = 0;
+                                            @endphp
+                                            <select class="form-select" id="answer" name="answer" required >
+                                                <option value="" class="">Respostas</option>
+                                                @while ($quantity > 0)
+                                                    @php
+                                                        $i++;
+                                                        $quantity--;
+                                                    @endphp
+                                                    <option value="{{ $i }}"  >{{ $i }}</option>
+                                                @endwhile
+                                            </select>
+                                        </div>
+                                        <div class="col-sm-4 ">
+                                            <button type="submit" class="btn btn-primary me-1">Salvar</button>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-8 ">
-                                        <button type="submit" class="btn btn-primary me-1">Salvar</button>
-                                    </div>
-                                </div>
-                            </form>
+                                </form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
+        </div>
+
+        <!-- exercise done panel -->
+        <div role="tabpanel" class="tab-pane" id="faq-exercise-done" aria-labelledby="exercise-done" aria-expanded="false">
+          <!-- icon and header -->
+            <div class="row match-height">
+                @foreach ($exercises_dones as $exercise_done)
+                        <div class="col-md-6 col-lg-6">
+                            <div class="card {{ $exercise_done->correct_answer == $exercise_done->users->first()->pivot->answer ? 'bg-success' : 'bg-danger' }} text-white">
+                                <img
+                                    src="{{ asset('storage/files/' . $exercise_done->file) }}"
+                                    class="card-img-top"
+                                />
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-sm-6 col-md-6 text-start">
+                                            <p class="card-text text-white">{{ 'Resposta Correta: ' . $exercise_done->correct_answer }}</p>
+                                        </div>
+                                        <div class="col-sm-6 col-md-6 text-end">
+                                            <h4 class="card-title text-white">{{ 'Selecionada: ' . $exercise_done->users->first()->pivot->answer }}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                @endforeach
+            </div>
         </div>
 
         <!-- Support-material panel -->
@@ -286,7 +338,7 @@
           </div>
         </div>
 
-        <!-- cancellation return  -->
+        <!-- exam  -->
         <div
           class="tab-pane"
           id="faq-exam"

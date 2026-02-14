@@ -138,6 +138,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Main - Treinaend - Student painel -----------------------------------------------------------------
     Route::get('disciplines_student_index', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
     Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
+    Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
 
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);
