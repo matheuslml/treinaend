@@ -14,6 +14,7 @@ use App\Services\SupportMaterialCreateService;
 use App\Services\SupportMaterialUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Response;
 
 class SupportMaterialController extends Controller
 {
@@ -125,4 +126,20 @@ class SupportMaterialController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function download($id)
+    {
+
+        $support_material = SupportMaterial::findOrFail($id);
+
+        $path = storage_path('app/public/files/material_apoio/' . str_replace("material_apoio/", "", $support_material->link));
+
+        if (file_exists($path)) {
+            return Response::download($path);
+        }
+
+        return back()->with('error', 'Arquivo não encontrado.');
+    }
+
 }
+

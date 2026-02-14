@@ -210,7 +210,7 @@
                                     </div>
                                 </div>
                                 <div class="fw-bolder text-danger">
-                                    <a type="submit" class="btn-sm btn-primary me-1">
+                                    <a href="{{ route('download_support_material', $support_material->id) }}" class="btn-sm btn-primary me-1">
                                         <i data-feather="download" class="avatar-icon font-medium-3"></i>
                                     </a>
                                 </div>

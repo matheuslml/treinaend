@@ -85,6 +85,7 @@ use App\Http\Controllers\StudentPainel;
 use App\Http\Controllers\SupportMaterialController;
 use App\Http\Controllers\WebFooterController;
 use App\Http\Controllers\WebFooterLogoController;
+use App\Models\SupportMaterial;
 
 /*
 |--------------------------------------------------------------------------
@@ -139,6 +140,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('disciplines_student_index', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
     Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
     Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
+    Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');
+
 
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);
