@@ -106,7 +106,7 @@ INSERT INTO users (name,email,person_id,password,deleted_at,created_at,updated_a
     ('USU TESTE DD','alan@treinaend.com',105,'MG5kZmRk',NULL,NOW(),NULL),
     ('WERTWERT WERTWERT WERT','sfcsdfcsdfc@fcfccdf.com',106,'bjdpZGpt',NULL,NOW(),NULL),
     ('ERT ERTWE RTWERT WERT','ewertfwertfwer@gfsg.com',107,'Y2w0ZXp5',NULL,NOW(),NULL),
-    ('RENAN VICTOR DA SILVA','sd6renan@gmail.com',108,'c2Q2cmVuYW4=',NULL,NOW(),NULL),
+    ('RENAN VICTOR DA SILVA','sd6renan@gmail.com',108,'c2Q2cmVuYW4=',NULL,NOW(),NULL),#PAREI AQUI
     ('JHONATA PESSANHA DA SILVA','jhonatapessanha.s@gmail.com',109,'bndpMWJm',NULL,NOW(),NULL),
     ('EDUARDO DE ALMEIDA PARAJARA','fusionendinspecoes@gmail.com',110,'ZWhueXUz',NULL,NOW(),NULL),
     ('RICARDO LUCAS MARTINS','ricardolucas7@gmail.com',111,'aXQ3Z255',NULL,NOW(),NULL),
@@ -244,7 +244,7 @@ INSERT INTO users (name,email,person_id,password,deleted_at,created_at,updated_a
     ('ANTONIO ANTUNES DA COSTA NETO','lucatonny@bol.com.br',243,'MmhjZDJ6',NULL,NOW(),NULL),
     ('FRANCISCO ÍTALO DE SOUZA FILHO','italo.inspecao@gmail.com',244,'eWI2dnJ5',NULL,NOW(),NULL),
     ('ALEXANDRE DANIEL GOMES','a.danielgomes@hotmail.com',245,'NmM0M3Ax',NULL,NOW(),NULL),
-    ('DIOGENES BISPO DOS SANTOS','diogenes_santos2005@yahoo.com.br',246,'ZHQyMDByOTg=',NULL,NOW(),NULL),
+    ('DIOGENES BISPO DOS SANTOS','diogenes_santos2005@yahoo.com.br',2461,'ZHQyMDByOTg=',NULL,NOW(),NULL),
     ('ARTHUR DE PAUALA JUNIOR','juniorkofty@gmail.com',247,'VmlkYW5vdmEyMA==',NULL,NOW(),NULL),
     ('GIVANILDO LIMA DOS SANTOS','givanildo777@hotmail.com',248,'eWxzaTl6',NULL,NOW(),NULL),
     ('ROBSON PINHEIRO RODRIGUES','robsonpr00@hotmail.com',249,'Z3E1M2o4',NULL,NOW(),NULL),
@@ -707,7 +707,7 @@ INSERT INTO users (name,email,person_id,password,deleted_at,created_at,updated_a
     ('FERNANDO PAES','fernando.paes@compagas.com.br',706,'YXNkZjc4OTA=',NULL,NOW(),NULL),
     ('MAURICIO POMIN BICHARA','mauricio.bichara@compagas.com.br',707,'d2VydDM0NTY=',NULL,NOW(),NULL),
     ('EDILSON TOMAZ ROQUE','edilson.roque@compagas.com.br',708,'dmJubTk4NzY=',NULL,NOW(),NULL),
-    ('RAFAEL DOS SANTOS','cumieraman22@gmail.com',709,'MjgwMzE5OTI=',NULL,NOW(),NULL),
+    ('RAFAEL DOS SANTOS','cumieraman22@gmail.com',709,'MjgwMzE5OTI=',NULL,NOW(),NULL),#PAREI AQUI
     ('EDSON RODRIGO RODRIGUES','rodriguesedson595@gmail.com',710,'ZlMxMjE1MjE=',NULL,NOW(),NULL),
     ('SAMUEL MARCIO DA SILVA','samuelmarciosilva@hotmail.com',711,'MDQxMDE4',NULL,NOW(),NULL),
     ('LUCAS RONCHI NASCIMENTO','lucasronchi63@gmail.com',712,'QmxvdmFkT0w=',NULL,NOW(),NULL),

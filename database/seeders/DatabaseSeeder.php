@@ -23,6 +23,6 @@ class DatabaseSeeder extends Seeder
          $this->call(DisciplinePersonSeeder::class);
          $this->call(SupportMaterialSeeder::class);
          $this->call(RegistrationSeeder::class);
-         //$this->call(UserSeeder::class);
+         $this->call(UserSeeder::class);
     }
 }
