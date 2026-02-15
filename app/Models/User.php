@@ -113,4 +113,9 @@ class User extends Authenticatable implements Auditable
     {
         return $this->hasMany(Notification::class, 'sender_id');
     }
+
+    public function exercises(): BelongsToMany
+    {
+        return $this->belongsToMany(Exercise::class);
+    }
 }

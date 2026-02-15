@@ -23,7 +23,7 @@ class SupportMaterial extends Model implements Auditable
         'link',
         'icon',
         'order'
-    ];
+    ];//
 
     protected $dates = [
         'expires_at',

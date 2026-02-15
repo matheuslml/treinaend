@@ -15,7 +15,7 @@ class UserEloquentRepository extends parentAlias
     /**
      * UserEloquentRepository constructor.
      */
-    #[Pure]
+    //#[Pure]
     public function __construct()
     {
         parent::__construct(new User());

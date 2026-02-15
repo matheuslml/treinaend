@@ -13,7 +13,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 
 class NotificationUserEloquentRepository extends EloquentRepository
 {
-    #[Pure]
+    //#[Pure]
     public function __construct()
     {
         parent::__construct(new NotificationUser());

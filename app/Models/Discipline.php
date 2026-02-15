@@ -22,20 +22,25 @@ class Discipline extends Model implements Auditable
         'name',
         'order',
         'days'
-    ];
+    ];//
 
     protected $dates = [
         'expires_at',
         'deleted_at'
     ];
 
-    public function lessons(): HasMany
+    public function exercises(): HasMany
     {
-        return $this->hasMany(Lesson::class, 'discipline_id');
+        return $this->hasMany(Exercise::class, 'discipline_id');
     }
 
     public function person(): BelongsToMany
     {
         return $this->belongsToMany(Person::class);
+    }
+
+    public function support_materials(): HasMany
+    {
+        return $this->hasMany(SupportMaterial::class, 'discipline_id');
     }
 }

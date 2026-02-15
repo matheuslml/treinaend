@@ -22,6 +22,7 @@ use App\Http\Controllers\BiddingModalityController;
 use App\Http\Controllers\BiddingWinnerController;
 use App\Http\Controllers\BlankPageController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CertificateController;
 use App\Http\Controllers\DepartamentController;
 use App\Http\Controllers\DirectHireController;
 use App\Http\Controllers\DirectHireWinnerController;
@@ -80,14 +81,16 @@ use App\Http\Controllers\ProjectProgressController;
 use App\Http\Controllers\ProjectResponsibleController;
 use App\Http\Controllers\RegistrationController;
 use App\Http\Controllers\ShortcutWebController;
+use App\Http\Controllers\StudentPainel;
 use App\Http\Controllers\SupportMaterialController;
 use App\Http\Controllers\WebFooterController;
 use App\Http\Controllers\WebFooterLogoController;
+use App\Models\SupportMaterial;
 
 /*
 |--------------------------------------------------------------------------
 | Main Routes
-|--------------------------------------------------------------------------
+|---------------------------------------------------------------------------
 */
 //Ouvidoria - Ombudsman
 Route::get('/ouvidoria_web', 'App\Http\Controllers\OmbudsmanController@web_ouvidoria')->name('web_ouvidoria');
@@ -126,12 +129,20 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/documentos', DocumentController::class);
     Route::resource('/emails', EmailController::class);
     Route::resource('/enderecos', AddressController::class);
-    //Main - Treinaend
+
+    //Main - Treinaend -----------------------------------------------------------------
     Route::resource('/questoes', LessonController::class);
     Route::resource('/disciplinas', DisciplineController::class);
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);
-    Route::resource('/cadastros', RegistrationController::class);
+    Route::resource('/matriculas', RegistrationController::class);
+    //Main - Treinaend - Student painel -----------------------------------------------------------------
+    Route::get('disciplines_student_index', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
+    Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
+    Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
+    Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');
+
+
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);
     Route::resource('/departamentos', DepartamentController::class);

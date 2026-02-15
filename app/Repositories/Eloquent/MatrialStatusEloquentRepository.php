@@ -12,7 +12,7 @@ use JetBrains\PhpStorm\Pure;
 
 class MatrialStatusEloquentRepository extends parentAlias
 {
-    #[Pure]
+    //#[Pure]
     public function __construct()
     {
         parent::__construct(new MatrialStatus());
