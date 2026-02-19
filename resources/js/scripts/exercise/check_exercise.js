@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.getElementById("btn-start");
+    const btnSave = document.getElementById("btn-lesson-save");
     const lessonBtn1 = document.getElementById("btn-number-lesson-1");
     const lessonBtn2 = document.getElementById("btn-number-lesson-2");
     const lessonBtn3 = document.getElementById("btn-number-lesson-3");
@@ -19,7 +20,6 @@ document.addEventListener("DOMContentLoaded", function () {
     const answer7 = document.getElementById("answer-7");
     const answer8 = document.getElementById("answer-8");
     const answer9 = document.getElementById("answer-9");
-    const answer10 = document.getElementById("answer-10");
     const nextBtn1 = document.getElementById("btn-next-1");
     const nextBtn2 = document.getElementById("btn-next-2");
     const nextBtn3 = document.getElementById("btn-next-3");
@@ -29,13 +29,47 @@ document.addEventListener("DOMContentLoaded", function () {
     const nextBtn7 = document.getElementById("btn-next-7");
     const nextBtn8 = document.getElementById("btn-next-8");
     const nextBtn9 = document.getElementById("btn-next-9");
-    const btnSave = document.getElementById("btn-save");
 
     startBtn.addEventListener("click", function (e) {
+        e.preventDefault();
         lessonBtn1.removeAttribute("disabled");
     });
 
+    btnSave.addEventListener("click", function (e) {
+        e.preventDefault();
+        alert('aqui');
+        const answers = [];
+        for (let i = 1; i <= 10; i++) {
+            const select = document.getElementById("answer-" + i);
+            if (select) {
+                answers.push(select.value || "");
+            }
+        }
+        console.log(answers);
+/*
+        fetch("/student_save_lesson", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify({
+                answers: answers
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            alert("Respostas salvas com sucesso!");
+            console.log("Resposta do servidor:", data);
+        })
+        .catch(error => {
+            console.error("Erro ao salvar:", error);
+            alert("Erro ao salvar as respostas.");
+        });*/
+    });
+
     nextBtn1.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer1.value !== "") {
             lessonBtn2.removeAttribute("disabled");
         } else {
@@ -44,6 +78,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn2.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer2.value !== "") {
             lessonBtn3.removeAttribute("disabled");
         } else {
@@ -52,6 +87,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn3.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer3.value !== "") {
             lessonBtn4.removeAttribute("disabled");
         } else {
@@ -60,6 +96,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn4.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer4.value !== "") {
             lessonBtn5.removeAttribute("disabled");
         } else {
@@ -68,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn5.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer5.value !== "") {
             lessonBtn6.removeAttribute("disabled");
         } else {
@@ -76,6 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn6.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer6.value !== "") {
             lessonBtn7.removeAttribute("disabled");
         } else {
@@ -84,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn7.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer7.value !== "") {
             lessonBtn8.removeAttribute("disabled");
         } else {
@@ -92,6 +132,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn8.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer8.value !== "") {
             lessonBtn9.removeAttribute("disabled");
         } else {
@@ -100,6 +141,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     nextBtn9.addEventListener("click", function (e) {
+        e.preventDefault();
         if (answer9.value !== "") {
             lessonBtn10.removeAttribute("disabled");
         } else {

@@ -364,7 +364,7 @@
                                 <span class="align-middle d-sm-inline-block d-none">Próximo</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
-                            <button  id="btn-save" class="btn btn-success btn-next" {{ $i < 10 ? 'hidden' : '' }} >
+                            <button  id="btn-lesson-save-{{ $i }}" class="btn btn-success" {{ $i < 10 ? 'hidden' : '' }} >
                                 <span class="align-middle d-sm-inline-block d-none">Salvar</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>

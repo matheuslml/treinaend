@@ -130,13 +130,26 @@ class StudentPainel extends Controller
         }
     }
 
-    public function checkUserExercise($exerciseId)
+    public function student_save_lesson(Request $request)
     {
-        $exists = \App\Models\ExerciseUser::where('exercise_id', $exerciseId)
-            ->where('user_id', auth()->id())
-            ->exists();
+        try{
+            $processed = [];
+            $answers = $request->input('answers');
+            if (is_array($answers)) {
+                foreach ($answers as $index => $answer) {
+                    $processed[] = [ 'question' => $index + 1, 'answer' => $answer ];
+                    //salvar aqui cada quest~]ao feita
+                }
 
-        return response()->json(['allowed' => $exists]);
+                    //salvar discipline user tbm
+                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
+            }else{
+                return response()->json([ 'status' => 'not ok', 'answers' => "Nenhuma resposta recebida." ]);
+            }
+            echo $request;
+        } catch (\Throwable $throwable) {
+            echo "Erro: " . $throwable->getMessage();
+        }
     }
 
 }
