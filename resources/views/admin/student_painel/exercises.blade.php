@@ -283,8 +283,8 @@
                             $i++;
                         @endphp
                         <div class="step" data-target="#question-{{ $i }}-vertical" role="tab" id="question-{{ $i }}-vertical-trigger">
-                            <button type="button" class="step-trigger">
-                            <span class="bs-stepper-box">{{ $i }}</span>
+                            <button type="button" class="step-trigger" id="btn-number-lesson-{{ $i }}" disabled>
+                                <span class="bs-stepper-box">{{ $i }}</span>
                             </button>
                         </div>
                     @endforeach
@@ -298,37 +298,18 @@
                 >
                     <div class="content-header">
                         <h5 class="mb-0">Prova </h5>
-                        <small class="text-muted">texto prova.</small>
+                        <small class="text-muted">Acredite: você está preparado. Boa prova!</small>
                     </div>
                     <div class="row">
-                    <div class="mb-1 col-md-6">
-                        <label class="form-label" for="vertical-username">Duração Máxima (Dias)</label>
-                        <input type="text" class="form-control" value="{{ $discipline->days }}" disabled />
-                    </div>
-                    <div class="mb-1 col-md-6">
-                        <label class="form-label" for="vertical-email">Data de Início</label>
-                        <input type="text" class="form-control" value="" disabled />
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="mb-1 form-password-toggle col-md-6">
-                        <label class="form-label" for="vertical-password">Dias Restantes</label>
-                        <input type="text" id="vertical" class="form-control" value="" disabled />
-                    </div>
-                    <div class="mb-1 form-password-toggle col-md-6">
-                        <label class="form-label" for="vertical-confirm-password">Data Fim</label>
-                        <input type="text" class="form-control" value="" disabled />
-                    </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-secondary btn-prev" disabled>
-                        <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Anterior</span>
-                    </button>
-                    <button class="btn btn-primary btn-next">
-                        <span class="align-middle d-sm-inline-block d-none">Começar</span>
-                        <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
-                    </button>
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label" for="vertical-username">Chegou a hora de colocar em prática tudo o que você estudou. Respire fundo, mantenha a concentração e faça o seu melhor.</label>
+                        </div>
+                        <div class="">
+                        <button class="btn btn-primary btn-next" id="btn-start">
+                            <span class="align-middle d-sm-inline-block d-none">Começar</span>
+                            <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                        </button>
+                        </div>
                     </div>
                 </div>
                 @php
@@ -340,7 +321,7 @@
                     @endphp
                     <div id="question-{{ $i }}-vertical" class="content" role="tabpanel" aria-labelledby="question-{{ $i }}-vertical-trigger">
                         <div class="content-header">
-                            <h5 class="mb-0">Questão da Prova</h5>
+                            <h5 class="mb-0">Questão: {{ $i }} </h5>
                             <small>Faça com calma!</small>
                         </div>
                         <div class="row">
@@ -358,7 +339,7 @@
                                                     $quantity = $exercise->answers;
                                                     $j = 0;
                                                 @endphp
-                                                <select class="form-select" id="answer" name="answer" required >
+                                                <select class="form-select" id="answer-{{ $i }}" name="answer" required >
                                                     <option value="" class="">Respostas</option>
                                                     @while ($quantity > 0)
                                                         @php
@@ -379,11 +360,11 @@
                                 <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Anterior</span>
                             </button>
-                            <button class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
+                            <button  id="btn-next-{{ $i }}" class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
                                 <span class="align-middle d-sm-inline-block d-none">Próximo</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
-                            <button class="btn btn-success btn-next" {{ $i < 10 ? 'hidden' : '' }} >
+                            <button  id="btn-save" class="btn btn-success btn-next" {{ $i < 10 ? 'hidden' : '' }} >
                                 <span class="align-middle d-sm-inline-block d-none">Salvar</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
@@ -427,7 +408,9 @@
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
-  <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>
+
+  <!-- lembrar de voltar depois
+    <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>-->
   <script src="{{ asset(mix('js/scripts/exercise/check_exercise.js')) }}"></script>
 @endsection
 

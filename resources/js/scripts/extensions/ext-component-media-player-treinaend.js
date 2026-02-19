@@ -11,11 +11,11 @@ $(function () {
   'use strict';
 
     $('.video-player').each(function() {
-    new Plyr(this, {
-        tooltips: {
-        controls: true
-        }
-    });
+        new Plyr(this, {
+            tooltips: {
+            controls: true
+            }
+        });
     });
 
 
