@@ -129,6 +129,16 @@ class StudentPainel extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function checkUserExercise($exerciseId)
+    {
+        $exists = \App\Models\ExerciseUser::where('exercise_id', $exerciseId)
+            ->where('user_id', auth()->id())
+            ->exists();
+
+        return response()->json(['allowed' => $exists]);
+    }
+
 }
 
 

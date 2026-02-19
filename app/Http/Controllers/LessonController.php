@@ -28,9 +28,9 @@ class LessonController extends Controller
 
     public function index()
     {
-        /*if (! Gate::allows('Ver e Listar Aulas')) {
+        if (! Gate::allows('Ver e Listar Aulas')) {
             return view('pages.not-authorized');
-        }*/
+        }
 
         try{
             $pageConfigs = ['pageHeader' => false];
@@ -48,9 +48,9 @@ class LessonController extends Controller
     public function store(
         LessonRequest $request
     ){
-        /*if (! Gate::allows('Editar Aulas')) {
+        if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }*/
+        }
         try {
             DB::beginTransaction();
             $this->lessonCreateService->create($request->toArray());
@@ -67,9 +67,9 @@ class LessonController extends Controller
 
     public function show($lesson_id)
     {
-        /*if (! Gate::allows('Editar Aulas')) {
+        if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }*/
+        }
 
         try{
             $disciplines = Discipline::orderBy('name', 'asc')->get();
@@ -86,9 +86,9 @@ class LessonController extends Controller
     public function update(
         LessonRequest $request, $lesson_id
     ){
-        /*if (! Gate::allows('Editar Aulas')) {
+        if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }*/
+        }
         try {
             DB::beginTransaction();
             $this->lessonUpdateService->update($request->toArray(), $lesson_id);
@@ -105,9 +105,9 @@ class LessonController extends Controller
 
     public function destroy($lesson)
     {
-        /*if (! Gate::allows('Editar Aulas')) {
+        if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }*/
+        }
 
         try{
             DB::beginTransaction();

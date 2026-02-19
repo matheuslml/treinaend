@@ -394,6 +394,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -427,5 +428,7 @@
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/exercise/check_exercise.js')) }}"></script>
 @endsection
 
+check_exercise

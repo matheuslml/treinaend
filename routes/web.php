@@ -141,7 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
     Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
     Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');
-
+    Route::get('/exercise/check/{exercise}', [SupportMaterialController::class, 'checkUserExercise']);
 
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);
