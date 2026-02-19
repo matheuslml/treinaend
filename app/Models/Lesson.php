@@ -21,7 +21,7 @@ class Lesson extends Model implements Auditable
         'discipline_id',
         'order',
         'link_video'
-    ];//
+    ];
 
     protected $dates = [
         'expires_at',

@@ -26,7 +26,7 @@ class StudentPainel extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $disciplines = Discipline::orderBy('name', 'asc')->get();
+            $disciplines = Discipline::orderBy('order', 'asc')->get();
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Matrículas Cadastras!')->error();

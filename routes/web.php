@@ -131,7 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/enderecos', AddressController::class);
 
     //Main - Treinaend -----------------------------------------------------------------
-    Route::resource('/questoes', LessonController::class);
+    Route::resource('/aulas', LessonController::class);
     Route::resource('/disciplinas', DisciplineController::class);
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);

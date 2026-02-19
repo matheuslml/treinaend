@@ -67,6 +67,26 @@ $configData = Helper::applClasses();
       </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+          <i data-feather="youtube"></i>
+          <span class="menu-title text-truncate">Aulas</span>
+        </a>
+        <ul class="menu-content">
+          <li >
+            <a href="{{ route('aulas.index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Listar / Cadastrar</span>
+            </a>
+          </li>
+          <li >
+            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="circle"></i>
+              <span class="menu-item text-truncate">Relatórios</span>
+            </a>
+          </li>
+        </ul>
+      </li>
+      <li class="nav-item  ">
+        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="book"></i>
           <span class="menu-title text-truncate">Disciplinas</span>
         </a>

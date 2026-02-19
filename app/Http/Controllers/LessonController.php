@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\LessonRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Discipline;
 use App\Services\LessonService;
 use App\Services\LessonCreateService;
 use App\Services\LessonUpdateService;
@@ -25,22 +26,21 @@ class LessonController extends Controller
         protected LessonUpdateService $lessonUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
-        if (! Gate::allows('Ver e Listar Lições')) {
+        /*if (! Gate::allows('Ver e Listar Aulas')) {
             return view('pages.not-authorized');
-        }
+        }*/
 
         try{
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-
-            $categories = Lesson::with('news')->latest()->get();
-            return view('admin.news.Lesson_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            $disciplines = Discipline::orderBy('name', 'asc')->get();
+            $lessons = Lesson::latest()->get();
+            return view('admin.lesson.index', ['pageConfigs' => $pageConfigs], compact('lessons', 'unit', 'copyright', 'disciplines'));
         } catch (\Throwable $throwable) {
-
-            flash('Erro ao procurar as Categorias Cadastradas!')->error();
+            flash('Erro ao procurar as Aulas Cadastradas!')->error();
             return redirect()->back()->withInput();
         }
     }
@@ -48,20 +48,14 @@ class LessonController extends Controller
     public function store(
         LessonRequest $request
     ){
-        if (! Gate::allows('Editar Lições')) {
+        /*if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }
+        }*/
         try {
             DB::beginTransaction();
-            $fileData = array_merge(
-                $request->toArray(),
-                [
-                    'active'  => 1
-                ]
-            );
-            $this->lessonCreateService->create($fileData);
+            $this->lessonCreateService->create($request->toArray());
 
-            flash('Categoria criada com sucesso!')->success();
+            flash('Aula criada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
@@ -73,18 +67,17 @@ class LessonController extends Controller
 
     public function show($lesson_id)
     {
-        if (! Gate::allows('Editar Lições')) {
+        /*if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }
+        }*/
 
         try{
-            $categories = Lesson::with('news')->latest()->get();
+            $disciplines = Discipline::orderBy('name', 'asc')->get();
             $lesson_selected = $this->lessonService->show($lesson_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.Lesson_show', compact('Lesson_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.lesson.show', compact('lesson_selected', 'disciplines', 'unit', 'copyright'));
         } catch (\Exception $exception) {
-            dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
         }
@@ -93,19 +86,18 @@ class LessonController extends Controller
     public function update(
         LessonRequest $request, $lesson_id
     ){
-        if (! Gate::allows('Editar Lições')) {
+        /*if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }
+        }*/
         try {
             DB::beginTransaction();
             $this->lessonUpdateService->update($request->toArray(), $lesson_id);
 
-            flash('Categoria editada com sucesso!')->success();
+            flash('Aula editada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-
             flash('Erro ao editar!')->error();
             return redirect()->back()->withInput();
         }
@@ -113,18 +105,21 @@ class LessonController extends Controller
 
     public function destroy($lesson)
     {
-        if (! Gate::allows('Editar Lições')) {
+        /*if (! Gate::allows('Editar Aulas')) {
             return view('pages.not-authorized');
-        }
+        }*/
 
         try{
-            $for_delete = Lesson::find($lesson);
-            $for_delete->delete();
-            flash('Categoria deletada com sucesso!')->success();
-            return redirect('/noticia_categorias');
+            DB::beginTransaction();
+
+                $for_delete = Lesson::find($lesson);
+                $for_delete->delete();
+
+                flash('Aula deletado com sucesso!')->success();
+            DB::commit();
+            return redirect('/aulas');
         } catch (\Exception $exception) {
-            dd($exception);
-            flash('Erro ao deletar a Categoria!')->error();
+            flash('Erro ao deletar o Aula!')->error();
             return redirect()->back()->withInput();
         }
     }
