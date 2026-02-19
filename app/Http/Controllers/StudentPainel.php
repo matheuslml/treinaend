@@ -6,6 +6,7 @@ use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Models\Exercise;
 use App\Models\ExerciseUser;
+use App\Models\Lesson;
 use App\Models\SupportMaterial;
 use App\Models\Unit;
 use App\Models\User;
@@ -46,6 +47,11 @@ class StudentPainel extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
+
+            $lessons = Lesson::where('discipline_id', $discipline_id)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+
             $exercises = Exercise::where('discipline_id', $discipline_id)
                                     ->whereIn('type', ['E', 'A'])
                                     ->whereDoesntHave('users', function($q) use ($userId) {
@@ -69,7 +75,7 @@ class StudentPainel extends Controller
                                     ->limit(10)
                                     ->get();
 
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions'));
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();

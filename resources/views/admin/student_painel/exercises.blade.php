@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/wizard/bs-stepper.min.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/plyr.min.css')) }}">
 @endsection
 
 @section('page-style')
@@ -16,6 +17,7 @@
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-wizard.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('css/base/pages/page-faq.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-media-player.css')) }}">
 @endsection
 
 @section('content')
@@ -45,6 +47,20 @@
           <li class="nav-item">
             <a
               class="nav-link active"
+              id="lesson"
+              data-bs-toggle="pill"
+              href="#faq-lesson"
+              aria-expanded="true"
+              role="tab"
+            >
+              <i data-feather="book-open" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Aulas</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
               id="exercise"
               data-bs-toggle="pill"
               href="#faq-exercise"
@@ -114,8 +130,34 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <!-- pill tabs tab content -->
       <div class="tab-content">
+
+        <!-- lesson panel -->
+        <div role="tabpanel" class="tab-pane active" id="faq-lesson" aria-labelledby="lesson" aria-expanded="true">
+          <!-- icon and header -->
+            <div class="row match-height">
+                @php
+                    $i=0;
+                @endphp
+                @foreach ($lessons as $lesson)
+                    @php
+                        $i++;
+                    @endphp
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                            <h4 class="card-title">Aula {{ $i }}: </h4>
+                                <div class="video-player" id="">
+                                    <iframe src="{{ $lesson->link_video }}" allowfullscreen allow="autoplay"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <!-- exercise panel -->
-        <div role="tabpanel" class="tab-pane active" id="faq-exercise" aria-labelledby="exercise" aria-expanded="true">
+        <div role="tabpanel" class="tab-pane" id="faq-exercise" aria-labelledby="exercise" aria-expanded="false">
           <!-- icon and header -->
             <div class="row match-height">
                 @foreach ($exercises as $exercise)
@@ -373,6 +415,8 @@
   <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/wizard/bs-stepper.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.polyfilled.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
@@ -382,5 +426,6 @@
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>
 @endsection
 
