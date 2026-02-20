@@ -302,10 +302,11 @@
                     </div>
                     <div class="row">
                         <div class="mb-1 col-md-6">
-                            <label class="form-label" for="vertical-username">Chegou a hora de colocar em prática tudo o que você estudou. Respire fundo, mantenha a concentração e faça o seu melhor.</label>
+                            <label class="form-label" for="vertical-username" {{ $exam_date == false ? 'hidden' : '' }} >Chegou a hora de colocar em prática tudo o que você estudou. Respire fundo, mantenha a concentração e faça o seu melhor.</label>
+                            <label class="form-label" for="vertical-username" {{ $exam_date == true ? 'hidden' : '' }} >Ainda não é o dia da prova. Aproveite este tempo para revisar o conteúdo, reforçar os pontos que você tem mais dificuldade e se preparar com calma. Mantenha o foco nos estudos, organize seu cronograma e use cada dia como uma oportunidade para estar mais seguro quando chegar a hora.</label>
                         </div>
-                        <div class="">
-                        <button class="btn btn-primary btn-next" id="btn-start">
+                        <div class="" >
+                        <button class="btn btn-primary btn-next" id="btn-start"  {{ $exam_date == false ? 'hidden' : '' }} >
                             <span class="align-middle d-sm-inline-block d-none">Começar</span>
                             <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                         </button>
@@ -339,6 +340,7 @@
                                                     $quantity = $exercise->answers;
                                                     $j = 0;
                                                 @endphp
+                                                <input type="number" value="{{ $exercise->id }}" id="question-{{ $i }}" name="question" hidden/>
                                                 <select class="form-select" id="answer-{{ $i }}" name="answer" required >
                                                     <option value="" class="">Respostas</option>
                                                     @while ($quantity > 0)
