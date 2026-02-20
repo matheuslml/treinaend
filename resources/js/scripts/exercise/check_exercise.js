@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     const startBtn = document.getElementById("btn-start");
-    const btnSave = document.getElementById("btn-lesson-save");
+    const btnSave = document.getElementById("btn-lesson-save-10");
     const lessonBtn1 = document.getElementById("btn-number-lesson-1");
     const lessonBtn2 = document.getElementById("btn-number-lesson-2");
     const lessonBtn3 = document.getElementById("btn-number-lesson-3");
@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const answer7 = document.getElementById("answer-7");
     const answer8 = document.getElementById("answer-8");
     const answer9 = document.getElementById("answer-9");
+    const answer10 = document.getElementById("answer-10");
     const nextBtn1 = document.getElementById("btn-next-1");
     const nextBtn2 = document.getElementById("btn-next-2");
     const nextBtn3 = document.getElementById("btn-next-3");
@@ -37,16 +38,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
     btnSave.addEventListener("click", function (e) {
         e.preventDefault();
-        alert('aqui');
+
         const answers = [];
+        const questions = [];
         for (let i = 1; i <= 10; i++) {
             const select = document.getElementById("answer-" + i);
             if (select) {
                 answers.push(select.value || "");
             }
         }
-        console.log(answers);
-/*
+        for (let i = 1; i <= 10; i++) {
+            const select = document.getElementById("question-" + i);
+            if (select) {
+                questions.push(select.value || "");
+            }
+        }
+
         fetch("/student_save_lesson", {
             method: "POST",
             headers: {
@@ -54,7 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
             },
             body: JSON.stringify({
-                answers: answers
+                answers: answers,
+                questions: questions
             })
         })
         .then(response => response.json())
@@ -65,7 +73,7 @@ document.addEventListener("DOMContentLoaded", function () {
         .catch(error => {
             console.error("Erro ao salvar:", error);
             alert("Erro ao salvar as respostas.");
-        });*/
+        });
     });
 
     nextBtn1.addEventListener("click", function (e) {

@@ -44,6 +44,10 @@ class DefaultInserts extends Migration
                 'guard_name' => 'web',
             ],
             [
+                'name' => 'Aluno',
+                'guard_name' => 'web',
+            ],
+            [
                 'name' => 'Administrador',
                 'guard_name' => 'web',
             ]
@@ -55,6 +59,8 @@ class DefaultInserts extends Migration
 
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu de Desenvolvedor', 'guard_name' => 'web']);
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver Menu Regras e Permissões', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu da Treinaend', 'guard_name' => 'web']);
+        Role::findByName('Aluno')->permissions()->firstOrCreate(['name' => 'Ver Menu do Aluno', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Administrador', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Ouvidoria', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Site', 'guard_name' => 'web']);

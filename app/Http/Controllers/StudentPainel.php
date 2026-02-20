@@ -166,61 +166,65 @@ class StudentPainel extends Controller
     public function student_save_lesson(Request $request)
     {
         try{
-            DB::beginTransaction();
-                $userId = Auth::id();
-                //$person = Person::find($userId);
-                $processed = [];
-                $answers = $request->input('answers', []);
-                $questions = $request->input('questions', []);
-                $score = 0;
-                $discipline_person_id = 0;
-                $exam_nr = 0;
-                if (is_array($answers) && is_array($questions)) {
-                    foreach ($answers as $index => $answer) {
-                        $question_id = $questions[$index] ?? null;
-                        $exercise = Exercise::find($question_id);
-                        if($discipline_person_id == 0){
-                            $discipline_person = DisciplinePeople::find($discipline_person_id);
-                            $discipline_person_id = $discipline_person->id;
-                            $exam_nr = $discipline_person->exam_nr;
-                        }
-                        if ($exercise->correct_answer == $answer) $score++;
-
-                        $processed[] = [
-                            'question' => $question_id,
-                            'answer' => $answer
-                        ];
-
-                        ExerciseUser::create([
-                            'user_id' => $userId,
-                            'exercise_id' => $question_id,
-                            'answer' => $answer
-                        ]);
+            //está salvando, mas não trava a disciplina depois de feita e tem que ir para um a página de conclusão da prova
+            $userId = Auth::id();
+            $person = Person::find($userId);
+            $today = Carbon::today();
+            $processed = [];
+            $answers = $request->input('answers', []);
+            $questions = $request->input('questions', []);
+            $score = 0;
+            $discipline_person_id = 0;
+            $exam_nr = 0;
+            $days = 0;
+            if (is_array($answers) && is_array($questions)) {
+                foreach ($answers as $index => $answer) {
+                    $question_id = $questions[$index] ?? null;
+                    $exercise = Exercise::find($question_id);
+                    if($discipline_person_id == 0){
+                        $discipline_person = DisciplinePeople::where('discipline_id', $exercise->discipline_id)->where('person_id', $person->id)->first();
+                        $discipline_person_id = $discipline_person->id;
+                        $exam_nr = $discipline_person->exam_nr;
+                        $days = $discipline_person->discipline->days;
                     }
+                    if ($exercise->correct_answer == $answer) $score++;
 
+                    ExerciseUser::create([
+                        'user_id' => $userId,
+                        'exercise_id' => $question_id,
+                        'answer' => $answer
+                    ]);
+                }
+                if($score >=7){
                     DisciplinePeople::updateOrCreate(
                         [
-                            'id' => $exercise->discipline_id,
-                            'person_id' => 2
+                            'discipline_id' => $exercise->discipline_id,
+                            'person_id' => $person->id
                         ],
                         [
-                            'exam_date' => $request['discipline_id'],
-                            'finished_at' => $request['answers'],
-                            'score' => $score,
-                            'exam_nr' => $exam_nr
+                            'finished_at' => $today,
+                            'score' => $score
                         ]
                     );
-
-
-                        //fazer o calculo de acertos
-                    return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
                 }else{
-                    return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $exercise->discipline_id,
+                            'person_id' => $person->id
+                        ],
+                        [
+                            'exam_date' => $today->copy()->addDays($days),
+                            'exam_nr' => $exam_nr+1
+                        ]
+                    );
                 }
-            DB::commit();
+
+                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
+            }else{
+                return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
+            }
         } catch (\Throwable $throwable) {
-            DB::rollBack();
-            echo "Erro: " . $throwable->getMessage();
+            return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
         }
     }
 
