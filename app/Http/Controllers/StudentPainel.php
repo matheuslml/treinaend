@@ -16,6 +16,7 @@ use Carbon\Carbon;
 use Detection\MobileDetect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class StudentPainel extends Controller
 {
@@ -165,33 +166,60 @@ class StudentPainel extends Controller
     public function student_save_lesson(Request $request)
     {
         try{
-            $userId = Auth::id();
-            $processed = [];
-            $answers = $request->input('answers', []);
-            $questions = $request->input('questions', []);
-            if (is_array($answers) && is_array($questions)) {
-                foreach ($answers as $index => $answer) {
-                    $question = $questions[$index] ?? null;
+            DB::beginTransaction();
+                $userId = Auth::id();
+                //$person = Person::find($userId);
+                $processed = [];
+                $answers = $request->input('answers', []);
+                $questions = $request->input('questions', []);
+                $score = 0;
+                $discipline_person_id = 0;
+                $exam_nr = 0;
+                if (is_array($answers) && is_array($questions)) {
+                    foreach ($answers as $index => $answer) {
+                        $question_id = $questions[$index] ?? null;
+                        $exercise = Exercise::find($question_id);
+                        if($discipline_person_id == 0){
+                            $discipline_person = DisciplinePeople::find($discipline_person_id);
+                            $discipline_person_id = $discipline_person->id;
+                            $exam_nr = $discipline_person->exam_nr;
+                        }
+                        if ($exercise->correct_answer == $answer) $score++;
 
-                    $processed[] = [
-                        'question' => $question,
-                        'answer' => $answer
-                    ];
+                        $processed[] = [
+                            'question' => $question_id,
+                            'answer' => $answer
+                        ];
 
-                    ExerciseUser::create([
-                        'user_id' => $userId,
-                        'exercise_id' => $question,
-                        'answer' => $answer
-                    ]);
+                        ExerciseUser::create([
+                            'user_id' => $userId,
+                            'exercise_id' => $question_id,
+                            'answer' => $answer
+                        ]);
+                    }
+
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'id' => $exercise->discipline_id,
+                            'person_id' => 2
+                        ],
+                        [
+                            'exam_date' => $request['discipline_id'],
+                            'finished_at' => $request['answers'],
+                            'score' => $score,
+                            'exam_nr' => $exam_nr
+                        ]
+                    );
+
+
+                        //fazer o calculo de acertos
+                    return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
+                }else{
+                    return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
                 }
-
-                    //salvar discipline user tbm
-                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
-            }else{
-                return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
-            }
-            echo $request;
+            DB::commit();
         } catch (\Throwable $throwable) {
+            DB::rollBack();
             echo "Erro: " . $throwable->getMessage();
         }
     }

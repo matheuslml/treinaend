@@ -340,7 +340,7 @@
                                                     $quantity = $exercise->answers;
                                                     $j = 0;
                                                 @endphp
-                                                <input type="number" value="{{ $exercise->id }}" id="question-{{ $i }}" name="question" hidden/>
+                                                <input type="number" value="{{ $question->id }}" id="question-{{ $i }}" name="question" hidden/>
                                                 <select class="form-select" id="answer-{{ $i }}" name="answer" required >
                                                     <option value="" class="">Respostas</option>
                                                     @while ($quantity > 0)
