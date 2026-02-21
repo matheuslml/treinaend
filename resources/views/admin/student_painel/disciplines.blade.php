@@ -36,14 +36,18 @@
   <!-- vertical tab pill -->
   <div class="row">
     @foreach ($disciplines as $discipline)
+        @php
+            $pivot = $discipline->person->first()?->pivot;
+        @endphp
         <div class="col-md-6 col-lg-4">
             <div class="card text-center">
-                <div class="card-header">'status do estudo'</div>
+                <div class="card-header"><i data-feather='{{ ($pivot?->score > 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}'></i>
+                </div>
                 <div class="card-body">
                 <h4 class="card-title">{{ $discipline->name }}</h4>
                 <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary">Acessar</a>
                 </div>
-                <div class="card-footer text-muted">{{ $discipline->days . ($discipline->days == 1 ? ' dia para realizar' : ' dias para realizar')  }}</div>
+                <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
             </div>
         </div>
     @endforeach

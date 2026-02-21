@@ -44,6 +44,13 @@ class Person extends Model implements Auditable
         'deleted_at'
     ];
 
+    public function disciplines(): BelongsToMany
+    {
+        return $this->belongsToMany(Discipline::class, 'discipline_people', 'person_id', 'discipline_id')
+                    ->withPivot(['score', 'exam_date', 'started_at', 'finished_at', 'exam_nr', 'registration'])
+                    ->withTimestamps();
+    }
+
     public function emails(): HasMany
     {
         return $this->hasMany(Email::class, 'person_id');
@@ -124,10 +131,5 @@ class Person extends Model implements Auditable
     public function winners(): HasMany
     {
         return $this->hasMany(BiddingWinner::class, 'person_id');
-    }
-
-    public function disciplines(): BelongsToMany
-    {
-        return $this->belongsToMany(Discipline::class);
     }
 }

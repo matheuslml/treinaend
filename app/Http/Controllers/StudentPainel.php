@@ -17,13 +17,14 @@ use Detection\MobileDetect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class StudentPainel extends Controller
 {
 
     public function disciplines_student_index()
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
@@ -31,9 +32,20 @@ class StudentPainel extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $disciplines = Discipline::orderBy('order', 'asc')->get();
+
+            $userId = Auth::id();
+            $user = User::find($userId);
+            $person_id = $user->person_id;
+
+            $disciplines = Discipline::orderBy('order', 'asc')
+                ->with(['person' => function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id);
+                }])
+                ->get();
+
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
+            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
@@ -41,22 +53,21 @@ class StudentPainel extends Controller
 
     public function exercises_student_index($discipline_id)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
         try{
             $userId = Auth::id();
-            //$person = Person::find($userId);
+            $user = User::find($userId);
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
-            //mudar parar $userId depois dos testes
-            $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id',2)->first();
+            $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id', $user->person_id)->first();
             $examDate = Carbon::parse($discipline_person->exam_date);
             $today = Carbon::today();
-            $exam_date = true;//mudar para false depois dos testes
+            $exam_date = false;
             if ($examDate->greaterThanOrEqualTo($today)) $exam_date = true;
 
             $lessons = Lesson::where('discipline_id', $discipline_id)
@@ -96,7 +107,7 @@ class StudentPainel extends Controller
 
     public function student_answer_exercise(Request $request)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
@@ -120,7 +131,7 @@ class StudentPainel extends Controller
 
     public function download_support_material($support_material_id)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
