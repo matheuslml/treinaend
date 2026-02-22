@@ -35,21 +35,36 @@
 <section id="faq-tabs">
   <!-- vertical tab pill -->
   <div class="row">
+        <div class="col-md-8 col-lg-8">
+            <div class="card text-center">
+                <div class="card-header">
+                    <i class="w-5 h-5" data-feather='{{ ($discipline_atual->person->first()?->pivot?->score > 7) ? "award" : (($discipline_atual->person->first()?->pivot?->exam_date ? "play-circle" : "x-circle" )) }}'></i>
+                </div>
+                <div class="card-body">
+                    <h4 class="card-title">{{ $discipline_atual->name }}</h4>
+                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary">Acessar</a>
+                </div>
+                <div class="card-footer text-muted">Prova: {{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
+            </div>
+        </div>
     @foreach ($disciplines as $discipline)
         @php
             $pivot = $discipline->person->first()?->pivot;
         @endphp
-        <div class="col-md-6 col-lg-4">
-            <div class="card text-center">
-                <div class="card-header"><i data-feather='{{ ($pivot?->score > 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}'></i>
+        @if ($discipline->id != $discipline_atual->id)
+            <div class="col-md-6 col-lg-4">
+                <div class="card text-center">
+                    <div class="card-header">
+                        <i data-feather='{{ ($pivot?->score > 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}'></i>
+                    </div>
+                    <div class="card-body">
+                    <h4 class="card-title">{{ $discipline->name }}</h4>
+                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary">Acessar</a>
+                    </div>
+                    <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
                 </div>
-                <div class="card-body">
-                <h4 class="card-title">{{ $discipline->name }}</h4>
-                <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary">Acessar</a>
-                </div>
-                <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
             </div>
-        </div>
+        @endif
     @endforeach
   </div>
 </section>
