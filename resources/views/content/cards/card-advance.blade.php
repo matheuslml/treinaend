@@ -13,7 +13,7 @@
 <!-- Card Advance -->
 
 <div class="row match-height">
-  <!-- Congratulations Card -->
+  <!-- Congratulations Card  -->
   <div class="col-12 col-md-6 col-lg-7">
     <div class="card card-congratulations">
       <div class="card-body text-center">

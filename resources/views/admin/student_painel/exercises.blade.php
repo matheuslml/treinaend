@@ -29,7 +29,7 @@
       <h2 class="text-primary">{{ $discipline->name }}</h2>
 
       <!-- subtitle -->
-      <p class="card-text ">escrever texto</p>
+      <p class="card-text ">conhecimento que abre caminhos</p>
     </div>
   </div>
 </section>
@@ -411,9 +411,8 @@
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
 
-  <!-- lembrar de voltar depois
-    <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>-->
+  <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>-->
   <script src="{{ asset(mix('js/scripts/exercise/check_exercise.js')) }}"></script>
 @endsection
 
-check_exercise
+
