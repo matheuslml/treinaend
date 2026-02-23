@@ -37,7 +37,7 @@
 <section id="faq-tabs">
   <!-- vertical tab pill -->
   <div class="row">
-        <div class="col-md-8 col-lg-8 ">
+        <div class="col-md-8 col-lg-8 " >
             <div class="card text-center card-congratulations">
                 <div class="card-header">
                     <div class="avatar avatar-xl bg-primary shadow">
@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title mb-1 text-white">{{ $discipline_atual->name }}</h4>
-                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white">Acessar</a>
+                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white" >Acessar</a>
                 </div>
                 <div class="card-footer text-muted ">
                     <p class="card-text m-auto w-75 text-white">
@@ -73,7 +73,7 @@
                     </div>
                     <div class="card-body">
                     <h4 class="card-title">{{ $discipline->name }}</h4>
-                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary">Acessar</a>
+                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'disabled' }}">Acessar</a>
                     </div>
                     <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
                 </div>

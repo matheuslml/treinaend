@@ -298,7 +298,7 @@
                 >
                     <div class="content-header">
                         <h5 class="mb-0">Prova </h5>
-                        <small class="text-muted">Acredite: você está preparado. Boa prova!</small>
+                        <small class="text-muted">Data: {{ $examDateFormated }}</small>
                     </div>
                     <div class="row">
                         <div class="mb-1 col-md-6">

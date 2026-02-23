@@ -46,14 +46,12 @@ class StudentPainel extends Controller
             $discipline_atual = Discipline::orderBy('order', 'asc')
                 ->whereHas('person', function ($query) use ($person_id) {
                     $query->where('person_id', $person_id)
-                        ->where('discipline_people.score', '<', 7);
+                        ->where('discipline_people.score', '<=', 7);
                 })
                 ->with(['person' => function ($query) use ($person_id) {
                     $query->where('person_id', $person_id);
                 }])
                 ->first();
-
-            //dd($discipline_atual->person->first()?->pivot);
 
 
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
@@ -79,9 +77,10 @@ class StudentPainel extends Controller
             $discipline = Discipline::find($discipline_id);
             $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id', $user->person_id)->first();
             $examDate = Carbon::parse($discipline_person->exam_date);
+            $examDateFormated = Carbon::parse($examDate)->format('d/m/Y');
             $today = Carbon::today();
             $exam_date = false;
-            if ($examDate->greaterThanOrEqualTo($today)) $exam_date = true;
+            if ($examDate->lessThanOrEqualTo($today)) $exam_date = true;
 
             $lessons = Lesson::where('discipline_id', $discipline_id)
                                     ->orderBy('order', 'asc')
@@ -110,7 +109,7 @@ class StudentPainel extends Controller
                                     ->limit(10)
                                     ->get();
 
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date','discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
