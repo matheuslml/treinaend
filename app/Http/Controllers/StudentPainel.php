@@ -191,7 +191,8 @@ class StudentPainel extends Controller
         try{
             //está salvando, mas não trava a disciplina depois de feita e tem que ir para um a página de conclusão da prova
             $userId = Auth::id();
-            $person = Person::find($userId);
+            $user = User::find($userId);
+            $person = Person::find($user->person_id);
             $today = Carbon::today();
             $processed = [];
             $answers = $request->input('answers', []);
@@ -202,13 +203,13 @@ class StudentPainel extends Controller
             $days = 0;
             if (is_array($answers) && is_array($questions)) {
                 foreach ($answers as $index => $answer) {
-                    $question_id = $questions[$index] ?? null;
+                    $question_id = $questions[$index];
                     $exercise = Exercise::find($question_id);
                     if($discipline_person_id == 0){
                         $discipline_person = DisciplinePeople::where('discipline_id', $exercise->discipline_id)->where('person_id', $person->id)->first();
-                        $discipline_person_id = $discipline_person->id;
-                        $exam_nr = $discipline_person->exam_nr;
-                        $days = $discipline_person->discipline->days;
+                        $discipline_person_id = $discipline_person->id ?? 0;
+                        $exam_nr = $discipline_person->exam_nr ?? 0;
+                        $days = $discipline_person->discipline->days ?? 0;
                     }
                     if ($exercise->correct_answer == $answer) $score++;
 
@@ -218,8 +219,6 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
-                //testando aqui
-                return response()->json([ 'status' => 'ok', 'answers' => $answer]);
                 if($score >=7){
                     DisciplinePeople::updateOrCreate(
                         [
