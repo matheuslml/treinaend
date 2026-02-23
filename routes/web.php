@@ -131,7 +131,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/enderecos', AddressController::class);
 
     //Main - Treinaend -----------------------------------------------------------------
-    Route::resource('/questoes', LessonController::class);
+    Route::resource('/aulas', LessonController::class);
     Route::resource('/disciplinas', DisciplineController::class);
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);
@@ -141,7 +141,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
     Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
     Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');
-
+    Route::post('/student_save_discipline', [StudentPainel::class, 'student_save_discipline'])->name('student_save_discipline');
+    Route::post('/student_save_lesson', [StudentPainel::class, 'student_save_lesson'])->name('student_save_lesson');
 
     //Main - Departamentos
     Route::resource('/unidades', UnitController::class);

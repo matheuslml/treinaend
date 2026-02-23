@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/wizard/bs-stepper.min.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/plyr.min.css')) }}">
 @endsection
 
 @section('page-style')
@@ -16,6 +17,7 @@
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-wizard.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('css/base/pages/page-faq.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-media-player.css')) }}">
 @endsection
 
 @section('content')
@@ -27,7 +29,7 @@
       <h2 class="text-primary">{{ $discipline->name }}</h2>
 
       <!-- subtitle -->
-      <p class="card-text ">escrever texto</p>
+      <p class="card-text ">conhecimento que abre caminhos</p>
     </div>
   </div>
 </section>
@@ -45,6 +47,20 @@
           <li class="nav-item">
             <a
               class="nav-link active"
+              id="lesson"
+              data-bs-toggle="pill"
+              href="#faq-lesson"
+              aria-expanded="true"
+              role="tab"
+            >
+              <i data-feather="book-open" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Aulas</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
               id="exercise"
               data-bs-toggle="pill"
               href="#faq-exercise"
@@ -114,8 +130,34 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <!-- pill tabs tab content -->
       <div class="tab-content">
+
+        <!-- lesson panel -->
+        <div role="tabpanel" class="tab-pane active" id="faq-lesson" aria-labelledby="lesson" aria-expanded="true">
+          <!-- icon and header -->
+            <div class="row match-height">
+                @php
+                    $i=0;
+                @endphp
+                @foreach ($lessons as $lesson)
+                    @php
+                        $i++;
+                    @endphp
+                    <div class="col-md-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                            <h4 class="card-title">Aula {{ $i }}: </h4>
+                                <div class="video-player" id="">
+                                    <iframe src="{{ $lesson->link_video }}" allowfullscreen allow="autoplay"></iframe>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            </div>
+        </div>
+
         <!-- exercise panel -->
-        <div role="tabpanel" class="tab-pane active" id="faq-exercise" aria-labelledby="exercise" aria-expanded="true">
+        <div role="tabpanel" class="tab-pane" id="faq-exercise" aria-labelledby="exercise" aria-expanded="false">
           <!-- icon and header -->
             <div class="row match-height">
                 @foreach ($exercises as $exercise)
@@ -241,8 +283,8 @@
                             $i++;
                         @endphp
                         <div class="step" data-target="#question-{{ $i }}-vertical" role="tab" id="question-{{ $i }}-vertical-trigger">
-                            <button type="button" class="step-trigger">
-                            <span class="bs-stepper-box">{{ $i }}</span>
+                            <button type="button" class="step-trigger" id="btn-number-lesson-{{ $i }}" disabled>
+                                <span class="bs-stepper-box">{{ $i }}</span>
                             </button>
                         </div>
                     @endforeach
@@ -256,37 +298,19 @@
                 >
                     <div class="content-header">
                         <h5 class="mb-0">Prova </h5>
-                        <small class="text-muted">texto prova.</small>
+                        <small class="text-muted">Data: {{ $examDateFormated }}</small>
                     </div>
                     <div class="row">
-                    <div class="mb-1 col-md-6">
-                        <label class="form-label" for="vertical-username">Duração Máxima (Dias)</label>
-                        <input type="text" class="form-control" value="{{ $discipline->days }}" disabled />
-                    </div>
-                    <div class="mb-1 col-md-6">
-                        <label class="form-label" for="vertical-email">Data de Início</label>
-                        <input type="text" class="form-control" value="" disabled />
-                    </div>
-                    </div>
-                    <div class="row">
-                    <div class="mb-1 form-password-toggle col-md-6">
-                        <label class="form-label" for="vertical-password">Dias Restantes</label>
-                        <input type="text" id="vertical" class="form-control" value="" disabled />
-                    </div>
-                    <div class="mb-1 form-password-toggle col-md-6">
-                        <label class="form-label" for="vertical-confirm-password">Data Fim</label>
-                        <input type="text" class="form-control" value="" disabled />
-                    </div>
-                    </div>
-                    <div class="d-flex justify-content-between">
-                    <button class="btn btn-outline-secondary btn-prev" disabled>
-                        <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
-                        <span class="align-middle d-sm-inline-block d-none">Anterior</span>
-                    </button>
-                    <button class="btn btn-primary btn-next">
-                        <span class="align-middle d-sm-inline-block d-none">Começar</span>
-                        <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
-                    </button>
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label" for="vertical-username" {{ $exam_date == false ? 'hidden' : '' }} >Chegou a hora de colocar em prática tudo o que você estudou. Respire fundo, mantenha a concentração e faça o seu melhor.</label>
+                            <label class="form-label" for="vertical-username" {{ $exam_date == true ? 'hidden' : '' }} >Ainda não é o dia da prova. Aproveite este tempo para revisar o conteúdo, reforçar os pontos que você tem mais dificuldade e se preparar com calma. Mantenha o foco nos estudos, organize seu cronograma e use cada dia como uma oportunidade para estar mais seguro quando chegar a hora.</label>
+                        </div>
+                        <div class="" >
+                        <button class="btn btn-primary btn-next" id="btn-start"  {{ $exam_date == false ? 'hidden' : '' }} >
+                            <span class="align-middle d-sm-inline-block d-none">Começar</span>
+                            <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                        </button>
+                        </div>
                     </div>
                 </div>
                 @php
@@ -298,7 +322,7 @@
                     @endphp
                     <div id="question-{{ $i }}-vertical" class="content" role="tabpanel" aria-labelledby="question-{{ $i }}-vertical-trigger">
                         <div class="content-header">
-                            <h5 class="mb-0">Questão da Prova</h5>
+                            <h5 class="mb-0">Questão: {{ $i }} </h5>
                             <small>Faça com calma!</small>
                         </div>
                         <div class="row">
@@ -316,7 +340,8 @@
                                                     $quantity = $exercise->answers;
                                                     $j = 0;
                                                 @endphp
-                                                <select class="form-select" id="answer" name="answer" required >
+                                                <input type="number" value="{{ $question->id }}" id="question-{{ $i }}" name="question" hidden/>
+                                                <select class="form-select" id="answer-{{ $i }}" name="answer" required >
                                                     <option value="" class="">Respostas</option>
                                                     @while ($quantity > 0)
                                                         @php
@@ -337,11 +362,11 @@
                                 <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
                                 <span class="align-middle d-sm-inline-block d-none">Anterior</span>
                             </button>
-                            <button class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
+                            <button  id="btn-next-{{ $i }}" class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
                                 <span class="align-middle d-sm-inline-block d-none">Próximo</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
-                            <button class="btn btn-success btn-next" {{ $i < 10 ? 'hidden' : '' }} >
+                            <button  id="btn-lesson-save-{{ $i }}" class="btn btn-success" {{ $i < 10 ? 'hidden' : '' }} >
                                 <span class="align-middle d-sm-inline-block d-none">Salvar</span>
                                 <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
@@ -352,6 +377,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>
@@ -373,6 +399,8 @@
   <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/wizard/bs-stepper.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.polyfilled.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
@@ -382,5 +410,9 @@
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-wizard.js')) }}"></script>
+
+  <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player-treinaend.js')) }}"></script>-->
+  <script src="{{ asset(mix('js/scripts/exercise/check_exercise.js')) }}"></script>
 @endsection
+
 

@@ -34,7 +34,11 @@ class Permissions extends Migration
 
         // TREINAEND
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu do Aluno', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu da Treinaend', 'guard_name' => 'web']);
+
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Aulas', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Aulas', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Aulas', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Aulas', 'guard_name' => 'web']);
 
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Exercícios', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Exercícios', 'guard_name' => 'web']);

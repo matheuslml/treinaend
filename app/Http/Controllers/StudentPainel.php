@@ -4,21 +4,27 @@ namespace App\Http\Controllers;
 
 use App\Models\Copyright;
 use App\Models\Discipline;
+use App\Models\DisciplinePeople;
 use App\Models\Exercise;
 use App\Models\ExerciseUser;
+use App\Models\Lesson;
+use App\Models\Person;
 use App\Models\SupportMaterial;
 use App\Models\Unit;
 use App\Models\User;
+use Carbon\Carbon;
 use Detection\MobileDetect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 
 class StudentPainel extends Controller
 {
 
     public function disciplines_student_index()
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
@@ -26,9 +32,31 @@ class StudentPainel extends Controller
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $disciplines = Discipline::orderBy('name', 'asc')->get();
-            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright'));
+
+            $userId = Auth::id();
+            $user = User::find($userId);
+            $person_id = $user->person_id;
+
+            $disciplines = Discipline::orderBy('order', 'asc')
+                ->with(['person' => function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id);
+                }])
+                ->get();
+
+            $discipline_atual = Discipline::orderBy('order', 'asc')
+                ->whereHas('person', function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id)
+                        ->where('discipline_people.score', '<=', 7);
+                })
+                ->with(['person' => function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id);
+                }])
+                ->first();
+
+
+            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
         } catch (\Throwable $throwable) {
+            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
@@ -36,16 +64,28 @@ class StudentPainel extends Controller
 
     public function exercises_student_index($discipline_id)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
         try{
             $userId = Auth::id();
+            $user = User::find($userId);
             $pageConfigs = ['pageHeader' => false];
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
+            $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id', $user->person_id)->first();
+            $examDate = Carbon::parse($discipline_person->exam_date);
+            $examDateFormated = Carbon::parse($examDate)->format('d/m/Y');
+            $today = Carbon::today();
+            $exam_date = false;
+            if ($examDate->lessThanOrEqualTo($today)) $exam_date = true;
+
+            $lessons = Lesson::where('discipline_id', $discipline_id)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+
             $exercises = Exercise::where('discipline_id', $discipline_id)
                                     ->whereIn('type', ['E', 'A'])
                                     ->whereDoesntHave('users', function($q) use ($userId) {
@@ -69,7 +109,7 @@ class StudentPainel extends Controller
                                     ->limit(10)
                                     ->get();
 
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions'));
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -79,7 +119,7 @@ class StudentPainel extends Controller
 
     public function student_answer_exercise(Request $request)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
@@ -103,7 +143,7 @@ class StudentPainel extends Controller
 
     public function download_support_material($support_material_id)
     {
-        /*if (! Gate::allows('Ver e Listar Matrículas')) {
+        /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
         }*/
 
@@ -123,6 +163,95 @@ class StudentPainel extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function student_save_discipline(Request $request)
+    {
+        try{
+            $processed = [];
+            $answers = $request->input('answers');
+            if (is_array($answers)) {
+                foreach ($answers as $index => $answer) {
+                    $processed[] = [ 'question' => $index + 1, 'answer' => $answer ];
+                    //salvar aqui cada quest~]ao feita
+                }
+
+                    //salvar discipline user tbm
+                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
+            }else{
+                return response()->json([ 'status' => 'not ok', 'answers' => "Nenhuma resposta recebida." ]);
+            }
+            echo $request;
+        } catch (\Throwable $throwable) {
+            echo "Erro: " . $throwable->getMessage();
+        }
+    }
+
+    public function student_save_lesson(Request $request)
+    {
+        try{
+            //está salvando, mas não trava a disciplina depois de feita e tem que ir para um a página de conclusão da prova
+            $userId = Auth::id();
+            $person = Person::find($userId);
+            $today = Carbon::today();
+            $processed = [];
+            $answers = $request->input('answers', []);
+            $questions = $request->input('questions', []);
+            $score = 0;
+            $discipline_person_id = 0;
+            $exam_nr = 0;
+            $days = 0;
+            if (is_array($answers) && is_array($questions)) {
+                foreach ($answers as $index => $answer) {
+                    $question_id = $questions[$index] ?? null;
+                    $exercise = Exercise::find($question_id);
+                    if($discipline_person_id == 0){
+                        $discipline_person = DisciplinePeople::where('discipline_id', $exercise->discipline_id)->where('person_id', $person->id)->first();
+                        $discipline_person_id = $discipline_person->id;
+                        $exam_nr = $discipline_person->exam_nr;
+                        $days = $discipline_person->discipline->days;
+                    }
+                    if ($exercise->correct_answer == $answer) $score++;
+
+                    ExerciseUser::create([
+                        'user_id' => $userId,
+                        'exercise_id' => $question_id,
+                        'answer' => $answer
+                    ]);
+                }
+                if($score >=7){
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $exercise->discipline_id,
+                            'person_id' => $person->id
+                        ],
+                        [
+                            'finished_at' => $today,
+                            'score' => $score
+                        ]
+                    );
+                }else{
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $exercise->discipline_id,
+                            'person_id' => $person->id
+                        ],
+                        [
+                            'exam_date' => $today->copy()->addDays($days),
+                            'exam_nr' => $exam_nr+1
+                        ]
+                    );
+                }
+
+                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
+            }else{
+                return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
+            }
+        } catch (\Throwable $throwable) {
+            return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
+        }
+    }
+
 }
+
 
 

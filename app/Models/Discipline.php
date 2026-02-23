@@ -22,7 +22,7 @@ class Discipline extends Model implements Auditable
         'name',
         'order',
         'days'
-    ];//
+    ];
 
     protected $dates = [
         'expires_at',
@@ -36,7 +36,9 @@ class Discipline extends Model implements Auditable
 
     public function person(): BelongsToMany
     {
-        return $this->belongsToMany(Person::class);
+        return $this->belongsToMany(Person::class, 'discipline_people', 'discipline_id', 'person_id')
+                    ->withPivot(['score', 'exam_date', 'started_at', 'finished_at', 'exam_nr', 'registration'])
+                    ->withTimestamps();
     }
 
     public function support_materials(): HasMany
