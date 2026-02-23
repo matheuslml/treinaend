@@ -218,6 +218,8 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
+                //testando aqui
+                return response()->json([ 'status' => 'ok', 'answers' => $answer]);
                 if($score >=7){
                     DisciplinePeople::updateOrCreate(
                         [
