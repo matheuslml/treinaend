@@ -43,16 +43,35 @@ class StudentPainel extends Controller
                 }])
                 ->get();
 
-            $discipline_atual = Discipline::orderBy('order', 'asc')
+            /*$discipline_atual = Discipline::orderBy('created_at', 'desc')
                 ->whereHas('person', function ($query) use ($person_id) {
                     $query->where('person_id', $person_id)
-                        ->where('discipline_people.score', '<=', 7);
+                        ->where('discipline_people.score', '<=', 7)
+                        ->orWhereNull('discipline_people.score');
                 })
                 ->with(['person' => function ($query) use ($person_id) {
                     $query->where('person_id', $person_id);
                 }])
-                ->first();
+                ->get();*/
+                $discipline_atual = Discipline::orderBy('order', 'asc')
+                    ->whereHas('person', function ($query) use ($person_id) {
+                        $query->where('person_id', $person_id)
+                            ->where(function ($q) {
+                                $q->where('discipline_people.score', '<=', 7)
+                                    ->orWhereNull('discipline_people.finished_at');
+                            });
+                    })
+                    ->with(['person' => function ($query) use ($person_id) {
+                        $query->where('person_id', $person_id)
+                            ->where(function ($q) {
+                                $q->where('discipline_people.score', '<=', 7)
+                                    ->orWhereNull('discipline_people.finished_at');
+                            });
+                    }])
+                    ->first();
 
+
+            //dd($discipline_atual);
 
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
         } catch (\Throwable $throwable) {
@@ -189,7 +208,7 @@ class StudentPainel extends Controller
     public function student_save_lesson(Request $request)
     {
         try{
-            //está salvando, mas não trava a disciplina depois de feita e tem que ir para um a página de conclusão da prova
+            //ok testar e ver se a interface está fechando e indo pra próxima
             $userId = Auth::id();
             $user = User::find($userId);
             $person = Person::find($user->person_id);
@@ -202,6 +221,7 @@ class StudentPainel extends Controller
             $exam_nr = 0;
             $days = 0;
             if (is_array($answers) && is_array($questions)) {
+                //Salvar exercícios feitos
                 foreach ($answers as $index => $answer) {
                     $question_id = $questions[$index];
                     $exercise = Exercise::find($question_id);
@@ -219,7 +239,9 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
+                $score=7;
                 if($score >=7){
+                //Salvar dados da prova
                     DisciplinePeople::updateOrCreate(
                         [
                             'discipline_id' => $exercise->discipline_id,
@@ -228,6 +250,19 @@ class StudentPainel extends Controller
                         [
                             'finished_at' => $today,
                             'score' => $score
+                        ]
+                    );
+
+                //criar proxima disciplina
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $exercise->discipline->order + 1,
+                            'person_id' => $person->id
+                        ],
+                        [
+                            'exam_date' => $today->copy()->addDays($days),
+                            'started_at' => $today,
+                            'exam_nr' => 0
                         ]
                     );
                 }else{

@@ -48,7 +48,7 @@
                 </div>
                 <div class="card-body">
                     <h4 class="card-title mb-1 text-white">{{ $discipline_atual->name }}</h4>
-                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white" >Acessar</a>
+                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white {{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($$discipline_atual->person->first()?->pivot?->exam_date)->format('d/m/Y') : null ?? 'disabled' }}" >Acessar</a>
                 </div>
                 <div class="card-footer text-muted ">
                     <p class="card-text m-auto w-75 text-white">
