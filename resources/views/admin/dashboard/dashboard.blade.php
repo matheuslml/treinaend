@@ -25,7 +25,7 @@
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="fw-bolder mb-0">00</h2>
+            <h2 class="fw-bolder mb-0">{{ $exercise_user_count }}</h2>
             <p class="card-text">Exercícios Feitos</p>
           </div>
           <div class="avatar bg-light-primary p-50 m-0">
@@ -40,7 +40,7 @@
       <div class="card">
         <div class="card-header">
           <div>
-            <h2 class="fw-bolder mb-0">00</h2>
+            <h2 class="fw-bolder mb-0">{{ $exercises_count }}</h2>
             <p class="card-text">Total de Exercícios</p>
           </div>
           <div class="avatar bg-light-success p-50 m-0">
@@ -100,43 +100,23 @@
       </div>
       <div class="card-body">
         <div class="meetup-header d-flex align-items-center">
-          <div class="meetup-day">
-            <h6 class="mb-0">THU</h6>
-            <h3 class="mb-0">{{ date('d') }}</h3>
-          </div>
           <div class="my-auto">
             <h4 class="card-title mb-25">Data da Prova</h4>
             <p class="card-text mb-0">Se prepare antecipadamente</p>
           </div>
         </div>
         <div class="d-flex flex-row meetings">
-          <div class="avatar bg-light-primary rounded me-1">
-            <div class="avatar-content">
-              <i data-feather="calendar" class="avatar-icon font-medium-3"></i>
-            </div>
-          </div>
           <div class="content-body">
-            <h6 class="mb-0">Sat, May 25, 2020</h6>
-            <small>10:AM to 6:PM</small>
+            @php
+                $pivot = $discipline_atual->person->first()?->pivot;
+            @endphp
+            <h2 class="m1-10">{{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</h2>
           </div>
         </div>
       </div>
     </div>
   </div>
   <!--/ Developer Meetup Card   -->
-
-  <!-- Employee Task Card -->
-  <div class="col-lg-4 col-md-6 col-12" >
-    <div class="card card-employee-task">
-      <div class="card-header">
-        <h4 class="card-title">Lista de Exercícios</h4>
-        <a href=""><i data-feather="book-open" class="font-medium-3 cursor-pointer"></i></a>
-      </div>
-      <div class="card-body">
-      </div>
-    </div>
-  </div>
-  <!--/ Employee Task Card -->
 
 </div>
 </section>
