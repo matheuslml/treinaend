@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\DisciplinePeople;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -24,5 +25,13 @@ class DisciplinePersonSeeder extends Seeder
             DB::unprepared(file_get_contents($filePath));
             $this->command->info('Discipline People Table Seed');
         }
+
+        // Atualiza todos os registros com score == NULL para 0
+        DisciplinePeople::whereNull('score')->update(['score' => 0]);
+        $this->command->info('Discipline People scores atualizados para 0 onde estavam NULL');
+
+        DisciplinePeople::whereNull('exam_nr')->update(['exam_nr' => 0]);
+        $this->command->info('Discipline People NR atualizados para 0 onde estavam NULL');
+
     }
 }

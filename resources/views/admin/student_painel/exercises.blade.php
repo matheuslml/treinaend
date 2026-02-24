@@ -264,11 +264,11 @@
             <!--/ Transaction card -->
         </div>
 
-        <!-- exam  -->
+        <!-- exam fazer tela para completar e falhar em prova  ---------------------------------------------------------------------------------->
         <div class="tab-pane" id="faq-exam" role="tabpanel" aria-labelledby="exam" aria-expanded="false" >
           <!-- icon and header exam_questions -->
           <div class="d-flex align-items-center col-12">
-            <div class="bs-stepper vertical vertical-wizard-example">
+            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >=7 ? 'hidden' : '' }}>
                 <div class="bs-stepper-header">
                     <div class="step" data-target="#question-0-vertical" role="tab" id="question-0-vertical-trigger">
                         <button type="button" class="step-trigger">
