@@ -266,9 +266,28 @@
 
         <!-- exam fazer tela para completar e falhar em prova  ---------------------------------------------------------------------------------->
         <div class="tab-pane" id="faq-exam" role="tabpanel" aria-labelledby="exam" aria-expanded="false" >
+
+
+            <!-- Medal Card -->
+            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
+                <div class="card card-congratulation-medal">
+                <div class="card-body">
+                        <h2>Parabéns!!! 🎉</h2>
+                        <h3>{{ auth()->user()->name }}!</h3>
+                        <p class="card-text font-small-3">
+                            É com grande satisfação que reconhecemos sua dedicação e esforço.<br>
+                            Continue avançando com confiança e determinação!
+                        </p>
+
+                        <h3 class="mb-75 mt-4">Nota na Disciplina: {{ $discipline_person->score }}</h3>
+                        <img src="{{asset('images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
+                    </div>
+                </div>
+            </div>
+            <!--/ Medal Card -->
           <!-- icon and header exam_questions -->
           <div class="d-flex align-items-center col-12">
-            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >=7 ? 'hidden' : '' }}>
+            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
                 <div class="bs-stepper-header">
                     <div class="step" data-target="#question-0-vertical" role="tab" id="question-0-vertical-trigger">
                         <button type="button" class="step-trigger">
