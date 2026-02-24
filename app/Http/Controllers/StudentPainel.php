@@ -239,7 +239,6 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
-                $score=7;
                 if($score >=7){
                 //Salvar dados da prova
                     DisciplinePeople::updateOrCreate(
