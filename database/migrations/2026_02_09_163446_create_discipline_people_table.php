@@ -18,8 +18,8 @@ return new class extends Migration
             $table->date('exam_date', $precision = 0)->nullable();
             $table->date('started_at', $precision = 0)->nullable();
             $table->date('finished_at', $precision = 0)->nullable();
-            $table->integer('score')->nullable();
-            $table->integer('exam_nr')->nullable();
+            $table->integer('score')->nullable()->default(0);
+            $table->integer('exam_nr')->nullable()->default(0);
             $table->string('registration')->nullable();
             $table->timestamps();
             $table->softDeletes();

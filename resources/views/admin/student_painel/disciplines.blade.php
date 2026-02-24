@@ -37,6 +37,9 @@
 <section id="faq-tabs">
   <!-- vertical tab pill -->
   <div class="row">
+        @php
+            $pivot = $discipline_atual->person->first()?->pivot;
+        @endphp
         <div class="col-md-8 col-lg-8 " >
             <div class="card text-center card-congratulations">
                 <div class="card-header">

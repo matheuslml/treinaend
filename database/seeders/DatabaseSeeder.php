@@ -24,5 +24,6 @@ class DatabaseSeeder extends Seeder
          $this->call(SupportMaterialSeeder::class);
          $this->call(RegistrationSeeder::class);
          $this->call(UserSeeder::class);
+         $this->call(DocumentSeeder::class);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Discipline\NewStudent;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Models\DisciplinePeople;
@@ -16,8 +17,6 @@ use Carbon\Carbon;
 use Detection\MobileDetect;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Gate;
 
 class StudentPainel extends Controller
 {
@@ -37,26 +36,35 @@ class StudentPainel extends Controller
             $user = User::find($userId);
             $person_id = $user->person_id;
 
+            //para testar se o Aluno nunca usou aula no sistema antigo
+            $new_student = resolve(NewStudent::class);
+            $new_student->handle($person_id);
+
             $disciplines = Discipline::orderBy('order', 'asc')
                 ->with(['person' => function ($query) use ($person_id) {
                     $query->where('person_id', $person_id);
                 }])
                 ->get();
 
-            $discipline_atual = Discipline::orderBy('order', 'asc')
+            $discipline_atual = Discipline::orderBy('order', 'desc')
                 ->whereHas('person', function ($query) use ($person_id) {
                     $query->where('person_id', $person_id)
-                        ->where('discipline_people.score', '<=', 7);
+                        ->where(function ($q) {
+                            $q->where('discipline_people.score', '<=', 7)
+                                ->orWhereNull('discipline_people.finished_at');
+                        });
                 })
                 ->with(['person' => function ($query) use ($person_id) {
-                    $query->where('person_id', $person_id);
+                    $query->where('person_id', $person_id)
+                        ->where(function ($q) {
+                            $q->where('discipline_people.score', '<=', 7)
+                                ->orWhereNull('discipline_people.finished_at');
+                        });
                 }])
                 ->first();
 
-
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
         } catch (\Throwable $throwable) {
-            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
@@ -111,7 +119,6 @@ class StudentPainel extends Controller
 
             return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
-            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
@@ -135,7 +142,6 @@ class StudentPainel extends Controller
             return redirect()->back()->with('success', 'Alterações salvas com sucesso!');
 
         } catch (\Throwable $throwable) {
-            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }
@@ -189,9 +195,10 @@ class StudentPainel extends Controller
     public function student_save_lesson(Request $request)
     {
         try{
-            //está salvando, mas não trava a disciplina depois de feita e tem que ir para um a página de conclusão da prova
+            //ok testar e ver se a interface está fechando e indo pra próxima
             $userId = Auth::id();
-            $person = Person::find($userId);
+            $user = User::find($userId);
+            $person = Person::find($user->person_id);
             $today = Carbon::today();
             $processed = [];
             $answers = $request->input('answers', []);
@@ -201,14 +208,15 @@ class StudentPainel extends Controller
             $exam_nr = 0;
             $days = 0;
             if (is_array($answers) && is_array($questions)) {
+                //Salvar exercícios feitos
                 foreach ($answers as $index => $answer) {
-                    $question_id = $questions[$index] ?? null;
+                    $question_id = $questions[$index];
                     $exercise = Exercise::find($question_id);
                     if($discipline_person_id == 0){
                         $discipline_person = DisciplinePeople::where('discipline_id', $exercise->discipline_id)->where('person_id', $person->id)->first();
-                        $discipline_person_id = $discipline_person->id;
-                        $exam_nr = $discipline_person->exam_nr;
-                        $days = $discipline_person->discipline->days;
+                        $discipline_person_id = $discipline_person->id ?? 0;
+                        $exam_nr = $discipline_person->exam_nr ?? 0;
+                        $days = $discipline_person->discipline->days ?? 0;
                     }
                     if ($exercise->correct_answer == $answer) $score++;
 
@@ -219,6 +227,7 @@ class StudentPainel extends Controller
                     ]);
                 }
                 if($score >=7){
+                //Salvar dados da prova
                     DisciplinePeople::updateOrCreate(
                         [
                             'discipline_id' => $exercise->discipline_id,
@@ -227,6 +236,19 @@ class StudentPainel extends Controller
                         [
                             'finished_at' => $today,
                             'score' => $score
+                        ]
+                    );
+
+                //criar proxima disciplina
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $exercise->discipline->order + 1,
+                            'person_id' => $person->id
+                        ],
+                        [
+                            'exam_date' => $today->copy()->addDays($days),
+                            'started_at' => $today,
+                            'exam_nr' => 0
                         ]
                     );
                 }else{

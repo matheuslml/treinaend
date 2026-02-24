@@ -27,7 +27,6 @@
     <div class="card-body text-left">
       <!-- main title -->
       <h2 class="text-primary">{{ $discipline->name }}</h2>
-
       <!-- subtitle -->
       <p class="card-text ">conhecimento que abre caminhos</p>
     </div>
@@ -47,6 +46,20 @@
           <li class="nav-item">
             <a
               class="nav-link active"
+              id="intro"
+              data-bs-toggle="pill"
+              href="#faq-intro"
+              aria-expanded="true"
+              role="tab"
+            >
+              <i data-feather="help-circle" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Introdução</span>
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a
+              class="nav-link"
               id="lesson"
               data-bs-toggle="pill"
               href="#faq-lesson"
@@ -112,8 +125,8 @@
               aria-expanded="false"
               role="tab"
             >
-              <i data-feather="clock" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Prova</span>
+              <i data-feather="{{ $discipline_person->score >= 7 ? 'award' : 'clock' }}" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Prova {{ $discipline_person->score < 7 ? ('- ' . $examDateFormated) : '' }}</span>
             </a>
           </li>
         </ul>
@@ -130,9 +143,55 @@
     <div class="col-lg-9 col-md-8 col-sm-12">
       <!-- pill tabs tab content -->
       <div class="tab-content">
+        <!-- Intro panel -->
+        <div role="tabpanel" class="tab-pane active" id="faq-intro" aria-labelledby="intro" aria-expanded="true">
+
+            <!-- Congratulations Card  -->
+            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
+                <div class="card card-congratulations">
+                    <div class="card-body text-center">
+                        <div class="avatar avatar-xl bg-primary shadow">
+                        <div class="avatar-content">
+                            <i data-feather="play-circle" class="font-large-1"></i>
+                        </div>
+                        </div>
+                        <div class="text-center">
+                            <h1 class="mb-1 text-white">Bons Estudos, <br>{{ auth()->user()->name }}!</h1>
+                            <p class="card-text m-auto w-75">
+                                Este é mais um passo importante na sua jornada de aprendizado.
+                                Mantenha o foco, a disciplina e a curiosidade — cada esforço de hoje
+                                será uma conquista no futuro. Continue avançando com confiança e determinação!
+                            </p>
+
+                            <h3 class=" mt-4 text-white">Nota na Disciplina: {{ $discipline_person->score == 0 ? '-' : $discipline_person->score }}</h3>
+                            <h3 class="mb-75  text-white" {{ $discipline_person->score < 7 ? '' : 'hidden' }}>Prova: {{ $examDateFormated }}</h3>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!--/ Congratulations Card -->
+            <!-- Medal Card -->
+            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
+                <div class="card card-congratulation-medal">
+                <div class="card-body">
+                        <h2>Parabéns!!! 🎉</h2>
+                        <h3>{{ auth()->user()->name }}!</h3>
+                        <p class="card-text font-small-3">
+                            É com grande satisfação que reconhecemos sua dedicação e esforço.<br>
+                            Continue avançando com confiança e determinação!
+                        </p>
+
+                        <h3 class="mb-75 mt-4">Nota na Disciplina: {{ $discipline_person->score }}</h3>
+                        <img src="{{asset('images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
+                    </div>
+                </div>
+            </div>
+            <!--/ Medal Card -->
+        </div>
 
         <!-- lesson panel -->
-        <div role="tabpanel" class="tab-pane active" id="faq-lesson" aria-labelledby="lesson" aria-expanded="true">
+        <div role="tabpanel" class="tab-pane" id="faq-lesson" aria-labelledby="lesson" aria-expanded="false">
           <!-- icon and header -->
             <div class="row match-height">
                 @php
@@ -264,11 +323,30 @@
             <!--/ Transaction card -->
         </div>
 
-        <!-- exam  -->
+        <!-- exam fazer tela para completar e falhar em prova  ---------------------------------------------------------------------------------->
         <div class="tab-pane" id="faq-exam" role="tabpanel" aria-labelledby="exam" aria-expanded="false" >
+
+
+            <!-- Medal Card -->
+            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
+                <div class="card card-congratulation-medal">
+                <div class="card-body">
+                        <h2>Parabéns!!! 🎉</h2>
+                        <h3>{{ auth()->user()->name }}!</h3>
+                        <p class="card-text font-small-3">
+                            É com grande satisfação que reconhecemos sua dedicação e esforço.<br>
+                            Continue avançando com confiança e determinação!
+                        </p>
+
+                        <h3 class="mb-75 mt-4">Nota na Disciplina: {{ $discipline_person->score }}</h3>
+                        <img src="{{asset('images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
+                    </div>
+                </div>
+            </div>
+            <!--/ Medal Card -->
           <!-- icon and header exam_questions -->
           <div class="d-flex align-items-center col-12">
-            <div class="bs-stepper vertical vertical-wizard-example">
+            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
                 <div class="bs-stepper-header">
                     <div class="step" data-target="#question-0-vertical" role="tab" id="question-0-vertical-trigger">
                         <button type="button" class="step-trigger">
