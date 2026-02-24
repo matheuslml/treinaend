@@ -27,7 +27,6 @@
     <div class="card-body text-left">
       <!-- main title -->
       <h2 class="text-primary">{{ $discipline->name }}</h2>
-
       <!-- subtitle -->
       <p class="card-text ">conhecimento que abre caminhos</p>
     </div>
@@ -126,8 +125,8 @@
               aria-expanded="false"
               role="tab"
             >
-              <i data-feather="clock" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Prova</span>
+              <i data-feather="{{ $discipline_person->score >= 7 ? 'award' : 'clock' }}" class="font-medium-3 me-1"></i>
+              <span class="fw-bold">Prova {{ $discipline_person->score < 7 ? ('- ' . $examDateFormated) : '' }}</span>
             </a>
           </li>
         </ul>
@@ -164,7 +163,8 @@
                                 será uma conquista no futuro. Continue avançando com confiança e determinação!
                             </p>
 
-                            <h3 class="mb-75 mt-4 text-white">Nota na Disciplina: {{ $discipline_person->score == 0 ? '-' : $discipline_person->score }}</h3>
+                            <h3 class=" mt-4 text-white">Nota na Disciplina: {{ $discipline_person->score == 0 ? '-' : $discipline_person->score }}</h3>
+                            <h3 class="mb-75  text-white" {{ $discipline_person->score < 7 ? '' : 'hidden' }}>Prova: {{ $examDateFormated }}</h3>
                         </div>
 
                     </div>

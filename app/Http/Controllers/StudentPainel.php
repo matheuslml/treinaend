@@ -43,17 +43,18 @@ class StudentPainel extends Controller
                 }])
                 ->get();
 
+            //arrumar a disciplina atual
             /*$discipline_atual = Discipline::orderBy('created_at', 'desc')
                 ->whereHas('person', function ($query) use ($person_id) {
                     $query->where('person_id', $person_id)
                         ->where('discipline_people.score', '<=', 7)
-                        ->orWhereNull('discipline_people.score');
+                        ->orWhere('discipline_people.score', '<=', 7);
                 })
                 ->with(['person' => function ($query) use ($person_id) {
                     $query->where('person_id', $person_id);
                 }])
-                ->get();*/
-                $discipline_atual = Discipline::orderBy('order', 'asc')
+                ->first();*/
+                $discipline_atual = Discipline::orderBy('order', 'desc')
                     ->whereHas('person', function ($query) use ($person_id) {
                         $query->where('person_id', $person_id)
                             ->where(function ($q) {
@@ -69,9 +70,6 @@ class StudentPainel extends Controller
                             });
                     }])
                     ->first();
-
-
-            //dd($discipline_atual);
 
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
         } catch (\Throwable $throwable) {
