@@ -25,33 +25,16 @@ class PersonUpdateService
     {
         try {
             DB::beginTransaction();
-            if($request['personable_type'] == 'pj'){
-                $userData = array_merge(
-                    $request,
-                    [
-                        'full_name'      => $request['person_name'] ?? $request['company_name'],
-                        'personable_type'      => 'App\Models\LegalPerson'
-                    ]
-                );
-            }
-            if($request['personable_type'] == 'pf'){
-                $userData = array_merge(
-                    $request,
-                    [
-                        'full_name'      => $request['person_name'] ?? $request['company_name'],
-                        'personable_type'      => 'App\Models\IndividualPerson'
-                    ]
-                );
-            }
 
-            $person = Person::find($person_id);
-
-            $this->personService->update($userData, $person_id);
-            match ($userData['personable_type']) {
-                'App\Models\LegalPerson' => $this->legalPersonService->update($userData, $person->personable_id),
-                'App\Models\IndividualPerson' => $this->individualPersonService->update($userData, $person->personable_id),
-            default => throw new Exception('Tipo de pessoal não selecionado')
-            };
+            Person::updateOrCreate(
+                [
+                    'id' => $person_id
+                ],
+                [
+                    'full_name' => $request['person_name'],
+                    'social_name' => $request['social_name']
+                ]
+            );
 
             if(isset($request['documents'])){
                 foreach ($request['documents']['document_type'] as $key => $documents) {
@@ -65,51 +48,6 @@ class PersonUpdateService
                         );
                     }
                 }
-            }
-
-            if(isset($request['phones'])){
-                foreach ($request['phones']['phone'] as $key => $phones) {
-                    $phoneId = $request['phones']['id'][$key];
-                    if ($request['phones']['phone'][$key]) {
-                        $this->phoneService->update(
-                            [
-                            'phone' => $request['phones']['phone'][$key],
-                            ], $phoneId
-                        );
-                    }
-                }
-            }
-
-            if(isset($request['emails'])){
-                foreach ($request['emails']['email'] as $key => $emails) {
-                    $emailId = $request['emails']['id'][$key];
-                    if ($request['emails']['email'][$key]) {
-                        $this->emailService->update(
-                            [
-                            'email' => $request['emails']['email'][$key],
-                            ], $emailId
-                        );
-                    }
-                }
-            }
-
-            if(isset($request['occupation_id'])){
-                if(OccupationUser::where('user_id', $person->user->id)){
-                    OccupationUser::where('user_id', $person->user->id)->update(['occupation_id' => $request['occupation_id']]);
-                }
-                else{
-                    OccupationUser::create(
-                        [
-                        'user_id' => $person->user->id,
-                        'occupation_id' => $request['occupation_id'],
-                        ]
-                    );
-                }
-            }
-
-            //tratando address como se fosse único, pq vai aparecer sempre como único
-            if(isset($request['address_id'])){
-                $this->addressService->update($userData, $userData['address_id']);
             }
 
             DB::commit();

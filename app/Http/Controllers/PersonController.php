@@ -10,20 +10,11 @@ use App\Services\PersonCreateService;
 use App\Services\PersonUpdateService;
 use App\Http\Requests\PersonRequest;
 use App\Http\Requests\PersonUpdateRequest;
-use App\Models\Address;
-use App\Models\AddressPerson;
 use App\Models\Audit;
 use App\Models\City;
 use App\Models\Country;
 use App\Models\Departament;
-use App\Models\DepartamentPerson;
-use App\Models\Document;
-use App\Models\Email;
-
-
 use App\Models\Occupation;
-use App\Models\OccupationUser;
-use App\Models\Phone;
 use App\Models\State;
 use App\Models\Unit;
 use App\Models\Copyright;
@@ -32,11 +23,8 @@ use Exception;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Storage;
 use App\Services\PhoneService;
 use App\Services\EmailService;
-use App\Services\AddressService;
 
 use Throwable;
 
@@ -71,12 +59,7 @@ class PersonController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $audits = Audit::where('user_id', $user_id)->orderBy('created_at', 'desc')->take(10)->get();
             $user = User::find($user_id);
-
-
-            $states = State::all();
-            $cities = City::all();
-            $countries = Country::all();
-            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user',    'countries', 'states', 'cities' ));
+            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user' ));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao buscar a pessoa!')->error();
@@ -159,9 +142,9 @@ class PersonController extends Controller
     public function update(
         PersonUpdateRequest $request, $person_id
     ){
-        if (! Gate::allows('Editar Pessoas')) {
+        /*if (! Gate::allows('Editar Pessoas')) {
             return view('pages.not-authorized');
-        };
+        };*/
         try {
             DB::beginTransaction();
             $this->personUpdateService->update($request->toArray(), $person_id);
@@ -191,119 +174,5 @@ class PersonController extends Controller
         }
         $person = $this->personService->paginate(10);
         return view('admin.user.index', compact('person'));
-    }
-
-    public function store_person()
-    {
-
-        $users_list = User::with('person')->get();
-        foreach($users_list as $user){
-            if(!isset($user->person)){
-                $userData = array(
-                    'full_name'      => $user->name,
-                    'social_name'      => '',
-                    'genre'      => 1,
-                    'matrial_status'      => 1,
-                    'phone'      => "899999999"
-
-                    );
-
-
-                $person = match ('pf') {
-                    'pj' => $this->legalPersonService->create($userData),
-                    'pf' => $this->individualPersonService->create($userData),
-                default => throw new Exception('Tipo de pessoal não selecionado')
-                };
-
-                $new_person = $person->personable()->create($userData);
-
-                $person_id = $new_person->id;
-                var_dump($person_id);
-
-                $user = User::find($user->id);
-                $user->person_id = $person_id;
-                $user->save();
-
-                Document::create(
-                    [
-                    'document' => "00000000" . $user->id,
-                    'person_id' => $person_id,
-                    'document_type_id' => 7,
-                    ]
-                );
-                Document::create(
-                    [
-                    'document' => "00000000" . $user->id,
-                    'person_id' => $person_id,
-                    'document_type_id' => 2,
-                    ]
-                );
-                Document::create(
-                    [
-                    'document' => "00000000" . $user->id,
-                    'person_id' => $person_id,
-                    'document_type_id' => 8,
-                    ]
-                );
-
-                Email::create(
-                    [
-                    'email' => $user->email,
-                    'person_id' => $person_id,
-                    ]
-                );
-
-                Phone::create(
-                    [
-                    'phone' => "999999999",
-                    'person_id' => $person_id,
-                    ]
-                );
-
-
-                $address = Address::create(
-                    [
-                    'street' => "rua",
-                    'complement' => "complemento",
-                    'number' => "00",
-                    'postal_code' => "28930-000",
-                    'neighborhood' => "bairro",
-                    'city_id' => 3570,
-                    'person_id' => $person_id,
-                    ]
-                );
-
-                AddressPerson::create(
-                    [
-                    'person_id' => $person_id,
-                    'address_id' => $address->id,
-                    ]
-                );
-
-                DepartamentPerson::create(
-                    [
-                    'departament_id' => 1,
-                    'person_id' => $person_id,
-                    ]
-                );
-
-
-                OccupationUser::create(
-                    [
-                    'user_id' => $user->id,
-                    'occupation_id' => 1,
-                    ]
-                );
-
-            }
-
-
-        }
-
-
-        $pageConfigs = ['pageHeader' => false];
-
-        $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
-        return view('/admin/user/index', ['pageConfigs' => $pageConfigs], compact('users'));
     }
 }

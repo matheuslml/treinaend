@@ -12,7 +12,6 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\AddressController;
 use App\Http\Controllers\AgreementTypeController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BiddingAgreementController;
@@ -229,14 +228,9 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::post('ajaxRegister', ['as' => 'ajax.storecontent', 'uses' => 'App\Http\Controllers\NewsController@store_content']);
     Route::post('/savenewscontent', [NewsController::class, 'store_content'])->name('store_content');
 
-    //person
-    Route::get('store_person', [PersonController::class, 'store_person'])->name('store_person');
-
     //Legislation Vínculo
     Route::post('legislacao_vinculo/{base}', [LegislationController::class, 'legislacao_vinculo'])->name('legislacao_vinculo');
 
-    //Address
-    Route::get('address/get-cidades/{idEstado}', 'App\Http\Controllers\AddressController@getCidades');
     //Notifications
     Route::get('notification/readed/{idNotification}', 'App\Http\Controllers\NotificationController@changeReaded');
     //departaments
