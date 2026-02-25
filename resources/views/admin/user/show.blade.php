@@ -277,19 +277,6 @@
                             <input type="text" class="form-control input-admin" value="{{ $document->document }}" id="{{ $document->document_type->type }}" name="documents[document][]">
                         </div>
                       @endforeach
-                      @foreach($user->person->phones as $phone)
-                        <div class="col-12 col-md-6">
-                          <label class="form-label" for="phone">Celular</label>
-                          <input type="number" class="form-control" name="phones[id][]" value="{{ $phone->id }}" hidden>
-                          <input
-                            type="text"
-                            id="{{ 'phone-' . $phone->id }}"
-                            name="phones[phone][]"
-                            class="form-control"
-                            value="{{ $phone->phone }}"
-                          />
-                        </div>
-                      @endforeach
 
 
 
@@ -380,6 +367,7 @@
                             type="email"
                             id="email"
                             name="email"
+                            value="{{ $user->email }}"
                           />
                           <span class="input-group-text cursor-pointer">
                             <i data-feather="eye"></i>
@@ -394,46 +382,6 @@
                 </div>
               </div>
               <!--/ Change Password -->
-              <!--/ Change Password --><!-- two-step verification -->
-              <div class="card">
-                <div class="card-header border-bottom">
-                  <h4 class="card-title">Autentificação de dois fatores</h4>
-                </div>
-                <div class="card-body my-2 py-25">
-                  <form action="/user/two-factor-authentication" method="post">
-                    @csrf
-                      @if(auth()->user()->two_factor_secret)
-                        @method('DELETE')
-                        <p class="fw-bolder">A autentificação de dois fatores está ativada.</p>
-                        <div class="mt-2 mb-2">
-                          {!! auth()->user()->twoFactorQrCodeSvg() !!}
-                        </div>
-                        <div class="mt-2 mb-2">
-                          <p>Lista de Códigos de Recuperação</p>
-                          <ul>
-                            @foreach(json_decode(decrypt(auth()->user()->two_factor_recovery_codes)) as $code)
-                              <li>{{ $code }}</li>
-                            @endforeach
-                          </ul>
-                        </div>
-                        <button class="btn btn-primary">
-                          Desativar autentificação de dois fatores
-                        </button>
-                      @else
-                        <p class="fw-bolder">A autentificação de dois fatores ainda não está ativada.</p>
-                        <p>
-                        A autenticação de dois fatores adiciona uma camada adicional de segurança à sua conta,  <br />
-                        exigindo mais do que apenas uma senha para fazer login. Saiba Mais.
-                        </p>
-                        <button class="btn btn-primary">
-                          Ativar autentificação de dois fatores
-                        </button>
-                      @endif
-
-                  </form>
-                </div>
-              </div>
-              <!-- / two-step verification -->
 
               <!-- recent device -->
               <div class="card">
