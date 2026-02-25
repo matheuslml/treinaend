@@ -79,18 +79,6 @@
               </div>
               <div class="user-info text-center">
                 <h4>{{ isset($user->person) ? (isset($user->person->social_name) ? $user->person->social_name : ( isset($user->person->full_name) ? $user->person->full_name : $user->name ) ) : $user->name }}</h4>
-                <span class="badge bg-light-secondary">
-                  @php $i = 0; @endphp
-                  @foreach($user->occupations as $occupation)
-                    @if($i == 0)
-                      @php $i = 1; @endphp
-                      {{ $occupation->title }}
-                    @else
-                      @php $i = 0; @endphp
-                      {{ ', ' . $occupation->title }}
-                    @endif
-                  @endforeach
-                </span>
               </div>
             </div>
           </div>
@@ -132,29 +120,6 @@
                 </span>
               </li>
               <li class="mb-75">
-                <span class="fw-bolder me-25">Gênero:</span>
-                <span>{{ isset($user->person->genreData) ? $user->person->genreData->type : '' }}</span>
-              </li>
-              <li class="mb-75">
-                <span class="fw-bolder me-25">Estado Cívil:</span>
-                <span>{{ isset($user->person->matrialStatus->type) ? $user->person->matrialStatus->type : '' }}</span>
-              </li>
-              <li class="mb-75">
-                <span class="fw-bolder me-25">Funções:</span>
-                <span>
-                  @php $i = 0; @endphp
-                  @foreach($user->occupations as $occupation)
-                    @if($i == 0)
-                      @php $i = 1; @endphp
-                      {{ $occupation->departament->departament . ' (' . $occupation->title . ')' }}
-                    @else
-                      @php $i = 0; @endphp
-                      {{ ', ' . $occupation->departament->departament . ' (' . $occupation->title . ')' }}
-                    @endif
-                  @endforeach
-                </span>
-              </li>
-              <li class="mb-75">
                 <span class="fw-bolder me-25">Contato:</span>
                 <span>
                   @if(isset($user->person->phones))
@@ -163,31 +128,6 @@
                       @if($i == 0)
                         @php $i = 1; @endphp
                         {{ $phone->phone }}
-                      @else
-                        @php $i = 0; @endphp
-                        {{ ', ' . $phone }}
-                      @endif
-                    @endforeach
-                  @else
-                  {{'-'}}
-                  @endif
-                </span>
-              </li>
-              <li class="mb-75">
-                <span class="fw-bolder me-25">Endereço:</span>
-                <span>
-                  @if(isset($user->person->addresses))
-                    @php $i = 0; @endphp
-                    @foreach($user->person->addresses as $address)
-                      @if($i == 0)
-                        @php $i = 1; @endphp
-                        {{  $address->city->name . ' - ' .
-                            $address->street . ' - ' .
-                            $address->number . ' - ' .
-                            $address->complement . ' - ' .
-                            $address->neighborhood . ' - ' .
-                            $address->postal_code
-                        }}
                       @else
                         @php $i = 0; @endphp
                         {{ ', ' . $phone }}
@@ -330,58 +270,6 @@
                           value="{{ $user->person->social_name }}"
                         />
                       </div>
-                      <div class="col-6">
-                        <label class="form-label" for="social_name">Ocupações</label>
-                        <select
-                          id="occupation_id"
-                          name="occupation_id"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                        <option value="" class="">Tipos</option>
-                        @foreach($occupations as $occupation)
-                            <option value="{{ $occupation->id }}"  >{{ $occupation->title }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="col-12 col-md-4">
-                        <label class="form-label" for="genre">Gênero</label>
-                        <select
-                          id="genre"
-                          name="genre"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                        <option value="" class="">Tipos</option>
-                        @foreach($genres as $genre)
-                            <option value="{{ $genre->id }}" {{ $user->person->genre===$genre->id ? 'selected' : '' }} >{{ $genre->type }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="col-12 col-md-4">
-                        <label class="form-label" for="matrial_status">Estado Cívil</label>
-                        <select
-                          id="matrial_status"
-                          name="matrial_status"
-                          class="form-select"
-                          aria-label="Default select example"
-                        >
-                        <option value="" class="">Tipos</option>
-                        @foreach($matrial_statuses as $matrial_status)
-                            <option value="{{ $matrial_status->id }}" {{ $user->person->matrial_status===$matrial_status->id ? 'selected' : '' }} >{{ $matrial_status->type }}</option>
-                        @endforeach
-                        </select>
-                      </div>
-                      <div class="col-12 col-md-4">
-                        <label class="form-label" for="birthdate">Data de Nascimento</label>
-                        <input
-                          type="date"
-                          id="birthdate"
-                          name="birthdate"
-                          class="form-control"
-                          value="{{ date('Y-m-d',strtotime($user->person->personable->birthdate)) }}"
-                        />
-                      </div>
                       @foreach($user->person->documents as $document)
                         <div class="col-12 col-md-6">
                           <label class="form-label" for="modalEditUserEmail">{{ $document->document_type->type }}:</label>
@@ -401,73 +289,6 @@
                             class="form-control"
                             value="{{ $phone->phone }}"
                           />
-                        </div>
-                      @endforeach
-                      @foreach($user->person->addresses as $address)
-                          <input type="number" class="form-control" name="address_id" value="{{ $address->id }}" hidden>
-                        <div class="col-12 col-md-8">
-                          <label class="form-label" for="street">Endereço</label>
-                          <input
-                            type="text"
-                            id="street"
-                            name="street"
-                            class="form-control"
-                            value="{{ $address->street }}"
-                          />
-                        </div>
-                        <div class="col-12 col-md-4">
-                          <label class="form-label" for="number">Número</label>
-                          <input
-                            type="text"
-                            id="number"
-                            name="number"
-                            class="form-control"
-                            value="{{ $address->number }}"
-                          />
-                        </div>
-                        <div class="col-12 col-md-6">
-                          <label class="form-label" for="complement">Complemento</label>
-                          <input
-                            type="text"
-                            id="complement"
-                            name="complement"
-                            class="form-control"
-                            value="{{ $address->complement }}"
-                          />
-                        </div>
-                        <div class="col-12 col-md-6">
-                          <label class="form-label" for="neighborhood">Bairro</label>
-                          <input
-                            type="text"
-                            id="neighborhood"
-                            name="neighborhood"
-                            class="form-control"
-                            value="{{ $address->neighborhood }}"
-                          />
-                        </div>
-                        <div class="col-12 col-md-6">
-                          <label class="form-label" for="postal_code">Código Postal</label>
-                          <input
-                            type="text"
-                            id="postal_code"
-                            name="postal_code"
-                            class="form-control"
-                            value="{{ $address->postal_code }}"
-                          />
-                        </div>
-                        <div class="col-12 col-md-6">
-                          <label class="form-label" for="city_id">Cidade</label>
-                          <select
-                            id="{{ 'city-' . $address->id }}"
-                            name="city_id"
-                            class="form-select"
-                            aria-label="Default select example"
-                          >
-                          <option value="" class="">Tipos</option>
-                          @foreach($cities as $city)
-                              <option value="{{ $city->id }}" {{ $city->id === $address->city->id ? 'selected' : '' }} >{{ $city->state->uf . ' - ' . $city->name }}</option>
-                          @endforeach
-                          </select>
                         </div>
                       @endforeach
 

@@ -13,17 +13,16 @@ class OmbudsmanUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected OmbudsmanService $OmbudsmanService,
     ) {
         //
     }
-    
+
     public function update(array $request)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->OmbudsmanService->update($request, $request['Ombudsman_id']);
 
             DB::commit();

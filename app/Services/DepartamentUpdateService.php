@@ -13,17 +13,16 @@ class DepartamentUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected DepartamentService $departamentService,
     ) {
         //
     }
-    
+
     public function update(array $request, $departament_id)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->departamentService->update($request, $departament_id);
 
             DB::commit();

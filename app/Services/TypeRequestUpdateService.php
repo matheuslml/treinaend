@@ -13,17 +13,16 @@ class TypeRequestUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected TypeRequestService $TypeRequestService,
     ) {
         //
     }
-    
+
     public function update(array $request, $request_id)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->TypeRequestService->update($request, $request_id);
 
             DB::commit();

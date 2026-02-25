@@ -13,17 +13,16 @@ class EmailUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected EmailService $emailService,
     ) {
         //
     }
-    
+
     public function update(array $request)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->emailService->update($request, $request['email_id']);
 
             DB::commit();

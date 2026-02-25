@@ -18,7 +18,6 @@ use Illuminate\Support\Facades\Gate;
 class DocumentController extends Controller
 {
     public function __construct(
-        protected PersonService $personService,
         protected DocumentService $documentService,
         protected DocumentCreateService $documentCreateService,
         protected DocumentUpdateService $documentUpdateService,
@@ -39,7 +38,7 @@ class DocumentController extends Controller
             return redirect()->back()->withInput();
         }
     }
-    
+
     public function update(
         DocumentRequest $request
     ){
@@ -54,7 +53,7 @@ class DocumentController extends Controller
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
-            DB::rollBack();            
+            DB::rollBack();
             flash('Erro ao editar o documento!')->error();
             return redirect()->back()->withInput();
         }
@@ -80,7 +79,7 @@ class DocumentController extends Controller
             return redirect()->back()->withInput();
         }
     }
-    
+
 
     public function destroy($document)
     {

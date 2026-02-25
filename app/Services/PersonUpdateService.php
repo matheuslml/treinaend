@@ -14,17 +14,13 @@ class PersonUpdateService
     // TODO: verificar imagem , editar user
     public function __construct(
         protected UserService $userService,
-        protected IndividualPersonService $individualPersonService,
-        protected LegalPersonService $legalPersonService,
         protected DocumentService $documentService,
-        protected PersonService $personService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
-        protected AddressService $addressService,
     ) {
         //
     }
-    
+
     public function update(array $request, $person_id)
     {
         try {

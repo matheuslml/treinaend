@@ -9,8 +9,8 @@ use App\Models\Bidding;
 use App\Models\BlankPage;
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Genre;
-use App\Models\MatrialStatus;
+
+
 use App\Models\Person;
 use App\Models\State;
 use App\Models\TypeRequest;
@@ -29,7 +29,6 @@ class DirectHireWinnerController extends Controller
 {
 
     public function __construct(
-        protected PersonService $personService,
         protected DirectHireWinnerService $directHireWinnerService,
         protected DirectHireWinnerCreateService $directHireWinnerCreateService,
         protected DirectHireWinnerUpdateService $directHireWinnerUpdateService,
@@ -67,13 +66,13 @@ class DirectHireWinnerController extends Controller
         $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-        $genres = Genre::all();
-        $matrial_statuses = MatrialStatus::all();
+
+
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
 
-        return view('admin.directHire.winner_create', ['pageConfigs' => $pageConfigs], compact('genres', 'unit', 'copyright', 'matrial_statuses', 'countries', 'states', 'cities'));
+        return view('admin.directHire.winner_create', ['pageConfigs' => $pageConfigs], compact( 'unit', 'copyright',  'countries', 'states', 'cities'));
 
     }
 
@@ -105,8 +104,8 @@ class DirectHireWinnerController extends Controller
         try{
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $genres = Genre::all();
-            $matrial_statuses = MatrialStatus::all();
+
+
             $countries = Country::all();
             $states = State::all();
             $cities = City::all();
@@ -115,7 +114,7 @@ class DirectHireWinnerController extends Controller
             $directs_hires_winner = DirectHireWinner::where('person_id', $winner_id)
                                             ->latest()
                                             ->get();
-            return view('admin.directHire.winner_show', compact('person', 'unit', 'copyright', 'directs_hires_winner', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
+            return view('admin.directHire.winner_show', compact('person', 'unit', 'copyright', 'directs_hires_winner',   'countries', 'states', 'cities'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -220,14 +219,14 @@ class DirectHireWinnerController extends Controller
         }
 
         try{
-            $genres = Genre::all();
-            $matrial_statuses = MatrialStatus::all();
+
+
             $countries = Country::all();
             $states = State::all();
             $cities = City::all();
 
             $winner_selected = $this->directHireWinnerService->show($winner_id);
-            return view('admin.directHire.winner_itens', compact('winner_selected', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
+            return view('admin.directHire.winner_itens', compact('winner_selected',   'countries', 'states', 'cities'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

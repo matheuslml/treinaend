@@ -13,17 +13,16 @@ class OrganizationUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected OrganizationService $organizationService,
     ) {
         //
     }
-    
+
     public function update(array $request, $organization_id)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->organizationService->update($request, $organization_id);
 
             DB::commit();

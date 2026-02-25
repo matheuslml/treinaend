@@ -13,17 +13,16 @@ class PhoneUpdateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected PhoneService $phoneService,
     ) {
         //
     }
-    
+
     public function update(array $request)
     {
         try {
             DB::beginTransaction();
-            
+
             $this->phoneService->update($request, $request['phone_id']);
 
             DB::commit();

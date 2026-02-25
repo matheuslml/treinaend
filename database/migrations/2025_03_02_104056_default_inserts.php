@@ -7,9 +7,7 @@ use App\Models\BiddingSituation;
 use App\Models\BlankPageType;
 use App\Models\DocumentType;
 use App\Models\FileType;
-use App\Models\Genre;
 use App\Models\LegislationAuthor;
-use App\Models\MatrialStatus;
 use App\Models\NotificationStatus;
 use App\Models\NotificationType;
 use App\Models\PermissionInformation;
@@ -400,29 +398,6 @@ class DefaultInserts extends Migration
 
         foreach ($permission_informations as $permission_information) {
             PermissionInformation::firstOrCreate($permission_information);
-        }
-
-        $genre_types = [
-            ['type' => 'Feminino'],
-            ['type' => 'Masculino']
-        ];
-
-        foreach ($genre_types as $genre_type) {
-            Genre::firstOrCreate($genre_type);
-        }
-
-        $matrial_status_types = [
-            ['type' => 'Solteiro(a)'],
-            ['type' => 'Casado(a)'],
-            ['type' => 'Viúvo(a)'],
-            ['type' => 'Separado(a)'],
-            ['type' => 'Divorciado(a)'],
-            ['type' => 'União estável'],
-            ['type' => 'outro']
-        ];
-
-        foreach ($matrial_status_types as $matrial_status_type) {
-            MatrialStatus::firstOrCreate($matrial_status_type);
         }
 
         $notification_statuses = [

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Discipline\NewStudent;
 use App\Models\Orderly;
 use App\Models\Unit;
 use App\Models\Copyright;
@@ -35,6 +36,10 @@ class DashboardController extends Controller
     $person_id = $user->person_id;
     $exercise_user_count = ExerciseUser::where('user_id', $userId)->count();
 
+
+    //para testar se o Aluno nunca usou aula no sistema antigo
+    $new_student = resolve(NewStudent::class);
+    $new_student->handle($person_id);
 
 
     $discipline_atual = Discipline::orderBy('order', 'desc')

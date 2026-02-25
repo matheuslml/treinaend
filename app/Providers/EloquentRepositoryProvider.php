@@ -9,13 +9,9 @@ use App\Repositories\Eloquent\CityEloquentRepository;
 use App\Repositories\Eloquent\CountryEloquentRepository;
 use App\Repositories\Eloquent\DocumentEloquentRepository;
 use App\Repositories\Eloquent\DocumentTypeEloquentRepository;
-use App\Repositories\Eloquent\GenreEloquentRepository;
-use App\Repositories\Eloquent\MatrialStatusEloquentRepository;
 use App\Repositories\Eloquent\EmailEloquentRepository;
 use App\Repositories\Eloquent\EmailCreateEloquentRepository;
 use App\Repositories\Eloquent\EmailUpdateEloquentRepository;
-use App\Repositories\Eloquent\IndividualPersonEloquentRepository;
-use App\Repositories\Eloquent\LegalPersonEloquentRepository;
 use App\Repositories\Eloquent\NotificationEloquentRepository;
 use App\Repositories\Eloquent\NotificationCreateEloquentRepository;
 use App\Repositories\Eloquent\NotificationUpdateEloquentRepository;
@@ -266,13 +262,11 @@ use App\Services\CityService;
 use App\Services\CountryService;
 use App\Services\DocumentService;
 use App\Services\DocumentTypeService;
-use App\Services\GenreService;
-use App\Services\MatrialStatusService;
 use App\Services\EmailService;
 use App\Services\EmailCreateService;
 use App\Services\EmailUpdateService;
-use App\Services\IndividualPersonService;
-use App\Services\LegalPersonService;
+
+
 use App\Services\NotificationService;
 use App\Services\NotificationCreateService;
 use App\Services\NotificationUpdateService;
@@ -518,9 +512,6 @@ use Illuminate\Support\ServiceProvider;
 class EloquentRepositoryProvider extends ServiceProvider
 {
     private array $services = [
-        AddressService::class => AddressEloquentRepository::class,
-        AddressCreateService::class => AddressCreateEloquentRepository::class,
-        AddressUpdateService::class => AddressUpdateEloquentRepository::class,
         CityService::class => CityEloquentRepository::class,
         CountryService::class => CountryEloquentRepository::class,
         EmailService::class => EmailEloquentRepository::class,
@@ -530,8 +521,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         //DocumentCreateService::class => DocumentCreateEloquentRepository::class,
         //DocumentUpdateService::class => DocumentUpdateEloquentRepository::class,
         DocumentTypeService::class => DocumentTypeEloquentRepository::class,
-        IndividualPersonService::class => IndividualPersonEloquentRepository::class,
-        LegalPersonService::class => LegalPersonEloquentRepository::class,
         NotificationService::class => NotificationEloquentRepository::class,
         NotificationCreateService::class => NotificationCreateEloquentRepository::class,
         NotificationUpdateService::class => NotificationUpdateEloquentRepository::class,
@@ -553,8 +542,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         UnitCreateService::class => UnitCreateEloquentRepository::class,
         UnitUpdateService::class => UnitUpdateEloquentRepository::class,
         UserService::class => UserEloquentRepository::class,
-        GenreService::class => GenreEloquentRepository::class,
-        MatrialStatusService::class => MatrialStatusEloquentRepository::class,
         //TREINAEND ---------------------------------------------------------
         CertificateService::class => CertificateEloquentRepository::class,
         CertificateCreateService::class => CertificateCreateEloquentRepository::class,

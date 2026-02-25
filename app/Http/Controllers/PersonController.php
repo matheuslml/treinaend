@@ -19,8 +19,8 @@ use App\Models\Departament;
 use App\Models\DepartamentPerson;
 use App\Models\Document;
 use App\Models\Email;
-use App\Models\Genre;
-use App\Models\MatrialStatus;
+
+
 use App\Models\Occupation;
 use App\Models\OccupationUser;
 use App\Models\Phone;
@@ -34,9 +34,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Storage;
-
-use App\Services\IndividualPersonService;
-use App\Services\LegalPersonService;
 use App\Services\PhoneService;
 use App\Services\EmailService;
 use App\Services\AddressService;
@@ -49,11 +46,8 @@ class PersonController extends Controller
         protected PersonCreateService $personCreateService,
         protected PersonUpdateService $personUpdateService,
         protected PersonService $personService,
-        protected IndividualPersonService $individualPersonService,
-        protected LegalPersonService $legalPersonService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
-        protected AddressService $addressService,
     ){}
 
     public function index(): View
@@ -70,21 +64,21 @@ class PersonController extends Controller
         return view('/admin/user/index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright'));
     }
 
-    public function show($user_id): View
+    public function show($user_id)
     {
         try{
             $unit = Unit::where('web', true)->first();
-        $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $audits = Audit::where('user_id', $user_id)->orderBy('created_at', 'desc')->take(10)->get();
             $user = User::find($user_id);
-            $genres = Genre::all();
-            $matrial_statuses = MatrialStatus::all();
+
+
             $states = State::all();
             $cities = City::all();
             $countries = Country::all();
-            $occupations = Occupation::all();
-            return view('admin.user.show', compact('unit', 'copyright', 'occupations', 'audits', 'user', 'genres', 'matrial_statuses',  'countries', 'states', 'cities' ));
+            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user',    'countries', 'states', 'cities' ));
         } catch (\Throwable $throwable) {
+            dd($throwable);
             flash('Erro ao buscar a pessoa!')->error();
             return redirect()->back()->withInput();
         }
@@ -100,8 +94,8 @@ class PersonController extends Controller
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-        $genres = Genre::all();
-        $matrial_statuses = MatrialStatus::all();
+
+
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
@@ -109,7 +103,7 @@ class PersonController extends Controller
         $departaments = Departament::all();
         $occupations = Occupation::all();
 
-        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'occupations', 'units', 'departaments', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
+        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'occupations', 'units', 'departaments',   'countries', 'states', 'cities'));
 
     }
 

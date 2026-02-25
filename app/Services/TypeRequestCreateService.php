@@ -13,7 +13,6 @@ class TypeRequestCreateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected TypeRequestService $TypeRequestService,
     ) {
         //

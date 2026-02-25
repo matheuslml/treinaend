@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Gate;
 class PhoneController extends Controller
 {
     public function __construct(
-        protected PersonService $personService,
         protected PhoneService $phoneService,
         protected PhoneCreateService $phoneCreateService,
         protected PhoneUpdateService $phoneUpdateService,

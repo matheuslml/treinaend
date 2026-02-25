@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Genre;
-use App\Models\MatrialStatus;
+
+
 use App\Models\Profession;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -20,8 +20,6 @@ class CreatePeopleTable extends Migration
             $table->id();
             $table->string('full_name')->index();
             $table->string('social_name')->nullable();
-            $table->foreignId('genre')->nullable()->constrained('genres');
-            $table->foreignId('matrial_status')->nullable()->constrained('matrial_statuses');
             $table->string('status')->default('active')->index();
             $table->softDeletes();
             $table->timestamps();

@@ -9,8 +9,8 @@ use App\Models\Bidding;
 use App\Models\BlankPage;
 use App\Models\City;
 use App\Models\Country;
-use App\Models\Genre;
-use App\Models\MatrialStatus;
+
+
 use App\Models\Person;
 use App\Models\State;
 use App\Models\TypeRequest;
@@ -29,7 +29,6 @@ class BiddingWinnerController extends Controller
 {
 
     public function __construct(
-        protected PersonService $personService,
         protected BiddingWinnerService $biddingWinnerService,
         protected BiddingWinnerCreateService $biddingWinnerCreateService,
         protected BiddingWinnerUpdateService $biddingWinnerUpdateService,
@@ -67,13 +66,13 @@ class BiddingWinnerController extends Controller
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-        $genres = Genre::all();
-        $matrial_statuses = MatrialStatus::all();
+
+
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
 
-        return view('admin.bidding.winner_create', ['pageConfigs' => $pageConfigs], compact('genres', 'unit', 'copyright', 'matrial_statuses', 'countries', 'states', 'cities'));
+        return view('admin.bidding.winner_create', ['pageConfigs' => $pageConfigs], compact( 'unit', 'copyright',  'countries', 'states', 'cities'));
 
     }
 
@@ -106,8 +105,8 @@ class BiddingWinnerController extends Controller
         try{
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $genres = Genre::all();
-            $matrial_statuses = MatrialStatus::all();
+
+
             $countries = Country::all();
             $states = State::all();
             $cities = City::all();
@@ -116,7 +115,7 @@ class BiddingWinnerController extends Controller
             $biddings_winner = BiddingWinner::where('person_id', $winner_id)
                                             ->latest()
                                             ->get();
-            return view('admin.bidding.winner_show', compact('person', 'unit', 'copyright', 'biddings_winner', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
+            return view('admin.bidding.winner_show', compact('person', 'unit', 'copyright', 'biddings_winner',   'countries', 'states', 'cities'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
@@ -222,14 +221,14 @@ class BiddingWinnerController extends Controller
         try{
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            $genres = Genre::all();
-            $matrial_statuses = MatrialStatus::all();
+
+
             $countries = Country::all();
             $states = State::all();
             $cities = City::all();
 
             $winner_selected = $this->biddingWinnerService->show($winner_id);
-            return view('admin.bidding.winner_itens', compact('winner_selected', 'unit', 'copyright', 'genres', 'matrial_statuses', 'countries', 'states', 'cities'));
+            return view('admin.bidding.winner_itens', compact('winner_selected', 'unit', 'copyright',   'countries', 'states', 'cities'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

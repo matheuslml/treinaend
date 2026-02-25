@@ -13,7 +13,6 @@ class DocumentCreateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected DocumentService $documentService,
     ) {
         //

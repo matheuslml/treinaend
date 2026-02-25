@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Gate;
 class EmailController extends Controller
 {
     public function __construct(
-        protected PersonService $personService,
         protected EmailService $emailService,
         protected EmailCreateService $emailCreateService,
         protected EmailUpdateService $emailUpdateService,

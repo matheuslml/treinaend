@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\MatrialStatus;
+
 use App\Repositories\RepositoryInterface;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;

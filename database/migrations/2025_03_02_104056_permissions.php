@@ -5,9 +5,9 @@ use App\Models\AgreementSituation;
 use App\Models\BiddingSituation;
 use App\Models\DocumentType;
 use App\Models\FileType;
-use App\Models\Genre;
+
 use App\Models\LegislationAuthor;
-use App\Models\MatrialStatus;
+
 use App\Models\NotificationStatus;
 use App\Models\NotificationType;
 use App\Models\PermissionInformation;

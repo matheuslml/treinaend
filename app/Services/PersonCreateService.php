@@ -20,12 +20,8 @@ class PersonCreateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected IndividualPersonService $individualPersonService,
-        protected LegalPersonService $legalPersonService,
-        protected PersonService $personService,
         protected EmailService $emailService,
         protected PhoneService $phoneService,
-        protected AddressService $addressService,
     ) {
         //
     }
@@ -42,8 +38,8 @@ class PersonCreateService
                     'full_name'      => $request['person_name'] ?? $request['company_name']
                 ]
             );
-
-            $person = match ($request['personable_type']) {
+            //arrumar
+            /*$person = match ($request['personable_type']) {
                 'pj' => $this->legalPersonService->create($userData),
                 'pf' => $this->individualPersonService->create($userData),
             default => throw new Exception('Tipo de pessoal não selecionado')
@@ -136,7 +132,7 @@ class PersonCreateService
                         'occupation_id' => $request['occupation_id'],
                         ]
                     );
-                }
+                }*/
             DB::commit();
         } catch (Exception $exception) {
             DB::rollBack();

@@ -13,7 +13,6 @@ class DepartamentCreateService
     // TODO: CSFix
     public function __construct(
         protected UserService $userService,
-        protected PersonService $personService,
         protected DepartamentService $departamentService,
     ) {
         //
@@ -23,7 +22,7 @@ class DepartamentCreateService
     public function create(array $request)
     {
         try {
-            
+
             DB::beginTransaction();
             $this->departamentService->create($request);
 
