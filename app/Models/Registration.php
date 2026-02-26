@@ -39,4 +39,5 @@ class Registration extends Model implements Auditable
     {
         return $this->belongsTo(Person::class, 'person_id');
     }
+
 }

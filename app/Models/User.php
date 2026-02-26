@@ -99,11 +99,6 @@ class User extends Authenticatable implements Auditable
         $this->attributes['email'] = mb_strtolower($value);
     }
 
-    public function occupations():BelongsToMany
-    {
-        return $this->belongsToMany(Occupation::class);
-    }
-
     public function notifications(): BelongsToMany
     {
         return $this->belongsToMany(Notification::class);

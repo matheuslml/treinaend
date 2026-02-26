@@ -6,6 +6,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
@@ -65,5 +66,10 @@ class Person extends Model implements Auditable
     public function setFullNameAttribute($value): void
     {
         $this->attributes['full_name'] = mb_strtoupper($value);
+    }
+
+    public function registration(): HasOne
+    {
+        return $this->hasOne(Registration::class, 'person_id');
     }
 }

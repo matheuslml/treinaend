@@ -82,12 +82,12 @@
         <li class="dropdown-menu-header">
           <div class="dropdown-header d-flex">
             <h4 class="notification-title mb-0 me-auto">Notificações</h4>
-            <div class="badge rounded-pill badge-light-primary">{{ count(Auth::user()->notifications->where('status_id', 2)) . 
+            <div class="badge rounded-pill badge-light-primary">{{ count(Auth::user()->notifications->where('status_id', 2)) .
               ( count(Auth::user()->notifications->where('status_id', 2)) > 1 ? ' Novas' : ' Nova') }}</div>
           </div>
         </li>
         <li class="scrollable-container media-list">
-          
+
           @foreach(Auth::user()->notifications->where('status_id', 2) as $newNotification)
             <a class="d-flex" href="javascript:void(0)">
               <div class="list-item d-flex align-items-start">
@@ -124,14 +124,14 @@
         <div class="user-nav d-sm-flex d-none">
           <span class="user-name fw-bolder">
             @if (Auth::check())
-              {{ Auth::user()->name }}
+              {{ Auth::user()->person->full_name }}
             @else
             {{ Auth::user()->email }}
             @endif
           </span>
           <span class="user-status">
             @if (Auth::check())
-              {{ isset(Auth::user()->occupations->first()->title) ? Auth::user()->occupations->first()->title : 'Desenvolvedor' }}
+              {{ isset(Auth::user()->person->registration->code) ? 'Aluno' : 'Desenvolvedor' }}
             @else
               sem ocupação
             @endif
