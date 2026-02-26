@@ -65,6 +65,26 @@ $configData = Helper::applClasses();
         <span>Treinaend</span>
         <i data-feather="more-horizontal"></i>
       </li>
+        <li class="nav-item  ">
+          <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+            <i data-feather="users"></i>
+            <span class="menu-title text-truncate">Alunos / Admins</span>
+          </a>
+          <ul class="menu-content">
+            <li >
+              <a href="{{ route('pessoas.create') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Cadastrar</span>
+              </a>
+            </li>
+            <li >
+              <a href="{{ route('pessoas.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Listar</span>
+              </a>
+            </li>
+          </ul>
+        </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="youtube"></i>
@@ -105,6 +125,32 @@ $configData = Helper::applClasses();
           </li>
         </ul>
       </li>
+        <li class="nav-item  ">
+          <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
+            <i data-feather="layout"></i>
+            <span class="menu-title text-truncate">Empresa</span>
+          </a>
+          <ul class="menu-content">
+            <li >
+              <a href="{{ route('departamentos.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Departamentos</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('organizacoes.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Organizações</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('unidades.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="home"></i>
+                <span class="menu-item text-truncate">Unidades</span>
+              </a>
+            </li>
+        </ul>
+        </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="book-open"></i>
@@ -166,13 +212,12 @@ $configData = Helper::applClasses();
           </li>
         </ul>
       </li>
-      @endcan
-
-      @can('Ver Menu de Ouvidoria')
-      <li class="navigation-header">
-        <span>Ouvidoria</span>
-        <i data-feather="more-horizontal"></i>
-      </li>
+        <li class="nav-item  ">
+          <a href="{{ route('notificacoes.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="bell"></i>
+            <span class="menu-title text-truncate">Notificações</span>
+          </a>
+        </li>
       <li class="nav-item  ">
         <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
           <i data-feather="message-circle"></i>
@@ -366,108 +411,11 @@ $configData = Helper::applClasses();
         </ul>
       </li>
       <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather='lock'></i>
-          <span class="menu-title text-truncate">Info. Sigilosas</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('info_sensiveis.create') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('info_sensiveis_categorias.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Categorias</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('info_sensiveis.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('info_sensiveis_responsaveis.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Responsáveis</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item  ">
         <a href="{{ route('webfooters.index') }}" class="d-flex align-items-center" target="_self">
           <i data-feather="check-circle"></i>
           <span class="menu-title text-truncate">Web Rodapé</span>
         </a>
       </li>
-      @endcan
-
-      @can('Ver Menu de Administrador')
-        <li class="navigation-header">
-          <span>Administrativo</span>
-          <i data-feather="more-horizontal"></i>
-        </li>
-        <li class="nav-item  ">
-          <a href="{{ route('notificacoes.index') }}" class="d-flex align-items-center" target="_self">
-            <i data-feather="bell"></i>
-            <span class="menu-title text-truncate">Notificações</span>
-          </a>
-        </li>
-        <li class="nav-item  ">
-          <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-            <i data-feather="layout"></i>
-            <span class="menu-title text-truncate">Setores</span>
-          </a>
-          <ul class="menu-content">
-            <li >
-              <a href="{{ route('departamentos.index') }}" class="d-flex align-items-center" target="_self">
-                <i data-feather="circle"></i>
-                <span class="menu-item text-truncate">Departamentos</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('organizacoes.index') }}" class="d-flex align-items-center" target="_self">
-                <i data-feather="circle"></i>
-                <span class="menu-item text-truncate">Organizações</span>
-              </a>
-            </li>
-            <li>
-              <a href="{{ route('unidades.index') }}" class="d-flex align-items-center" target="_self">
-                <i data-feather="home"></i>
-                <span class="menu-item text-truncate">Unidades</span>
-              </a>
-            </li>
-        </ul>
-        </li>
-        <li class="nav-item  ">
-          <a href="{{ route('ocupacoes.index') }}" class="d-flex align-items-center" target="_self">
-            <i data-feather="briefcase"></i>
-            <span class="menu-title text-truncate">Ocupações</span>
-          </a>
-        </li>
-        <li class="nav-item  ">
-          <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-            <i data-feather="users"></i>
-            <span class="menu-title text-truncate">Usuários</span>
-          </a>
-          <ul class="menu-content">
-            <li >
-              <a href="{{ route('pessoas.create') }}" class="d-flex align-items-center" target="_self">
-                <i data-feather="circle"></i>
-                <span class="menu-item text-truncate">Cadastrar</span>
-              </a>
-            </li>
-            <li >
-              <a href="{{ route('pessoas.index') }}" class="d-flex align-items-center" target="_self">
-                <i data-feather="circle"></i>
-                <span class="menu-item text-truncate">Listar</span>
-              </a>
-            </li>
-          </ul>
-        </li>
       @endcan
       @can('Ver Menu Regras e Permissões')
         <li class="navigation-header">

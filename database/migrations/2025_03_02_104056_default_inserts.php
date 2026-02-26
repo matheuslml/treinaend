@@ -60,145 +60,103 @@ class DefaultInserts extends Migration
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver Menu da Treinaend', 'guard_name' => 'web']);
         Role::findByName('Aluno')->permissions()->firstOrCreate(['name' => 'Ver Menu do Aluno', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Administrador', 'guard_name' => 'web']);
-        Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Ouvidoria', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Site', 'guard_name' => 'web']);
         Role::findByName('Administrador')->permissions()->firstOrCreate(['name' => 'Ver Menu de Transparência', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e listar Permissões', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Permissões', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Permissões', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Permissões', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Regras', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Regras', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Regras', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Regras', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Usuários', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Usuários', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Usuários', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Usuários', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e listar Permissões', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Permissões', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Permissões', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Permissões', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Regras', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Regras', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Regras', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Regras', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Usuários', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Usuários', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Usuários', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Usuários', 'guard_name' => 'web']);
 
         //administrador
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Pessoas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Pessoas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Pessoas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Pessoas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Documentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Documentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Documentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Documentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar E-mails', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar E-mails', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar E-mails', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar E-mails', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Telefones', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Telefones', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Telefones', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Telefones', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Departamentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Departamentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Departamentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Departamentos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Unidades', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Unidades', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Unidades', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Unidades', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Endereços', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Endereços', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Endereços', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Endereços', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Ocupações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Ocupações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Ocupações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Ocupações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Notificações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Notificações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Notificações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Notificações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Banners', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Banner', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar FAQs', 'guard_name' => 'web']);
-        // Transparência
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Contratos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Contratos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Contratos', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Contratos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Pessoas', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Pessoas', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Pessoas', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Pessoas', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Documentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Documentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Documentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Documentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar E-mails', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar E-mails', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar E-mails', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar E-mails', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Departamentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Departamentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Departamentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Departamentos', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Unidades', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Unidades', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Unidades', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Unidades', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Banners', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Banner', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Licitações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Licitações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Licitações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Licitações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar FAQs', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Legislações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Legislações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Legislações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Legislações', 'guard_name' => 'web']);
-
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Manifestações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Manifestações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Manifestações', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Manifestações', 'guard_name' => 'web']);
-
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Despesas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Despesas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Despesas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Despesas', 'guard_name' => 'web']);
-
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Receitas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Receitas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Receitas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Receitas', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Manifestações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Manifestações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Manifestações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Manifestações', 'guard_name' => 'web']);
 
         // Site
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Notícias', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Notícias', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Notícias', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Notícias', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Notícias', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Notícias', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Notícias', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Notícias', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Capas do Site', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Capas do Site', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Capas do Site', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Capas do Site', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Capas do Site', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Capas do Site', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Capas do Site', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Capas do Site', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Banners', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Banner', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Banners', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Banner', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar FAQs', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar FAQs', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar FAQs', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar WebFooter', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar WebFooter', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar WebFooter', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar WebFooter', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Copyright', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Copyright', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Copyright', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Copyright', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Copyright', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Copyright', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Copyright', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Copyright', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Shortcut', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Shortcut', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Shortcut', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Shortcut', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Shortcut', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Shortcut', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Shortcut', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Shortcut', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Páginas em Branco', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Páginas em Branco', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Páginas em Branco', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Páginas em Branco', 'guard_name' => 'web']);
-
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Diário Oficial', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Diário Oficial', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Diário Oficial', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Diário Oficial', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Páginas em Branco', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Páginas em Branco', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Páginas em Branco', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Páginas em Branco', 'guard_name' => 'web']);
 
         $document_types = [
             ['type' => 'CPF'],
