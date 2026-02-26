@@ -120,18 +120,11 @@
                 </span>
               </li>
               <li class="mb-75">
-                <span class="fw-bolder me-25">Contato:</span>
+                <span class="fw-bolder me-25">CPF:</span>
                 <span>
-                  @if(isset($user->person->phones))
-                    @php $i = 0; @endphp
-                    @foreach($user->person->phones as $phone)
-                      @if($i == 0)
-                        @php $i = 1; @endphp
-                        {{ $phone->phone }}
-                      @else
-                        @php $i = 0; @endphp
-                        {{ ', ' . $phone }}
-                      @endif
+                  @if(isset($user->person->documents))
+                    @foreach($user->person->documents as $document)
+                        {{ preg_replace( "/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $document->document ) }}
                     @endforeach
                   @else
                   {{'-'}}
@@ -154,21 +147,11 @@
             <li class="nav-item">
               <a
                 class="nav-link active"
-                id="sistem-tab-justified"
-                data-bs-toggle="pill"
-                href="#sistem-justified"
-                aria-expanded="true"
-                >Sistema</a
-              >
-            </li>
-            <li class="nav-item">
-              <a
-                class="nav-link"
                 id="edit-tab-justified"
                 data-bs-toggle="pill"
                 href="#edit-justified"
-                aria-expanded="false"
-                >Editar</a
+                aria-expanded="true"
+                >Editar Dados Pessoais</a
               >
             </li>
             <li class="nav-item">
@@ -183,62 +166,7 @@
             </li>
           </ul>
           <div class="tab-content">
-            <!-- Sistema -->
-            <div role="tabpanel" class="tab-pane active" id="sistem-justified" aria-labelledby="sistem-tab-justified" aria-expanded="true" >
-              <!-- Project table -->
-              <div class="card">
-                <div class="card-header">
-                  <h4 class="card-title">Lista de de Datas Agendadas</h4>
-                </div>
-                <div class="table-responsive">
-                  <table class="table text-nowrap text-center">
-                    <thead>
-                      <tr>
-                        <th>Agenda</th>
-                        <th>Status</th>
-                        <th>Agendado para</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                          <tr>
-                            <td ><span class="fw-bolder">-</span></td>
-                            <td ><span class="fw-bolder">-</span></td>
-                            <td ><span class="fw-bolder">-</span></td>
-                          </tr>
-                    </tbody>
-                  </table>
-                </div>
-              </div>
-              <!-- /Project table -->
-
-              <!-- Activity Timeline -->
-              <div class="card">
-                <h4 class="card-header">Linha do Tempo de Atividades</h4>
-                <div class="card-body pt-1">
-                  <ul class="timeline ms-50">
-
-                  @if(isset($audits))
-                    @foreach($audits as $audit)
-                      <li class="timeline-item">
-                        <span class="timeline-point timeline-point-indicator"></span>
-                        <div class="timeline-event">
-                          <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                            <h6>{{ $audit->auditable_type }}</h6>
-                            <span class="timeline-event-time me-1">{{ $audit->event . ' - IP: ' . $audit->ip_address }}</span>
-                          </div>
-                          <p>{{ $audit->created_at }}</p>
-                        </div>
-                      </li>
-                    @endforeach
-                  @endif
-
-                  </ul>
-                </div>
-              </div>
-              <!-- /Activity Timeline -->
-            </div>
-            <!-- edição -->
-            <div role="tabpanel" class="tab-pane" id="edit-justified" aria-labelledby="edit-tab-justified" aria-expanded="false" >
+            <div role="tabpanel" class="tab-pane active" id="edit-justified" aria-labelledby="edit-tab-justified" aria-expanded="true" >
               <!-- Editar Informações do Usuário -->
               <div class="card">
                 <h4 class="card-header">Editar Informações do Usuário</h4>
@@ -259,7 +187,7 @@
                         />
                       </div>
                       <div class="col-6">
-                        <label class="form-label" for="social_name">Nome Social (apelido, alcunha, designação, etc)</label>
+                        <label class="form-label" for="social_name">Nome Social </label>
                         <input
                           type="text"
                           id="social_name"
@@ -274,7 +202,7 @@
                           <label class="form-label" for="modalEditUserEmail">{{ $document->document_type->type }}:</label>
                             <input type="number" class="form-control" name="documents[id][]" value="{{ $document->id }}"  hidden>
                             <input type="text" class="form-control" name="documents[document_type][]" value="{{ $document->document_type_id }}"  hidden>
-                            <input type="text" class="form-control input-admin" value="{{ $document->document }}" id="{{ $document->document_type->type }}" name="documents[document][]">
+                            <input type="text" class="form-control input-admin" value="{{ preg_replace( "/(\d{3})(\d{3})(\d{3})(\d{2})/", "$1.$2.$3-$4", $document->document) }}" id="{{ $document->document_type->type }}" name="documents[document][]">
                         </div>
                       @endforeach
 
