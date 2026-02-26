@@ -88,17 +88,17 @@
                 <i data-feather="check" class="font-medium-2"></i>
               </span>
               <div class="ms-75">
-                <h4 class="mb-0">14/06/22</h4>
-                <small>Ultimo login</small>
+                <h4 class="mb-0">{{ $exercises_count }}</h4>
+                <small>Exercícios</small>
               </div>
             </div>
             <div class="d-flex align-items-start">
               <span class="badge bg-light-primary p-75 rounded">
-                <i data-feather="briefcase" class="font-medium-2"></i>
+                <i data-feather="book" class="font-medium-2"></i>
               </span>
               <div class="ms-75">
-                <h4 class="mb-0">126</h4>
-                <small>Postagens</small>
+                <h4 class="mb-0">{{ $disciplines_count }}</h4>
+                <small>Disciplinas</small>
               </div>
             </div>
           </div>

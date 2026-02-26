@@ -18,6 +18,8 @@ use App\Models\Occupation;
 use App\Models\State;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Discipline;
+use App\Models\Exercise;
 use App\Models\User;
 use Exception;
 use Illuminate\Contracts\View\View;
@@ -25,7 +27,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use App\Services\PhoneService;
 use App\Services\EmailService;
-
+use Illuminate\Support\Facades\Auth;
 use Throwable;
 
 class PersonController extends Controller
@@ -55,11 +57,33 @@ class PersonController extends Controller
     public function show($user_id)
     {
         try{
+            $userId = Auth::id();
+            $user = User::find($userId);
+            $person_id = $user->person_id;
+
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $audits = Audit::where('user_id', $user_id)->orderBy('created_at', 'desc')->take(10)->get();
-            $user = User::find($user_id);
-            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user' ));
+
+            $disciplines_count = Discipline::orderBy('order', 'asc')
+                ->whereHas('person', function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id);
+                })
+                ->with(['person' => function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id);
+                }])
+                ->count();
+
+            $exercises_count = Exercise::orderBy('id', 'asc')
+                ->whereHas('users', function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                })
+                ->with(['users' => function ($query) use ($userId) {
+                    $query->where('user_id', $userId);
+                }])
+                ->count();
+
+            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user', 'disciplines_count', 'exercises_count' ));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao buscar a pessoa!')->error();
