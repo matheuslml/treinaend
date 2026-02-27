@@ -85,7 +85,6 @@ class PersonController extends Controller
 
             return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user', 'disciplines_count', 'exercises_count' ));
         } catch (\Throwable $throwable) {
-            dd($throwable);
             flash('Erro ao buscar a pessoa!')->error();
             return redirect()->back()->withInput();
         }
@@ -101,63 +100,39 @@ class PersonController extends Controller
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-
-
-        $countries = Country::all();
-        $states = State::all();
-        $cities = City::all();
-        $units = Unit::all();
-        $departaments = Departament::all();
-        $occupations = Occupation::all();
-
-        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'occupations', 'units', 'departaments',   'countries', 'states', 'cities'));
+        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright'));
 
     }
 
     public function store(
-        PersonRequest $request
+        Request $request
     ){
         if (! Gate::allows('Criar Pessoas')) {
             return view('pages.not-authorized');
         }
         try {
             DB::beginTransaction();
-            if(isset($request['password'])){
-                if($request['password'] == $request['confirm_password']){
-                    $request->validate([
-                        'name' => 'required|string|max:255',
-                        'email' => 'required|string|email|max:255|unique:users',
-                        'password' => 'required|string|min:8'
-                    ]);
+            if($request['password'] == $request['confirm_password']){
+                $request->validate([
+                    'name' => 'required|string|max:255',
+                    'email' => 'required|string|email|max:255|unique:users',
+                    'documents.document.0' => 'required|string|max:15|unique:documents,document',
+                    'password' => 'required|string|min:8'
+                ]);
 
-                    if(isset($request['profile_photo'])){
-                        $request->validate([
-                            'profile_photo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-                        ]);
-                        //sending to storage path
-                        $path = $request->file( key:'profile_photo')->store( path: 'public/images/profile');
-                        $path = str_replace("public/", "storage/", $path);
-                        $request->request->add(['profile_photo_path' => $path]);
-                    }
-
-                    $this->personCreateService->create($request->toArray());
-                    flash('Registro criado com sucesso!')->success();
-                }
-                else{
-                    flash('Senhas Diferentes!')->error();
-                }
-            }
-            else{
                 $this->personCreateService->create($request->toArray());
                 flash('Registro criado com sucesso!')->success();
-
             }
+            else{
+                flash('Senhas Diferentes!')->error();
+            }
+
             DB::commit();
 
             return redirect()->back()->withInput();
         }catch (\Throwable $throwable){
             DB::rollBack();
-
+            dd($throwable);
             flash('Erro ao adicionar novo usuário!')->error();
             return redirect()->back()->withInput();
         }

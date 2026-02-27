@@ -29,7 +29,7 @@ class Person extends Model implements Auditable
     protected $fillable = [
         'full_name',
         'social_name',
-        'user_id'
+        'status'
     ];
 
     protected $dates = [

@@ -27,47 +27,6 @@ class PersonRequest extends FormRequest
     public function rules()
     {
         return [
-            'person_name'          => [
-                'exclude_unless:person_type,pf',
-                'required',
-                'min:3',
-                'max:150'
-            ],
-            'genre'    => [
-                'exclude_unless:person_type,pf',
-                Rule::exists(Genre::class, 'id')
-            ],
-            'matrial_status'    => [
-                'exclude_unless:person_type,pf',
-                Rule::exists(MatrialStatus::class, 'id')
-            ],
-            //pj
-            'company_name' => [
-                'exclude_unless:person_type,pj',
-                'nullable',
-            ],
-            'legal_responsible' => [
-                'exclude_unless:person_type,pj',
-                'required',
-            ],
-            'social_name' => [
-                'exclude_unless:person_type,pf',
-                'nullable',
-                'min:3',
-                'max:150'
-            ],
-            'birthdate'     => [
-                'exclude_unless:person_type,pf',
-                'nullable',
-                'date'
-            ],
-            'email' => [
-                'nullable',
-                'email',
-            ],
-            'phone' => [
-                'nullable'
-            ],
         ];
     }
 

@@ -52,7 +52,7 @@
                       <input type="text" name="social_name" id="social_name" class="form-control" placeholder="Nome Sobrenome" />
                     </div>
                     <div class="col-md-4 mb-1">
-                      <label class="form-label" for=cpf">CPF</label>
+                      <label class="form-label" for=cpf">CPF<strong>*</strong></label>
                       <input type="hidden" name="documents[document_type][]" value="1">
                       <input
                         type="text"
@@ -75,7 +75,7 @@
                     </div>
                     <div class="col-md-4 mb-1">
                       <label class="form-label" for="email">Aluno ou Administrador do Sistema?<strong>*</strong></label>
-                      <select class="select2 form-select" id="discipline" name="discipline">
+                      <select class="select2 form-select" id="type" name="type">
                         <optgroup label="Selecione">
                             <option value="aluno" >Aluno</option>
                             <option value="administrador" >Administrador</option>
@@ -108,11 +108,6 @@
                         />
                         <span class="input-group-text cursor-pointer"><i data-feather="eye"></i></span>
                       </div>
-                    </div>
-
-                    <div class="col-12 mb-1">
-                      <label class="form-label" for="profile_photo">Foto do Usuário</label>
-                      <input type="file" class="form-control" id="profile_photo" name="profile_photo" >
                     </div>
                   </div>
                     <button class="btn btn-primary w-100 mt-2" type="submit" tabindex="5">Cadastrar</button>

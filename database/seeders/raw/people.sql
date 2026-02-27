@@ -1468,4 +1468,5 @@ INSERT INTO people (full_name,status,deleted_at,created_at,updated_at) VALUES
     ('LUCAS DEOLINDO DE JESUS ANDRADE','active',NULL,NOW(),NULL),
     ('RICARDO MARTINS DE OLIVEIRA','active',NULL,NOW(),NULL),
     ('LEOVALDO JOSé CARVALHO JUNIOR','active',NULL,NOW(),NULL),
-    ('ROMáRIO DA SILVA PALMEIRA','active',NULL,NOW(),NULL);
+    ('ROMáRIO DA SILVA PALMEIRA','active',NULL,NOW(),NULL),
+    ('ADMIN','active',NULL,NOW(),NULL);
