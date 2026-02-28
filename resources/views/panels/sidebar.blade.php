@@ -1,7 +1,7 @@
 @php
 $configData = Helper::applClasses();
 @endphp
-<div class="main-menu {{(($configData['theme'] === 'dark') || ($configData['theme'] === 'semi-dark')) ? 'menu-dark' : 'menu-light'}} menu-accordion menu-shadow menu-collapsed" data-scroll-to-active="false">
+<div class="main-menu menu-fixed {{(($configData['theme'] === 'dark') || ($configData['theme'] === 'semi-dark')) ? 'menu-dark' : 'menu-light'}} menu-accordion menu-shadow" data-scroll-to-active="false">
   <div class="navbar-header">
     <ul class="nav navbar-nav flex-row">
       <li class="nav-item me-auto">
@@ -85,46 +85,18 @@ $configData = Helper::applClasses();
             </li>
           </ul>
         </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="youtube"></i>
-          <span class="menu-title text-truncate">Aulas</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('aulas.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar / Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="book"></i>
-          <span class="menu-title text-truncate">Disciplinas</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('disciplinas.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar / Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-        </ul>
-      </li>
+        <li class="nav-item  ">
+          <a href="{{ route('aulas.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="youtube"></i>
+            <span class="menu-title text-truncate">Aulas</span>
+          </a>
+        </li>
+        <li class="nav-item  ">
+          <a href="{{ route('disciplinas.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="book"></i>
+            <span class="menu-title text-truncate">Disciplinas</span>
+          </a>
+        </li>
         <li class="nav-item  ">
           <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
             <i data-feather="layout"></i>
@@ -151,67 +123,18 @@ $configData = Helper::applClasses();
             </li>
         </ul>
         </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="book-open"></i>
-          <span class="menu-title text-truncate">Exercícios</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('exercicios.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar / Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="file-text"></i>
-          <span class="menu-title text-truncate">Materiais de Apoio</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('materiais_de_apoio.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar / Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-          <li >
-        </ul>
-      </li>
-      <li class="nav-item  ">
-        <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
-          <i data-feather="user-check"></i>
-          <span class="menu-title text-truncate">Matrículas</span>
-        </a>
-        <ul class="menu-content">
-          <li >
-            <a href="{{ route('matriculas.index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Listar / Cadastrar</span>
-            </a>
-          </li>
-          <li >
-            <a href="{{ route('report_ombudsman_index') }}" class="d-flex align-items-center" target="_self">
-              <i data-feather="circle"></i>
-              <span class="menu-item text-truncate">Relatórios</span>
-            </a>
-          </li>
-        </ul>
-      </li>
+        <li class="nav-item  ">
+          <a href="{{ route('exercicios.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="book-open"></i>
+            <span class="menu-title text-truncate">Exercícios</span>
+          </a>
+        </li>
+        <li class="nav-item  ">
+          <a href="{{ route('matriculas.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="user-check"></i>
+            <span class="menu-title text-truncate">Matrículas</span>
+          </a>
+        </li>
         <li class="nav-item  ">
           <a href="{{ route('notificacoes.index') }}" class="d-flex align-items-center" target="_self">
             <i data-feather="bell"></i>

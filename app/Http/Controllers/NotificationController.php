@@ -28,7 +28,7 @@ class NotificationController extends Controller
         protected NotificationUpdateService $notificationUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Notificações')) {
             return view('pages.not-authorized');
@@ -36,9 +36,9 @@ class NotificationController extends Controller
 
         try{
             $unit = Unit::where('web', true)->first();
-$copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
             //user notifications
-            $notifications = Notification::with('users')->whereRelation('users', 'user_id', Auth::user()->id)->orderBy('created_at', 'desc')->get();
+            $notifications = Notification::with('users')->orderBy('created_at', 'desc')->get();
             $readeds = $notifications->where('status_id', 1);
             $not_readeds = $notifications->where('status_id', '!=', 1);
             $sendeds = Notification::where('sender_id', Auth::user()->id)->get();
@@ -80,7 +80,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
         if (! Gate::allows('Criar Notificações')) {
             return view('pages.not-authorized');
         }
-        dd($request);
         try {
             DB::beginTransaction();
             $this->notificationCreateService->create($request->toArray());
@@ -92,6 +91,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             DB::rollBack();
             flash('Erro ao adicionar nova notificação!')->error();
 
+        dd($throwable);
             return redirect()->back()->withInput();
         }
     }

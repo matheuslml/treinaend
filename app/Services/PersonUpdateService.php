@@ -54,7 +54,6 @@ class PersonUpdateService
         } catch (Exception $exception) {
             ////Bugsnag::notifyException($exception);
             DB::rollBack();
-            dd($exception);
             throw new Exception($exception);
         }
     }

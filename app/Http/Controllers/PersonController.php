@@ -138,7 +138,7 @@ class PersonController extends Controller
     }
 
     public function update(
-        PersonUpdateRequest $request, $person_id
+        Request $request, $person_id
     ){
         /*if (! Gate::allows('Editar Pessoas')) {
             return view('pages.not-authorized');

@@ -36,7 +36,6 @@ class NotificationCreateService
 
             DB::commit();
         } catch (Exception $exception) {
-            dd($exception);
             ////Bugsnag::notifyException($exception);
             DB::rollBack();
             throw new Exception($exception);
