@@ -54,6 +54,10 @@ class User extends Authenticatable implements Auditable
         'remember_token',
     ];
 
+    protected $dates = [
+        'deleted_at'
+    ];
+
     /**
      * The attributes that should be cast to native types.
      *

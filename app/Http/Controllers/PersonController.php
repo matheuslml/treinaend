@@ -51,7 +51,7 @@ class PersonController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
-        return view('/admin/user/index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright'));
+        return view('admin.user.index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright'));
     }
 
     public function show($user_id)

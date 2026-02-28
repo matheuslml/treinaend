@@ -34,21 +34,6 @@
         </div>
       </div>
     </div>
-    <div class="col-lg-3 col-sm-6">
-      <div class="card">
-        <div class="card-body d-flex align-items-center justify-content-between">
-          <div>
-            <h3 class="fw-bolder mb-75">{{ count($users) }}</h3>
-            <span>Total de Administradores</span>
-          </div>
-          <div class="avatar bg-light-danger p-50">
-            <span class="avatar-content">
-              <i data-feather="user-plus" class="font-medium-4"></i>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
   </div>
 </section>
 <!-- Advanced Search -->
@@ -109,7 +94,7 @@
             </div>
             <div class="row g-1">
               <div class="col-md-4">
-                <label class="form-label">Departamento:</label>
+                <label class="form-label">Matrícula:</label>
                 <input
                   type="text"
                   class="form-control dt-input dt-departament"
@@ -167,8 +152,8 @@
                 <th></th>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>Registro</th>
-                <th>Departamento</th>
+                <th>Documento</th>
+                <th>Matrícula</th>
                 <th>Status</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
@@ -179,8 +164,8 @@
                 <th></th>
                 <th>Nome</th>
                 <th>E-mail</th>
-                <th>Registro</th>
-                <th>Departamento</th>
+                <th>Documento</th>
+                <th>Matrícula</th>
                 <th>Status</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
@@ -222,34 +207,13 @@
                           @endif
                         </div>
                       </td>
-                      <td style="display: none;">
-                        <div class="">
-                          @if(isset($user->person))
-                            @php $i = 1; @endphp
-                            @foreach($user->person->departaments as $departament)
-                              @if($i == 1)
-                                <span class="badge rounded-pill bg-primary">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
-                              @endif
-                              @if($i == 2)
-                                <span class="badge rounded-pill bg-secondary">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
-                              @endif
-                              @if($i == 3)
-                                <span class="badge rounded-pill bg-success">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
-                                @php $i = 0; @endphp
-                              @endif
-                              @php $i++; @endphp
-                            @endforeach
-                          @else
-                            <span class="badge rounded-pill bg-danger">{{ ' - ' }}</span>
-                          @endif
-                        </div>
-                      </td>
+                      <td style="display: none;">{{ isset($user->person->registration) ? $user->person->registration->code : 'Administrador' }}</td>
                       <td style="display: none;">
                         <span class="badge bg-light-{{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'success' : 'danger' ) : 'warning'}}">
                           {{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'Ativo' : 'Bloqueado' ) : '-'}}
                         </span>
                       </td>
-                      <td style="display: none;">{{isset($user->created_at) ? (($user->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
+                      <td style="display: none;">{{isset($user->person->created_at) ? (($user->person->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
                       <td style="display: none;">
 
                         <div class="btn-group">
@@ -265,7 +229,7 @@
           </table>
           @else
           <div class="alert alert-info" role="alert">
-            <i class="fas fa-times"></i> Não existem Funcionários Armazenados.
+            <i class="fas fa-times"></i> Não existem Usuários Cadastrados.
           </div>
           @endif
         </div>

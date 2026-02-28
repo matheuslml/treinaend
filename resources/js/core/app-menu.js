@@ -60,7 +60,7 @@
       update: function () {
         // if (this.obj) {
         // Scroll to currently active menu on page load if data-scroll-to-active is true
-        if ($('.main-menu').data('scroll-to-active') === true) {
+        if ($('.main-menu').data('scroll-to-active') === false) {
           var activeEl, menu, activeElHeight;
           activeEl = document.querySelector('.main-menu-content li.active');
           menu = document.querySelector('.main-menu-content');
