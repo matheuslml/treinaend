@@ -57,8 +57,7 @@ class PersonController extends Controller
     public function show($user_id)
     {
         try{
-            $userId = Auth::id();
-            $user = User::find($userId);
+            $user = User::find($user_id);
             $person_id = $user->person_id;
 
             $unit = Unit::where('web', true)->first();
@@ -75,11 +74,11 @@ class PersonController extends Controller
                 ->count();
 
             $exercises_count = Exercise::orderBy('id', 'asc')
-                ->whereHas('users', function ($query) use ($userId) {
-                    $query->where('user_id', $userId);
+                ->whereHas('users', function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
                 })
-                ->with(['users' => function ($query) use ($userId) {
-                    $query->where('user_id', $userId);
+                ->with(['users' => function ($query) use ($user_id) {
+                    $query->where('user_id', $user_id);
                 }])
                 ->count();
 
@@ -164,14 +163,15 @@ class PersonController extends Controller
             return view('pages.not-authorized');
         }
 
+
         try{
             $person = Person::find($person);
             $person->delete();
             flash('Usuário deletado com sucesso!')->success();
+            return redirect('/pessoas');
         } catch (\Exception $exception) {
             flash('Erro ao deletar o Usuário!')->error();
+            return redirect()->back()->withInput();
         }
-        $person = $this->personService->paginate(10);
-        return view('admin.user.index', compact('person'));
     }
 }
