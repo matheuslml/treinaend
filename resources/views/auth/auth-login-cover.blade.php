@@ -35,13 +35,12 @@ $configData = Helper::applClasses();
     <!-- Login-->
     <div class="d-flex col-lg-4 align-items-center auth-bg px-2 p-lg-5">
       <div class="col-12 col-sm-8 col-md-6 col-lg-12 px-xl-2 mx-auto" >
-        <h2 class="card-title fw-bold mb-1">Seja bem Vindo ao Sistema do {{ isset($unit->name) ? $unit->name : '' }}!</h2>
+        <h2 class="card-title fw-bold mb-1">Seja bem Vindo ao Sistema {{ isset($unit->name) ? $unit->name : '' }}!</h2>
         <p class="card-text mb-2">Por favor entre com sua conta para poder acessar o painel de controle</p>
         <form class="auth-login-form mt-2" action="{{ route('login') }}" method="POST">
           @csrf
           <div class="mb-1">
-            <label class="form-label" for="email">E-mail</label>
-            <input class="form-control" id="email" type="text" name="email" placeholder="email@example.com" aria-describedby="email" autofocus="" tabindex="1" />
+            <label class="form-label" for="cpf">CPF</label><input class="form-control" id="cpf" type="text" name="cpf" aria-describedby="cpf" autofocus tabindex="1" />
           </div>
           <div class="mb-1">
             <div class="d-flex justify-content-between">
@@ -79,5 +78,12 @@ $configData = Helper::applClasses();
 @endsection
 
 @section('page-script')
-<script src="{{asset(mix('js/scripts/pages/auth-login.js'))}}"></script>
+<script src="{{asset(mix('js/scripts/pages/auth-login.js'))}}">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+<script>
+  $(document).ready(function(){
+    $('#cpf').mask('000.000.000-00');
+  });
+</script>
 @endsection

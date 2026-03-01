@@ -32,6 +32,15 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
+        // Normaliza o CPF removendo pontos e traço
+        $cpfFinal = ltrim(preg_replace('/\D/', '', $request->cpf), '0');
+
+        // Substitui o valor no próprio request para seguir no fluxo
+        $request->merge([
+            'cpf' => $cpfFinal,
+        ]);
+
+        // Continua o processo de autenticação
         $request->authenticate();
 
         $request->session()->regenerate();
