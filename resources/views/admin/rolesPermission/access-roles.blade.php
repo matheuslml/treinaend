@@ -28,19 +28,6 @@
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <span>Total {{ count($role->users) }} usuários</span>
-            <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-              @foreach($role->users as $user)
-                <li
-                  data-bs-toggle="tooltip"
-                  data-popup="tooltip-custom"
-                  data-bs-placement="top"
-                  title="{{ isset($user->person) ? (isset($user->person->social_name) ? $user->person->social_name : $user->person->full_name) : $user->name }}"
-                  class="avatar avatar-sm pull-up"
-                >
-                  <img class="rounded-circle" src="{{ isset($user->profile_photo_path) ? asset($user->profile_photo_path) : asset('images/portrait/small/avatar-icon.png') }}" alt="Avatar" />
-                </li>
-              @endforeach
-            </ul>
           </div>
           <div class="d-flex justify-content-between align-items-end mt-1 pt-25">
             <div class="role-heading">
@@ -110,7 +97,7 @@
               <th></th>
               <th>Usuário</th>
               <th>Regras</th>
-              <th>Setor</th>
+              <th>Documento</th>
               <th>Status</th>
               <th>Registrado em</th>
               <th>Sistema</th>
@@ -121,7 +108,7 @@
               <th></th>
               <th>Nome</th>
               <th>Regras</th>
-              <th>Setor</th>
+              <th>Documento</th>
               <th>Status</th>
               <th>Registrado em</th>
               <th>Sistema</th>
@@ -139,35 +126,35 @@
               @endif
                   <td class="control sorting_1" tabindex="0" ></td>
                   <td style="display: none;">
-                    {{ isset($user->person) ? (isset($user->person->social_name) ? $user->person->social_name : ( isset($user->person->full_name) ? $user->person->full_name : $user->name ) ) : $user->name }}  
+                    {{ isset($user->person) ? (isset($user->person->social_name) ? $user->person->social_name : ( isset($user->person->full_name) ? $user->person->full_name : $user->name ) ) : $user->name }}
                   </td>
                   <td style="display: none;">
                     @foreach($user->roles as $role)
                       {{ $role->name . ', ' }}
                     @endforeach
                   </td>
-                  <td style="display: none;">
-                    <div class="">
-                      @if(isset($user->person))
-                        @php $i = 1; @endphp
-                        @foreach($user->person->departaments as $departament)
-                          @if($i == 1)
-                            <span class="badge rounded-pill bg-primary">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
+                      <td style="display: none;">
+                        <div class="">
+                          @if(isset($user->person))
+                            @php $i = 1; @endphp
+                            @foreach($user->person->documents as $document)
+                              @if($i == 1)
+                                <span class="badge rounded-pill bg-primary">{{ isset($document->document) ? $document->document . ' / ' . $document->document_type->type : '' }}</span>
+                              @endif
+                              @if($i == 2)
+                                <span class="badge rounded-pill bg-secondary">{{ isset($document->document) ? $document->document . ' / ' . $document->document_type->type : '' }}</span>
+                              @endif
+                              @if($i == 3)
+                                <span class="badge rounded-pill bg-success">{{ isset($document->document) ? $document->document . ' / ' . $document->document_type->type : '' }}</span>
+                                @php $i = 0; @endphp
+                              @endif
+                              @php $i++; @endphp
+                            @endforeach
+                          @else
+                            <span class="badge rounded-pill bg-danger">{{ ' - ' }}</span>
                           @endif
-                          @if($i == 2)
-                            <span class="badge rounded-pill bg-secondary">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
-                          @endif
-                          @if($i == 3)
-                            <span class="badge rounded-pill bg-success">{{ isset($departament->departament) ? $departament->departament : '' }}</span>
-                            @php $i = 0; @endphp
-                          @endif
-                          @php $i++; @endphp
-                        @endforeach
-                      @else
-                        <span class="badge rounded-pill bg-danger">{{ ' - ' }}</span>
-                      @endif
-                    </div>
-                  </td>
+                        </div>
+                      </td>
                   <td style="display: none;">
                     <span class="badge bg-light-{{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'success' : 'danger' ) : 'warning'}}">
                       {{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'Ativo' : 'Bloqueado' ) : '-'}}
@@ -175,17 +162,17 @@
                   </td>
                   <td style="display: none;">{{($user->created_at)->format('d/M/y H:m:s')}}</td>
                   <td style="display: none;">
-                    
+
                     <div class="btn-group">
                       <a href="{{ route('pessoas.show',  $user->id) }}" class="btn btn-icon btn-icon rounded-circle btn-flat-primary"
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top"  
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
                         title="Editar">
                         <i data-feather="edit"></i>
                       </a>
                       <a href="{{ route('user_rule_create',  $user->id) }}" class="btn btn-icon btn-icon rounded-circle btn-flat-primary"
-                        data-bs-toggle="tooltip" 
-                        data-bs-placement="top"  
+                        data-bs-toggle="tooltip"
+                        data-bs-placement="top"
                         title="Adicionar ou Editar Regras">
                         <i data-feather="plus-circle"></i>
                       </a>

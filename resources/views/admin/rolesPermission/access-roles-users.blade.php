@@ -29,19 +29,6 @@
         <div class="card-body">
           <div class="d-flex justify-content-between">
             <span>Total {{ count($role->users) }} usuários</span>
-            <ul class="list-unstyled d-flex align-items-center avatar-group mb-0">
-              @foreach($role->users as $user)
-                <li
-                  data-bs-toggle="tooltip"
-                  data-popup="tooltip-custom"
-                  data-bs-placement="top"
-                  title="{{ isset($user->person) ? isset($user->person->social_name) ? $user->person->social_name : $user->person->full_name : $user->name }}"
-                  class="avatar avatar-sm pull-up"
-                >
-                  <img class="rounded-circle" src="{{ isset($user->profile_photo_path) ? asset($user->profile_photo_path) : asset('images/portrait/small/avatar-icon.png') }}" alt="Avatar" />
-                </li>
-              @endforeach
-            </ul>
           </div>
           <div class="d-flex justify-content-between align-items-end mt-1 pt-25">
             <div class="role-heading">
@@ -100,7 +87,7 @@
                     </span>
                   </td>
                   <td>
-                    
+
                   </td>
                   <td>
                     <div class="form-check">
@@ -116,12 +103,12 @@
                       <td>
                         <div class="d-flex">
                           <div class="form-check">
-                            <input 
-                            class="form-check-input check-input" 
-                            value="{{$id}}" 
-                            type="checkbox" 
+                            <input
+                            class="form-check-input check-input"
+                            value="{{$id}}"
+                            type="checkbox"
                             name="roles_list[]"
-                            {{ (in_array($id, old('roles_list', [])) || isset($user_finded) && $user_finded->roles()->pluck('id', 'name')->contains($id)) ? 'checked' : '' }} 
+                            {{ (in_array($id, old('roles_list', [])) || isset($user_finded) && $user_finded->roles()->pluck('id', 'name')->contains($id)) ? 'checked' : '' }}
                             />
                             <label class="form-check-label" for="roleManagementCreate"> Selecionar </label>
                           </div>
