@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class ConfigurationSeeder extends Seeder
+class SettingSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,10 +19,10 @@ class ConfigurationSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $filePath = database_path('seeders/raw/configurations.sql');
+        $filePath = database_path('seeders/raw/settings.sql');
         if(File::exists($filePath)){
             DB::unprepared(file_get_contents($filePath));
-            $this->command->info('Configurations Table Seed');
+            $this->command->info('Settings Table Seed');
         }
     }
 }

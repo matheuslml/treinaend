@@ -1,4 +1,4 @@
-INSERT INTO configurations (name,value,description,deleted_at,created_at,updated_at) VALUES
+INSERT INTO settings (`key`,`value`,`description`,deleted_at,created_at,updated_at) VALUES
     ('wwwroot','http://www.treinaend.com.br','URL do site',NULL,NOW(),NULL),
     ('dataroot','/var/www/html/treinaend.com.br/web/','Caminho físico',NULL,NOW(),NULL),
     ('destinatariocontato','comercial@treinaend.com.br','E-mail do destinatário do formulário de contato',NULL,NOW(),NULL),
@@ -25,4 +25,12 @@ INSERT INTO configurations (name,value,description,deleted_at,created_at,updated
     ('Tabela_Estado_Padrao','0','Valor padrão, da tabela ead_cur_uf, quando o Estado não é localizado.',NULL,NOW(),NULL),
     ('Valor_Curso_Padrao','00,00','Valor padrão dos cursos em caso do sistema não localizar o ID do Curso.',NULL,NOW(),NULL),
     ('valortentativaminima','3','Usado na sql do sistema de exercicios e prova',NULL,NOW(),NULL),
-    ('destinarioconclusao','alan@treinaend.com.br','E-mail que receberá alerta de conclusão do curso',NULL,NOW(),NULL);
+    ('destinarioconclusao','alan@treinaend.com.br','E-mail que receberá alerta de conclusão do curso',NULL,NOW(),NULL),
+    ('color_primary','#801612','Cor Primaria',NULL,NOW(),NULL),
+    ('color_secondary','#DE282D','Cor Secundária',NULL,NOW(),NULL),
+    ('color_success','#198754','Cor para Sucesso',NULL,NOW(),NULL),
+    ('color_info','#0dcaf0','Cor para Informação',NULL,NOW(),NULL),
+    ('color_warning','#ffc107','Cor para alerta',NULL,NOW(),NULL),
+    ('color_danger','#dc3545','Cor para perigo',NULL,NOW(),NULL),
+    ('color_light','#f8f9fa','Cor para claro',NULL,NOW(),NULL),
+    ('color_dark','#212529','Cor para escuro',NULL,NOW(),NULL);

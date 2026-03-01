@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class Configuration extends Model implements Auditable
+class Setting extends Model implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
     use AuditableTrait;
 
-    protected $table = 'disciplines';
+    protected $table = 'settings';
 
     protected $fillable = [
-        'name',
+        'key',
         'value',
         'description'
     ];
