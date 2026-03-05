@@ -93,46 +93,86 @@
             @yield('content')
         </main>
          <!-- ======= Footer ======= -->
-        <footer id="footer">
-            <div class="container-fluid">
-
-
-            </div>
+        <footer id="footer" class="w-ful">
             <div class="footer-top">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-12 col-lg-4 col-md-6 footer-newsletter">
-                            <iframe src="{{ isset($unit->google_maps_iframe) ? $unit->google_maps_iframe : '' }}" height="100%" width="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+                <div class="row footer-logo">
+                    <img class="img-profile-footer-home" src="{{isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : ''}}" >
+                </div>
+                <div class="row">
+                    <div class="col-12 col-lg-3 col-md-6 footer-links  text-footer-phone">
+                        <div class="col-12 text-footer-phone">
+                            <a  href=""><h4 class="mt-2 footer-link-title">
+                                Home
+                            </h4></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Inspeção de Equipamentos
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                NR-33 – Trabalho em espaço Confinado
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                NR-35 – Trabalho em altura
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Parcerias educacionais
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Blog
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Sobre a TREINAEND
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Contato
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Meu EAD
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Matrícula
+                            </p></a>
+                            <a  href=""><p class="mt-2 footer-link-text">
+                                Consulta de Profissionais
+                            </p></a>
                         </div>
-                        <div class="col-12 col-lg-3 col-md-6 footer-info">
-                            <img class="img-profile-footer-home" src="{{isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : ''}}" >
-                            <div class="col-12 text-footer-phone">
-                                <p class="mt-2">
-                                    {{ isset($unit->organization) ? $unit->organization->title : ''}} <br>
-                                    {{ isset($unit) ? $unit->address : '' }}<br>
-                                    {{ isset($unit->organization) ? $unit->operation : '' }}<br><br>
-                                </p>
-                                <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a><br>                    <a
-                                href="
-                                {{ isset($unit) ?
-                                    'https://api.whatsapp.com/send/?phone=%2B' .
-                                        $unit->phone .
-                                        '&text&type=phone_number&app_absent=0'
-                                        : ''
-                                }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a><br>
-                                <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
-                            </div>
-                        </div>
-
-                        <div class="col-12 col-lg-2 col-md-6 footer-links  text-footer-phone">
-                            {!! html_entity_decode((isset($web_footer->content_left) ? $web_footer->content_left : ''), ENT_QUOTES, 'UTF-8') !!}
-                        </div>
-                        <div class="col-12 col-lg-2 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
-                            {!! html_entity_decode((isset($web_footer->content_right) ? $web_footer->content_right : ''), ENT_QUOTES, 'UTF-8') !!}
-                        </div>
-
-
                     </div>
+                    <div class="col-12 col-lg-3 col-md-6 footer-info">
+                        <div class="col-12 text-footer-phone">
+                            <a  href=""><h4 class="mt-2 footer-link-title">
+                                Localização
+                            </h4></a>
+                            <p class="mt-2">
+                                {{ isset($unit->organization) ? $unit->organization->title : ''}} <br>
+                                {{ isset($unit) ? $unit->address : '' }}<br>
+                                {{ isset($unit->organization) ? $unit->operation : '' }}<br><br>
+                            </p>
+                            <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a><br>                    <a
+                            href="
+                            {{ isset($unit) ?
+                                'https://api.whatsapp.com/send/?phone=%2B' .
+                                    $unit->phone .
+                                    '&text&type=phone_number&app_absent=0'
+                                    : ''
+                            }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a><br>
+                            <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-2 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
+                    </div>
+                    <div class="col-12 col-lg-4 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
+                        <div class="col-12 text-footer-phone">
+                            <a  href=""><h4 class="mt-2 footer-link-title">
+                                Seja um Aluno da TREINAEND
+                            </h4></a>
+                            <p class="footer-link-text">Ao se matricular, você garante acesso imediato a conteúdos inspiradores, professores renomados e experiências únicas que vão impulsionar sua carreira e seu desenvolvimento pessoal.
+Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futuro que você merece.</p>
+                            <a  href=""><h4 class="mt-2 footer-link-title">
+                                Siga a TREINAEND
+                            </h4></a>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 
@@ -140,34 +180,6 @@
                 <div class="row develop-by">
                     <div class="col-12 text-center " >
                         <a style="color: white;" href="{{ isset($copyright->link_url) ? $copyright->link_url : '' }}"><p class="mb-1"> Desenvolvido pela {{ isset($copyright->company_name) ? $copyright->company_name : '' }}</p></a>
-                    </div>
-                    <div class="col-12" >
-                        @php
-                            $verifica_logo = false;
-                        @endphp
-                        @if (isset($web_footer->logos))
-                            @foreach ( $web_footer->logos as $logo)
-                                <a href="{{ $logo->link_url }}">
-                                    <img
-                                        {{ $verifica_logo ? "style=\"padding-left:10px;margin-left:10px;border-left:1px solid #858796;\"" : '' }}
-                                        src="{{asset('storage/images/webfooters/' . $logo->logo_url)}}"
-                                        alt="{{ $logo->title }}"
-                                    />
-                                </a>
-                                @if ($verifica_logo)
-                                    @php
-                                        $verifica_logo = false;
-                                    @endphp
-                                @else
-                                    @php
-                                        $verifica_logo = true;
-                                    @endphp
-                                @endif
-                            @endforeach
-                        @endif
-                        @if (isset($copyright->logo_url))
-                            <a href="{{ isset($copyright->link_url) ? $copyright->link_url : '' }}"><img src="{{asset('storage/images/copyrights/' . $copyright->logo_url)}}" height="50" style="padding-left:10px;margin-left:10px;border-left:1px solid #858796;" alt="{{ $copyright->company_name }}"></a>
-                        @endif
                     </div>
                 </div>
             </div>

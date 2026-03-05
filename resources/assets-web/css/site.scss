@@ -64870,14 +64870,41 @@ section {
 }
 
 #footer .footer-top {
-  padding: 60px 0 30px 0;
+  padding: 3%;
 }
 
 @media screen and (max-width: 992px) {
   #footer .footer-top {
-    padding: 0;
+  padding: 3% 2% 3% 2%;
   }
 }
+
+#footer .footer-top .footer-logo {
+  margin-bottom: 3%;
+}
+
+#footer .footer-top .footer-link-title {
+  font-size: 26px;
+  color: #fff;
+  line-height: 1.64;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  padding-bottom: 4%;
+}
+
+#footer .footer-top .footer-link-text {
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.64;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  padding-bottom: 4%;
+}
+
 #footer .footer-top .footer-info {
   margin-bottom: 30px;
 }
@@ -66471,12 +66498,12 @@ news-section {
 }
 
 .img-profile-footer-home {
-  width: 100%;
+  width: 67px;
 }
 
 @media screen and (max-width: 992px) {
   .img-profile-footer-home {
-    padding-top: 5%;
+    width: 67px;
   }
 }
 @media screen and (max-width: 992px) {
