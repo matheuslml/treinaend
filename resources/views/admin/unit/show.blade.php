@@ -91,7 +91,7 @@
                       <input type="text" class="form-control document" id="document" name="document" value="{{ $unit->document }}" />
                     </div>
                     <div class="col-md-12 mb-1">
-                      <label class="form-label" for="operation">Horário de Funcionamento<strong>* </strong><tag data-bs-toggle="tooltip" title="EX: segunda a sexta das 08h as 17h"><i data-feather='info'></i></tag></label>
+                      <label class="form-label" for="operation">Sub para Logo do Site<strong>* </strong><tag data-bs-toggle="tooltip" title="EX: segunda a sexta das 08h as 17h"><i data-feather='info'></i></tag></label>
                       <input type="text" class="form-control" id="operation" name="operation" value="{{ $unit->operation }}" />
                     </div>
                     <div class="col-md-12 mb-1">

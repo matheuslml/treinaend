@@ -27,7 +27,7 @@
                             src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
                             style="margin-right: 10px;">
                         <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
-                            Ideas change everything
+                            {{ $unit->operation }}
                         </div>
                     </a>
                 </div>
@@ -38,7 +38,7 @@
                             src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
                             style="margin-right: 10px;">
                         <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
-                            Ideas change everything
+                            {{ $unit->operation }}
                         </div>
                     </a>
               </div>
