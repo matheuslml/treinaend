@@ -4,9 +4,7 @@
 @endsection
 
 @section('content')
-
-    <div id="carouselHomeBanner" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height:100%;">
-
+    <div id="carouselHomeBanner" class="carousel slide carousel-fade" data-mdb-ride="carousel" style="height:100%;">
         <!-- Indicators -->
         <div class="carousel-indicators">
             @php
@@ -15,8 +13,8 @@
             @foreach($posts as $post)
                 <button
                 type="button"
-                data-bs-target="#carouselHomeBanner"
-                data-bs-slide-to={{ $i }}
+                data-mdb-target="#carouselHomeBanner"
+                data-mdb-slide-to={{ $i }}
                 @if ($i == 0)
                     class="active"
                     aria-current="true"
@@ -106,12 +104,12 @@
         <!-- Inner -->
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomeBanner" data-bs-slide="prev">
-            <span class="" style="font-size: 125%"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></span>
+        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselHomeBanner" data-mdb-slide="prev">
+            <span class="" aria-hidden="true" style="font-size: 125%"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-bs-target="#carouselHomeBanner" data-bs-slide="next">
-            <span class="" style="font-size: 125%"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
+        <button class="carousel-control-next" type="button" data-mdb-target="#carouselHomeBanner" data-mdb-slide="next">
+            <span class="" aria-hidden="true" style="font-size: 125%"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
             <span class="visually-hidden">Próximo</span>
         </button>
     </div>
@@ -286,19 +284,8 @@
 
 @section('page-script')
   {{-- Page js files --}}
-          <!-- jQuery (apenas uma vez) --><!-- jQuery (apenas uma vez) -->
-<script src="https://code.jquery.com/jquery-3.7.1.min.js"
-        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
-        crossorigin="anonymous"></script>
-
-<!-- Bootstrap -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossorigin="anonymous"></script>
-
-<!-- Owl Carousel (versão mais nova recomendada) -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
-
+  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
   <script>
 
     $(document).ready(function() {
