@@ -110,7 +110,7 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="operation">Horário de Funcionamento<strong>* </strong></label>
+                    <label class="col-form-label" for="operation">Sub para Logo do Site<strong>* </strong></label>
                   </div>
                   <div class="col-sm-9">
                     <input type="text" id="operation" class="form-control" name="operation" placeholder="Segunda a Sexta de 8 as 17H" required/>

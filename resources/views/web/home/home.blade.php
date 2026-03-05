@@ -4,7 +4,9 @@
 @endsection
 
 @section('content')
-    <div id="carouselHomeBanner" class="carousel slide carousel-fade" data-mdb-ride="carousel" style="height:100%;">
+
+    <div id="carouselHomeBanner" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height:100%;">
+
         <!-- Indicators -->
         <div class="carousel-indicators">
             @php
@@ -13,8 +15,8 @@
             @foreach($posts as $post)
                 <button
                 type="button"
-                data-mdb-target="#carouselHomeBanner"
-                data-mdb-slide-to={{ $i }}
+                data-bs-target="#carouselHomeBanner"
+                data-bs-slide-to={{ $i }}
                 @if ($i == 0)
                     class="active"
                     aria-current="true"
@@ -31,7 +33,7 @@
         <div class="carousel-inner" style="height:100%;">
             @php
                 $banner_path = "";
-                $verification = false; //verification serve para dr o status active para o banner
+                $verification = false; //verification serve para dr o status active para o banner a
             @endphp
             @foreach($posts as $post)
                 @foreach($post->media as $img)
@@ -48,7 +50,6 @@
                     @endif
                 @endforeach
 
-                //verifica se foi upada imagem para mobile
                 @php
                     $banner_path = "";
                     foreach($post->media as $img) {
@@ -69,9 +70,9 @@
                         <!-- Single item -->
                         <div class="carousel-item">
                             @if (isset($post->link))
-                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/></a>
+                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/></a>
                             @else
-                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/>
+                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
                                 <div class="carousel-caption d-none " >
@@ -87,12 +88,12 @@
                         <!-- Single item -->
                         <div class="carousel-item active">
                             @if (isset($post->link))
-                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/></a>
+                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/></a>
                             @else
-                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/>
+                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption d-none ">
+                                <div class="carousel-caption  d-none">
                                     <h5>{{ $post->title }}</h5>
                                     <p>{{ $post->sub_title }}</p>
                                 </div>
@@ -104,12 +105,12 @@
         <!-- Inner -->
 
         <!-- Controls -->
-        <button class="carousel-control-prev" type="button" data-mdb-target="#carouselHomeBanner" data-mdb-slide="prev">
-            <span class="" aria-hidden="true" style="font-size: 125%"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></span>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselHomeBanner" data-bs-slide="prev">
+            <span class="" style="font-size: 125%"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></span>
             <span class="visually-hidden">Anterior</span>
         </button>
-        <button class="carousel-control-next" type="button" data-mdb-target="#carouselHomeBanner" data-mdb-slide="next">
-            <span class="" aria-hidden="true" style="font-size: 125%"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselHomeBanner" data-bs-slide="next">
+            <span class="" style="font-size: 125%"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></span>
             <span class="visually-hidden">Próximo</span>
         </button>
     </div>
@@ -153,9 +154,9 @@
   <!-- ======= title-section ======= -->
   <section class="title-section" >
     <div class="container">
-        <h2>Notícias</h2>
+        <h2>Blog</h2>
         <div class="col-md-6 pt-0 mt-0">
-            <h3>Acompanhe as Notícias da Cidade</h3>
+            <h3>Acompanhe nosso Blog</h3>
         </div>
     </div>
   </section>
@@ -226,9 +227,9 @@
   <!-- ======= Secretários Section ======= -->
   <section class="title-section" >
     <div class="container">
-        <h2>Secretarias</h2>
+        <h2>Cursos</h2>
         <div class="col-md-6 pt-0 mt-0">
-            <h3>Conheça os Secretários e as Secretarias da nossa Prefeitura</h3>
+            <h3>Conheça os hushsi suhsiu usih isuisuh</h3>
         </div>
     </div>
   </section>
@@ -236,15 +237,12 @@
     <div class="team-boxed" style="padding-bottom: 5%">
         <div class="container" ><div class="gtco-testimonials">
             <div class="owl-carousel owl-carousel1 owl-theme leadership-web" >
-                @foreach ($leaderships as $leadership)
+                @foreach ($courses as $course)
                     <div>
                         <div class="card text-center ">
-                            <img
-                                class="card-img-leadership"
-                                src="{{asset('storage/images/leadership/' . $leadership->photo)}}" alt="">
                             <div class="card-body" style="width: 300px">
-                                <h5>{{ substr($leadership->name, 0, 34)  . '...' }}</h5>
-                                <p>{{ $leadership->occupation }}</p>
+                                <h5>{{ $course->name }}</h5>
+                                <p>{{ $course->description }}</p>
                             </div>
                         </div>
                     </div>
@@ -287,8 +285,20 @@
 
 @section('page-script')
   {{-- Page js files --}}
-  <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/owl-carousel/1.3.3/owl.carousel.min.js"></script>
+          <!-- jQuery (apenas uma vez) --><!-- jQuery (apenas uma vez) -->
+
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
+        crossorigin="anonymous"></script>
+
+<!-- Bootstrap -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+<!-- Owl Carousel (versão mais nova recomendada) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+
   <script>
 
     $(document).ready(function() {
@@ -350,5 +360,7 @@
       }
     });
   </script>
+
+    <script src="assets-web/js/site/site.js" src=""></script>
 @endsection
 

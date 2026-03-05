@@ -74,6 +74,10 @@ mix.copyDirectory('resources/data', 'public/data')
 mix.copyDirectory('resources/assets-web/images', 'public/assets-web/images')
 mix.copyDirectory('resources/assets-web/img', 'public/assets-web/img')
 
+mix.copy('resources/assets-web/js/owl.carousel.js', 'public/assets-web/js/owl.carousel.js')
+mix.copy('resources/assets-web/css/owl.carousel.css', 'public/assets-web/css/owl.carousel.css')
+mix.copy('resources/assets-web/css/owl.theme.default.css', 'public/assets-web/css/owl.theme.default.css')
+
 mix
     .js('resources/js/core/app-menu.js', 'public/js/core')
     .js('resources/js/core/app.js', 'public/js/core')
