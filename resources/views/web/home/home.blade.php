@@ -50,7 +50,6 @@
                     @endif
                 @endforeach
 
-                //verifica se foi upada imagem para mobile
                 @php
                     $banner_path = "";
                     foreach($post->media as $img) {
@@ -287,6 +286,9 @@
 @section('page-script')
   {{-- Page js files --}}
           <!-- jQuery (apenas uma vez) --><!-- jQuery (apenas uma vez) -->
+
+            <script src="assets-web/js/site/site.js" src=""></script>
+
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo="
         crossorigin="anonymous"></script>

@@ -20,18 +20,30 @@
     <body>
         <!-- ======= Header ======= -->
         <header id="header" >
-            <div class="" style="margin-left: 2%;">
+            <div class="" style="margin:0 2% 0 2%;">
+                <div class="logo float-start d-none d-xl-block" style="display: flex; align-items: center;">
+                    <a href="{{ route('web_home') }}" style="display: flex; align-items: center;">
+                        <img class="img-profile"
+                            src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
+                            style="margin-right: 10px;">
+                        <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
+                            Ideas change everything
+                        </div>
+                    </a>
+                </div>
 
-              <div class="logo float-start d-none d-xl-block">
-                  <a href="{{ route('web_home') }}"><img class="img-profile"
-                src="{{isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : ''}}"></a>
-              </div>
               <div class="logo float-start d-lg-none">
-                <img class="img-profile"
-                  src="{{isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : ''}}">
+                    <a href="{{ route('web_home') }}" style="display: flex; align-items: center;">
+                        <img class="img-profile"
+                            src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
+                            style="margin-right: 10px;">
+                        <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
+                            Ideas change everything
+                        </div>
+                    </a>
               </div>
 
-              <nav class="nav-menu float-start d-none d-lg-block" style="margin-left: 2%">
+              <nav class="nav-menu float-end d-none d-lg-block" style="margin-left: 2%">
                 <ul>
                   <li class="{{ (request()->is('/')) || (request()->is('/')) ? 'active' : '' }}">
                     <a href="{{ route('web_home') }}">Início</a></li>
@@ -73,7 +85,7 @@
               </nav><!-- .nav-menu -->
 
             </div>
-          </header><!-- End Header -->
+        </header><!-- End Header -->
 
         <main id="main">
             @include('flash::message')
