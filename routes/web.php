@@ -301,15 +301,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/noticias_web', 'App\Http\Controllers\WebController@news_web_index')->name('news_web_index');
 
 
-    //official diary
-    Route::get('/pdf_official_diary_acts/{official_diary}', 'App\Http\Controllers\OfficialDiaryController@pdf_official_diary_acts')->name('pdf_official_diary_acts');
-    Route::get('/diario_oficial_web/{official_diary}', 'App\Http\Controllers\OfficialDiaryController@official_diary_web_show')->name('official_diary_web_show');
-    Route::get('/diarios_oficiais_web', [OfficialDiarySearchController::class, 'index'])->name('official_diary_web_index');
-    Route::get('/web_pdf_official_diary_acts/{official_diary}', 'App\Http\Controllers\OfficialDiaryController@web_pdf_official_diary_acts')->name('web_pdf_official_diary_acts');
-    Route::post('/diarios_oficiais_web_filter_text', 'App\Http\Controllers\OfficialDiaryController@diarios_oficiais_web_filter_text')->name('diarios_oficiais_web_filter_text');
-    Route::post('/diarios_oficiais_web_filter_year', 'App\Http\Controllers\OfficialDiaryController@diarios_oficiais_web_filter_year')->name('diarios_oficiais_web_filter_year');
-    Route::post('/diarios_oficiais_web_filter_date', 'App\Http\Controllers\OfficialDiaryController@diarios_oficiais_web_filter_date')->name('diarios_oficiais_web_filter_date');
-
     // ROTA PROJETOS WEB
     Route::get('/projeto_web/{project_id}', [ProjectController::class, 'web_show'])->name('project_web_show');
     Route::get('/projeto_web', [ProjectController::class, 'web_index'])->name('projects_web_index');

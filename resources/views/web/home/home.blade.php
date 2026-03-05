@@ -31,7 +31,7 @@
         <div class="carousel-inner" style="height:100%;">
             @php
                 $banner_path = "";
-                $verification = false; //verification serve para dr o status active para o banner
+                $verification = false; //verification serve para dr o status active para o banner a
             @endphp
             @foreach($posts as $post)
                 @foreach($post->media as $img)
@@ -69,12 +69,12 @@
                         <!-- Single item -->
                         <div class="carousel-item">
                             @if (isset($post->link))
-                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/></a>
+                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/></a>
                             @else
-                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/>
+                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption d-none " >
+                                <div class="carousel-caption  " >
                                     <h5>{{ $post->title }}</h5>
                                     <p>{{ $post->sub_title }}</p>
                                 </div>
@@ -87,12 +87,12 @@
                         <!-- Single item -->
                         <div class="carousel-item active">
                             @if (isset($post->link))
-                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/></a>
+                                <a href="{{ $post->link }}"><img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/></a>
                             @else
-                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt="Capa PMAC"/>
+                                <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption d-none ">
+                                <div class="carousel-caption  ">
                                     <h5>{{ $post->title }}</h5>
                                     <p>{{ $post->sub_title }}</p>
                                 </div>

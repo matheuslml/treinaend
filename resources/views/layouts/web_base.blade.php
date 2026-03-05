@@ -18,46 +18,6 @@
 </head>
 
     <body>
-        <!-- ======= Top Bar ======= -->
-        <section id="topbar">
-            <div class="clearfix">
-                <div class="contact-info float-start">
-                    <a href="mailto:grc@{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i>{{ isset($unit->email) ? $unit->email : '' }}</a>
-                    <a
-                    href="
-                    {{ isset($unit) ?
-                        'https://api.whatsapp.com/send/?phone=%2B' .
-                            $unit->phone .
-                            '&text&type=phone_number&app_absent=0'
-                            : ''
-                    }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a>
-                </div>
-
-
-                <div class="social-links-topbar float-end " >
-                    @if(isset($unit))
-                        @foreach($unit->socialmedia as $social_media)
-                            <a class="share-facebook" href="{{$social_media->pivot->url}}"><i class="{{ $social_media->logo }}"></i></a>
-                        @endforeach
-                    @endif
-                </div>
-                <div class="topbar-bar float-end d-none d-lg-block" >
-                    <p>|</p>
-                </div>
-                <div class="topbar-text float-end d-none d-lg-block" >
-                    <a href="https://transparencia.arraial.modernizacao.com.br/">
-                        <p>Acesso a</p>
-                        <p>Informação</p>
-                    </a>
-                </div>
-                <div class="topbar-img float-end d-none d-lg-block" >
-                    <a href="https://arraial.egov.modernizacao.com.br/" class="">
-                        <img src="{{ isset($web_footer->float_icon_url) ? asset('storage/images/webfooters/' . $web_footer->float_icon_url) : '' }}"
-                        class="" alt="icon"/>
-                    </a>
-                </div>
-            </div>
-        </section>
         <!-- ======= Header ======= -->
         <header id="header" >
             <div class="" style="margin-left: 2%;">
@@ -75,90 +35,37 @@
                 <ul>
                   <li class="{{ (request()->is('/')) || (request()->is('/')) ? 'active' : '' }}">
                     <a href="{{ route('web_home') }}">Início</a></li>
-                  <li class="drop-down {{ (request()->is('institucional*')) || (request()->is('institucional*')) ? 'active' : '' }}">
-                    <a href="">Institucional</a>
+                  <li class="drop-down {{ (request()->is('cursos*')) || (request()->is('cursos*')) ? 'active' : '' }}">
+                    <a href="">Cursos</a>
                     <ul>
-                      <li class="{{ (request()->is('institucional/estrutura')) || (request()->is('institucional/estrutura')) ? 'active' : '' }}">
-                        <a href="">Estrutura Organizacional</a>
-                      </li>
-                      @foreach ($institucional_pages as $institucional_page)
+                      @foreach ($courses as $course)
                           <li class="">
-                              <a href="{{ route('pagina_web', $institucional_page->meta_keywords) }}">{{ $institucional_page->meta_keywords }}</a>
-                          </li>
-                      @endforeach
-                      <li class="{{ (request()->is('institucional/unidadesconservacao')) || (request()->is('institucional/unidadesconservacao')) ? 'active' : '' }}">
-                    </ul>
-                  </li>
-                  <li class="drop-down {{ (request()->is('servicos*')) || (request()->is('faq')) ? 'active' : '' }}">
-                    <a href="">Serviços</a>
-                    <ul>
-                      @foreach ($service_pages as $service_page)
-                          @if ($service_page->meta_keywords != 'Matrícula')
-                              <li class="">
-                                  <a href="{{ route('pagina_web', $service_page->meta_keywords) }}">{{ $service_page->meta_keywords }}</a>
-                              </li>
-                          @endif
-                      @endforeach
-                      <li class="{{ (request()->is('ouvidoria')) || (request()->is('ouvidoria')) ? 'active' : '' }}">
-                        <a href="{{ route('web_faq') }}">FAQ</a>
-                      </li>
-                      <li class="{{ (request()->is('ouvidoria')) || (request()->is('ouvidoria')) ? 'active' : '' }}">
-                        <a href="{{ route('web_ombudsman') }}">Ouvidoria</a>
-                      </li>
-                    </ul>
-                  </li>
-                  <li class="drop-down {{ (request()->is('programas*')) || (request()->is('programas*')) ? 'active' : '' }}">
-                    <a href="">Programas</a>
-                    <ul>
-                      @foreach ($categories as $category)
-                          <li class="">
-                              <a href="{{ route('project_category_web', $category->id) }}">{{ $category->title }}</a>
+                              <a href="">{{ $course->name }}</a>
                           </li>
                       @endforeach
                     </ul>
                   </li>
-                  <li class="drop-down {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
-                    <a href="">Publicações</a>
-                    <ul>
-                      <li class="{{ (request()->is('gallery_web_index')) || (request()->is('gallery_web_index')) ? 'active' : '' }}">
-                        <a href="{{ route('gallery_web_index') }}">Galeria</a>
-                      </li>
-                      <li class="{{ (request()->is('noticias_web')) || (request()->is('noticias_web')) ? 'active' : '' }}">
-                          <a href="{{ route('noticias_web_index') }}">Noticias</a>
-                        </li>
-                    </ul>
+                  <li  {{ (request()->is('parcerias*')) || (request()->is('parcerias*')) ? 'active' : '' }}">
+                    <a href="">Parcerias</a>
                   </li>
-                  <li class="drop-down {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
-                    <a href="">Publicações Oficiais</a>
-                    <ul>
-                      <li class="{{ (request()->is('official_diary_web_index')) || (request()->is('official_diary_web_index')) ? 'active' : '' }}">
-                        <a href="{{ route('official_diary_web_index') }}">Diário Oficial</a>
-                      </li>
-                    </ul>
+                  <li  {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
+                    <a href="{{ route('noticias_web_index') }}">Blog</a>
                   </li>
-                  <li  {{ (request()->is('transparencia*')) || (request()->is('transparencia*')) ? 'active' : '' }}">
-                    <a href="https://transparencia.arraial.modernizacao.com.br">Transparência</a>
-                    <!--<ul>
-                      <li><a href="{{ route('web_expense_index') }}">Despesas</a></li>
-                      <li><a href="{{ route('web_legislacoes_index') }}">Legislações</a></li>
-                      <li><a href="{{ route('web_revenue_index') }}">Receitas</a></li>
-                    </ul>-->
+                  <li  {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
+                    <a href="">Sobre</a>
                   </li>
-                  @foreach ($service_pages as $service_page)
-                      @if ($service_page->meta_keywords == 'Matrícula')
-                          <li class="{{ (request()->is('pagina_web/Matrícula')) ? 'active' : '' }}">
-                              <a href="{{ route('pagina_web', $service_page->meta_keywords) }}">Matricule-se</a>
-                          </li>
-                      @endif
-                  @endforeach
+                  <li  {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
+                    <a href="">Contato</a>
+                  </li>
 
-                  <li class="drop-down"> <a href="">Servidor</a>
+                  <li class="drop-down"> <a href="">Mais</a>
                     <ul>
                       <li class="">
                         <a class="employee-menu-link" href="{{ route('login') }}">Login</a></li>
                       <li class="">
-                        <a href="https://mail.hostinger.com/">E-mail</a></li>
-                      <li class=""><a href="{{ route('links_uteis') }}">Telefones Úteis</a></li>
+                        <a href="">Matrícula</a></li>
+                      <li class="">
+                        <a href="">Consulta de Profissionais</a></li>
                     </ul>
                   </li>
 
@@ -176,21 +83,6 @@
          <!-- ======= Footer ======= -->
         <footer id="footer">
             <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-12 col-md-8 col-sm-12 col-xs-12">
-                           <div class="card p-3 p-md-4 text-white">
-
-                                <h2 class="my-3" style="color: black; background-color: white"> Acesse nossa Ouvidoria e faça um comentário!</h2>
-
-                                <div class="row d-flex my-2 pr-2 pr-md-5 div1">
-                                    <div class="col-4">
-                                        <button class="btn text-white px-4 py-2" style="width: 100%"> Acessar </button>
-                                    </div>
-                                </div>
-
-                            </div>
-                    </div>
-                </div>
 
 
             </div>
