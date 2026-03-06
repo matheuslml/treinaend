@@ -75,9 +75,9 @@
                                 <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption d-none " >
-                                    <h5>{{ $post->title }}</h5>
+                                <div class="carousel-caption " >
                                     <p>{{ $post->sub_title }}</p>
+                                    <h1>{{ $post->title }}</h1>
                                 </div>
                             @endif
                         </div>
@@ -93,9 +93,9 @@
                                 <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption  d-none">
-                                    <h5>{{ $post->title }}</h5>
+                                <div class="carousel-caption ">
                                     <p>{{ $post->sub_title }}</p>
+                                    <h1>{{ $post->title }}</h1>
                                 </div>
                             @endif
                         </div>

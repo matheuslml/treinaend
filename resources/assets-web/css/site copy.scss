@@ -64821,6 +64821,155 @@ section {
     transform: rotate(360deg);
   }
 }
+//MENU ---------------------
+.menu-button {
+  padding:  0rem 0.75rem !important; 
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.menu-button:hover {
+  background-color: #f9fafb !important; /* group-hover:bg-gray-50 */
+}
+
+@media (prefers-color-scheme: dark) {
+  .menuButton {
+    padding:  0rem 0.75rem !important;   /* dark:py-4 */
+  }
+  .menu-button:hover {
+    background-color: #1f2937 !important; /* dark:group-hover:bg-gray-800 */
+  }
+}
+
+.menu-link {
+  font-size: 0.90rem !important;   /* text-xs */
+  font-weight: 700 !important;     /* font-bold */    
+  line-height: 1.35 !important;
+  color: #111827 !important;       /* Tailwind gray-900 */
+  text-decoration: none !important;
+}
+
+.menu-link:hover {
+  color: #1f2937 !important;       /* um cinza mais escuro no hover */
+}
+
+@media (prefers-color-scheme: dark) {
+  .menu-link {
+    color: #ffffff !important;     /* dark:text-white */
+  }
+}
+
+.btn-matricula {
+  background-color: #b91c1c !important; /* Tailwind red-700 */
+  color: #fff !important;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 1rem;
+  border-radius: 0.25rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  transition: background-color 1s;
+}
+.btn-matricula:hover {
+  background-color: #7f1d1d !important; /* Tailwind red-900 */
+}
+.text-logo-description {
+  font-size: 0.875rem !important;   /* equivale a text-sm */
+  color: #6b7280 !important;        /* Tailwind gray-500 */
+  display: none !important;         /* hidden */
+}
+
+@media (min-width: 1024px) {
+  .text-logo-description {
+    display: block !important;      /* lg:block */
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .text-logo-description {
+    color: #ffffff !important;      /* dark:text-white */
+  }
+}
+//Banner principal ---------------------
+.carousel-caption {
+    position: absolute !important;
+    top: 0 !important;              /* encosta no topo */
+    left: 0 !important;             /* encosta no lado esquerdo */
+    width: 40% !important;          /* ocupa 40% da largura */
+    height: 100% !important;        /* ocupa toda a altura do banner */
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* centraliza verticalmente o conteúdo */
+    padding-left: 3rem !important;
+    padding-right: 3rem !important;
+    padding-bottom: 3rem !important;
+    margin: 0 !important;
+    background-color: rgba(0,0,0,0.7) !important; /* fundo translúcido */
+    text-align: left !important;
+}
+
+
+/* Responsividade */
+@media (min-width: 1024px) {
+    .banner-container {
+        text-align: center !important;
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+}
+.carousel-caption h1 {
+    font-size: 1.75rem !important; /* base */
+    line-height: 115% !important;
+    letter-spacing: -0.05em !important;
+    font-weight: 600 !important;
+    margin-bottom: 0.5rem !important;
+    color: #ffffff !important;
+}
+
+/* Responsividade */
+@media (min-width: 1024px) {
+    .carousel-caption h1 {
+        font-size: 2.25rem !important;
+        line-height: 110% !important;
+    }
+}
+
+@media (min-width: 1280px) {
+    .carousel-caption h1 {
+        font-size: 32px !important;
+    }
+}
+
+
+.carousel-caption p {
+    color: #ffffff !important; /* ou #212121 se quiser usar text-textPrimary-onLight */
+    font-weight: 400 !important;
+    font-size: 1rem !important;
+    line-height: 130% !important;
+    letter-spacing: -0.24px !important;
+    margin: 0 !important;
+}
+
+
+@media (max-width: 768px) {
+    .carousel-caption {
+        max-width: 90% !important;
+        padding: 1rem !important;
+        bottom: 10% !important;
+    }
+
+    .carousel-caption h5 {
+        font-size: 1.4rem !important;
+    }
+
+    .carousel-caption p {
+        font-size: 0.95rem !important;
+    }
+}
+
+//footer ---------------------
 #footer {
   background-image: url("/images/pages/bg-footer.jpg");
   padding: 0 0 20px 0;
@@ -64870,14 +65019,41 @@ section {
 }
 
 #footer .footer-top {
-  padding: 60px 0 30px 0;
+  padding: 3%;
 }
 
 @media screen and (max-width: 992px) {
   #footer .footer-top {
-    padding: 0;
+  padding: 3% 2% 3% 2%;
   }
 }
+
+#footer .footer-top .footer-logo {
+  margin-bottom: 3%;
+}
+
+#footer .footer-top .footer-link-title {
+  font-size: 26px;
+  color: #fff;
+  line-height: 1.64;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  padding-bottom: 4%;
+}
+
+#footer .footer-top .footer-link-text {
+  font-size: 14px;
+  color: #fff;
+  line-height: 1.64;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  padding-bottom: 4%;
+}
+
 #footer .footer-top .footer-info {
   margin-bottom: 30px;
 }
@@ -66471,12 +66647,12 @@ news-section {
 }
 
 .img-profile-footer-home {
-  width: 100%;
+  width: 67px;
 }
 
 @media screen and (max-width: 992px) {
   .img-profile-footer-home {
-    padding-top: 5%;
+    width: 67px;
   }
 }
 @media screen and (max-width: 992px) {

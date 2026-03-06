@@ -8,7 +8,8 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($unit->name) ? $unit->name : '' }}</title>
+    <title>{{ isset($unit->organization->title) ? $unit->organization->title : '' }}</title>
+    <meta name="description" content="Escola especializada em capacitação industrial. Curso de Inspeção de Equipamentos Online e Treinamentos em NR 33 e 35 com atuação há mais de 12 anos.">
 
 
     @component('web.components.styles')
