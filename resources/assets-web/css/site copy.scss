@@ -64895,79 +64895,88 @@ section {
 //Banner principal ---------------------
 .carousel-caption {
     position: absolute !important;
-    top: 0 !important;              /* encosta no topo */
-    left: 0 !important;             /* encosta no lado esquerdo */
-    width: 40% !important;          /* ocupa 40% da largura */
-    height: 100% !important;        /* ocupa toda a altura do banner */
+    top: 0 !important;              
+    left: 0 !important;             
+    width: 40% !important;          
+    height: 100% !important;        
     display: flex !important;
     flex-direction: column !important;
-    justify-content: center !important; /* centraliza verticalmente o conteúdo */
+    justify-content: flex-start !important;
+    align-items: flex-start !important;
     padding-left: 3rem !important;
     padding-right: 3rem !important;
+    padding-top: 3rem !important;
     padding-bottom: 3rem !important;
     margin: 0 !important;
-    background-color: rgba(0,0,0,0.7) !important; /* fundo translúcido */
+    background-color: rgba(0,0,0,0.7) !important;
     text-align: left !important;
 }
 
-
-/* Responsividade */
-@media (min-width: 1024px) {
-    .banner-container {
-        text-align: center !important;
-        padding-left: 1.5rem;
-        padding-right: 1.5rem;
-    }
+/* Subtítulo */
+.carousel-caption p {
+    font-family: "Montserrat", sans-serif !important;
+    color: #6b7280 !important;
+    font-weight: 400 !important;
+    font-size: 1.25rem !important;
+    line-height: 1.3 !important;
+    letter-spacing: -0.24px !important;
+    margin: 0 0 1rem 0 !important;
 }
+
+/* Título */
 .carousel-caption h1 {
-    font-size: 1.75rem !important; /* base */
-    line-height: 115% !important;
+    font-family: "Montserrat", sans-serif !important;
+    font-size: 3rem !important;
+    line-height: 1.2 !important;
     letter-spacing: -0.05em !important;
-    font-weight: 600 !important;
-    margin-bottom: 0.5rem !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
     color: #ffffff !important;
 }
 
-/* Responsividade */
+/* Responsividade Desktop */
 @media (min-width: 1024px) {
     .carousel-caption h1 {
-        font-size: 2.25rem !important;
-        line-height: 110% !important;
+        font-size: 4rem !important;
+    }
+    .carousel-caption p {
+        font-size: 1.5rem !important;
     }
 }
 
 @media (min-width: 1280px) {
     .carousel-caption h1 {
-        font-size: 32px !important;
+        font-size: 4.5rem !important;
+    }
+    .carousel-caption p {
+        font-size: 1.75rem !important;
     }
 }
 
-
-.carousel-caption p {
-    color: #ffffff !important; /* ou #212121 se quiser usar text-textPrimary-onLight */
-    font-weight: 400 !important;
-    font-size: 1rem !important;
-    line-height: 130% !important;
-    letter-spacing: -0.24px !important;
-    margin: 0 !important;
-}
-
-
+/* Responsividade Mobile */
 @media (max-width: 768px) {
     .carousel-caption {
-        max-width: 90% !important;
-        padding: 1rem !important;
-        bottom: 10% !important;
+        position: relative !important;   /* deixa dentro do fluxo */
+        width: auto !important;          /* largura ajustada ao conteúdo */
+        height: auto !important;         /* altura ajustada ao conteúdo */
+        background-color: rgba(0,0,0,0.85) !important;
+        padding: 1.5rem !important;
+        margin: 1rem auto !important;
+        text-align: center !important;   /* centraliza no mobile */
+        align-items: center !important;
+        justify-content: center !important;
     }
-
-    .carousel-caption h5 {
-        font-size: 1.4rem !important;
+    .carousel-caption h1 {
+        font-size: 2rem !important;
+        line-height: 1.2 !important;
     }
-
     .carousel-caption p {
-        font-size: 0.95rem !important;
+        font-size: 1rem !important;
+        margin-bottom: 0.75rem !important;
     }
 }
+
+
 
 //footer ---------------------
 #footer {
