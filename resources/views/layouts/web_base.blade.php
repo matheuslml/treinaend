@@ -26,7 +26,7 @@
                         <img class="img-profile"
                             src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
                             style="margin-right: 10px;">
-                        <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
+                        <div class="text-logo-description">
                             {{ $unit->operation }}
                         </div>
                     </a>
@@ -37,7 +37,7 @@
                         <img class="img-profile"
                             src="{{ isset($unit->logo) ? asset('storage/images/units/' . $unit->logo) : '' }}"
                             style="margin-right: 10px;">
-                        <div class="text-sm hidden text-gray-500 dark:text-white lg:block">
+                        <div class="text-logo-description">
                             {{ $unit->operation }}
                         </div>
                     </a>
@@ -45,42 +45,46 @@
 
               <nav class="nav-menu float-end d-none d-lg-block" style="margin-left: 2%">
                 <ul>
-                  <li class="{{ (request()->is('/')) || (request()->is('/')) ? 'active' : '' }}">
-                    <a href="{{ route('web_home') }}">Início</a></li>
-                  <li class="drop-down {{ (request()->is('cursos*')) || (request()->is('cursos*')) ? 'active' : '' }}">
-                    <a href="">Cursos</a>
+                  <li class="menu-button" {{ (request()->is('/')) || (request()->is('/')) ? 'active' : '' }}>
+                    <a class="menu-link" href="{{ route('web_home') }}">Início</a></li>
+                  <li class="drop-down menu-button {{ (request()->is('cursos*')) || (request()->is('cursos*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="">Cursos</a>
                     <ul>
                       @foreach ($courses as $course)
                           <li class="">
-                              <a href="">{{ $course->name }}</a>
+                              <a class="menu-link" href="">{{ $course->name }}</a>
                           </li>
                       @endforeach
                     </ul>
                   </li>
-                  <li  {{ (request()->is('parcerias*')) || (request()->is('parcerias*')) ? 'active' : '' }}">
-                    <a href="">Parcerias</a>
+                  <li class="menu-button"   {{ (request()->is('parcerias*')) || (request()->is('parcerias*')) ? 'active' : '' }}">
+                    <a  class="menu-link" href="">Parcerias</a>
                   </li>
-                  <li  {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
-                    <a href="{{ route('noticias_web_index') }}">Blog</a>
+                  <li class="menu-button"   {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('noticias_web_index') }}">Blog</a>
                   </li>
-                  <li  {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
-                    <a href="">Sobre</a>
+                  <li class="menu-button"   {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="">Sobre</a>
                   </li>
-                  <li  {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
-                    <a href="">Contato</a>
+                  <li class="menu-button"   {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="">Contato</a>
                   </li>
 
-                  <li class="drop-down"> <a href="">Mais</a>
+                  <li class="drop-down menu-button"> 
+                    <a class="menu-link" href="">Mais</a>
                     <ul>
                       <li class="">
-                        <a class="employee-menu-link" href="{{ route('login') }}">Login</a></li>
+                        <a  class="menu-link" href="{{ route('login') }}">Login</a></li>
                       <li class="">
-                        <a href="">Matrícula</a></li>
-                      <li class="">
-                        <a href="">Consulta de Profissionais</a></li>
+                        <a  class="menu-link" href="">Consulta de Profissionais</a></li>
                     </ul>
                   </li>
-
+                  <li>
+                    <a href=""
+                        class="btn-matricula">
+                        MATRÍCULA
+                    </a>
+                  </li>
                 </ul>
               </nav><!-- .nav-menu -->
 
