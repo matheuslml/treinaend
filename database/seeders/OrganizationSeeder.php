@@ -7,7 +7,7 @@ use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 
-class UnitSeeder extends Seeder
+class OrganizationSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -19,10 +19,10 @@ class UnitSeeder extends Seeder
     public function run()
     {
         Model::unguard();
-        $filePath = database_path('seeders/raw/units.sql');
+        $filePath = database_path('seeders/raw/organizations.sql');
         if(File::exists($filePath)){
             DB::unprepared(file_get_contents($filePath));
-            $this->command->info('Units Table Seed');
+            $this->command->info('Organizations Table Seed');
         }
     }
 }

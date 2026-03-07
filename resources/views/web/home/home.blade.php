@@ -75,9 +75,9 @@
                                 <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption d-none " >
-                                    <h5>{{ $post->title }}</h5>
+                                <div class="carousel-caption " >
                                     <p>{{ $post->sub_title }}</p>
+                                    <h1>{{ $post->title }}</h1>
                                 </div>
                             @endif
                         </div>
@@ -93,9 +93,9 @@
                                 <img src="{{asset('storage/images/posts/' . $banner_path)}}" class="d-block w-100" alt=""/>
                             @endif
                             @if (isset($post->title))
-                                <div class="carousel-caption  d-none">
-                                    <h5>{{ $post->title }}</h5>
+                                <div class="carousel-caption ">
                                     <p>{{ $post->sub_title }}</p>
+                                    <h1>{{ $post->title }}</h1>
                                 </div>
                             @endif
                         </div>
@@ -120,30 +120,41 @@
     <div class="team-boxed">
         <div class="container">
             <div class="carousel-wrapper">
-            <div class="row person">
-                @foreach ($web_shortcuts as $web_shortcut)
-                <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
-                    <a href="{{ $web_shortcut->link_url }}">
-                    <div class="box">
-                        <img class="rounded-circle" src="{{asset('storage/images/shortcutweb/' . $web_shortcut->img_url)}}">
-                        <h2 class="name">{{ $web_shortcut->title }}</h2>
+                <div class="row person">
+                    <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
+                            <h1 class="title">Atalhos</h1>
+                        </a>
                     </div>
-                    </a>
+                    @foreach ($web_shortcuts as $web_shortcut)
+                        <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
+                            <a href="{{ $web_shortcut->link_url }}">
+                            <div class="box">
+                                <h2 class="name">{{ $web_shortcut->title }}</h2>
+                            </div>
+                            </a>
+                        </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
-            <!-- Botões de navegação ajustados -->
-            <button class="carousel-nav prev" aria-label="Botão anterior">
-                <i class="fa fa-chevron-circle-left" aria-hidden="true"></i>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-nav next" aria-label="Botão próximo">
-                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
-                <span class="visually-hidden">Próximo</span>
-            </button>
             </div>
         </div>
     </div>
+
+
+
+    <section id="matricula" class="matricula">
+        <div class="container mt-5 mb-5">
+
+            <div class="section-title">
+                <h2>Faça sua Matrícula</h2>
+            </div>
+
+            <div class=" text-center" >
+                <a href="" class="btn ">Clique Aqui e Saiba Mais<i class="energia-arrow-right"></i></a>
+            </div>
+
+        </div>
+    </section><!-- End Contact Us Section -->
+
     <!-- ======= comment section ======= -->
     <section class="comment-section" >
       <div class="container">
