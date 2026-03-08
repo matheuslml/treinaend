@@ -15,6 +15,7 @@ use App\Models\Tag;
 use App\Models\TypeRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Course;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
 use App\Services\NewsService;
@@ -32,6 +33,8 @@ class WebController extends Controller
 
     public function __invoke()
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $posts = Post::where('type_post_id', 1)->paginate(5)->load(['media']);
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
@@ -41,12 +44,14 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.home.home', compact('categories', 'posts', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.home.home', compact('categories', 'posts', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
 
     }
 
     public function transparency_index()
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(9);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -56,12 +61,14 @@ class WebController extends Controller
         $type_requests = TypeRequest::all();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.home.transparency', compact('categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'type_requests', 'web_footer'));
+        return view('web.home.transparency', compact('categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'type_requests', 'web_footer','courses'));
 
     }
 
     public function contact()
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(9);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -70,12 +77,14 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.home.contact', compact('categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.home.contact', compact('categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
 
     }
 
     public function news_web_index()
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -87,11 +96,13 @@ class WebController extends Controller
         $banner = Banner::where('banner_type_id', 4)->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.news.index', compact('categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 
     public function news_web_index_filter_title(Request $request)
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::filter($request->all())->where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -103,11 +114,13 @@ class WebController extends Controller
         $banner = Banner::where('banner_type_id', 4)->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.news.index', compact('categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 
     public function news_web_index_filter_category($category_id)
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->where('category_id', $category_id)->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -120,11 +133,13 @@ class WebController extends Controller
 
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('web_footer', 'categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.news.index', compact('web_footer', 'categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 
     public function news_web_index_filter_tag($tag_id)
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::with('tags')->where('status', 'PUBLISHED')->where('tags->id', $tag_id)->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
@@ -137,11 +152,13 @@ class WebController extends Controller
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('web_footer', 'categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.news.index', compact('web_footer', 'categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 
     public function news_web_show($new)
     {
+
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
 
         $institucional_pages = BlankPage::where('blank_page_type_id', 1)->orderBy('meta_keywords', 'asc')->get();
         $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
@@ -158,6 +175,6 @@ class WebController extends Controller
 
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.show', compact('web_footer', 'categories', 'service_pages', 'institucional_pages', 'news', 'new', 'posts', 'unit', 'copyright', 'categories', 'tags', 'projects', 'leaderships', 'galleries', 'web_footer'));
+        return view('web.news.show', compact('web_footer', 'categories', 'service_pages', 'institucional_pages', 'news', 'new', 'posts', 'unit', 'copyright', 'categories', 'tags', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 }

@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name')->nullable();
             $table->string('description')->nullable();
+            $table->integer('order')->nullable();
+            $table->integer('grade')->nullable();
+            $table->boolean('online')->default(true);
+            $table->float('payment_value', 16, 2)->nullable();
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             $table->timestamps();
             $table->softDeletes();

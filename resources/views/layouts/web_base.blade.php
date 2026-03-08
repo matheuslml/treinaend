@@ -71,11 +71,11 @@
                     <a class="menu-link" href="">Contato</a>
                   </li>
 
-                  <li class="drop-down menu-button"> 
+                  <li class="drop-down menu-button">
                     <a class="menu-link" href="">Mais</a>
                     <ul>
                       <li class="">
-                        <a  class="menu-link" href="{{ route('login') }}">Login</a></li>
+                        <a  class="menu-link" href="{{ route('login') }}">Meu EAD</a></li>
                       <li class="">
                         <a  class="menu-link" href="">Consulta de Profissionais</a></li>
                     </ul>

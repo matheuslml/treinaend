@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -21,6 +20,10 @@ class Course extends Model implements Auditable
     protected $fillable = [
         'name',
         'description',
+        'order',
+        'grade',
+        'online',
+        'payment_value',
         'status'
     ];
 

@@ -7,7 +7,7 @@
 
     <div id="carouselHomeBanner" class="carousel slide carousel-fade" data-bs-ride="carousel" style="height:100%;">
 
-        <!-- Indicators -->
+        <!-- Indicatorsd -->
         <div class="carousel-indicators">
             @php
                 $i=0;
@@ -65,7 +65,7 @@
                         $banner_path = $post->media->where('type_media_id', 1)->first()->url ?? '';
                     }
                 @endphp
-                
+
                     @if ($verification)
                         <!-- Single item -->
                         <div class="carousel-item">
@@ -76,8 +76,8 @@
                             @endif
                             @if (isset($post->title))
                                 <div class="carousel-caption " >
-                                    <p>{{ $post->sub_title }}</p>
                                     <h1>{{ $post->title }}</h1>
+                                    <p>{{ $post->sub_title }}</p>
                                 </div>
                             @endif
                         </div>
@@ -94,8 +94,8 @@
                             @endif
                             @if (isset($post->title))
                                 <div class="carousel-caption ">
-                                    <p>{{ $post->sub_title }}</p>
                                     <h1>{{ $post->title }}</h1>
+                                    <p>{{ $post->sub_title }}</p>
                                 </div>
                             @endif
                         </div>
