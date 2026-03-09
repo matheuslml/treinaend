@@ -105,7 +105,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 footer-links  text-footer-phone">
-                        <div class="col-12 text-footer-phone">
+                        <div class="col-12 ">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Home
                             </h4></a>

@@ -65073,12 +65073,12 @@ section {
 
 @media screen and (max-width: 992px) {
   #footer .footer-top .footer-info {
-    text-align: center;
+    text-align: left;
   }
 }
 @media screen and (max-width: 992px) {
   #footer .footer-top .footer-info a {
-    text-align: center;
+    text-align: left;
   }
 }
 #footer .footer-top .footer-info a {
@@ -65217,7 +65217,7 @@ section {
 
 @media screen and (max-width: 992px) {
   #footer .footer-top .footer-links ul a {
-    text-align: center;
+    text-align: left;
   }
 }
 #footer .footer-top .footer-newsletter form {
@@ -65267,6 +65267,85 @@ section {
 
 #footer .credits a {
   color: #be3139;
+}
+
+/* Responsivo Tablet */
+@media screen and (max-width: 992px) {
+  #footer .footer-top {
+    padding: 20px; /* margem interna uniforme */
+    text-align: left; /* tudo alinhado à esquerda */
+  }
+
+  #footer .footer-top .footer-info,
+  #footer .footer-top .footer-links,
+  #footer .footer-top .footer-newsletter {
+    margin-bottom: 20px;
+    padding-left: 10px; /* margem elegante da borda */
+    padding-right: 10px;
+  }
+
+  #footer .footer-top .footer-info a,
+  #footer .footer-top .footer-links ul a {
+    display: block;
+    margin: 6px 0;
+    text-align: left;
+  }
+
+  #footer .footer-top .footer-links ul {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start; /* alinhado à esquerda */
+  }
+
+  #footer .footer-top .social-links {
+    margin-top: 20px;
+    text-align: left;
+    padding-left: 10px;
+  }
+}
+
+/* Responsivo Mobile */
+@media screen and (max-width: 576px) {
+  #footer .footer-top .footer-link-title {
+    font-size: 20px;
+    padding-left: 10px;
+  }
+
+  #footer .footer-top .footer-link-text,
+  #footer .footer-top .footer-info a,
+  #footer .footer-top .footer-info p {
+    font-size: 13px;
+    line-height: 1.4;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  #footer .footer-top .footer-links h1,
+  #footer .footer-top .footer-links h2 {
+    font-size: 22px;
+    padding-left: 10px;
+  }
+
+  #footer .footer-top .footer-links h3 {
+    font-size: 14px;
+    padding-left: 10px;
+  }
+
+  #footer .footer-top .footer-newsletter form {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  #footer .footer-top .footer-newsletter form input[type=email] {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  #footer .footer-top .footer-newsletter form input[type=submit] {
+    position: static;
+    width: 100%;
+    border-radius: 4px;
+  }
 }
 
 /*--------------------------------------------------------------
@@ -67222,7 +67301,7 @@ news-section {
 }
 @media screen and (max-width: 992px) {
   .text-footer-phone {
-    text-align: center;
+    text-align: left;
   }
 }
 /*--------------------------------------------------------------
