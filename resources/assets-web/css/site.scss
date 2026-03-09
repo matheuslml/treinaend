@@ -63682,12 +63682,11 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   font-optical-sizing: auto;
 }
 
-.social-links-topbar {
-  padding-right: 25px;
-  margin: 10px 15px;
+.social-links-footer {
+  padding-right: 30px;
 }
 
-.social-links-topbar a {
+.social-links-footer a {
   color: white;
   padding: 0 5px;
   display: inline-block;
@@ -63696,7 +63695,7 @@ h1, h2, h3, h4, h5, h6, .font-primary {
   transition: 0.3s;
 }
 
-.social-links-topbar a:hover {
+.social-links-footer a:hover {
   color: #fff;
 }
 
@@ -64993,7 +64992,6 @@ section {
   background-size: cover;
   background-position-y: 75%;
   border-radius: 20px;
-  margin-top: 80px;
   margin-bottom: 60px;
   font-family: "Manrope", sans-serif;
 }
@@ -66988,9 +66986,7 @@ section {
 .comment-section {
   padding: 3% 0;
   background-color: #eef4f7;
-  margin-bottom: clamp(40px, 5vw, 96px);
 }
-
 .comment-section h3 {
   font-family: "Montserrat", system-ui, sans-serif;
   font-weight: 600;
@@ -67023,6 +67019,85 @@ section {
   max-width: 700px;
   color: #444;
 }
+
+.comment-section-footer {
+    background-color: rgba(38, 38, 38, var(--tw-bg-opacity, 1));
+    padding: 40px 20px; /* respiro interno */
+}
+
+.comment-section-footer h3 {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    text-align: center;
+    margin: 0 auto 20px auto;
+    max-width: 1000px;
+    line-height: 1.4;
+    letter-spacing: 1px;
+    color: white;
+}
+
+.comment-section-footer h4 {
+    font-family: "Montserrat", system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 22px;
+    text-align: center;
+    margin: 10px auto;
+    max-width: 800px;
+    line-height: 1.4;
+    color: white;
+}
+
+.comment-section-footer p {
+    line-height: 1.5;
+    font-weight: 400;
+    font-family: "Montserrat", sans-serif;
+    text-align: center;
+    margin: 8px auto;
+    max-width: 700px;
+    color: white;
+}
+
+/* Responsivo */
+@media screen and (max-width: 992px) {
+    .comment-section-footer h3 {
+        font-size: 26px;
+    }
+    .comment-section-footer h4 {
+        font-size: 18px;
+    }
+    .comment-section-footer p {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .comment-section-footer h3 {
+        font-size: 22px;
+        line-height: 1.3;
+    }
+    .comment-section-footer h4 {
+        font-size: 16px;
+        line-height: 1.3;
+    }
+    .comment-section-footer p {
+        font-size: 13px;
+        line-height: 1.4;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .comment-section-footer h3 {
+        font-size: 20px;
+    }
+    .comment-section-footer h4 {
+        font-size: 14px;
+    }
+    .comment-section-footer p {
+        font-size: 12px;
+    }
+}
+
 
 @media screen and (max-width: 992px) {
   .comment-section h3 {

@@ -377,7 +377,7 @@
     </section>
 
     <!-- Carousel wrapper -->
-    <section class="comment-section" >
+    <section class="comment-section comment-section-footer" >
         <div class="container">
               <h3 style="padding-top: 4%">
                  Seja para:
@@ -386,7 +386,7 @@
                     Se preparar para novas oportunidades,
               </h3>
               <p style="text-align: center; padding-top: 2%">A TREINAEND está pronta para apoiar seu desenvolvimento técnico e profissional. 
-                <a href="{{ route('web_ombudsman') }}">Chame no WhatsApp</a></p>
+                <a href="{{ route('web_ombudsman') }}" style="color: white" >Chame no WhatsApp</a></p>
         </div>
       </section>
 @endsection

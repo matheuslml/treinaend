@@ -174,6 +174,14 @@ Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futu
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Siga a TREINAEND
                             </h4></a>
+
+                            <div class="social-links-footer float-start " >
+                                @if(isset($unit))
+                                    @foreach($unit->socialmedia as $social_media)
+                                        <a class="share-facebook" href="{{$social_media->pivot->url}}"><i class="{{ $social_media->logo }}"></i></a>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
 
