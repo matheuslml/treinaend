@@ -141,7 +141,7 @@
                             </p></a>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-md-6 footer-info">
+                    <div class="col-12 col-lg-4 col-md-6 footer-info">
                         <div class="col-12 text-footer-phone">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Localização
@@ -162,15 +162,13 @@
                             <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-2 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
-                    </div>
-                    <div class="col-12 col-lg-4 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
+                    <div class="col-12 col-lg-5 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
                         <div class="col-12 text-footer-phone">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Seja um Aluno da TREINAEND
                             </h4></a>
                             <p class="footer-link-text">Ao se matricular, você garante acesso imediato a conteúdos inspiradores, professores renomados e experiências únicas que vão impulsionar sua carreira e seu desenvolvimento pessoal.
-Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futuro que você merece.</p>
+                                                        Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futuro que você merece.</p>
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Siga a TREINAEND
                             </h4></a>
@@ -208,7 +206,11 @@ Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futu
             new window.VLibras.Widget('https://vlibras.gov.br/app');
           </script>
 
-            <a href="https://arraial.egov.modernizacao.com.br/" class="back-to-top-link"><img src="{{ isset($web_footer->float_icon_url) ? asset('storage/images/webfooters/' . $web_footer->float_icon_url) : '' }}" class="" alt="icon"/></a>
+            <a href="#" class="back-to-top-link" id="backToTop">
+                <span class="back-to-top-icon">↑</span>
+            </a>
+
+
         @component('web.components.scripts')
 
         @endcomponent

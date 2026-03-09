@@ -63547,29 +63547,34 @@ h1, h2, h3, h4, h5, h6, .font-primary {
 # Back to top button link
 --------------------------------------------------------------*/
 .back-to-top-link {
-  position: fixed;
-  display: none;
-  width: 80px;
-  height: 80px;
-  border-radius: 3px;
-  right: 15px;
-  bottom: 15px;
-  color: #fff;
-  transition: display 0.5s ease-in-out;
-  z-index: 99999;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: none; /* escondido até rolar a página */
+    z-index: 999;
+    text-decoration: none;
 }
 
-.back-to-top-link img {
-  width: 80px;
-  height: 80px;
+.back-to-top-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #e62b1e; /* vermelho TED */
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, background-color 0.3s ease;
 }
 
-.back-to-top-link i {
-  font-size: 24px;
-  position: absolute;
-  top: 8px;
-  left: 8px;
+.back-to-top-icon:hover {
+    transform: scale(1.1);
+    background-color: #c41f14;
 }
+
 
 /*--------------------------------------------------------------
 # Back to top button
@@ -67022,82 +67027,39 @@ section {
 
 .comment-section-footer {
     background-color: rgba(38, 38, 38, var(--tw-bg-opacity, 1));
-    padding: 40px 20px; /* respiro interno */
 }
-
 .comment-section-footer h3 {
-    font-family: "Montserrat", system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 32px;
-    text-align: center;
-    margin: 0 auto 20px auto;
-    max-width: 1000px;
-    line-height: 1.4;
-    letter-spacing: 1px;
-    color: white;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
+  text-align: center;
+  margin: 0 auto 20px auto;
+  max-width: 1000px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  color: white;
 }
 
 .comment-section-footer h4 {
-    font-family: "Montserrat", system-ui, sans-serif;
-    font-weight: 500;
-    font-size: 22px;
-    text-align: center;
-    margin: 10px auto;
-    max-width: 800px;
-    line-height: 1.4;
-    color: white;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 22px; /* intermediário entre h3 e p */
+  text-align: center;
+  margin: 10px auto;
+  max-width: 800px;
+  line-height: 1.4;
+  color: white; /* vermelho TED para destaque */
 }
 
 .comment-section-footer p {
-    line-height: 1.5;
-    font-weight: 400;
-    font-family: "Montserrat", sans-serif;
-    text-align: center;
-    margin: 8px auto;
-    max-width: 700px;
-    color: white;
+  line-height: 1.5;
+  font-weight: 400;
+  font-family: "Montserrat", sans-serif;
+  text-align: center;
+  margin: 8px auto;
+  max-width: 700px;
+  color: white;
 }
-
-/* Responsivo */
-@media screen and (max-width: 992px) {
-    .comment-section-footer h3 {
-        font-size: 26px;
-    }
-    .comment-section-footer h4 {
-        font-size: 18px;
-    }
-    .comment-section-footer p {
-        font-size: 14px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .comment-section-footer h3 {
-        font-size: 22px;
-        line-height: 1.3;
-    }
-    .comment-section-footer h4 {
-        font-size: 16px;
-        line-height: 1.3;
-    }
-    .comment-section-footer p {
-        font-size: 13px;
-        line-height: 1.4;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .comment-section-footer h3 {
-        font-size: 20px;
-    }
-    .comment-section-footer h4 {
-        font-size: 14px;
-    }
-    .comment-section-footer p {
-        font-size: 12px;
-    }
-}
-
 
 @media screen and (max-width: 992px) {
   .comment-section h3 {
