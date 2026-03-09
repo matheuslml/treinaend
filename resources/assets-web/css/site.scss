@@ -66152,6 +66152,88 @@ section {
     background-color: #c41f14;
 }
 
+/*--------------------------------------------------------------
+# home por que web sections
+--------------------------------------------------------------*/
+.tnd-education-section {
+    background-color: #fff; /* fundo da section */
+    padding: 4% 0;
+}
+
+.tnd-education-section .container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tnd-education-title {
+    font-size: 40px;
+    line-height: 1.24;
+    font-weight: 700;
+    font-family: "Montserrat", sans-serif;
+    margin: 0 0 2% 0;
+    text-align: center;
+    color: #222;
+}
+
+.tnd-education-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* até 3 por linha */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tnd-education-card {
+    background-color: #d9ecff; /* azul claro */
+    border-radius: 6px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    text-align: center; /* centraliza texto */
+    padding: 16px; /* margem interna para não colar nas bordas */
+    position: relative;
+}
+
+.tnd-education-image {
+    margin-top: 30px; /* espaço para o número acima */
+}
+
+.tnd-education-image  p{
+    width: 30px;
+    height: 30px;
+    background-color: white; /* círculo cinza claro */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: black;
+    position: absolute;
+    top: 7px; /* fica acima da imagem */
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.tnd-education-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 4px;
+}
+
+.tnd-education-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 12px 0 8px 0;
+    color: #000;
+}
+
+@media screen and (max-width: 768px) {
+    .tnd-education-grid {
+        grid-template-columns: 1fr; /* em telas menores, um card por linha */
+    }
+}
+
 
 /*--------------------------------------------------------------
 # home courses web sections
@@ -66639,7 +66721,6 @@ section {
   text-align: center;
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
   padding: 20px 0 30px 0;
-  margin-bottom: 30px;
   width: 100%;
 }
 

@@ -115,29 +115,6 @@
         </button>
     </div>
     <!-- Carousel wrapper -->
-
-    <!-- SHORTCUT ICONS -->
-    <div class="team-boxed">
-        <div class="container">
-            <div class="carousel-wrapper">
-                <div class="row person">
-                    <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
-                            <h1 class="title">Atalhos</h1>
-                        </a>
-                    </div>
-                    @foreach ($web_shortcuts as $web_shortcut)
-                        <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
-                            <a href="{{ $web_shortcut->link_url }}">
-                            <div class="box">
-                                <h2 class="name">{{ $web_shortcut->title }}</h2>
-                            </div>
-                            </a>
-                        </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- ======= comment section ======= -->
     <section class="comment-section">
         <div class="container">
@@ -248,6 +225,67 @@
         </div>
     </section>
 
+    <section class="tnd-education-section">
+        <div class="container">
+            <h3 class="tnd-education-title mb-5">Por que escolher a TREINAEND</h3>
+
+            <div class="tnd-education-grid mb-5">
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>1</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Lottery Winners">
+                    </div>
+                    <h4 class="tnd-education-name">Mais de 12 anos de atuação na capacitação industrial</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>2</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Formação baseada na realidade da indústria brasileira</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>3</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Responsabilidade técnica e compromisso com normas e boas práticas</h4>
+                </div>
+
+                <!-- Repita até 6 cards -->
+            </div>
+
+            <div class="tnd-education-grid">
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>4</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Lottery Winners">
+                    </div>
+                    <h4 class="tnd-education-name">Estrutura educacional clara, organizada e objetiva</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>5</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Compromisso com formação contínua e evolução profissional</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>6</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Suporte técnico ao aluno durante todo o curso</h4>
+                </div>
+
+                <!-- Repita até 6 cards -->
+            </div>
+        </div>
+    </section>
 
 
 
@@ -265,13 +303,6 @@
 
         </div>
     </section><!-- End Contact Us Section -->
-
-    <!-- ======= comment section ======= -->
-    <section class="comment-section" >
-      <div class="container">
-            <h3>Arraial do Cabo, é um verdadeiro paraíso costeiro. Com suas dunas, restingas, lagoas e praias deslumbrantes, a cidade encanta moradores e turistas. Além disso, Arraial do Cabo é conhecida como a capital brasileira do mergulho.</h3>
-      </div>
-    </section>
 
   <!-- ======= title-section ======= -->
   <section class="title-section" >
@@ -345,61 +376,17 @@
         </div>
     </section>
 
-
-  <!-- ======= Secretários Section ======= -->
-  <section class="title-section" >
-    <div class="container">
-        <h2>Cursos</h2>
-        <div class="col-md-6 pt-0 mt-0">
-            <h3>Conheça os hushsi suhsiu usih isuisuh</h3>
-        </div>
-    </div>
-  </section>
-    <!-- secretarias -->
-    <div class="team-boxed" style="padding-bottom: 5%">
-        <div class="container" ><div class="gtco-testimonials">
-            <div class="owl-carousel owl-carousel1 owl-theme leadership-web" >
-                @foreach ($courses as $course)
-                    <div>
-                        <div class="card text-center ">
-                            <div class="card-body" style="width: 300px">
-                                <h5>{{ $course->name }}</h5>
-                                <p>{{ $course->description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-          </div>
-        </div>
-    </div>
-
-    @foreach ($service_pages as $service_page)
-        @if ($service_page->meta_keywords == 'Matrícula')
-            <!-- ======= Contact Us Section ======= -->
-            <section id="matricula" class="matricula">
-                <div class="container mt-5 mb-5">
-
-                    <div class="section-title">
-                        <h2>Faça sua Matrícula</h2>
-                    </div>
-
-                    <div class=" text-center" >
-                        <a href="{{ route('pagina_web', $service_page->meta_keywords) }}" class="btn ">Clique Aqui e Saiba Mais<i class="energia-arrow-right"></i></a>
-                    </div>
-
-                </div>
-            </section><!-- End Contact Us Section -->
-        @endif
-    @endforeach
     <!-- Carousel wrapper -->
     <section class="comment-section" >
         <div class="container">
               <h3 style="padding-top: 4%">
-                O Portal da Prefeitura de Arraial do Cabo está em processo de Manutenção.
-                Em Breve estaremos normalizados.
+                 Seja para:
+                    Iniciar sua trajetória profissional,
+                    Se diferenciar no mercado de trabalho ou
+                    Se preparar para novas oportunidades,
               </h3>
-              <p style="text-align: center; padding-top: 2%">Se precisar de Ajuda Mande sua Manifestação <a href="{{ route('web_ombudsman') }}">AQUI</a></p>
+              <p style="text-align: center; padding-top: 2%">A TREINAEND está pronta para apoiar seu desenvolvimento técnico e profissional. 
+                <a href="{{ route('web_ombudsman') }}">Chame no WhatsApp</a></p>
         </div>
       </section>
 @endsection
