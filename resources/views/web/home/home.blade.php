@@ -235,15 +235,15 @@
     </section>
 
     <section class="tnd-college-section">
-        <div class="tnd-college-content">
+        <div class="tnd-college-content mb-5 mt-5">
             <h2 class="tnd-college-title">Parcerias com escolas técnicas</h2>
             <p class="tnd-college-description">
                 A TREINAEND mantém parcerias educacionais com instituições de ensino técnico, oferecendo condições especiais para alunos regularmente matriculados.
                 Essas parcerias têm como objetivo incentivar a qualificação profissional, ampliar a empregabilidade e complementar a formação técnica dos estudantes.
             </p>
-            <a href="{{ url('/sobre') }}" class="tnd-college-button">Sobre</a>
+            <a href="{{ url('/sobre') }}" class="tnd-college-button">Saiba Mais</a>
         </div>
-        <div class="tnd-college-image">
+        <div class="tnd-college-image mb-5 mt-5">
             <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="TREINAEND">
         </div>
     </section>
@@ -260,7 +260,7 @@
             </div>
 
             <div class=" text-center" >
-                <a href="" class="btn ">Clique Aqui e Saiba Mais<i class="energia-arrow-right"></i></a>
+                <a href="" class="btn ">Clique Aqui<i class="energia-arrow-right"></i></a>
             </div>
 
         </div>

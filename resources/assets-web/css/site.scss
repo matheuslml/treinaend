@@ -66088,31 +66088,28 @@ section {
 # home college sections
 --------------------------------------------------------------*/
 .tnd-college-section {
-    background-color: #fff;
+    background-color: #eef4f7; /* fundo da section ocupa toda a página */
     display: flex;
-    flex-direction: row; /* texto à esquerda, imagem à direita */
-    align-items: stretch; /* força os filhos a terem mesma altura */
-    max-width: 1000px;
-    margin: 40px auto;
-    border-radius: 8px;
-    overflow: hidden;
-    color: #000;
+    justify-content: center;   /* centraliza o conteúdo interno */
+    padding: 40px 0;           /* respiro vertical */
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
 .tnd-college-content {
+    max-width: 350px;         /* limite de largura */
     flex: 1;
     padding: 20px;
     text-align: left;
-    background-color: #000;
+    background-color: #000;    /* fundo preto do bloco */
     color: white;
-    display: flex;              /* garante que o conteúdo interno se organize */
-    flex-direction: column;     /* empilha título, descrição e botão */
-    justify-content: space-between; /* distribui elementos para ocupar toda a altura */
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 8px 0 0 8px;
 }
 
 .tnd-college-image {
-    flex: 0 0 60%;
+    flex: 0 0 35%;
 }
 
 .tnd-college-image img {
@@ -66127,20 +66124,23 @@ section {
     font-weight: bold;
     margin-bottom: 15px;
     line-height: 1.4;
-    color: white; /* garante texto preto */
+    color: white;
+    word-break: break-word;
+    font-family: "Montserrat", sans-serif;
+    font-optical-sizing: auto;
 }
 
 .tnd-college-description {
     font-size: 16px;
     line-height: 1.6;
     margin-bottom: 20px;
-    color: white; /* garante texto preto */
+    color: white;
 }
 
 .tnd-college-button {
     display: inline-block;
     padding: 10px 20px;
-    background-color: #e62b1e; /* vermelho TED */
+    background-color: #e62b1e;
     color: #fff;
     text-decoration: none;
     font-weight: bold;
@@ -66149,8 +66149,9 @@ section {
 }
 
 .tnd-college-button:hover {
-    background-color: #c41f14; /* tom mais escuro no hover */
+    background-color: #c41f14;
 }
+
 
 /*--------------------------------------------------------------
 # home courses web sections
