@@ -66019,11 +66019,11 @@ section {
     flex-direction: row; /* texto à esquerda, imagem à direita */
     align-items: flex-start;
     max-width: 1000px;
-    margin: 40px auto;
-    background: #fff; /* fundo branco */
+    margin: 40px auto; /* centraliza horizontalmente */
+    background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    color: #000; /* texto padrão preto */
+    color: #000;
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
@@ -66084,6 +66084,113 @@ section {
     background-color: #c41f14; /* tom mais escuro no hover */
 }
 
+
+/*--------------------------------------------------------------
+# home courses web sections
+--------------------------------------------------------------*/
+.tnd-courses-section {
+    padding: 4% 0;
+    background-color: #eef4f7;
+}
+
+.tnd-courses-section .container {
+    max-width: 1000px;   /* limita largura igual à about-section */
+    margin: 0 auto;      /* centraliza horizontalmente */
+}
+
+.tnd-courses-title {
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
+    font-size: 26px;
+    margin-bottom: 40px;
+    text-align: center;
+    color: #222;
+    letter-spacing: 1px;
+}
+
+.tnd-course-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.tnd-course-content {
+    flex: 1;
+    text-align: left;
+}
+
+.tnd-course-image {
+    flex: 0 0 200px;
+}
+
+.tnd-course-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 6px;
+    display: block;
+}
+
+.tnd-course-category {
+    font-size: 12px;
+    font-weight: bold;
+    color: #e62b1e; /* vermelho TED */
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.tnd-course-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px 0;
+    color: #000;
+}
+
+.tnd-course-speaker {
+    font-size: 14px;
+    color: #555;
+    margin: 0;
+}
+
+.tnd-course-meta {
+    font-size: 12px;
+    color: #777;
+    margin-top: 5px;
+}
+
+.tnd-courses-button {
+    display: inline-block;
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: #e62b1e;
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.tnd-courses-button:hover {
+    background-color: #c41f14;
+}
+
+@media screen and (max-width: 768px) {
+    .tnd-course-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .tnd-course-content {
+        padding-right: 0;
+        margin-bottom: 15px;
+    }
+
+    .tnd-course-image {
+        flex: none;
+        width: 100%;
+    }
+}
 
 
 
@@ -66575,39 +66682,58 @@ section {
 # base  code - comment section
 --------------------------------------------------------------*/
 .comment-section {
-  padding: 1% 0 2% 0;
+  padding: 3% 0;
   background-color: #eef4f7;
-  position: relative;
   margin-bottom: clamp(40px, 5vw, 96px);
-  margin: 0;
 }
 
 .comment-section h3 {
-  font-family: system-ui;
-  font-weight: 300;
-  font-size: 28px;
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 600;
+  font-size: 32px;
   text-align: center;
-  margin: 0 5% 0 5%;
-  letter-spacing: 2px;
+  margin: 0 auto 20px auto;
+  max-width: 1000px;
+  line-height: 1.4;
+  letter-spacing: 1px;
+  color: #222;
+}
+
+.comment-section h4 {
+  font-family: "Montserrat", system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 22px; /* intermediário entre h3 e p */
+  text-align: center;
+  margin: 10px auto;
+  max-width: 800px;
+  line-height: 1.4;
+  color: #e62b1e; /* vermelho TED para destaque */
 }
 
 .comment-section p {
-  line-height: 1.24;
-  font-weight: 500;
-  word-break: break-word;
+  line-height: 1.5;
+  font-weight: 400;
   font-family: "Montserrat", sans-serif;
-  font-optical-sizing: auto;
   text-align: center;
-  margin: 0 5% 0 5%;
-  letter-spacing: 2px;
+  margin: 8px auto;
+  max-width: 700px;
+  color: #444;
 }
 
 @media screen and (max-width: 992px) {
   .comment-section h3 {
-    font-weight: 300;
-    font-size: 18px;
+    font-size: 20px;
+  }
+
+  .comment-section h4 {
+    font-size: 16px;
+  }
+
+  .comment-section p {
+    font-size: 14px;
   }
 }
+
 /*--------------------------------------------------------------
 # base  code - notcias
 --------------------------------------------------------------*/
