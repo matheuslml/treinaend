@@ -66099,19 +66099,39 @@ section {
 }
 
 .tnd-courses-title {
-    font-family: "Montserrat", sans-serif;
-    font-weight: 700;
-    font-size: 26px;
-    margin-bottom: 40px;
-    text-align: center;
-    color: #222;
-    letter-spacing: 1px;
+  line-height: 120%;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-size: 40px;
+  line-height: 1.24;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  margin: 0 0 2% 0;
+}
+
+.tnd-courses-section h2 {
+  display: block;
+  font-size: 1em;
+  margin-block-start: 0.83em;
+  margin-block-end: 0.83em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-weight: 100;
+  unicode-bidi: -webkit-isolate;
+  unicode-bidi: -moz-isolate;
+  unicode-bidi: isolate;
+  padding-bottom: 0;
 }
 
 .tnd-course-card {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start; /* força alinhamento no topo */
     padding: 20px 0;
     border-bottom: 1px solid #ddd;
 }
@@ -66119,10 +66139,13 @@ section {
 .tnd-course-content {
     flex: 1;
     text-align: left;
+    display: flex;
+    flex-direction: column; /* garante que os elementos fiquem empilhados */
+    justify-content: flex-start; /* força alinhamento no topo */
 }
 
 .tnd-course-image {
-    flex: 0 0 200px;
+    flex: 0 0 400px;
 }
 
 .tnd-course-image img {
@@ -66132,20 +66155,17 @@ section {
     display: block;
 }
 
-.tnd-course-category {
-    font-size: 12px;
-    font-weight: bold;
-    color: #e62b1e; /* vermelho TED */
-    text-transform: uppercase;
-    letter-spacing: 1px;
+.tnd-course-name {
+  color: var(--textPrimary-onLight); /* text-textPrimary-onLight */
+  font-weight: 900; /* font-semibold */
+  font-family: "Montserrat", sans-serif;
+
+  /* tamanho base (header3) */
+  font-size: 2.5rem; /* ~24px */
+  line-height: 1.3;
+  letter-spacing: -0.5px;
 }
 
-.tnd-course-name {
-    font-size: 18px;
-    font-weight: 600;
-    margin: 8px 0;
-    color: #000;
-}
 
 .tnd-course-speaker {
     font-size: 14px;

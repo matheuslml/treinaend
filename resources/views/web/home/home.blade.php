@@ -170,45 +170,23 @@
 
     <section class="tnd-courses-section">
         <div class="container">
+            <h2>Cursos</h2>
             <h3 class="tnd-courses-title">Nossos programas de capacitação</h3>
 
-            <div class="tnd-course-card">
-                <div class="tnd-course-content">
-                    <span class="tnd-course-category">Climate Change</span>
-                    <h4 class="tnd-course-name">The controversial climate tool funding real change</h4>
-                    <p class="tnd-course-speaker">Sandeep Roy Choudhury</p>
-                    <p class="tnd-course-meta">192K plays · 13 days ago</p>
+            @foreach ($courses as $course)
+                <div class="tnd-course-card">
+                    <div class="tnd-course-content">
+                        <h4 class="tnd-course-name">{{ $course->name }}</h4>
+                        <p class="tnd-course-speaker">{{ $course->description }}</p>
+                        <p class="tnd-course-meta">192K plays · 13 days ago</p>
+                    </div>
+                    <div class="tnd-course-image">
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Sandeep Roy Choudhury">
+                    </div>
                 </div>
-                <div class="tnd-course-image">
-                    <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Sandeep Roy Choudhury">
-                </div>
-            </div>
+            @endforeach
 
-            <div class="tnd-course-card">
-                <div class="tnd-course-content">
-                    <span class="tnd-course-category">Climate Change</span>
-                    <h4 class="tnd-course-name">Why I want to bring lions back to my village</h4>
-                    <p class="tnd-course-speaker">Seif Hamisi</p>
-                    <p class="tnd-course-meta">198K plays · 1 month ago</p>
-                </div>
-                <div class="tnd-course-image">
-                    <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Seif Hamisi">
-                </div>
-            </div>
-
-            <div class="tnd-course-card">
-                <div class="tnd-course-content">
-                    <span class="tnd-course-category">Environment</span>
-                    <h4 class="tnd-course-name">The language you're fluent in — but forgot how to hear</h4>
-                    <p class="tnd-course-speaker">Louis VI</p>
-                    <p class="tnd-course-meta">242K plays · 1 month ago</p>
-                </div>
-                <div class="tnd-course-image">
-                    <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Louis VI">
-                </div>
-            </div>
-
-            <a href="{{ url('/sustainability') }}" class="tnd-courses-button">Browse all Sustainability</a>
+            <a href="{{ url('/sustainability') }}" class="tnd-courses-button">Veja todos os Cursos</a>
         </div>
     </section>
 
