@@ -151,15 +151,22 @@
                                 {{ isset($unit) ? $unit->address : '' }}<br>
                                 {{ isset($unit->organization) ? $unit->operation : '' }}<br><br>
                             </p>
-                            <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a><br>                    <a
-                            href="
-                            {{ isset($unit) ?
-                                'https://api.whatsapp.com/send/?phone=%2B' .
-                                    $unit->phone .
-                                    '&text&type=phone_number&app_absent=0'
-                                    : ''
-                            }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a><br>
-                            <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
+                            <p class="">
+                                <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a> 
+                            </p>
+                            <p class="">           
+                                <a
+                                    href="
+                                    {{ isset($unit) ?
+                                        'https://api.whatsapp.com/send/?phone=%2B' .
+                                            $unit->phone .
+                                            '&text&type=phone_number&app_absent=0'
+                                            : ''
+                                    }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a>
+                            </p>
+                            <p class=""> 
+                                <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
+                            </p>
                         </div>
                     </div>
                     <div class="col-12 col-lg-5 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>

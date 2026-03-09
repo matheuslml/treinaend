@@ -65272,22 +65272,19 @@ section {
 /* Responsivo Tablet */
 @media screen and (max-width: 992px) {
   #footer .footer-top {
-    padding: 20px; /* margem interna uniforme */
+    padding: 40px; /* margem interna uniforme */
     text-align: left; /* tudo alinhado à esquerda */
   }
 
-  #footer .footer-top .footer-info,
-  #footer .footer-top .footer-links,
-  #footer .footer-top .footer-newsletter {
-    margin-bottom: 20px;
-    padding-left: 10px; /* margem elegante da borda */
-    padding-right: 10px;
+  #footer .footer-top .footer-link-text {
+    padding-bottom: 1%;
   }
-
+#footer .footer-top .footer-info a{
+    padding-bottom: 1%;
+}
   #footer .footer-top .footer-info a,
   #footer .footer-top .footer-links ul a {
     display: block;
-    margin: 6px 0;
     text-align: left;
   }
 
@@ -65304,49 +65301,6 @@ section {
   }
 }
 
-/* Responsivo Mobile */
-@media screen and (max-width: 576px) {
-  #footer .footer-top .footer-link-title {
-    font-size: 20px;
-    padding-left: 10px;
-  }
-
-  #footer .footer-top .footer-link-text,
-  #footer .footer-top .footer-info a,
-  #footer .footer-top .footer-info p {
-    font-size: 13px;
-    line-height: 1.4;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  #footer .footer-top .footer-links h1,
-  #footer .footer-top .footer-links h2 {
-    font-size: 22px;
-    padding-left: 10px;
-  }
-
-  #footer .footer-top .footer-links h3 {
-    font-size: 14px;
-    padding-left: 10px;
-  }
-
-  #footer .footer-top .footer-newsletter form {
-    flex-direction: column;
-    padding: 10px;
-  }
-
-  #footer .footer-top .footer-newsletter form input[type=email] {
-    width: 100%;
-    margin-bottom: 10px;
-  }
-
-  #footer .footer-top .footer-newsletter form input[type=submit] {
-    position: static;
-    width: 100%;
-    border-radius: 4px;
-  }
-}
 
 /*--------------------------------------------------------------
 # PDFObject
