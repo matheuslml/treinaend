@@ -139,6 +139,25 @@
         </div>
     </div>
 
+    <section class="tnd-about-section">
+        <div class="tnd-about-content">
+            <div class="tnd-about-category">Sobre a TREINAEND</div>
+            <h2 class="tnd-about-title">Uma escola técnica especializada na formação de profissionais da indústria</h2>
+            <p class="tnd-about-description">
+                <strong>A TREINAEND atua há mais de 12 anos</strong> na capacitação de profissionais da indústria, oferecendo cursos que complementam a 
+                formação técnica tradicional e fortalecem o currículo de quem busca crescimento profissional.
+                Nosso trabalho é direcionado a estudantes, profissionais em início de carreira e trabalhadores que <strong>desejam se qualificar de forma prática, 
+                organizada e alinhada às demandas do setor industrial</strong>.
+            </p>
+            <a href="{{ url('/sobre') }}" class="tnd-about-button">Sobre</a>
+        </div>
+        <div class="tnd-about-image">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="TREINAEND">
+        </div>
+    </section>
+
+
+
 
 
     <section id="matricula" class="matricula">

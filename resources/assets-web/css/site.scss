@@ -66010,6 +66010,84 @@ section {
   }
 }
 
+
+/*--------------------------------------------------------------
+# home treinaend sections
+--------------------------------------------------------------*/
+.tnd-about-section {
+    display: flex;
+    flex-direction: row; /* texto à esquerda, imagem à direita */
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 40px auto;
+    background: #fff; /* fundo branco */
+    border-radius: 8px;
+    overflow: hidden;
+    color: #000; /* texto padrão preto */
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.tnd-about-content {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    color: #000; /* garante texto preto */
+}
+
+.tnd-about-image {
+    flex: 0 0 40%;
+}
+
+.tnd-about-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 8px 8px 0;
+}
+
+.tnd-about-category {
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: bold;
+    color: #e62b1e; /* vermelho TED */
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+}
+
+.tnd-about-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    color: #000;
+}
+
+.tnd-about-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #333; /* cinza escuro para leitura confortável */
+}
+
+.tnd-about-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e62b1e; /* vermelho TED */
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.tnd-about-button:hover {
+    background-color: #c41f14; /* tom mais escuro no hover */
+}
+
+
+
+
+
 /*--------------------------------------------------------------
 # home carousel
 --------------------------------------------------------------*/
