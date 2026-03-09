@@ -66027,6 +66027,29 @@ section {
     font-family: 'Helvetica Neue', Arial, sans-serif;
 }
 
+@media screen and (max-width: 768px) {
+    .tnd-about-section {
+        flex-direction: column; /* imagem em cima, texto embaixo */
+        max-width: 100%;        /* ocupa toda a largura da tela */
+        margin: 0;              /* remove margens laterais */
+        border-radius: 0;       /* opcional: remove borda arredondada para full width */
+    }
+
+    .tnd-about-image {
+        flex: none;
+        width: 100%;            /* imagem ocupa 100% da largura */
+    }
+
+    .tnd-about-image img {
+        border-radius: 0;       /* imagem sem borda lateral */
+    }
+
+    .tnd-about-content {
+        padding: 20px;
+        text-align: left;
+    }
+}
+
 .tnd-about-content {
     flex: 1;
     padding: 20px;
@@ -66096,11 +66119,11 @@ section {
 }
 
 .tnd-college-content {
-    max-width: 350px;         /* limite de largura */
+    max-width: 350px;
     flex: 1;
     padding: 20px;
     text-align: left;
-    background-color: #000;    /* fundo preto do bloco */
+    background-color: #000;
     color: white;
     display: flex;
     flex-direction: column;
@@ -66151,6 +66174,40 @@ section {
 .tnd-college-button:hover {
     background-color: #c41f14;
 }
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .tnd-college-section {
+        flex-direction: column; /* imagem em cima, conteúdo embaixo */
+        align-items: center;
+        padding: 20px 0;
+    }
+
+    .tnd-college-content {
+        max-width: 100%;        /* ocupa toda a largura da tela */
+        border-radius: 0 0 8px 8px; /* arredonda apenas embaixo */
+        margin-top: 0;
+    }
+
+    .tnd-college-image {
+        flex: none;
+        width: 100%;            /* imagem ocupa 100% da largura */
+    }
+
+    .tnd-college-image img {
+        border-radius: 8px 8px 0 0; /* arredonda apenas em cima */
+    }
+
+    .tnd-college-title,
+    .tnd-college-description {
+        text-align: center;     /* opcional: centraliza texto em mobile */
+    }
+
+    .tnd-college-button {
+        align-self: center;     /* botão centralizado em mobile */
+    }
+}
+
 
 /*--------------------------------------------------------------
 # home por que web sections
