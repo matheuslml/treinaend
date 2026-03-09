@@ -171,7 +171,7 @@
     <section class="tnd-courses-section">
         <div class="container">
             <h2>Cursos</h2>
-            <h3 class="tnd-courses-title">Nossos programas de capacitação</h3>
+            <h3 class="tnd-courses-title mb-5">Nossos programas de capacitação</h3>
 
             @foreach ($courses as $course)
                 <div class="tnd-course-card">
@@ -187,6 +187,64 @@
             @endforeach
 
             <a href="{{ url('/sustainability') }}" class="tnd-courses-button">Veja todos os Cursos</a>
+        </div>
+    </section>
+
+
+    <section class="tnd-trending-section">
+        <div class="container">
+            <h3 class="tnd-trending-title mb-5">Para quem a TREINAEND é indicada</h3>
+
+            <div class="tnd-trending-grid">
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">1</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Estudantes de cursos técnicos industriais</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">2</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Profissionais em início de carreira</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">3</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Trabalhadores que desejam se qualificar e se diferenciar</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">4</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Pessoas que buscam fortalecimento do currículo técnico</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">5</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Empresas interessadas em capacitação organizada e segura</h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="tnd-college-section">
+        <div class="tnd-college-content">
+            <h2 class="tnd-college-title">Parcerias com escolas técnicas</h2>
+            <p class="tnd-college-description">
+                A TREINAEND mantém parcerias educacionais com instituições de ensino técnico, oferecendo condições especiais para alunos regularmente matriculados.
+                Essas parcerias têm como objetivo incentivar a qualificação profissional, ampliar a empregabilidade e complementar a formação técnica dos estudantes.
+            </p>
+            <a href="{{ url('/sobre') }}" class="tnd-college-button">Sobre</a>
+        </div>
+        <div class="tnd-college-image">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="TREINAEND">
         </div>
     </section>
 

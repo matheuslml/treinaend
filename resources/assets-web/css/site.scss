@@ -66084,6 +66084,73 @@ section {
     background-color: #c41f14; /* tom mais escuro no hover */
 }
 
+/*--------------------------------------------------------------
+# home college sections
+--------------------------------------------------------------*/
+.tnd-college-section {
+    background-color: #fff;
+    display: flex;
+    flex-direction: row; /* texto à esquerda, imagem à direita */
+    align-items: stretch; /* força os filhos a terem mesma altura */
+    max-width: 1000px;
+    margin: 40px auto;
+    border-radius: 8px;
+    overflow: hidden;
+    color: #000;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.tnd-college-content {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    background-color: #000;
+    color: white;
+    display: flex;              /* garante que o conteúdo interno se organize */
+    flex-direction: column;     /* empilha título, descrição e botão */
+    justify-content: space-between; /* distribui elementos para ocupar toda a altura */
+}
+
+.tnd-college-image {
+    flex: 0 0 60%;
+}
+
+.tnd-college-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 0 8px 8px 0;
+}
+
+.tnd-college-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    color: white; /* garante texto preto */
+}
+
+.tnd-college-description {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: white; /* garante texto preto */
+}
+
+.tnd-college-button {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #e62b1e; /* vermelho TED */
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.tnd-college-button:hover {
+    background-color: #c41f14; /* tom mais escuro no hover */
+}
 
 /*--------------------------------------------------------------
 # home courses web sections
@@ -66211,6 +66278,84 @@ section {
         width: 100%;
     }
 }
+
+
+/*--------------------------------------------------------------
+# home trend
+--------------------------------------------------------------*/
+.tnd-trending-section {
+    padding: 4% 0;
+    background-color: #fff; /* fundo branco da section */
+}
+
+.tnd-trending-section .container {
+    max-width: 1000px;   /* limita largura igual à about-section */
+    margin: 0 auto;      /* centraliza horizontalmente */
+}
+
+.tnd-trending-title {
+  line-height: 120%;
+  display: block;
+  margin-block-start: 1em;
+  margin-block-end: 1em;
+  margin-inline-start: 0px;
+  margin-inline-end: 0px;
+  font-size: 40px;
+  line-height: 1.24;
+  font-weight: 700;
+  word-break: break-word;
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  margin: 0 0 2% 0;
+}
+
+.tnd-trending-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* duas colunas */
+    gap: 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.tnd-trending-card {
+    background-color: #eef4f7; /* fundo cinza claro de cada card */
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.tnd-trending-rank {
+    font-size: 30px;
+    font-weight: bold;
+    color: #e62b1e;
+    margin-right: 15px;
+    min-width: 30px;
+    text-align: center;
+}
+
+.tnd-trending-content {
+    flex: 1;
+    text-align: left;
+    display: flex;              /* ativa flexbox */
+    flex-direction: column;     /* organiza em coluna */
+    justify-content: space-between; /* distribui elementos entre topo e bottom */
+}
+
+
+.tnd-trending-name {
+    font-size: 18px;
+    font-weight: 600;
+    margin: 8px 0;
+    color: #000;
+}
+
+@media screen and (max-width: 768px) {
+    .tnd-trending-grid {
+        grid-template-columns: 1fr; /* em telas menores vira uma coluna */
+    }
+}
+
 
 
 
