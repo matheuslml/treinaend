@@ -47,6 +47,18 @@ class WebController extends Controller
         return view('web.home.home', compact('categories', 'posts', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
 
     }
+    public function about()
+    {
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
+        $institucional_pages = BlankPage::where('blank_page_type_id', 1)->orderBy('meta_keywords', 'asc')->get();
+        $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
+        $unit = Unit::where('web', true)->first();
+        $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $banner = Banner::where('banner_type_id', 2)->first();
+        $categories = ProjectCategory::orderBy('title', 'asc')->get();
+        return view('web.about.index', compact('categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
+    }
 
     public function transparency_index()
     {

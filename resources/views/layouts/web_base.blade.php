@@ -65,7 +65,7 @@
                     <a class="menu-link" href="{{ route('blog') }}">Blog</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
-                    <a class="menu-link" href="">Sobre</a>
+                    <a class="menu-link" href="{{ route('about') }}">Sobre</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
                     <a class="menu-link" href="">Contato</a>

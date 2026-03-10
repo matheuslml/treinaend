@@ -284,6 +284,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
 
     //~ ROTAS WEB ~~~
 
+    Route::get('/sobre', 'App\Http\Controllers\WebController@about')->name('about');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');
@@ -336,9 +337,6 @@ Route::get('/ouvidoria',[OmbudsmanController::class, 'web_ouvidoria'])->name('we
 Route::post('/ombudsman_store', [OmbudsmanController::class, 'ombudsman_store'])->name('ombudsman_store');
 
 
-
-//ROTA FAQ
-Route::get('/faq', [FAQWebController::class, 'index'])->name('web_faq');
 
 
 //
