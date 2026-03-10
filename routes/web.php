@@ -289,7 +289,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');
 
     // BlankPages
-    Route::get('/pagina_web/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');
+    Route::get('/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');
 
 
     // Galeria WEB
@@ -298,7 +298,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
 
     //news
     Route::get('/noticia_web/{new}', 'App\Http\Controllers\WebController@news_web_show')->name('news_web_show');
-    Route::get('/noticias_web', 'App\Http\Controllers\WebController@news_web_index')->name('news_web_index');
+    Route::get('/news_web_index', 'App\Http\Controllers\WebController@news_web_index')->name('news_web_index');
 
 
     // ROTA PROJETOS WEB

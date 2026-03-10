@@ -71,16 +71,6 @@ class Permissions extends Migration
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Sobre', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Sobre', 'guard_name' => 'web']);
 
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Contratações Diretas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Contratações Diretas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Contratações Diretas', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Contratações Diretas', 'guard_name' => 'web']);
-
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Galeria', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Galeria', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Galeria', 'guard_name' => 'web']);
-        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Galeria', 'guard_name' => 'web']);
-
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Galeria', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Galeria', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Galeria', 'guard_name' => 'web']);

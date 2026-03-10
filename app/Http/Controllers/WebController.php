@@ -84,6 +84,7 @@ class WebController extends Controller
     public function news_web_index()
     {
 
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
@@ -96,7 +97,7 @@ class WebController extends Controller
         $banner = Banner::where('banner_type_id', 4)->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
+        return view('web.news.index', compact('partnership','categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 
     public function news_web_index_filter_title(Request $request)
@@ -159,6 +160,7 @@ class WebController extends Controller
     {
 
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
 
         $institucional_pages = BlankPage::where('blank_page_type_id', 1)->orderBy('meta_keywords', 'asc')->get();
         $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
@@ -175,6 +177,6 @@ class WebController extends Controller
 
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.show', compact('web_footer', 'categories', 'service_pages', 'institucional_pages', 'news', 'new', 'posts', 'unit', 'copyright', 'categories', 'tags', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
+        return view('web.news.show', compact('partnership','web_footer', 'categories', 'service_pages', 'institucional_pages', 'news', 'new', 'posts', 'unit', 'copyright', 'categories', 'tags', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
     }
 }

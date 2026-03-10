@@ -22,6 +22,7 @@ class HomeWebController extends Controller
     {
         //
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
         $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $posts = Post::where('type_post_id', 1)->get();
@@ -33,7 +34,11 @@ class HomeWebController extends Controller
         $leaderships = Leadership::where('type', 'HEADSHIP')->where('status', 'PUBLISHED')->orderBy('order', 'asc')->get();
         $detect = new MobileDetect();
         $isMobile = $detect->isMobile();
-        return view('web.home.home', compact('isMobile', 'leaderships', 'copyright', 'posts', 'unit', 'copyright', 'web_shortcuts', 'news', 'news_mob', 'web_footer', 'courses', 'service_pages'));
+        return view('web.home.home', compact('partnership','isMobile', 'leaderships', 'copyright', 'posts', 'unit', 'copyright', 'web_shortcuts', 'news', 'news_mob', 'web_footer', 'courses', 'service_pages'));
+    }
+    public function testea()
+    {
+        dd('a');
     }
 
 }
