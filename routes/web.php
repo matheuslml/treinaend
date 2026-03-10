@@ -285,6 +285,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     //~ ROTAS WEB ~~~
 
     Route::get('/sobre', 'App\Http\Controllers\WebController@about')->name('about');
+    Route::get('/contato', 'App\Http\Controllers\WebController@contact')->name('contact');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');

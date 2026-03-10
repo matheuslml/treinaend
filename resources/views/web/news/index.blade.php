@@ -1,6 +1,13 @@
 @extends('layouts.web_base')
 
 @section('content')
+
+    <section class="title-section">
+        <div class="container">
+            <h2>Blog</h2>
+            <h3>Acompanhe a TREINAEND</h3>
+        </div>
+    </section>
     <section class="section" style="width: 100%;">
         <div class="container px-5" >
             <div class="row">

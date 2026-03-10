@@ -79,7 +79,7 @@ class WebController extends Controller
 
     public function contact()
     {
-
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(9);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
@@ -89,7 +89,7 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.home.contact', compact('categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
+        return view('web.contact.index', compact('partnership','categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries','courses'));
 
     }
 

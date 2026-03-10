@@ -67548,3 +67548,69 @@ news-section {
   max-width: 700px;
   margin: 0 auto;
 }
+/*--------------------------------------------------------------
+# Page contato
+--------------------------------------------------------------*/
+/* Formulário */
+.contact-form {
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.contact-form .form-group {
+  margin-bottom: 20px;
+}
+
+.contact-form label {
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: "Montserrat", sans-serif;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: #e62b1e;
+}
+
+/* Botão */
+.contact-form button {
+  background-color: #e62b1e;
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.contact-form button:hover {
+  background-color: #c41f14;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+  .contact-form {
+    padding: 0 15px;
+  }
+  .tnd-about-section {
+    flex-direction: column;
+    max-width: 100%;
+    margin: 0;
+  }
+  .tnd-about-image {
+    width: 100%;
+  }
+}
