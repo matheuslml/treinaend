@@ -77,7 +77,7 @@
                       <li class="">
                         <a  class="menu-link" href="{{ route('login') }}">Meu EAD</a></li>
                       <li class="">
-                        <a  class="menu-link" href="">Consulta de Profissionais</a></li>
+                        <a  class="menu-link" href="{{ route('professional_consult') }}">Consulta de Profissionais</a></li>
                     </ul>
                   </li>
                   <li>

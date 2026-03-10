@@ -67614,3 +67614,126 @@ news-section {
     width: 100%;
   }
 }
+/*--------------------------------------------------------------
+# Page consulta de profissionais
+--------------------------------------------------------------*/
+.consult-section {
+    display: flex;
+    min-height: 100vh;
+    font-family: "Montserrat", sans-serif;
+    padding: 0;
+}
+
+/* Lado esquerdo */
+.consult-image {
+    flex: 1;
+    overflow: hidden;
+}
+
+.consult-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Lado direito */
+.consult-content {
+    flex: 1;
+    background-color: #eef4f7;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+    text-align: left;
+}
+
+.consult-title {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.consult-description {
+    font-size: 16px;
+    margin-bottom: 30px;
+    color: #333;
+}
+
+/* Formulário */
+.consult-form {
+    margin-bottom: 40px;
+}
+
+.consult-form .form-group {
+    margin-bottom: 20px;
+}
+
+.consult-form label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.consult-form input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.consult-button {
+    background-color: #e62b1e;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.consult-button:hover {
+    background-color: #c41f14;
+}
+
+/* Relatório */
+.consult-report {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.consult-report h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.consult-report p {
+    font-size: 14px;
+    color: #555;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .consult-section {
+        flex-direction: column;
+    }
+
+    .consult-image {
+        flex: none;
+        height: 200px;
+    }
+
+    .consult-image img {
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .consult-content {
+        flex: none;
+        padding: 20px;
+    }
+}
