@@ -284,12 +284,16 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
 
     //~ ROTAS WEB ~~~
 
+    Route::get('/sobre', 'App\Http\Controllers\WebController@about')->name('about');
+    Route::get('/contato', 'App\Http\Controllers\WebController@contact')->name('contact');
+    Route::get('/consulta', 'App\Http\Controllers\WebController@professional_consult')->name('professional_consult');
+    Route::get('/matricula', 'App\Http\Controllers\WebController@membership')->name('membership');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');
 
     // BlankPages
-    Route::get('/pagina_web/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');
+    Route::get('page/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');
 
 
     // Galeria WEB
@@ -297,8 +301,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
 
 
     //news
-    Route::get('/noticia_web/{new}', 'App\Http\Controllers\WebController@news_web_show')->name('news_web_show');
-    Route::get('/noticias_web', 'App\Http\Controllers\WebController@news_web_index')->name('news_web_index');
+    Route::get('/blog/{new}', 'App\Http\Controllers\WebController@news_web_show')->name('news_web_show');
+    Route::get('/blog', 'App\Http\Controllers\WebController@blog')->name('blog');
 
 
     // ROTA PROJETOS WEB
@@ -330,47 +334,12 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/web_bididng_winner_show/{winner_id}', 'App\Http\Controllers\BiddingWinnerController@show_web')->name('web_bididng_winner_show');
 
 
-//~ ROTAS INSTITUCIONAIS END ~~~
-
-
-//~ ROTAS DE SEVIÇOS END ~~~
-
-//~ ROTAS PROGRAMA MEU AMBIENTE ~~~
-
-
-//~ ROTAS PROGRAMA MEU AMBIENTE END~~~
-
-
-//~ ROTAS PUBLICAÇÕES ~~~
-
-    // ROTA NOTICIAS
-
-        Route::get('/noticias_web/{noticia_id}', [NewsController::class, 'web_show'])->name('noticia_web_show');
-        Route::get('/noticias_web', [NewsController::class, 'web_index'])->name('noticias_web_index');
-
-//~ ROTAS PUBLICAÇÕES END~~~
-
-
-
 
 // ROTA OUVIDORIA
 Route::get('/ouvidoria',[OmbudsmanController::class, 'web_ouvidoria'])->name('web_ombudsman');
 Route::post('/ombudsman_store', [OmbudsmanController::class, 'ombudsman_store'])->name('ombudsman_store');
 
 
-
-//  ROTA PUBLICAÇÃO
-Route::prefix('publicacao')->group(function(){
-    Route::get('/publicacoessemas',[PublicationWebController::class, 'home'])->name('web_publication.home');
-    Route::get('/pesquisas',[PublicationWebController::class, 'researchs'])->name('web_publication.researchs');
-});
-
-
-//  ROTA LEGISLAÇÃO
-Route::get('/legislacao/{legislation_id}', [LegislationController:: class, 'show_web'])->name('web_legislation_show');
-
-//ROTA FAQ
-Route::get('/faq', [FAQWebController::class, 'index'])->name('web_faq');
 
 
 //

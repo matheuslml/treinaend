@@ -115,29 +115,178 @@
         </button>
     </div>
     <!-- Carousel wrapper -->
-
-    <!-- SHORTCUT ICONS -->
-    <div class="team-boxed">
+    <!-- ======= comment section ======= -->
+    <section class="comment-section">
         <div class="container">
-            <div class="carousel-wrapper">
-                <div class="row person">
-                    <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
-                            <h1 class="title">Atalhos</h1>
-                        </a>
+            <h3>
+            Cursos voltados à formação e ao desenvolvimento profissional na área industrial, 
+            com foco em empregabilidade, qualificação técnica e segurança no trabalho.
+            </h3>
+            <h4>Conheça o Curso de Inspeção de Equipamentos</h4>
+            <p>Parcerias com Escolas Técnicas</p>
+        </div>
+    </section>
+
+
+    <section class="tnd-about-section">
+        <div class="tnd-about-content">
+            <div class="tnd-about-category">Sobre a TREINAEND</div>
+            <h2 class="tnd-about-title">Uma escola técnica especializada na formação de profissionais da indústria</h2>
+            <p class="tnd-about-description">
+                <strong>A TREINAEND atua há mais de 12 anos</strong> na capacitação de profissionais da indústria, oferecendo cursos que complementam a 
+                formação técnica tradicional e fortalecem o currículo de quem busca crescimento profissional.
+                Nosso trabalho é direcionado a estudantes, profissionais em início de carreira e trabalhadores que <strong>desejam se qualificar de forma prática, 
+                organizada e alinhada às demandas do setor industrial</strong>.
+            </p>
+            <a href="{{ url('/sobre') }}" class="tnd-about-button">Sobre</a>
+        </div>
+        <div class="tnd-about-image">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="TREINAEND">
+        </div>
+    </section>
+
+    <section class="tnd-courses-section">
+        <div class="container">
+            <h2>Cursos</h2>
+            <h3 class="tnd-courses-title mb-5">Nossos programas de capacitação</h3>
+
+            @foreach ($courses as $course)
+                <div class="tnd-course-card">
+                    <div class="tnd-course-content">
+                        <h4 class="tnd-course-name">{{ $course->name }}</h4>
+                        <p class="tnd-course-speaker">{{ $course->description }}</p>
+                        <p class="tnd-course-meta">192K plays · 13 days ago</p>
                     </div>
-                    @foreach ($web_shortcuts as $web_shortcut)
-                        <div class="col-12 col-md-2 col-lg-2 col-xl-2 item">
-                            <a href="{{ $web_shortcut->link_url }}">
-                            <div class="box">
-                                <h2 class="name">{{ $web_shortcut->title }}</h2>
-                            </div>
-                            </a>
-                        </div>
-                    @endforeach
+                    <div class="tnd-course-image">
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Sandeep Roy Choudhury">
+                    </div>
+                </div>
+            @endforeach
+
+            <a href="{{ url('/sustainability') }}" class="tnd-courses-button">Veja todos os Cursos</a>
+        </div>
+    </section>
+
+
+    <section class="tnd-trending-section">
+        <div class="container">
+            <h3 class="tnd-trending-title mb-5">Para quem a TREINAEND é indicada</h3>
+
+            <div class="tnd-trending-grid">
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">1</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Estudantes de cursos técnicos industriais</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">2</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Profissionais em início de carreira</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">3</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Trabalhadores que desejam se qualificar e se diferenciar</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">4</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Pessoas que buscam fortalecimento do currículo técnico</h4>
+                    </div>
+                </div>
+
+                <div class="tnd-trending-card">
+                    <span class="tnd-trending-rank">5</span>
+                    <div class="tnd-trending-content">
+                        <h4 class="tnd-trending-name">Empresas interessadas em capacitação organizada e segura</h4>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
+
+    <section class="tnd-college-section">
+        <div class="tnd-college-content mb-5 mt-5">
+            <h2 class="tnd-college-title">Parcerias com escolas técnicas</h2>
+            <p class="tnd-college-description">
+                A TREINAEND mantém parcerias educacionais com instituições de ensino técnico, oferecendo condições especiais para alunos regularmente matriculados.
+                Essas parcerias têm como objetivo incentivar a qualificação profissional, ampliar a empregabilidade e complementar a formação técnica dos estudantes.
+            </p>
+            <a href="{{ url('/sobre') }}" class="tnd-college-button">Saiba Mais</a>
+        </div>
+        <div class="tnd-college-image mb-5 mt-5">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="TREINAEND">
+        </div>
+    </section>
+
+    <section class="tnd-education-section">
+        <div class="container">
+            <h3 class="tnd-education-title mb-5">Por que escolher a TREINAEND</h3>
+
+            <div class="tnd-education-grid mb-5">
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>1</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Lottery Winners">
+                    </div>
+                    <h4 class="tnd-education-name">Mais de 12 anos de atuação na capacitação industrial</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>2</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Formação baseada na realidade da indústria brasileira</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>3</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Responsabilidade técnica e compromisso com normas e boas práticas</h4>
+                </div>
+
+                <!-- Repita até 6 cards -->
+            </div>
+
+            <div class="tnd-education-grid">
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>4</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Lottery Winners">
+                    </div>
+                    <h4 class="tnd-education-name">Estrutura educacional clara, organizada e objetiva</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>5</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Compromisso com formação contínua e evolução profissional</h4>
+                </div>
+
+                <div class="tnd-education-card">
+                    <div class="tnd-education-image">
+                        <p>6</p>
+                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Hypnosis">
+                    </div>
+                    <h4 class="tnd-education-name">Suporte técnico ao aluno durante todo o curso</h4>
+                </div>
+
+                <!-- Repita até 6 cards -->
+            </div>
+        </div>
+    </section>
+
 
 
 
@@ -149,18 +298,11 @@
             </div>
 
             <div class=" text-center" >
-                <a href="" class="btn ">Clique Aqui e Saiba Mais<i class="energia-arrow-right"></i></a>
+                <a href="" class="btn ">Clique Aqui<i class="energia-arrow-right"></i></a>
             </div>
 
         </div>
     </section><!-- End Contact Us Section -->
-
-    <!-- ======= comment section ======= -->
-    <section class="comment-section" >
-      <div class="container">
-            <h3>Arraial do Cabo, é um verdadeiro paraíso costeiro. Com suas dunas, restingas, lagoas e praias deslumbrantes, a cidade encanta moradores e turistas. Além disso, Arraial do Cabo é conhecida como a capital brasileira do mergulho.</h3>
-      </div>
-    </section>
 
   <!-- ======= title-section ======= -->
   <section class="title-section" >
@@ -234,61 +376,17 @@
         </div>
     </section>
 
-
-  <!-- ======= Secretários Section ======= -->
-  <section class="title-section" >
-    <div class="container">
-        <h2>Cursos</h2>
-        <div class="col-md-6 pt-0 mt-0">
-            <h3>Conheça os hushsi suhsiu usih isuisuh</h3>
-        </div>
-    </div>
-  </section>
-    <!-- secretarias -->
-    <div class="team-boxed" style="padding-bottom: 5%">
-        <div class="container" ><div class="gtco-testimonials">
-            <div class="owl-carousel owl-carousel1 owl-theme leadership-web" >
-                @foreach ($courses as $course)
-                    <div>
-                        <div class="card text-center ">
-                            <div class="card-body" style="width: 300px">
-                                <h5>{{ $course->name }}</h5>
-                                <p>{{ $course->description }}</p>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-          </div>
-        </div>
-    </div>
-
-    @foreach ($service_pages as $service_page)
-        @if ($service_page->meta_keywords == 'Matrícula')
-            <!-- ======= Contact Us Section ======= -->
-            <section id="matricula" class="matricula">
-                <div class="container mt-5 mb-5">
-
-                    <div class="section-title">
-                        <h2>Faça sua Matrícula</h2>
-                    </div>
-
-                    <div class=" text-center" >
-                        <a href="{{ route('pagina_web', $service_page->meta_keywords) }}" class="btn ">Clique Aqui e Saiba Mais<i class="energia-arrow-right"></i></a>
-                    </div>
-
-                </div>
-            </section><!-- End Contact Us Section -->
-        @endif
-    @endforeach
     <!-- Carousel wrapper -->
-    <section class="comment-section" >
+    <section class="comment-section comment-section-footer" >
         <div class="container">
               <h3 style="padding-top: 4%">
-                O Portal da Prefeitura de Arraial do Cabo está em processo de Manutenção.
-                Em Breve estaremos normalizados.
+                 Seja para:
+                    Iniciar sua trajetória profissional,
+                    Se diferenciar no mercado de trabalho ou
+                    Se preparar para novas oportunidades,
               </h3>
-              <p style="text-align: center; padding-top: 2%">Se precisar de Ajuda Mande sua Manifestação <a href="{{ route('web_ombudsman') }}">AQUI</a></p>
+              <p style="text-align: center; padding-top: 2%">A TREINAEND está pronta para apoiar seu desenvolvimento técnico e profissional. 
+                <a href="{{ route('web_ombudsman') }}" style="color: white" >Chame no WhatsApp</a></p>
         </div>
       </section>
 @endsection

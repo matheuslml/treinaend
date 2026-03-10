@@ -35,7 +35,7 @@ class NewsController extends Controller
         protected NewsUpdateService $newsUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
 
         if (! Gate::allows('Ver e Listar Notícias')) {
@@ -132,9 +132,9 @@ class NewsController extends Controller
                     //todo ----- arrumar os .env dos servidores
                     $img->removeattribute('src');
                     //production
-                    $src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
+                    //$src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
                     //local test
-                    //$src_path = env('APP_URL') . ':8080/storage/images/news/'. $path_img;
+                    $src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
                     $img->setattribute('class', 'img-content');
                     $img->setattribute('src', $src_path);
                 }
@@ -192,8 +192,8 @@ class NewsController extends Controller
 
             $news_old = News::find($news_id);
             //for server and local unlink
-            $old_path = array("https://arraial.rj.gov.br/storage/images/news/");
-            //$old_path = array("http://localhost:8000/storage/images/news/");
+            //$old_path = array("https://arraial.rj.gov.br/storage/images/news/");
+            $old_path = array("http://localhost:8000/storage/images/news/");
             $currentuuid = Auth::user()->id;
 
             if(isset($request['image'])){
@@ -270,9 +270,9 @@ class NewsController extends Controller
                         //todo ----- arrumar os .env dos servidores
                         $img->removeattribute('src');
                         //production
-                        $src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
+                        //$src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
                         //local test
-                        //$src_path = env('APP_URL') . ':8000/storage/images/news/'. $path_img;
+                        $src_path = env('APP_URL') . '/storage/images/news/'. $path_img;
                         $img->setattribute('src', $src_path);
                     }
                     $img->setattribute('class', 'img-content');

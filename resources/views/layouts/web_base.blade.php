@@ -59,16 +59,16 @@
                     </ul>
                   </li>
                   <li class="menu-button"   {{ (request()->is('parcerias*')) || (request()->is('parcerias*')) ? 'active' : '' }}">
-                    <a  class="menu-link" href="">Parcerias</a>
+                    <a  class="menu-link" href="{{ route('pagina_web', $partnership->meta_keywords) }}">Parcerias</a>
                   </li>
-                  <li class="menu-button"   {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
-                    <a class="menu-link" href="{{ route('noticias_web_index') }}">Blog</a>
+                  <li class="menu-button"   {{ (request()->is('blog')) || (request()->is('blog*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('blog') }}">Blog</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
-                    <a class="menu-link" href="">Sobre</a>
+                    <a class="menu-link" href="{{ route('about') }}">Sobre</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
-                    <a class="menu-link" href="">Contato</a>
+                    <a class="menu-link" href="{{ route('contact') }}">Contato</a>
                   </li>
 
                   <li class="drop-down menu-button">
@@ -77,11 +77,11 @@
                       <li class="">
                         <a  class="menu-link" href="{{ route('login') }}">Meu EAD</a></li>
                       <li class="">
-                        <a  class="menu-link" href="">Consulta de Profissionais</a></li>
+                        <a  class="menu-link" href="{{ route('professional_consult') }}">Consulta de Profissionais</a></li>
                     </ul>
                   </li>
                   <li>
-                    <a href=""
+                    <a href="{{ route('membership') }}"
                         class="btn-matricula">
                         MATRÍCULA
                     </a>
@@ -105,7 +105,7 @@
                 </div>
                 <div class="row">
                     <div class="col-12 col-lg-3 col-md-6 footer-links  text-footer-phone">
-                        <div class="col-12 text-footer-phone">
+                        <div class="col-12 ">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Home
                             </h4></a>
@@ -141,7 +141,7 @@
                             </p></a>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-3 col-md-6 footer-info">
+                    <div class="col-12 col-lg-4 col-md-6 footer-info">
                         <div class="col-12 text-footer-phone">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Localização
@@ -151,29 +151,42 @@
                                 {{ isset($unit) ? $unit->address : '' }}<br>
                                 {{ isset($unit->organization) ? $unit->operation : '' }}<br><br>
                             </p>
-                            <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a><br>                    <a
-                            href="
-                            {{ isset($unit) ?
-                                'https://api.whatsapp.com/send/?phone=%2B' .
-                                    $unit->phone .
-                                    '&text&type=phone_number&app_absent=0'
-                                    : ''
-                            }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a><br>
-                            <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
+                            <p class="">
+                                <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a> 
+                            </p>
+                            <p class="">           
+                                <a
+                                    href="
+                                    {{ isset($unit) ?
+                                        'https://api.whatsapp.com/send/?phone=%2B' .
+                                            $unit->phone .
+                                            '&text&type=phone_number&app_absent=0'
+                                            : ''
+                                    }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a>
+                            </p>
+                            <p class=""> 
+                                <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
+                            </p>
                         </div>
                     </div>
-                    <div class="col-12 col-lg-2 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
-                    </div>
-                    <div class="col-12 col-lg-4 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
+                    <div class="col-12 col-lg-5 col-md-6 footer-links  text-footer-phone" style="padding-left: 4%";>
                         <div class="col-12 text-footer-phone">
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Seja um Aluno da TREINAEND
                             </h4></a>
                             <p class="footer-link-text">Ao se matricular, você garante acesso imediato a conteúdos inspiradores, professores renomados e experiências únicas que vão impulsionar sua carreira e seu desenvolvimento pessoal.
-Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futuro que você merece.</p>
+                                                        Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futuro que você merece.</p>
                             <a  href=""><h4 class="mt-2 footer-link-title">
                                 Siga a TREINAEND
                             </h4></a>
+
+                            <div class="social-links-footer float-start " >
+                                @if(isset($unit))
+                                    @foreach($unit->socialmedia as $social_media)
+                                        <a class="share-facebook" href="{{$social_media->pivot->url}}"><i class="{{ $social_media->logo }}"></i></a>
+                                    @endforeach
+                                @endif
+                            </div>
                         </div>
                     </div>
 
@@ -200,7 +213,11 @@ Não espere mais: faça sua matrícula agora e dê o primeiro passo rumo ao futu
             new window.VLibras.Widget('https://vlibras.gov.br/app');
           </script>
 
-            <a href="https://arraial.egov.modernizacao.com.br/" class="back-to-top-link"><img src="{{ isset($web_footer->float_icon_url) ? asset('storage/images/webfooters/' . $web_footer->float_icon_url) : '' }}" class="" alt="icon"/></a>
+            <a href="#" class="back-to-top-link" id="backToTop">
+                <span class="back-to-top-icon">↑</span>
+            </a>
+
+
         @component('web.components.scripts')
 
         @endcomponent

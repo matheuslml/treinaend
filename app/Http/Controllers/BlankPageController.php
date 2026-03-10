@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\BlankPageType;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Course;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
 use App\Services\BlankPageService;
@@ -31,7 +32,7 @@ class BlankPageController extends Controller
         protected BlankPageUpdateService $blankPageUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
 
         if (! Gate::allows('Ver e Listar Páginas em Branco')) {
@@ -119,9 +120,9 @@ class BlankPageController extends Controller
                     //todo ----- arrumar os .env dos servidores
                     $img->removeattribute('src');
                     //production
-                    $src_path = env('APP_URL') . '/storage/images/blankpages/'. $path_img;
+                    //$src_path = env('APP_URL') . '/storage/images/blankpages/'. $path_img;
                     //local test
-                    //$src_path = env('APP_URL') . ':8080/storage/images/blankpages/'. $path_img;
+                    $src_path = env('APP_URL') . '/storage/images/blankpages/'. $path_img;
                     $img->setattribute('class', 'img-content');
                     $img->setattribute('src', $src_path);
                 }
@@ -180,8 +181,8 @@ class BlankPageController extends Controller
 
             $blankPage_old = BlankPage::find($blank_page_id);
             //for server and local unlink
-            $old_path = array("https://arraial.rj.gov.br/storage/images/blankpages/");
-            //$old_path = array("http://localhost:8080/storage/images/blankpages/");
+            //$old_path = array("https://arraial.rj.gov.br/storage/images/blankpages/");
+            $old_path = array("http://localhost:8000/storage/images/blankpages/");
             $currentuuid = Auth::user()->id;
 
             if(isset($request['image'])){
@@ -267,9 +268,9 @@ class BlankPageController extends Controller
                         //todo ----- arrumar os .env dos servidores
                         $img->removeattribute('src');
                         //production
-                        $src_path = env('APP_URL') . '/storage/images/blankpage/'. $path_img;
+                        //$src_path = env('APP_URL') . '/storage/images/blankpages/'. $path_img;
                         //local test
-                        //$src_path = env('APP_URL') . ':8080/storage/images/blankpage/'. $path_img;
+                        $src_path = env('APP_URL') . '/storage/images/blankpages/'. $path_img;
                         $img->setattribute('src', $src_path);
                     }
                     $img->setattribute('class', 'img-content');
@@ -289,7 +290,7 @@ class BlankPageController extends Controller
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-
+dd($throwable);
             flash('Erro ao editar!')->error();
             return redirect()->back()->withInput();
         }
@@ -315,7 +316,9 @@ class BlankPageController extends Controller
 
     public function pagina_web($blank_page)
     {
+        $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
         $institucional_pages = BlankPage::where('blank_page_type_id', 1)->orderBy('meta_keywords', 'asc')->get();
+        $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
         $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
         $page = BlankPage::where('meta_keywords', $blank_page)->first();
         $unit = Unit::where('web', true)->first();
@@ -324,7 +327,7 @@ class BlankPageController extends Controller
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
 
-        return view('web.blankpage.show', compact('categories', 'page', 'banner', 'institucional_pages', 'unit', 'copyright', 'service_pages', 'web_footer'));
+        return view('web.blankpage.show', compact('categories', 'page', 'banner', 'institucional_pages', 'unit', 'copyright', 'service_pages', 'web_footer', 'courses','partnership'));
     }
 }
 
