@@ -67737,3 +67737,127 @@ news-section {
         padding: 20px;
     }
 }
+/*--------------------------------------------------------------
+# Page matrícula
+--------------------------------------------------------------*/
+.student-register-section {
+    background-color: #eef4f7;
+    padding: 60px 20px;
+    font-family: "Montserrat", sans-serif;
+}
+
+.student-register-container {
+    display: flex;
+    max-width: 1000px;
+    margin: 0 auto;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Card Informativo */
+.student-register-info {
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.student-register-info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.info-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 40px;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.info-overlay h2 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.info-overlay p {
+    font-size: 16px;
+    line-height: 1.6;
+}
+
+/* Card Formulário */
+.student-register-form {
+    flex: 1;
+    background-color: #fff;
+    padding: 40px;
+    text-align: left;
+}
+
+.student-register-form h3 {
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.register-button {
+    background-color: #e62b1e;
+    color: #fff;
+    border: none;
+    padding: 12px 24px;
+    font-weight: bold;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.register-button:hover {
+    background-color: #c41f14;
+}
+
+/* Responsivo */
+@media screen and (max-width: 768px) {
+    .student-register-container {
+        flex-direction: column;
+    }
+
+    .student-register-info,
+    .student-register-form {
+        width: 100%;
+    }
+
+    .info-overlay {
+        padding: 20px;
+        text-align: center;
+    }
+
+    .student-register-form {
+        padding: 20px;
+    }
+}

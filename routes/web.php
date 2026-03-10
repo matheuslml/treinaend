@@ -287,6 +287,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/sobre', 'App\Http\Controllers\WebController@about')->name('about');
     Route::get('/contato', 'App\Http\Controllers\WebController@contact')->name('contact');
     Route::get('/consulta', 'App\Http\Controllers\WebController@professional_consult')->name('professional_consult');
+    Route::get('/matricula', 'App\Http\Controllers\WebController@membership')->name('membership');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');

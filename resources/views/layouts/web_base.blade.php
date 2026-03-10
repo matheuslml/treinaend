@@ -81,7 +81,7 @@
                     </ul>
                   </li>
                   <li>
-                    <a href=""
+                    <a href="{{ route('membership') }}"
                         class="btn-matricula">
                         MATRÍCULA
                     </a>
