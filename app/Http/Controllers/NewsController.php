@@ -327,7 +327,6 @@ class NewsController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $banner = Banner::where('banner_type_id', 3)->first();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-dd('s');
 
         return view('web.news.index', compact('service_pages', 'institucional_pages', 'banner', 'news', 'unit', 'copyright', 'categories', 'tags', 'web_footer'));
     }

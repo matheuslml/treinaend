@@ -36,9 +36,5 @@ class HomeWebController extends Controller
         $isMobile = $detect->isMobile();
         return view('web.home.home', compact('partnership','isMobile', 'leaderships', 'copyright', 'posts', 'unit', 'copyright', 'web_shortcuts', 'news', 'news_mob', 'web_footer', 'courses', 'service_pages'));
     }
-    public function testea()
-    {
-        dd('a');
-    }
 
 }

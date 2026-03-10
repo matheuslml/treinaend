@@ -61,8 +61,8 @@
                   <li class="menu-button"   {{ (request()->is('parcerias*')) || (request()->is('parcerias*')) ? 'active' : '' }}">
                     <a  class="menu-link" href="{{ route('pagina_web', $partnership->meta_keywords) }}">Parcerias</a>
                   </li>
-                  <li class="menu-button"   {{ (request()->is('publicacoes')) || (request()->is('publicacao*')) ? 'active' : '' }}">
-                    <a class="menu-link" href="{{ route('news_web_index') }}">Blog</a>
+                  <li class="menu-button"   {{ (request()->is('blog')) || (request()->is('blog*')) ? 'active' : '' }}">
+                    <a class="menu-link" href="{{ route('blog') }}">Blog</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('sobre*')) || (request()->is('sobre*')) ? 'active' : '' }}">
                     <a class="menu-link" href="">Sobre</a>
