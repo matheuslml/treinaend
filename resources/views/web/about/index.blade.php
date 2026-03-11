@@ -47,14 +47,14 @@
             <h3>Nossos programas são desenvolvidos com base em:</h3>
             
             <ul class="about-lists">
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-experiência prática no contexto industrial</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-organização didática e técnica</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-respeito às normas e boas práticas do setor</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-compromisso com formação responsável e clara</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+experiência prática no contexto industrial</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+organização didática e técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+respeito às normas e boas práticas do setor</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+compromisso com formação responsável e clara</strong></li>
             </ul>
         </div>
     </section>
@@ -75,14 +75,14 @@ compromisso com formação responsável e clara</li>
             <h3>Por isso, a TREINAEND desenvolve cursos que:</h3>
             
             <ul class="about-lists">
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    fortalecem a base técnica</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    ampliam a compreensão prática</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    contribuem para a organização profissional</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    auxiliam na diferenciação curricular</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    fortalecem a base técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    ampliam a compreensão prática</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    contribuem para a organização profissional</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    auxiliam na diferenciação curricular</strong></li>
             </ul>
         </div>
     </section>
@@ -115,14 +115,14 @@ compromisso com formação responsável e clara</li>
             <h3>Esse modelo permite:</h3>
             
             <ul class="about-lists">
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    alinhamento entre teoria e prática</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    coerência técnica nos conteúdos</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    organização dos processos educacionais</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    compromisso direto com a qualidade da formação</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    alinhamento entre teoria e prática</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    coerência técnica nos conteúdos</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    organização dos processos educacionais</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    compromisso direto com a qualidade da formação</strong></li>
             </ul>
         </div>
     </section>
@@ -140,16 +140,16 @@ compromisso com formação responsável e clara</li>
             <h3>Nosso compromisso é atuar com:</h3>
             
             <ul class="about-lists">
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    seriedade técnica</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    clareza na comunicação</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    respeito às normas</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    transparência nas propostas</li>
-                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
-                    responsabilidade na formação profissional</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    seriedade técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    clareza na comunicação</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    respeito às normas</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    transparência nas propostas</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    responsabilidade na formação profissional</strong></li>
             </ul>
         </div>
     </section>
