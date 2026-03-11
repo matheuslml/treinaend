@@ -83,6 +83,7 @@ use App\Http\Controllers\StudentPainel;
 use App\Http\Controllers\SupportMaterialController;
 use App\Http\Controllers\WebFooterController;
 use App\Http\Controllers\WebFooterLogoController;
+use App\Models\Registration;
 use App\Models\SupportMaterial;
 
 /*
@@ -288,6 +289,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/contato', 'App\Http\Controllers\WebController@contact')->name('contact');
     Route::get('/consulta', 'App\Http\Controllers\WebController@professional_consult')->name('professional_consult');
     Route::get('/matricula', 'App\Http\Controllers\WebController@membership')->name('membership');
+    Route::post('/get_registration', [RegistrationController::class, 'get_registration'])->name('get_registration');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');

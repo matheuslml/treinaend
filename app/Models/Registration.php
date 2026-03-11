@@ -19,6 +19,7 @@ class Registration extends Model implements Auditable
     protected $table = 'registrations';
 
     protected $fillable = [
+        'course_id',
         'person_id',
         'payment_form',
         'payment_status',
@@ -34,6 +35,11 @@ class Registration extends Model implements Auditable
         'expires_at',
         'deleted_at'
     ];
+
+    public function course(): BelongsTo
+    {
+        return $this->belongsTo(Course::class, 'course_id');
+    }
 
     public function person(): BelongsTo
     {

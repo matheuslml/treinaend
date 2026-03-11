@@ -123,4 +123,49 @@ class RegistrationController extends Controller
             return redirect()->back()->withInput();
         }
     }
+
+    public function get_registration(Request $request)
+    {
+
+        try{
+
+            // Busca o registro pelo código e carrega as relações
+            $registration = Registration::with(['person.documents', 'course'])
+                ->where('code', $request->code)
+                ->first();
+
+
+            if (!$registration) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Nenhum registro encontrado para este código.'
+                ], 404);
+            }
+
+            // Retorna os dados em JSON
+            return response()->json([
+                'success' => true,
+                'data' => [
+                    'code' => $registration->code,
+                    'qualification' => $registration->qualification,
+                    'person' => [
+                        'full_name' => $registration->person->full_name ?? null,
+                        'documents' => $registration->person->documents->map(function ($doc) {
+                            return [
+                                'number' => $doc->document ?? null,
+                            ];
+                        })
+                    ],
+                    'course' => [
+                        'name' => $registration->course->name ?? null,
+                    ]
+                ]
+            ]);
+        } catch (\Exception $exception) {
+                return response()->json([
+                    'success' => false,
+                    'message' => $exception->getMessage()
+                ], 404);
+        }
+    }
 }
