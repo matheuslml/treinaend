@@ -60,71 +60,97 @@ compromisso com formação responsável e clara</li>
     </section>
 
     <!-- Seção 4 -->
-    <section class="about tnd-section-white">
-        <div class="container">
-            <div class="about-content">
-                <h2 class="section-title">Posicionamento educacional</h2>
-                <p>
-                    Acreditamos que a formação técnica é construída de forma contínua...
-                </p>
-                <ul class="about-list">
-                    <li>fortalecem a base técnica</li>
-                    <li>ampliam a compreensão prática</li>
-                    <li>contribuem para a organização profissional</li>
-                    <li>auxiliam na diferenciação curricular</li>
-                </ul>
-                <p>Sempre com clareza sobre o papel educacional de cada curso.</p>
-            </div>
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Posicionamento educacional</h2>
+            <p>
+                Acreditamos que a formação técnica é construída de forma contínua. 
+                A capacitação complementar não substitui a formação acadêmica ou 
+                técnica tradicional, mas atua como um reforço importante, especialmente 
+                para estudantes e profissionais em início de carreira.
+            </p>
+            <p>Sempre com clareza sobre o papel educacional de cada curso</p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Por isso, a TREINAEND desenvolve cursos que:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    fortalecem a base técnica</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    ampliam a compreensão prática</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    contribuem para a organização profissional</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    auxiliam na diferenciação curricular</li>
+            </ul>
         </div>
     </section>
 
     <!-- Seção 5 -->
-    <section class="about tnd-section-gray">
-        <div class="container">
-            <div class="about-content">
-                <h2 class="section-title">Parcerias e relação com instituições</h2>
-                <p>
-                    A TREINAEND mantém parcerias educacionais com escolas técnicas...
-                </p>
-            </div>
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Parcerias e relação com instituições</h2>
+            <p>
+                A TREINAEND mantém parcerias educacionais com escolas técnicas e instituições de formação profissional, 
+                com o objetivo de incentivar a qualificação técnica e a empregabilidade dos alunos.</p>
+            <p class="pt-6">Essas parcerias são estruturadas de forma simples, transparente e institucional, sem custos ou riscos 
+                para as instituições parceiras, respeitando a autonomia pedagógica e a identidade de cada escola.</p>
+        </div>
+        <div class="tnd-about-image">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Sobre TREINAEND">
         </div>
     </section>
 
     <!-- Seção 6 -->
-    <section class="about tnd-section-white">
-        <div class="container">
-            <div class="about-content">
-                <h2 class="section-title">Responsabilidade técnica</h2>
-                <p>
-                    A TREINAEND foi fundada e é conduzida por profissional com experiência...
-                </p>
-                <ul class="about-list">
-                    <li>alinhamento entre teoria e prática</li>
-                    <li>coerência técnica nos conteúdos</li>
-                    <li>organização dos processos educacionais</li>
-                    <li>compromisso direto com a qualidade da formação</li>
-                </ul>
-            </div>
+    <section class="tnd-about-section tnd-section-gray">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Responsabilidade técnica</h2>
+            <p>
+                A TREINAEND foi fundada e é conduzida por profissional com experiência 
+                no setor industrial, que atua como responsável técnico pelos programas de capacitação oferecidos.
+            </p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Esse modelo permite:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    alinhamento entre teoria e prática</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    coerência técnica nos conteúdos</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    organização dos processos educacionais</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    compromisso direto com a qualidade da formação</li>
+            </ul>
         </div>
     </section>
 
     <!-- Seção 7 -->
-    <section class="about tnd-section-gray">
-        <div class="container">
-            <div class="about-content">
-                <h2 class="section-title">Compromisso com a clareza</h2>
-                <p>Nosso compromisso é atuar com:</p>
-                <ul class="about-list">
-                    <li>seriedade técnica</li>
-                    <li>clareza na comunicação</li>
-                    <li>respeito às normas</li>
-                    <li>transparência nas propostas</li>
-                    <li>responsabilidade na formação profissional</li>
-                </ul>
-                <p>
-                    A TREINAEND existe para contribuir com a formação técnica industrial...
-                </p>
-            </div>
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Compromisso com a clareza</h2>
+            <p>
+                A TREINAEND existe para contribuir com a formação técnica industrial 
+                de forma organizada, consciente e alinhada à realidade do mercado.
+            </p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Nosso compromisso é atuar com:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    seriedade técnica</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    clareza na comunicação</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    respeito às normas</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    transparência nas propostas</li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i>
+                    responsabilidade na formação profissional</li>
+            </ul>
         </div>
     </section>
 
@@ -132,7 +158,8 @@ compromisso com formação responsável e clara</li>
     <!-- Call to Action -->
     <section class="comment-section-footer">
         <h3>
-            Seja para complementar a formação técnica, fortalecer o currículo profissional...
+            Seja para complementar a formação técnica, fortalecer o currículo profissional ou estabelecer parcerias educacionais, 
+            a TREINAEND está preparada para atuar com seriedade, clareza e responsabilidade.
         </h3>
     </section>
 @endsection
