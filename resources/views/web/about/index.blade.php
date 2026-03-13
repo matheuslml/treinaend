@@ -17,12 +17,12 @@
         <div class="tnd-about-content">
             <span class="tnd-about-category">Institucional</span>
             <h2 class="tnd-about-title">Quem Somos</h2>
-            <p class="tnd-about-description">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                Fusce vitae lorem nec sapien tincidunt fermentum. 
-                Integer euismod, magna vel facilisis cursus, justo nulla 
-                posuere libero, vitae tincidunt risus lorem nec erat.
-            </p>
+            <p class="tnd-about-description">A TREINAEND é uma escola técnica especializada em capacitação industrial, 
+                com atuação voltada à formação complementar de estudantes e profissionais da indústria. Nosso trabalho 
+                é direcionado ao desenvolvimento técnico responsável, com foco na clareza dos conteúdos, na aplicação 
+                prática e no alinhamento às exigências reais do setor industrial.</p>
+            <p class="tnd-about-description">Atuamos na capacitação de profissionais que buscam fortalecer o currículo, 
+                ampliar competências técnicas e se preparar de forma mais consistente para as demandas do mercado.</p>
             <a href="#" class="tnd-about-button">Saiba Mais</a>
         </div>
         <div class="tnd-about-image">
@@ -30,63 +30,137 @@
         </div>
     </section>
 
-    <!-- Values Section -->
-    <section class="tnd-education-section">
-        <div class="container">
-            <h3 class="tnd-education-title">Nossos Valores</h3>
-
-            <div class="tnd-education-grid">
-                <div class="tnd-education-card">
-                    <div class="tnd-education-image">
-                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Missão">
-                    </div>
-                    <h4 class="tnd-education-name">Missão</h4>
-                    <div class="tnd-education-content">
-                        <p class="tnd-education-meta">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Proin ac neque nec sapien fermentum varius.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="tnd-education-card">
-                    <div class="tnd-education-image">
-                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Visão">
-                    </div>
-                    <h4 class="tnd-education-name">Visão</h4>
-                    <div class="tnd-education-content">
-                        <p class="tnd-education-meta">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Integer euismod magna vel facilisis cursus.
-                        </p>
-                    </div>
-                </div>
-
-                <div class="tnd-education-card">
-                    <div class="tnd-education-image">
-                        <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Valores">
-                    </div>
-                    <h4 class="tnd-education-name">Valores</h4>
-                    <div class="tnd-education-content">
-                        <p class="tnd-education-meta">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-                            Justo nulla posuere libero, vitae tincidunt risus lorem nec erat.
-                        </p>
-                    </div>
-                </div>
-            </div>
+    <!-- Seção 3 -->
+    <section class="tnd-about-section tnd-section-gray">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Nossa atuação</h2>
+            <p>
+                A TREINAEND atua há mais de 12 anos na capacitação técnica industrial, 
+                oferecendo cursos que complementam a formação tradicional e contribuem para a preparação prática dos profissionais.
+            </p>
+            <p>
+                Não trabalhamos com promessas irreais ou discursos comerciais exagerados. 
+                Nosso foco é formar profissionais tecnicamente mais preparados, conscientes das responsabilidades e exigências da atuação industrial.
+            </p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Nossos programas são desenvolvidos com base em:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+experiência prática no contexto industrial</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+organização didática e técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+respeito às normas e boas práticas do setor</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+compromisso com formação responsável e clara</strong></li>
+            </ul>
         </div>
     </section>
 
+    <!-- Seção 4 -->
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Posicionamento educacional</h2>
+            <p>
+                Acreditamos que a formação técnica é construída de forma contínua. 
+                A capacitação complementar não substitui a formação acadêmica ou 
+                técnica tradicional, mas atua como um reforço importante, especialmente 
+                para estudantes e profissionais em início de carreira.
+            </p>
+            <p>Sempre com clareza sobre o papel educacional de cada curso</p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Por isso, a TREINAEND desenvolve cursos que:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    fortalecem a base técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    ampliam a compreensão prática</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    contribuem para a organização profissional</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    auxiliam na diferenciação curricular</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Seção 5 -->
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Parcerias e relação com instituições</h2>
+            <p>
+                A TREINAEND mantém parcerias educacionais com escolas técnicas e instituições de formação profissional, 
+                com o objetivo de incentivar a qualificação técnica e a empregabilidade dos alunos.</p>
+            <p class="pt-6">Essas parcerias são estruturadas de forma simples, transparente e institucional, sem custos ou riscos 
+                para as instituições parceiras, respeitando a autonomia pedagógica e a identidade de cada escola.</p>
+        </div>
+        <div class="tnd-about-image">
+            <img src="{{ asset('assets-web/img/bg-ombudsman.jpg') }}" alt="Sobre TREINAEND">
+        </div>
+    </section>
+
+    <!-- Seção 6 -->
+    <section class="tnd-about-section tnd-section-gray">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Responsabilidade técnica</h2>
+            <p>
+                A TREINAEND foi fundada e é conduzida por profissional com experiência 
+                no setor industrial, que atua como responsável técnico pelos programas de capacitação oferecidos.
+            </p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Esse modelo permite:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    alinhamento entre teoria e prática</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    coerência técnica nos conteúdos</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    organização dos processos educacionais</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    compromisso direto com a qualidade da formação</strong></li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Seção 7 -->
+    <section class="tnd-about-section tnd-section-white">
+        <div class="tnd-about-content">
+            <h2 class="tnd-about-title">Compromisso com a clareza</h2>
+            <p>
+                A TREINAEND existe para contribuir com a formação técnica industrial 
+                de forma organizada, consciente e alinhada à realidade do mercado.
+            </p>
+        </div>
+        <div class="tnd-about-content">
+            <h3>Nosso compromisso é atuar com:</h3>
+            
+            <ul class="about-lists">
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    seriedade técnica</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    clareza na comunicação</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    respeito às normas</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    transparência nas propostas</strong></li>
+                <li><i class="fa fa-arrow-circle-right pages-module-scss-module__peInyW__pages-featured-link__icon float-left"></i><strong>
+                    responsabilidade na formação profissional</strong></li>
+            </ul>
+        </div>
+    </section>
+
+
     <!-- Call to Action -->
     <section class="comment-section-footer">
-        <h3>Compromisso com a Indústria Brasileira</h3>
-        <h4>Capacitação, responsabilidade técnica e evolução contínua</h4>
-        <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-            Fusce vitae lorem nec sapien tincidunt fermentum. 
-            Integer euismod magna vel facilisis cursus.
-        </p>
+        <h3>
+            Seja para complementar a formação técnica, fortalecer o currículo profissional ou estabelecer parcerias educacionais, 
+            a TREINAEND está preparada para atuar com seriedade, clareza e responsabilidade.
+        </h3>
     </section>
 @endsection
 

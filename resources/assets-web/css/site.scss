@@ -64333,11 +64333,45 @@ section {
     opacity: 0;
   }
 }
+/* Seções cinza claro e branco */
+.tnd-section-gray {
+  background-color: #f7f7f7 !important; /* cinza claro */
+  padding: 60px 20px;
+}
+
+.tnd-section-white {
+  background-color: #ffffff !important; /* branco */
+  padding: 60px 20px;
+}
+
+/* Ícone de seta dentro do link destacado */
+.fa.fa-arrow-circle-right.pages-module-scss-module__peInyW__pages-featured-link__icon {
+  font-size: 20px;        /* tamanho do ícone */
+  color: #007BFF;         /* azul padrão */
+  margin-right: 8px;      /* espaço entre ícone e texto */
+  vertical-align: middle; /* alinhamento vertical */
+  transition: color 0.3s ease;
+}
+
+/* Efeito hover */
+.fa.fa-arrow-circle-right.pages-module-scss-module__peInyW__pages-featured-link__icon:hover {
+  color: #0056b3; /* azul mais escuro ao passar o mouse */
+}
+
+/* Float-left já está aplicado, mas pode reforçar */
+.float-left {
+  float: left;
+}
+
+
 /*--------------------------------------------------------------
 # About Lists
 --------------------------------------------------------------*/
 .about-lists {
   padding: 40px;
+  list-style: none;   /* remove bullets */
+  padding-left: 0;    /* remove indentação */
+  margin: 0;
 }
 
 .about-lists .row {
@@ -64372,11 +64406,32 @@ section {
   padding: 0;
 }
 
+/* 🔹 Remove as bolinhas dos li */
+.about-lists ul {
+  list-style: none;   /* remove bullets */
+  padding-left: 0;    /* remove indentação */
+  margin: 0;
+}
+
+.about-lists li {
+  margin-bottom: 8px;
+  list-style: none;   /* garante que não apareçam bolinhas */
+}
+
+/* Ícone dentro do li */
+.about-lists li i {
+  margin-right: 8px;
+  color: #007BFF; /* azul */
+  font-size: 18px;
+}
+
+/* Responsivo */
 @media (max-width: 768px) {
   .about-lists .content-item {
     padding: 40px 0;
   }
 }
+
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
@@ -66057,6 +66112,19 @@ section {
     max-width: 1000px;
     margin: 40px auto; /* centraliza horizontalmente */
     background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    color: #000;
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+}
+
+.tnd-about-section-gray {
+    display: flex;
+    flex-direction: row; /* texto à esquerda, imagem à direita */
+    align-items: flex-start;
+    max-width: 1000px;
+    margin: 40px auto; /* centraliza horizontalmente */
+    background-color: #f7f7f7 !important; /* cinza claro */
     border-radius: 8px;
     overflow: hidden;
     color: #000;

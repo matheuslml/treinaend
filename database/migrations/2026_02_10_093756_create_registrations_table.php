@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('registrations', function (Blueprint $table) {
             $table->id();
+            $table->integer('course_id')->constrained('courses')->default(1)->nullable();
             $table->integer('person_id')->constrained('people')->nullable();
             $table->string('payment_form')->nullable();
             $table->enum('payment_status', ['S', 'N', 'NãoNPagoNpelaNBASF', ''])->default('N')->nullable();

@@ -14,14 +14,14 @@
     <div class="consult-content">
         <h2 class="consult-title">Consulta de Profissionais</h2>
         <p class="consult-description">
-            Digite o número do certificado para verificar informações sobre o profissional.
+            Digite o Código da Matrícula para verificar informações sobre o profissional.
         </p>
 
         <!-- Formulário -->
-        <form class="consult-form">
+        <form class="consult-form" data-url="{{ route('get_registration') }}">
             <div class="form-group">
-                <label for="certificate">Certificado</label>
-                <input type="text" id="certificate" name="certificate" placeholder="Digite o código do certificado">
+                <label for="code">Código da Matrícula do Aluno</label>
+                <input type="text" id="code" name="code" placeholder="IEQ000000">
             </div>
             <button type="submit" class="consult-button">Consultar</button>
         </form>
@@ -40,6 +40,6 @@
 
 
 @section('page-script')
-
     <script src="assets-web/js/site/site.js" src=""></script>
+    <script src="js/scripts/registration/get_registration_code.js" src=""></script>
 @endsection
