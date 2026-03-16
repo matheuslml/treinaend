@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Document;
 use App\Models\Person;
 use App\Models\User;
 use App\Services\RegistrationService;
@@ -15,6 +16,7 @@ use App\Services\RegistrationCreateService;
 use App\Services\RegistrationUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
@@ -120,6 +122,49 @@ class RegistrationController extends Controller
             return redirect('/matriculas');
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Matrícula!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function web_store(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $cpf = preg_replace('/\D/', '', $request->cpf);
+            $cpf = ltrim($cpf, '0');
+
+            $document = Document::whereRaw("
+                            TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
+                            ", [$cpf])->first();    
+
+            if ($document) {
+                flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
+            }else{
+                $person = Person::create([
+                    'full_name' => $request['name']
+                ]);
+
+                User::create([
+                    'person_id' => $person->id,
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password'])
+                ]);
+
+                Document::create([
+                    'person_id' => $person->id,
+                    'document' => $request['cpf'],
+                    'document_type_id' => 1
+                ]);
+                flash('Matrícula criada com sucesso!')->success();
+            }
+
+            DB::commit();
+            return redirect('/login');
+        } catch (\Throwable $throwable) {
+            DB::rollBack();
+            flash('Erro Criar a Matrícula, entre em contato!')->error();
             return redirect()->back()->withInput();
         }
     }
