@@ -157,9 +157,9 @@ class RegistrationController extends Controller
                     'document' => $request['cpf'],
                     'document_type_id' => 1
                 ]);
+                flash('Matrícula criada com sucesso!')->success();
             }
 
-            flash('Matrícula criada com sucesso!')->success();
             DB::commit();
             return redirect('/login');
         } catch (\Throwable $throwable) {
