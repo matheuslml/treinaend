@@ -124,25 +124,41 @@ class RegistrationController extends Controller
         }
     }
 
+
     public function get_registration(Request $request)
     {
+        try {
+            $registration = null;
 
-        try{
+            if ($request->filled('cpf')) {
+                // Normaliza CPF (remove pontos e traços)
+                $cpf = preg_replace('/\D/', '', $request->cpf);
+                $cpf = ltrim($cpf, '0'); // remove zeros à esquerda
 
-            // Busca o registro pelo código e carrega as relações
-            $registration = Registration::with(['person.documents', 'course'])
-                ->where('code', $request->code)
-                ->first();
+                $registration = Registration::with(['person.documents', 'course'])
+                    ->whereHas('person.documents', function ($query) use ($cpf) {
+                        $query->whereRaw("
+                            TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
+                        ", [$cpf]);
+                    })
+                    ->when($request->filled('course_id'), function ($query) use ($request) {
+                        $query->where('course_id', $request->course_id);
+                    })
+                    ->first();
 
+            } else {
+                $registration = Registration::with(['person.documents', 'course'])
+                    ->where('code', $request->code)
+                    ->first();
+            }
 
             if (!$registration) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Nenhum registro encontrado para este código.'
+                    'message' => 'Nenhum registro encontrado.'
                 ], 404);
             }
 
-            // Retorna os dados em JSON
             return response()->json([
                 'success' => true,
                 'data' => [
@@ -162,10 +178,11 @@ class RegistrationController extends Controller
                 ]
             ]);
         } catch (\Exception $exception) {
-                return response()->json([
-                    'success' => false,
-                    'message' => $exception->getMessage()
-                ], 404);
+            return response()->json([
+                'success' => false,
+                'message' => $exception->getMessage()
+            ], 500);
         }
     }
+
 }
