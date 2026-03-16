@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
         e.preventDefault(); // Evita recarregar a página
 
         const code = document.querySelector("input[name='code']").value;
+        const cpf = document.querySelector("input[name='cpf']").value;
+        const course_id = document.querySelector("select[name='course_id']").value;
+
         reportDiv.innerHTML = "<p>Consultando dados...</p>";
 
         try {
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     "Content-Type": "application/json",
                     "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                 },
-                body: JSON.stringify({ code })
+                body: JSON.stringify({ code, cpf, course_id })
             });
 
             if (!response.ok) {
@@ -42,7 +45,6 @@ document.addEventListener("DOMContentLoaded", function () {
                     ${data.person?.documents?.map(doc => `
                            <p><strong>CPF: </strong>${doc.number}</p>
                         `).join("") || "<p><strong>CPF: </strong>Nenhum documento encontrado</p>"}
-                    </p>
                 </div>
             `;
         } catch (error) {

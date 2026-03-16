@@ -290,6 +290,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/consulta', 'App\Http\Controllers\WebController@professional_consult')->name('professional_consult');
     Route::get('/matricula', 'App\Http\Controllers\WebController@membership')->name('membership');
     Route::post('/get_registration', [RegistrationController::class, 'get_registration'])->name('get_registration');
+    Route::get('/teste', [RegistrationController::class, 'teste'])->name('teste');
 
     // Internal pages
     Route::get('/links_uteis', 'App\Http\Controllers\InternalPages@links_uteis')->name('links_uteis');
