@@ -48,10 +48,6 @@
                 <div class="form-group">
                     <label for="email">E-mail</label>
                     <input type="email" id="email" name="email" placeholder="email@exemplo.com">
-                    <button type="button" id="togglePassword" 
-                            style="position:absolute; right:10px; top:30px; background:none; border:none; cursor:pointer;">
-                        👁️
-                    </button>
                 </div>
 
                 <div class="form-group">
