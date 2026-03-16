@@ -136,7 +136,7 @@ class RegistrationController extends Controller
 
             $document = Document::whereRaw("
                             TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
-                            ", [$cpf])->first();
+                            ", [$cpf])->first();    
 
             if ($document) {
                 flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
@@ -164,7 +164,7 @@ class RegistrationController extends Controller
             return redirect('/login');
         } catch (\Throwable $throwable) {
             DB::rollBack();
-            flash('Erro Cadastrar!')->error();
+            flash('Erro Criar a Matrícula, entre em contato!')->error();
             return redirect()->back()->withInput();
         }
     }
