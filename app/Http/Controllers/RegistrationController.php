@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Document;
 use App\Models\Person;
 use App\Models\User;
 use App\Services\RegistrationService;
@@ -120,6 +121,36 @@ class RegistrationController extends Controller
             return redirect('/matriculas');
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Matrícula!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function web_store(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $cpf = preg_replace('/\D/', '', $request->cpf);
+            $cpf = ltrim($cpf, '0');
+
+            $document = Document::whereRaw("
+                            TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
+                            ", [$cpf])->first();
+
+            if ($document) {
+                dd($request->all());
+                flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
+            }else{
+                //dd('nao');
+            }
+
+            flash('Matrícula criada com sucesso!')->success();
+            DB::commit();
+            return redirect('/dashboard');
+        } catch (\Throwable $throwable) {
+            DB::rollBack();
+                dd($throwable);
+            flash('Erro Cadastrar!')->error();
             return redirect()->back()->withInput();
         }
     }
