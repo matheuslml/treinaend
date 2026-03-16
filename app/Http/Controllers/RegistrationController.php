@@ -16,6 +16,7 @@ use App\Services\RegistrationCreateService;
 use App\Services\RegistrationUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Hash;
 
 class RegistrationController extends Controller
 {
@@ -138,18 +139,31 @@ class RegistrationController extends Controller
                             ", [$cpf])->first();
 
             if ($document) {
-                dd($request->all());
                 flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
             }else{
-                //dd('nao');
+                $person = Person::create([
+                    'full_name' => $request['name']
+                ]);
+
+                User::create([
+                    'person_id' => $person->id,
+                    'name' => $request['name'],
+                    'email' => $request['email'],
+                    'password' => Hash::make($request['password'])
+                ]);
+
+                Document::create([
+                    'person_id' => $person->id,
+                    'document' => $request['cpf'],
+                    'document_type_id' => 1
+                ]);
             }
 
             flash('Matrícula criada com sucesso!')->success();
             DB::commit();
-            return redirect('/dashboard');
+            return redirect('/login');
         } catch (\Throwable $throwable) {
             DB::rollBack();
-                dd($throwable);
             flash('Erro Cadastrar!')->error();
             return redirect()->back()->withInput();
         }
