@@ -17,6 +17,7 @@ use App\Services\RegistrationUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 
 class RegistrationController extends Controller
 {
@@ -122,6 +123,27 @@ class RegistrationController extends Controller
             return redirect('/matriculas');
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Matrícula!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function certificate($registration_id)
+    {
+        try{
+            $unit = Unit::where('web', true)->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
+
+            $registration = Registration::where('id', $registration_id)->first();
+
+            $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration'));
+            
+            $pdf->setPAper('a4', 'landscape');
+
+            return $pdf->stream('certificate.pdf');
+
+        } catch (\Throwable $throwable) {
+            flash('Erro ao buscar registro!')->error();
+            dd($throwable);
             return redirect()->back()->withInput();
         }
     }
