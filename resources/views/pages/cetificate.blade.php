@@ -58,27 +58,53 @@
             flex: 1;
             display: flex;
             align-items: center;
-            justify-content: flex-end;
+            justify-content: flex-end; /* força o bloco para a direita */
             text-align: center;
+            padding-right: 30mm; /* margem elegante à direita */
         }
 
         .certificate-text {
-            max-width: 60%;
-            background: rgba(255, 255, 255, 0.85);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 0 8px rgba(0,0,0,0.25);
+            width: 50%; /* ocupa metade direita */
+            text-align: center;
+            color: #fff; /* texto branco */
+            font-family: 'Georgia', serif;
         }
 
-        h1 {
-            font-size: 28px;
-            margin-bottom: 15px;
+        .title {
+            font-size: 42px;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
         }
 
-        p {
+        .subtitle {
+            font-size: 24px;
+            margin-bottom: 10px;
+            font-style: italic;
+        }
+
+        .name {
+            font-size: 30px;
+            font-weight: bold;
+            margin-bottom: 25px;
+            color: #fff; /* mantém branco */
+        }
+
+        .description {
             font-size: 18px;
-            line-height: 1.5;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #fff;
         }
+
+        .validation {
+            font-size: 14px;
+            color: #ddd; /* tom mais suave para rodapé */
+            margin-top: 30px;
+        }
+
+
     </style>
 </head>
 <body>
@@ -93,17 +119,26 @@
             <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : '' }}" alt="Logo">
         </div>
 
-        <!-- Texto central -->
         <div class="content">
             <div class="certificate-text">
-                <h1>Certificado</h1>
-                <p>
-                    Certificamos que <strong>{{ $registration->person->name }}</strong><br>
-                    concluiu com êxito sua participação.<br><br>
-                    Emitido por {{ $unit->name ?? 'Unidade' }}.
+                <h1 class="title">Certificado</h1>
+                <h2 class="subtitle">Conferimos a</h2>
+                <h2 class="name">{{ $registration->person->name }}</h2>
+                <p class="description">
+                    O presente certificado pela conclusão do curso de<br>
+                    <strong>Inspeção de Equipamentos</strong><br>
+                    Promovido pela <strong>TREINAEND</strong><br>
+                    Treinamentos e cursos industriais Ltda<br>
+                    de acordo com a Portaria 537/2015 do INMETRO.
+                </p>
+                <p class="validation">
+                    Consulte a veracidade da qualificação do aluno no site<br>
+                    <strong>www.treinaend.com.br</strong>, no menu "Consulta de Profissionais".
                 </p>
             </div>
         </div>
+
+
 
         <!-- Logo rodapé -->
         <div class="footer">
