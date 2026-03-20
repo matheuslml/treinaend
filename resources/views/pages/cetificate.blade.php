@@ -38,20 +38,10 @@
             left: 0;
             width: 297mm;
             height: 210mm;
-            padding: 30mm;
             box-sizing: border-box;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-        }
-
-        .header, .footer {
-            display: flex;
-            justify-content: flex-start;
-        }
-
-        .header img, .footer img {
-            height: 70px;
         }
 
         .content {
@@ -60,7 +50,6 @@
             align-items: flex-start; /* texto mais acima */
             justify-content: flex-end; /* força para a direita */
             text-align: right;
-            padding-right: 30mm;
         }
 
         .certificate-text {
@@ -111,13 +100,10 @@
 </head>
 <body>
     <div class="background">
-        <img src="{{ public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
+        <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
     </div>
 
     <div class="container">
-        <div class="header">
-            <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : '' }}" alt="Logo">
-        </div>
 
         <div class="content">
             <div class="certificate-text">
@@ -136,10 +122,6 @@
                     <strong>www.treinaend.com.br</strong>, no menu "Consulta de Profissionais".
                 </p>
             </div>
-        </div>
-
-        <div class="footer">
-            <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : '' }}" alt="Logo">
         </div>
     </div>
 </body>
