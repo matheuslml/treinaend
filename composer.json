@@ -9,6 +9,7 @@
         "ext-redis": "*",
         "barryvdh/laravel-dompdf": "^2.0",
         "dyrynda/laravel-cascade-soft-deletes": "^4.4",
+        "endroid/qr-code": "^6.0",
         "guzzlehttp/guzzle": "^7.8",
         "infyomlabs/laravel-ui-adminlte": "^5.2",
         "laracasts/flash": "^3.2",

@@ -17,7 +17,14 @@ use App\Services\RegistrationUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
-
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Label\LabelAlignment;
+use Endroid\QrCode\Label\Font\OpenSans;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
 class RegistrationController extends Controller
 {
 
@@ -122,6 +129,47 @@ class RegistrationController extends Controller
             return redirect('/matriculas');
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Matrícula!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
+    public function certificate($registration_id)
+    {
+        try{
+            $unit = Unit::where('web', true)->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
+
+            $registration = Registration::where('id', $registration_id)->first();
+
+
+            $builder = new Builder(
+                writer: new PngWriter(),
+                writerOptions: [],
+                validateResult: false,
+                data: 'http://localhost:8000/consulta',
+                encoding: new Encoding('UTF-8'),
+                errorCorrectionLevel: ErrorCorrectionLevel::High,
+                size: 300,
+                margin: 20,
+                roundBlockSizeMode: RoundBlockSizeMode::Margin,
+            );
+            
+            $result = $builder->build();
+
+            // gera data URI pronto para usar em <img>
+            $qrcode = $result->getDataUri();
+
+
+
+            $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration', 'qrcode'));
+            
+            $pdf->setPAper('a4', 'landscape');
+
+            return $pdf->stream('certificate.pdf');
+
+        } catch (\Throwable $throwable) {
+            flash('Erro ao buscar registro!')->error();
+            dd($throwable);
             return redirect()->back()->withInput();
         }
     }
