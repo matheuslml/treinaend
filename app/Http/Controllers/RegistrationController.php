@@ -18,7 +18,13 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-
+use Endroid\QrCode\Builder\Builder;
+use Endroid\QrCode\Encoding\Encoding;
+use Endroid\QrCode\ErrorCorrectionLevel;
+use Endroid\QrCode\Label\LabelAlignment;
+use Endroid\QrCode\Label\Font\OpenSans;
+use Endroid\QrCode\RoundBlockSizeMode;
+use Endroid\QrCode\Writer\PngWriter;
 class RegistrationController extends Controller
 {
 
@@ -135,7 +141,27 @@ class RegistrationController extends Controller
 
             $registration = Registration::where('id', $registration_id)->first();
 
-            $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration'));
+
+            $builder = new Builder(
+                writer: new PngWriter(),
+                writerOptions: [],
+                validateResult: false,
+                data: 'http://localhost:8000/consulta',
+                encoding: new Encoding('UTF-8'),
+                errorCorrectionLevel: ErrorCorrectionLevel::High,
+                size: 300,
+                margin: 20,
+                roundBlockSizeMode: RoundBlockSizeMode::Margin,
+            );
+            
+            $result = $builder->build();
+
+            // gera data URI pronto para usar em <img>
+            $qrcode = $result->getDataUri();
+
+
+
+            $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration', 'qrcode'));
             
             $pdf->setPAper('a4', 'landscape');
 

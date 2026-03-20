@@ -53,7 +53,7 @@
         }
 
         .certificate-text {
-            width: 50%;
+            width: 60%;
             margin-left: auto; /* empurra o bloco para a borda direita */
             text-align: right;
             color: #000; /* texto preto */
@@ -77,7 +77,7 @@
         }
 
         .name {
-            font-size: 30px;
+            font-size: 40px;
             font-weight: bold;
             margin-bottom: 25px;
             color: #000;
@@ -90,12 +90,32 @@
             margin-bottom: 20px;
             color: #000;
         }
+        .qrcode-container {
+            position: absolute;
+            bottom: 20mm;
+            right: 20mm;
+            display: flex;          /* coloca lado a lado */
+            flex-direction: row;    /* garante orientação horizontal */
+            align-items: center;    /* alinha verticalmente */
+            gap: 15px;              /* espaço entre texto e QR */
+        }
 
-        .validation {
+        .qrcode-container .validation {
             font-size: 14px;
             color: #333;
-            margin-top: 30px;
+            margin: 0;
+            text-align: left;       /* texto alinhado à esquerda */
+            max-width: 200px;
         }
+
+        .qrcode-container img {
+            width: 120px;
+            height: 120px;
+            display: block;         /* evita comportamento inline estranho */
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -109,18 +129,23 @@
             <div class="certificate-text">
                 <h1 class="title">Certificado</h1>
                 <h3 class="subtitle">Conferimos a</h3>
-                <h2 class="name">{{ $registration->person->name }}</h2>
+                <h2 class="name">{{ $registration->person->full_name }}</h2>
                 <p class="description">
                     O presente certificado pela conclusão do curso de<br>
-                    <strong>Inspeção de Equipamentos</strong><br>
-                    Promovido pela <strong>TREINAEND</strong><br>
+                    <strong>{{ $registration->course->name }}</strong><br>
+                    Promovido pela <strong>{{ $unit->name }}</strong><br>
                     Treinamentos e cursos industriais Ltda<br>
                     de acordo com a Portaria 537/2015 do INMETRO.
                 </p>
-                <p class="validation">
-                    Consulte a veracidade da qualificação do aluno no site<br>
-                    <strong>www.treinaend.com.br</strong>, no menu "Consulta de Profissionais".
-                </p>
+                <div class="qrcode-container">
+                    <div class="validation">
+                        Consulte a veracidade da qualificação do aluno no site<br>
+                        <strong>www.treinaend.com.br</strong>, no menu "Consulta de Profissionais".
+                    </div>
+                    <img src="{{ $qrcode }}" alt="QR Code">
+                </div>
+
+
             </div>
         </div>
     </div>
