@@ -57,30 +57,33 @@
         .content {
             flex: 1;
             display: flex;
-            align-items: center;
-            justify-content: flex-end; /* força o bloco para a direita */
-            text-align: center;
-            padding-right: 30mm; /* margem elegante à direita */
+            align-items: flex-start; /* texto mais acima */
+            justify-content: flex-end; /* força para a direita */
+            text-align: right;
+            padding-right: 30mm;
         }
 
         .certificate-text {
-            width: 50%; /* ocupa metade direita */
-            text-align: center;
-            color: #fff; /* texto branco */
+            width: 50%;
+            margin-left: auto; /* empurra o bloco para a borda direita */
+            text-align: right;
+            color: #000; /* texto preto */
             font-family: 'Georgia', serif;
+            padding: 20mm; /* margem interna igual em todos os lados */
+            box-sizing: border-box; /* garante que o padding não estoure a largura */
         }
 
         .title {
-            font-size: 42px;
+            font-size: 60px; /* maior */
             font-weight: bold;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             letter-spacing: 2px;
         }
 
         .subtitle {
-            font-size: 24px;
-            margin-bottom: 10px;
+            font-size: 28px; /* menor que o título */
+            margin-bottom: 20px;
             font-style: italic;
         }
 
@@ -88,33 +91,30 @@
             font-size: 30px;
             font-weight: bold;
             margin-bottom: 25px;
-            color: #fff; /* mantém branco */
+            color: #000;
+            width: 100%;
         }
 
         .description {
             font-size: 18px;
             line-height: 1.6;
             margin-bottom: 20px;
-            color: #fff;
+            color: #000;
         }
 
         .validation {
             font-size: 14px;
-            color: #ddd; /* tom mais suave para rodapé */
+            color: #333;
             margin-top: 30px;
         }
-
-
     </style>
 </head>
 <body>
-    <!-- Fundo fixo -->
     <div class="background">
-        <img src="{{ public_path('assets-web/img/bg-ombudsman.jpg') }}" alt="Fundo">
+        <img src="{{ public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
     </div>
 
     <div class="container">
-        <!-- Logo topo -->
         <div class="header">
             <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : '' }}" alt="Logo">
         </div>
@@ -122,7 +122,7 @@
         <div class="content">
             <div class="certificate-text">
                 <h1 class="title">Certificado</h1>
-                <h2 class="subtitle">Conferimos a</h2>
+                <h3 class="subtitle">Conferimos a</h3>
                 <h2 class="name">{{ $registration->person->name }}</h2>
                 <p class="description">
                     O presente certificado pela conclusão do curso de<br>
@@ -138,9 +138,6 @@
             </div>
         </div>
 
-
-
-        <!-- Logo rodapé -->
         <div class="footer">
             <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : '' }}" alt="Logo">
         </div>
