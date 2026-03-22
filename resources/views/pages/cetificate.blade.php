@@ -120,7 +120,7 @@
 </head>
 <body>
     <div class="background">
-        <img src="{{ isset($copyright->logo_url) ? public_path('storage/images/copyrights/' . $copyright->logo_url) : public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
+        <img src="{{ public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
     </div>
 
     <div class="container">
