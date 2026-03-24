@@ -44,10 +44,20 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome do Disciplina"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                       <input type="text" class="form-control" id="name" name="name" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="description">Descrição<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="description" name="description" />
                   </div>
                 </div>
               </div>
@@ -66,12 +76,63 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="days">Dias para Realização<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="grade">Nota<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="1" id="days" name="days" />
+                        <input type="number" class="touchspin" value="7" id="grade" name="grade" />
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="online">Online <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <select class="select2 form-select" id="online" name="online">
+                        <optgroup label="Selecione">
+                            <option value="1" >Sim</option>
+                            <option value="2" >Não</option>
+                        </optgroup>
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="payment_value">Valor<tag data-bs-toggle="tooltip" title="Valor"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control used-balance" placeholder="10,000.00" id="payment_value" name="payment_value" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="image_certificate">Imagem do Certificado<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="file" class="form-control" id="image_certificate" name="image_certificate" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="status">Status <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <select class="select2 form-select" id="status" name="status">
+                        <optgroup label="Selecione">
+                            <option value="PUBLISHED" >Publicado</option>
+                            <option value="DRAFT" >Editando</option>
+                            <option value="PENDING" >Pendente</option>
+                        </optgroup>
+                      </select>
                   </div>
                 </div>
               </div>
@@ -87,7 +148,7 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Matriculas Cadastradas - Busca Avançada</h4>
+          <h4 class="card-title">Cursos Cadastrados - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
@@ -98,7 +159,8 @@
                 <th></th>
                 <th>Título</th>
                 <th>Ordem</th>
-                <th>Dias</th>
+                <th>Valor</th>
+                <th>Status</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -108,7 +170,8 @@
                 <th></th>
                 <th>Título</th>
                 <th>Ordem</th>
-                <th>Dias</th>
+                <th>Valor</th>
+                <th>Status</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -126,7 +189,8 @@
                     <td class="control sorting_1" tabindex="0" ></td>
                     <td style="display: none;">{{ $course->name }}</td>
                     <td style="display: none;">{{ $course->order }}</td>
-                    <td style="display: none;">{{ $course->days  }}</td>
+                      <td style="display: none;"><input class="form-control list-value bg-white border-0" type="text" value="{{ isset($course->payment_value) ? $course->payment_value : ' ' }}" disabled /></td>
+                      <td style="display: none;">{{ $course->status == 'PENDING' ? 'Pendente' : ($course->status == 'DRAFT' ? 'Editando' : 'Publicado') }}</td>
                     <td style="display: none;">{{isset($course->created_at) ? (($course->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
                     <td style="display: none;">
                       <a href="{{ route('cursos.show', $course->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
@@ -171,5 +235,6 @@
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
+<script src="{{ asset(mix('js/scripts/forms/expense-input-mask.js')) }}"></script>
 @endsection
 

@@ -37,7 +37,7 @@ class CourseController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $courses = Course::latest()->get();
-            return view('admin.course.index', ['pageConfigs' => $pageConfigs], compact('Courses', 'unit', 'copyright'));
+            return view('admin.course.index', ['pageConfigs' => $pageConfigs], compact('courses', 'unit', 'copyright'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -51,6 +51,7 @@ class CourseController extends Controller
             return view('pages.not-authorized');
         }
         try {
+            dd('s');
             DB::beginTransaction();
 
             $this->courseCreateService->create($request->toArray());
