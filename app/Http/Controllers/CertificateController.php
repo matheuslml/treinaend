@@ -84,6 +84,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $certificate_selected = $this->certificateService->show($certificate_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.news.Certificate_show', compact('Certificate_selected', 'categories', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);

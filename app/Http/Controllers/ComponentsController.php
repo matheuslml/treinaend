@@ -18,6 +18,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-accordion', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -32,6 +34,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-alerts', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -46,6 +50,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-avatar', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -60,6 +66,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-badges', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -74,6 +82,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-breadcrumbs', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -88,6 +98,8 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-buttons', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -102,6 +114,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-carousel', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -116,6 +129,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-collapse', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -130,6 +144,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-divider', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -144,6 +159,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-dropdowns', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -158,6 +174,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-list-group', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -172,6 +189,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-modals', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -186,6 +204,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-navs', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -200,6 +219,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-offcanvas', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -214,6 +234,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pagination', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -228,6 +249,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pill-badges', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -242,6 +264,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pills', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -256,6 +279,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-tabs', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -271,6 +295,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-tooltips', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -285,6 +310,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-popovers', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -299,6 +325,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-progress', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -313,6 +340,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-spinner', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -327,6 +355,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-timeline', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -341,6 +370,7 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-bs-toast', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));

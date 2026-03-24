@@ -17,6 +17,7 @@ class PagesController extends Controller
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/admin/account/page-account-settings-account', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -27,6 +28,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/admin/account/page-account-settings-security', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -37,6 +39,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/admin/account/page-account-settings-billing', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -47,6 +50,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/admin/account/page-account-settings-notifications', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -57,6 +61,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/admin/account/page-account-settings-connections', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -67,6 +72,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/page-profile', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -78,6 +84,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-faq', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -88,6 +95,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-knowledge-base', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -98,6 +106,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-kb-category', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -108,6 +117,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-kb-question', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -119,6 +129,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-pricing', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -130,6 +141,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/pages/page-api-key', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -142,6 +154,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/page-blog-list', ['breadcrumbs' => $breadcrumbs, 'pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -155,6 +168,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/page-blog-detail', ['breadcrumbs' => $breadcrumbs, 'pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -167,6 +181,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/page-blog-edit', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -179,6 +194,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/modal-examples', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -191,6 +207,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/pages/page-license', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }

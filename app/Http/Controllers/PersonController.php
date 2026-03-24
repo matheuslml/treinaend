@@ -48,7 +48,7 @@ class PersonController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -61,6 +61,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
         try{
             $user = User::find($user_id);
             $person_id = $user->person_id;
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
@@ -98,7 +99,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
         }
 
         $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 

@@ -26,7 +26,7 @@ class UnitController extends Controller
         protected UnitUpdateService $unitUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Unidades')) {
             return view('pages.not-authorized');
@@ -34,9 +34,9 @@ class UnitController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
-$copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $organizations = Organization::all();
             $units = $this->unitService->get();
@@ -216,6 +216,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $unit = Unit::find($unit_id);
             $organizations = Organization::all();
             $unit_selected = $this->unitService->show($unit_id);
+            $courses_nav = Course::where('status', 'PUBLISHED')->get(); 
             $social_media = SocialMedia::all();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             return view('admin.unit.show', compact('social_media', 'unit', 'copyright', 'courses_nav', 'organizations', 'unit_selected'));

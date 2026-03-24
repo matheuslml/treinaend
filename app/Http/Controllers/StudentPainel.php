@@ -39,6 +39,7 @@ class StudentPainel extends Controller
             $person_id = $user->person_id;
 
             //fazer a verificação se o curso está pago
+            $course = Course::find($course_id);
             $new_student = resolve(NewStudent::class);
             $new_student->handle($person_id, $course_id);
 
@@ -65,8 +66,9 @@ class StudentPainel extends Controller
                 }])
                 ->first();
 
-            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
+            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
+            dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
         }

@@ -173,6 +173,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $tags = Tag::with('news')->orderBy('tag', 'asc')->get();
             $categories = Category::with('news')->orderBy('title', 'asc')->get();
 

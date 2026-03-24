@@ -23,7 +23,7 @@ class OrganizationController extends Controller
         protected OrganizationUpdateService $organizationUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         /*if (! Gate::allows('Ver e Listar Organizações')) {
             return view('pages.not-authorized');
@@ -31,9 +31,9 @@ class OrganizationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
-$copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $organizations = $this->organizationService->get();
             return view('admin.organization.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'unit', 'copyright', 'courses_nav'));
@@ -93,7 +93,8 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         try{
             $unit = Unit::where('web', true)->first();
-$copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $organizations = $this->organizationService->get();
             $organization_selected = $this->organizationService->show($organization_id);
             return view('admin.organization.show', compact('organization_selected', 'organizations', 'unit', 'copyright', 'courses_nav'));

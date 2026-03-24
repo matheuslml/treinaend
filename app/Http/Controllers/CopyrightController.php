@@ -24,7 +24,7 @@ class CopyrightController extends Controller
         protected CopyrightUpdateService $copyrightUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
 
         if (! Gate::allows('Ver e Listar Copyright')) {
@@ -95,6 +95,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.copyright.show', compact('copyright_selected', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a copyright!')->error();

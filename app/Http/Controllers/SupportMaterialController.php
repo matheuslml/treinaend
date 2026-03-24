@@ -78,6 +78,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $support_material_selected = $this->supportMaterialService->show($support_material_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.support_material.show', compact('support_material_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();

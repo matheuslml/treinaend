@@ -25,7 +25,7 @@ class PostController extends Controller
         protected PostUpdateService $postUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Capas do Site')) {
             return view('pages.not-authorized');
@@ -104,6 +104,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $posts = Post::with('user', 'type_post', 'media')->latest()->get();
             $post_selected = $this->postService->show($post_id);
             return view('admin.post.show', compact('post_selected', 'posts', 'unit', 'copyright', 'courses_nav'));

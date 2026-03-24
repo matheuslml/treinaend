@@ -81,6 +81,7 @@ class DisciplineController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $courses = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.discipline.show', compact('discipline_selected', 'unit', 'copyright', 'courses_nav', 'exercises', 'courses'));
         } catch (\Exception $exception) {
             dd($exception);

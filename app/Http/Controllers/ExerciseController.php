@@ -80,6 +80,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
         try{
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $exercise_selected = $this->exerciseService->show($exercise_id);
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             return view('admin.exercise.show', compact('exercise_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));

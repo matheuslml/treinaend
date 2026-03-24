@@ -162,6 +162,7 @@ class BlankPageController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $types = BlankPageType::with('blank_pages')->orderBy('title', 'asc')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             return view('admin.blankpage.show', compact('blank_page', 'types', 'unit', 'copyright', 'courses_nav' ));
         } catch (\Exception $exception) {

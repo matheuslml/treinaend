@@ -16,6 +16,7 @@ class TableController extends Controller
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/table/table-bootstrap/table-bootstrap', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));
@@ -28,6 +29,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/table/table-datatable/table-datatable-basic', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
@@ -40,6 +42,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/table/table-datatable/table-datatable-advance', [
             'breadcrumbs' => $breadcrumbs
         ], compact('unit', 'copyright', 'courses_nav'));

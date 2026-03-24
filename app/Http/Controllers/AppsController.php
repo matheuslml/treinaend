@@ -151,10 +151,11 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/apps/chat/app-chat', [
             'pageConfigs' => $pageConfigs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Calender App
@@ -164,9 +165,13 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             'pageHeader' => false
         ];
 
+        $unit = Unit::where('web', true)->first();
+$copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
         return view('/admin/calendar/index', [
             'pageConfigs' => $pageConfigs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Email App
@@ -180,6 +185,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/apps/email/app-email', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -194,10 +200,11 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/apps/todo/app-todo', [
             'pageConfigs' => $pageConfigs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
     // File manager App
     public function file_manager()
@@ -210,6 +217,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/apps/fileManager/app-file-manager', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -246,6 +254,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/apps/kanban/app-kanban', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -260,6 +269,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "eCommerce"], ['name' => "Shop"]
@@ -268,7 +278,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/apps/ecommerce/app-ecommerce-shop', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Ecommerce Details
@@ -280,6 +290,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "eCommerce"], ['link' => "/app/ecommerce/shop", 'name' => "Shop"], ['name' => "Details"]
@@ -288,7 +299,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/apps/ecommerce/app-ecommerce-details', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Ecommerce Wish List
@@ -300,6 +311,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "eCommerce"], ['name' => "Wish List"]
@@ -308,7 +320,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/apps/ecommerce/app-ecommerce-wishlist', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Ecommerce Checkout
@@ -320,6 +332,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $breadcrumbs = [
             ['link' => "/", 'name' => "Home"], ['link' => "javascript:void(0)", 'name' => "eCommerce"], ['name' => "Checkout"]
@@ -328,6 +341,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/apps/ecommerce/app-ecommerce-checkout', [
             'pageConfigs' => $pageConfigs,
             'breadcrumbs' => $breadcrumbs
-        ]);
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

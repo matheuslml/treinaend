@@ -89,6 +89,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $registration_selected = $this->registrationService->show($registration_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.registration.show', compact('registration_selected', 'people', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);

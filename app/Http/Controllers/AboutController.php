@@ -101,6 +101,7 @@ class AboutController extends Controller
             $units = Unit::all();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             return view('admin.about.show', compact('about', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {

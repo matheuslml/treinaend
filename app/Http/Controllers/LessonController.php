@@ -35,7 +35,7 @@ class LessonController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $disciplines = Discipline::orderBy('name', 'asc')->get();
@@ -77,6 +77,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $lesson_selected = $this->lessonService->show($lesson_id);
             $unit = Unit::where('web', true)->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             return view('admin.lesson.show', compact('lesson_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {

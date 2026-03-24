@@ -27,7 +27,7 @@ class DepartamentController extends Controller
         protected DepartamentUpdateService $departamentUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Departamentos')) {
             return view('pages.not-authorized');
@@ -35,7 +35,7 @@ class DepartamentController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -78,6 +78,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         try{
             $unit = Unit::where('web', true)->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $departaments = $this->departamentService->get();
             $units = Unit::all();
