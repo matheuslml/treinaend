@@ -98,6 +98,12 @@ $configData = Helper::applClasses();
           </a>
         </li>
         <li class="nav-item  ">
+          <a href="{{ route('cursos.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="book"></i>
+            <span class="menu-title text-truncate">Cursos</span>
+          </a>
+        </li>
+        <li class="nav-item  ">
           <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
             <i data-feather="layout"></i>
             <span class="menu-title text-truncate">Empresa</span>

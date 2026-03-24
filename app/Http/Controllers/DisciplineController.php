@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\DisciplineRequest;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Course;
 use App\Models\Exercise;
 use App\Services\DisciplineService;
 use App\Services\DisciplineCreateService;
@@ -38,7 +39,8 @@ class DisciplineController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $disciplines = Discipline::latest()->get();
-            return view('admin.discipline.index', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright'));
+            $courses = Course::where('status', 'PUBLISHED')->get();
+            return view('admin.discipline.index', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'courses'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -77,7 +79,8 @@ class DisciplineController extends Controller
             $exercises = Exercise::where('discipline_id',$discipline_id)->latest()->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.discipline.show', compact('discipline_selected', 'unit', 'copyright', 'exercises'));
+            $courses = Course::where('status', 'PUBLISHED')->get();
+            return view('admin.discipline.show', compact('discipline_selected', 'unit', 'copyright', 'exercises', 'courses'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Disciplina!')->error();

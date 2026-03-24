@@ -55,22 +55,6 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="course">Cursos <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <select class="select2 form-select" id="course_id" name="course_id">
-                        <optgroup label="Selecione">
-                          @foreach($courses as  $course)
-                            <option value="{{ $course->id }}" {{ $course->id == $discipline_selected->course_id ? 'selected' : '' }} >{{ isset($course->name) ? $course->name : '' }}</option>
-                          @endforeach
-                        </optgroup>
-                      </select>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
                     <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">

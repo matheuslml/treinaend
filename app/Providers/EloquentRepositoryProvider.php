@@ -53,6 +53,9 @@ use App\Repositories\Eloquent\SupportMaterialUpdateEloquentRepository;
 use App\Repositories\Eloquent\DisciplineEloquentRepository;
 use App\Repositories\Eloquent\DisciplineCreateEloquentRepository;
 use App\Repositories\Eloquent\DisciplineUpdateEloquentRepository;
+use App\Repositories\Eloquent\CourseEloquentRepository;
+use App\Repositories\Eloquent\CourseCreateEloquentRepository;
+use App\Repositories\Eloquent\CourseUpdateEloquentRepository;
 
 //SEMAS -------------------------------------------------------------
 use App\Repositories\Eloquent\ShortcutWebEloquentRepository;
@@ -308,6 +311,9 @@ use App\Services\SupportMaterialUpdateService;
 use App\Services\DisciplineService;
 use App\Services\DisciplineCreateService;
 use App\Services\DisciplineUpdateService;
+use App\Services\CourseService;
+use App\Services\CourseCreateService;
+use App\Services\CourseUpdateService;
 
 //SEMAS ---------------------------------------------------------
 use App\Services\ShortcutWebService;
@@ -566,6 +572,10 @@ class EloquentRepositoryProvider extends ServiceProvider
         DisciplineService::class => DisciplineEloquentRepository::class,
         DisciplineCreateService::class => DisciplineCreateEloquentRepository::class,
         DisciplineUpdateService::class => DisciplineUpdateEloquentRepository::class,
+
+        CourseService::class => CourseEloquentRepository::class,
+        CourseCreateService::class => CourseCreateEloquentRepository::class,
+        CourseUpdateService::class => CourseUpdateEloquentRepository::class,
         //FIPAC ---------------------------------------------------------
         OrganizationService::class => OrganizationEloquentRepository::class,
         OrganizationCreateService::class => OrganizationCreateEloquentRepository::class,

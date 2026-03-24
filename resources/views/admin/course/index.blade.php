@@ -22,7 +22,7 @@
     <div class="col-md-4 col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Editar Disciplina</h4>
+          <h4 class="card-title">Cadastrar Novo Curso</h4>
         </div>
         <div class="card-body">
           @include('flash::message')
@@ -38,9 +38,8 @@
                 </div>
             </div>
           @endif
-          <form class="form form-horizontal" method="POST" action="{{ route('disciplinas.update', $discipline_selected->id) }}" enctype="multipart/form-data">
+          <form class="form form-horizontal" method="POST" action="{{ route('cursos.store') }}" enctype="multipart/form-data">
             @csrf()
-              @method('PUT')
             <div class="row">
               <div class="col-12">
                 <div class="mb-1 row">
@@ -48,23 +47,7 @@
                     <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome do Disciplina"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="name" name="name" value="{{ $discipline_selected->name }}" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="course">Cursos <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <select class="select2 form-select" id="course_id" name="course_id">
-                        <optgroup label="Selecione">
-                          @foreach($courses as  $course)
-                            <option value="{{ $course->id }}" {{ $course->id == $discipline_selected->course_id ? 'selected' : '' }} >{{ isset($course->name) ? $course->name : '' }}</option>
-                          @endforeach
-                        </optgroup>
-                      </select>
+                      <input type="text" class="form-control" id="name" name="name" />
                   </div>
                 </div>
               </div>
@@ -75,7 +58,7 @@
                   </div>
                   <div class="col-sm-9">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="{{ $discipline_selected->order }}" id="order" name="order" />
+                        <input type="number" class="touchspin" value="1" id="order" name="order" />
                     </div>
                   </div>
                 </div>
@@ -87,42 +70,35 @@
                   </div>
                   <div class="col-sm-9">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="{{ $discipline_selected->days }}" id="days" name="days" />
+                        <input type="number" class="touchspin" value="1" id="days" name="days" />
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-12 mt-2">
-                <button type="submit" class="btn btn-primary me-1" style="position: relative; float: left;">Editar</button>
-                </form>
-                <form method="POST" name="form-delete" action="{{ route('disciplinas.destroy', $discipline_selected->id) }}">
-                    @csrf()
-                    @method('delete')
-                    <button type="submit" class="btn btn-danger" style="position: relative; float: left;"
-                      onclick="return confirm('Tem certeza que deseja deletar a Disciplina?');">Deletar
-                    </button>
-                </form>
+              <div class="col-sm-9 offset-sm-3">
+                <button type="submit" class="btn btn-primary me-1">Salvar</button>
+                <button type="reset" class="btn btn-outline-secondary">Resetar</button>
               </div>
             </div>
+          </form>
         </div>
       </div>
     </div>
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Exercícios Cadastrados - Busca Avançada</h4>
+          <h4 class="card-title">Matriculas Cadastradas - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
-        @if (count($exercises) >= 1)
+        @if (count($courses) >= 1)
           <table class="dt-advanced-search table">
             <thead>
               <tr>
                 <th></th>
-                <th>Imagem</th>
-                <th>Tipo</th>
-                <th>Questões</th>
-                <th>Correta</th>
+                <th>Título</th>
+                <th>Ordem</th>
+                <th>Dias</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -130,17 +106,16 @@
             <tfoot>
               <tr>
                 <th></th>
-                <th>Imagem</th>
-                <th>Tipo</th>
-                <th>Questões</th>
-                <th>Correta</th>
+                <th>Título</th>
+                <th>Ordem</th>
+                <th>Dias</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
             </tfoot>
             <tbody>
               @php $i = 0; @endphp
-              @foreach($exercises as $exercise)
+              @foreach($courses as $course)
                 @if($i == 0)
                   @php $i = 1; @endphp
                   <tr class="odd">
@@ -149,20 +124,12 @@
                   <tr class="even">
                 @endif
                     <td class="control sorting_1" tabindex="0" ></td>
+                    <td style="display: none;">{{ $course->name }}</td>
+                    <td style="display: none;">{{ $course->order }}</td>
+                    <td style="display: none;">{{ $course->days  }}</td>
+                    <td style="display: none;">{{isset($course->created_at) ? (($course->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
                     <td style="display: none;">
-                        <img
-                            src="{{ asset('storage/files/' . $exercise->file) }}"
-                            class="me-75"
-                            height="60"
-                            alt="Angular"
-                        />
-                    </td>
-                    <td style="display: none;">{{ $exercise->type }}</td>
-                    <td style="display: none;">{{ $exercise->answers }}</td>
-                    <td style="display: none;">{{ $exercise->correct_answer  }}</td>
-                    <td style="display: none;">{{isset($exercise->created_at) ? (($exercise->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
-                    <td style="display: none;">
-                      <a href="{{ route('exercicios.show', $exercise->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
+                      <a href="{{ route('cursos.show', $course->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
                     </td>
                   </tr>
               @endforeach
@@ -172,7 +139,7 @@
             <div class="alert alert-warning" role="alert">
               <h4 class="alert-heading">Aviso</h4>
               <div class="alert-body">
-                Não existem Exercícios Armazenados.
+                Não existem Cursos Armazenados.
               </div>
             </div>
           @endif
@@ -192,16 +159,17 @@
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
-<script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
-<script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
-<script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/validation/jquery.validate.min.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
+  <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
 @endsection
 
 @section('page-script')
   {{-- Page js files --}}
+  <script src="{{ asset(mix('js/scripts/tables/courses.js')) }}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
-  <script src="{{ asset(mix('js/scripts/tables/exercises.js')) }}"></script>
 @endsection
+
