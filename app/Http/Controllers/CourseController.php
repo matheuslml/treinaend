@@ -14,6 +14,7 @@ use App\Services\CourseCreateService;
 use App\Services\CourseUpdateService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -51,16 +52,34 @@ class CourseController extends Controller
             return view('pages.not-authorized');
         }
         try {
-            dd('s');
             DB::beginTransaction();
 
-            $this->courseCreateService->create($request->toArray());
+            $courseArrayData = $request->toArray();
 
-            flash('Disciplina criada com sucesso!')->success();
+            if(isset($request['image_certificate'])){
+
+                $request->validate([
+                    'image_certificate' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                ]);
+
+                $path = Storage::disk('courses')->put('certificates', $request->file( key:'image_certificate'));
+
+                $courseArrayData = array_merge(
+                    $request->toArray(),
+                    [
+                        'path'  => $path
+                    ]
+                );
+            }
+
+            $this->courseCreateService->create($courseArrayData);
+
+            flash('Curso criada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
+            dd($throwable);
             flash('Erro Cadastrar!')->error();
             return redirect()->back()->withInput();
         }
