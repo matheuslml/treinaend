@@ -98,7 +98,6 @@ class CourseController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             return view('admin.course.show', compact('course_selected', 'unit', 'copyright', 'disciplines'));
         } catch (\Exception $exception) {
-            dd($exception);
             flash('Erro ao buscar a Curso!')->error();
             return redirect()->back()->withInput();
         }
@@ -112,13 +111,34 @@ class CourseController extends Controller
         }
         try {
             DB::beginTransaction();
-            $this->courseUpdateService->update($request->toArray(), $course_id);
+
+                if(isset($request['image_certificate'])){
+
+                    $request->validate([
+                        'image_certificate' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                    ]);
+
+                    $path = Storage::disk('courses')->put('certificates', $request->file( key:'image_certificate'));
+
+                    $courseArrayData = array_merge(
+                        $request->toArray(),
+                        [
+                            'path'  => $path
+                        ]
+                    );
+                    $this->courseUpdateService->update($courseArrayData, $course_id);
+                }
+                else{
+                    $this->courseUpdateService->update($request->toArray(), $course_id);
+                }
+
 
             flash('Curso editado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
+            dd($throwable);
             flash('Erro ao editar!')->error();
             return redirect()->back()->withInput();
         }
