@@ -13,6 +13,7 @@ use App\Models\News;
 use App\Models\Project;
 use App\Models\SocialMedia;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\LeadershipService;
 use App\Services\LeadershipCreateService;
@@ -42,13 +43,14 @@ class LeadershipController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $leaderships = Leadership::with('socialMedia')
                                         ->latest()
                                         ->get();
-            return view('admin.leadership.index', ['pageConfigs' => $pageConfigs], compact('leaderships', 'unit', 'copyright'));
+            return view('admin.leadership.index', ['pageConfigs' => $pageConfigs], compact('leaderships', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as lideranças Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -104,7 +106,7 @@ class LeadershipController extends Controller
             $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            return view('admin.leadership.show', compact('leadership', 'social_media', 'unit', 'copyright'));
+            return view('admin.leadership.show', compact('leadership', 'social_media', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a liderança!')->error();
             return redirect()->back()->withInput();
@@ -233,6 +235,6 @@ class LeadershipController extends Controller
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
-        return view('web.leadership.index', compact('service_pages', 'institucional_pages', 'banner', 'leaderships_headship', 'leaderships_employee', 'unit', 'copyright', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.leadership.index', compact('service_pages', 'institucional_pages', 'banner', 'leaderships_headship', 'leaderships_employee', 'unit', 'copyright', 'courses_nav', 'news', 'projects', 'leaderships', 'galleries'));
     }
 }

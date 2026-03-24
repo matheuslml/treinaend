@@ -19,6 +19,7 @@ use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\BiddingService;
 use App\Services\BiddingCreateService;
@@ -44,13 +45,14 @@ class BiddingController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $biddings = Bidding::with('modality')
                                         ->latest()
                                         ->get();
-            return view('admin.bidding.bidding_index', ['pageConfigs' => $pageConfigs], compact('biddings', 'unit', 'copyright'));
+            return view('admin.bidding.bidding_index', ['pageConfigs' => $pageConfigs], compact('biddings', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -64,13 +66,14 @@ class BiddingController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $modalities = BiddingModality::with('biddings')->orderBy('title', 'asc')->get();
         $situations = BiddingSituation::with('biddings')->orderBy('title', 'asc')->get();
 
-        return view('admin.bidding.bidding_create', ['pageConfigs' => $pageConfigs], compact('modalities', 'unit', 'copyright', 'situations'));
+        return view('admin.bidding.bidding_create', ['pageConfigs' => $pageConfigs], compact('modalities', 'unit', 'copyright', 'courses_nav', 'situations'));
 
     }
 
@@ -119,7 +122,7 @@ class BiddingController extends Controller
             $modalities = BiddingModality::with('biddings')->orderBy('title', 'asc')->get();
             $situations = BiddingSituation::with('biddings')->orderBy('title', 'asc')->get();
 
-            return view('admin.bidding.bidding_show', compact('bidding', 'unit', 'copyright', 'biddings', 'modalities', 'situations', 'possible_winners'));
+            return view('admin.bidding.bidding_show', compact('bidding', 'unit', 'copyright', 'courses_nav', 'biddings', 'modalities', 'situations', 'possible_winners'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
@@ -182,7 +185,7 @@ class BiddingController extends Controller
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
-        return view('web.bidding.index', compact('service_pages', 'institucional_pages', 'banner', 'biddings', 'modalities', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.bidding.index', compact('service_pages', 'institucional_pages', 'banner', 'biddings', 'modalities', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_index_filter(Request $request)
@@ -200,7 +203,7 @@ class BiddingController extends Controller
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
-        return view('web.bidding.index', compact('service_pages', 'institucional_pages', 'banner', 'biddings', 'modalities', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.bidding.index', compact('service_pages', 'institucional_pages', 'banner', 'biddings', 'modalities', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function show_web($bidding_id)
@@ -219,7 +222,7 @@ class BiddingController extends Controller
             $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
             $leaderships = Leadership::all();
             $galleries = Gallery::all();
-            return view('web.bidding.show', compact('service_pages', 'institucional_pages', 'bidding', 'bidding_files', 'bidding_winners', 'bidding_agreements', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+            return view('web.bidding.show', compact('service_pages', 'institucional_pages', 'bidding', 'bidding_files', 'bidding_winners', 'bidding_agreements', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
             return redirect()->back()->withInput();

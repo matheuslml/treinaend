@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         return view('/content/charts-maps/chart-apex', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Chartjs Charts
@@ -34,7 +35,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/charts-maps/chart-chartjs', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Google Maps
@@ -48,6 +49,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/charts-maps/maps-leaflet', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

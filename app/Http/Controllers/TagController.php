@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Tag;
 use App\Http\Requests\TagRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\TagService;
 use App\Services\TagCreateService;
@@ -30,11 +31,12 @@ class TagController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $tags = Tag::with('news')->latest()->get();
-            return view('admin.news.tag_index', ['pageConfigs' => $pageConfigs], compact('tags', 'unit', 'copyright'));
+            return view('admin.news.tag_index', ['pageConfigs' => $pageConfigs], compact('tags', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as TAGS Cadastradas!')->error();
@@ -79,7 +81,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $tag_selected = $this->tagService->show($tag_id);
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.tag_show', compact('tag_selected', 'tags', 'unit', 'copyright'));
+            return view('admin.news.tag_show', compact('tag_selected', 'tags', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

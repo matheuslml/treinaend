@@ -10,6 +10,7 @@ use App\Services\TypeAccessUpdateService;
 use App\Http\Requests\TypeAccessRequest;
 use App\Models\TypeAccess;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,11 +30,12 @@ class TypeAccessController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $type_accesses = TypeAccess::with('ombudsmen')->latest()->get();
-            return view('admin.ombudsman.access_index', ['pageConfigs' => $pageConfigs], compact('type_accesses', 'unit', 'copyright'));
+            return view('admin.ombudsman.access_index', ['pageConfigs' => $pageConfigs], compact('type_accesses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Acessos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_accesses = TypeAccess::with('ombudsmen')->latest()->get();
             $access_selected = $this->typeAccessService->show($access_id);
-            return view('admin.ombudsman.access_show', compact('access_selected', 'type_accesses', 'unit', 'copyright'));
+            return view('admin.ombudsman.access_show', compact('access_selected', 'type_accesses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -111,6 +113,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_access = TypeAccess::find($access);
             $type_access->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $type_accesses = TypeAccess::with('ombudsmen')->latest()->get();
             flash('Tipo de Acesso deletado com sucesso!')->success();

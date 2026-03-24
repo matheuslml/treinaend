@@ -17,6 +17,7 @@ use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 use App\Services\DirectHireService;
@@ -43,13 +44,14 @@ class DirectHireController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $direct_hires = DirectHire::with('modality')
                                         ->latest()
                                         ->get();
-            return view('admin.directHire.index', ['pageConfigs' => $pageConfigs], compact('direct_hires', 'unit', 'copyright'));
+            return view('admin.directHire.index', ['pageConfigs' => $pageConfigs], compact('direct_hires', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Contratações Diretas Cadastrada-s!')->error();
@@ -64,13 +66,14 @@ class DirectHireController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $modalities = DirectHireModality::with('directHires')->orderBy('title', 'asc')->get();
         $situations = DirectHireSituations::with('directHires')->orderBy('title', 'asc')->get();
 
-        return view('admin.directHire.create', ['pageConfigs' => $pageConfigs], compact('modalities', 'situations', 'unit', 'copyright'));
+        return view('admin.directHire.create', ['pageConfigs' => $pageConfigs], compact('modalities', 'situations', 'unit', 'copyright', 'courses_nav'));
 
     }
 
@@ -119,7 +122,7 @@ class DirectHireController extends Controller
             $modalities = DirectHireModality::with('directHires')->orderBy('title', 'asc')->get();
             $situations = DirectHireSituations::with('directHires')->orderBy('title', 'asc')->get();
 
-            return view('admin.directHire.show', compact('direct_hire', 'unit', 'copyright', 'direct_hires', 'modalities', 'situations', 'possible_winners'));
+            return view('admin.directHire.show', compact('direct_hire', 'unit', 'copyright', 'courses_nav', 'direct_hires', 'modalities', 'situations', 'possible_winners'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
@@ -165,7 +168,7 @@ class DirectHireController extends Controller
         $galleries = Gallery::all();
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
-        return view('web.directHire.index', compact('service_pages', 'institucional_pages', 'banner', 'direct_hires', 'modalities', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.directHire.index', compact('service_pages', 'institucional_pages', 'banner', 'direct_hires', 'modalities', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_index_filter(Request $request)
@@ -183,7 +186,7 @@ class DirectHireController extends Controller
         $direct_hires = DirectHire::filter($request->all())->where('status', 'PUBLISHED')->paginate(5);
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
-        return view('web.directHire.index', compact('service_pages', 'institucional_pages', 'banner', 'direct_hires', 'modalities', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.directHire.index', compact('service_pages', 'institucional_pages', 'banner', 'direct_hires', 'modalities', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function show_web($direct_hire_id)
@@ -201,7 +204,7 @@ class DirectHireController extends Controller
             $leaderships = Leadership::all();
             $galleries = Gallery::all();
             $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
-            return view('web.directHire.show', compact('service_pages', 'institucional_pages', 'direct_hire', 'direct_hire_files', 'direct_hire_winners', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+            return view('web.directHire.show', compact('service_pages', 'institucional_pages', 'direct_hire', 'direct_hire_files', 'direct_hire_winners', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
             return redirect()->back()->withInput();

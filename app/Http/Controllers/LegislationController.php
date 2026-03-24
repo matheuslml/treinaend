@@ -18,6 +18,7 @@ use App\Models\News;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use App\Services\LegislationService;
@@ -47,6 +48,7 @@ class LegislationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -55,7 +57,7 @@ class LegislationController extends Controller
                                         ->get();
             $categories = LegislationCategory::with('legislations')->orderBy('category', 'asc')->get();
             $situations = LegislationSituation::with('legislations')->orderBy('situation', 'asc')->get();
-            return view('admin.legislation.legislation_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'legislations', 'categories', 'situations'));
+            return view('admin.legislation.legislation_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'legislations', 'categories', 'situations'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -69,6 +71,7 @@ class LegislationController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -78,7 +81,7 @@ class LegislationController extends Controller
         $subjects = LegislationSubject::with('legislations')->orderBy('subject', 'asc')->get();
         $units = Unit::all();
 
-        return view('admin.legislation.legislation_create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'categories', 'situations', 'authors', 'subjects', 'units'));
+        return view('admin.legislation.legislation_create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'categories', 'situations', 'authors', 'subjects', 'units'));
 
     }
 
@@ -127,7 +130,7 @@ class LegislationController extends Controller
                                         ->latest()
                                         ->get();
             $categories = LegislationCategory::with('legislations')->orderBy('category', 'asc')->get();
-            return view('admin.legislation.legislation_show', compact('unit', 'copyright', 'legislation', 'legislations', 'categories', 'situations', 'categories', 'authors', 'subjects', 'units'));
+            return view('admin.legislation.legislation_show', compact('unit', 'copyright', 'courses_nav', 'legislation', 'legislations', 'categories', 'situations', 'categories', 'authors', 'subjects', 'units'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -192,7 +195,7 @@ class LegislationController extends Controller
             $legislations = Legislation::all();
             $categories = LegislationCategory::orderBy('category', 'asc')->get();
             $situations = LegislationSituation::orderBy('situation', 'asc')->get();
-            return view('admin.legislation.report_index', compact('legislations', 'categories', 'situations', 'unit', 'copyright'));
+            return view('admin.legislation.report_index', compact('legislations', 'categories', 'situations', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar!')->error();
             return redirect()->back()->withInput();
@@ -397,7 +400,7 @@ class LegislationController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.legislation.report_pdf', compact('legislations', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.legislation.report_pdf', compact('legislations', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('legislations.pdf');
@@ -428,7 +431,7 @@ class LegislationController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.legislation.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislations', 'categories', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.legislation.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislations', 'categories', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_index_filter(Request $request)
@@ -447,7 +450,7 @@ class LegislationController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.legislation.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislations', 'categories', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.legislation.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislations', 'categories', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function show_web($legislation_id)
@@ -465,7 +468,7 @@ class LegislationController extends Controller
             $leaderships = Leadership::all();
             $galleries = Gallery::all();
             $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-            return view('web.legislation.show', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislation', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+            return view('web.legislation.show', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'legislation', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
             return redirect()->back()->withInput();

@@ -12,6 +12,7 @@ use App\Models\Lesson;
 use App\Models\Person;
 use App\Models\SupportMaterial;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\User;
 use Carbon\Carbon;
 use Detection\MobileDetect;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Auth;
 class StudentPainel extends Controller
 {
 
-    public function disciplines_student_index()
+    public function disciplines_student_index($course_id)
     {
         /*if (! Gate::allows('Ver Menu do Aluno')) {
             return view('pages.not-authorized');
@@ -29,6 +30,7 @@ class StudentPainel extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -36,17 +38,17 @@ class StudentPainel extends Controller
             $user = User::find($userId);
             $person_id = $user->person_id;
 
-            //para testar se o Aluno nunca usou aula no sistema antigo
+            //fazer a verificação se o curso está pago
             $new_student = resolve(NewStudent::class);
-            $new_student->handle($person_id);
+            $new_student->handle($person_id, $course_id);
 
-            $disciplines = Discipline::orderBy('order', 'asc')
+            $disciplines = Discipline::where('course_id', $course_id)->orderBy('order', 'asc')
                 ->with(['person' => function ($query) use ($person_id) {
                     $query->where('person_id', $person_id);
                 }])
                 ->get();
 
-            $discipline_atual = Discipline::orderBy('order', 'desc')
+            $discipline_atual = Discipline::where('course_id', $course_id)->orderBy('order', 'desc')
                 ->whereHas('person', function ($query) use ($person_id) {
                     $query->where('person_id', $person_id)
                         ->where(function ($q) {
@@ -63,7 +65,7 @@ class StudentPainel extends Controller
                 }])
                 ->first();
 
-            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'discipline_atual'));
+            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();
@@ -80,6 +82,7 @@ class StudentPainel extends Controller
             $userId = Auth::id();
             $user = User::find($userId);
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
@@ -117,7 +120,7 @@ class StudentPainel extends Controller
                                     ->limit(10)
                                     ->get();
 
-            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
+            return view('admin.student_painel.exercises', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'courses_nav', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
             return redirect()->back()->withInput();

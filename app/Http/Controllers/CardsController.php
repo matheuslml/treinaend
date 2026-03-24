@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -20,7 +21,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     ];
     return view('/content/cards/card-basic', [
       'breadcrumbs' => $breadcrumbs
-    ], compact('unit', 'copyright'));
+    ], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Card Advance
@@ -35,7 +36,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     ];
     return view('/content/cards/card-advance', [
       'breadcrumbs' => $breadcrumbs
-    ], compact('unit', 'copyright'));
+    ], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Card Statistics
@@ -50,7 +51,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     ];
     return view('/content/cards/card-statistics', [
       'breadcrumbs' => $breadcrumbs
-    ], compact('unit', 'copyright'));
+    ], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Card Analytics
@@ -65,7 +66,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     ];
     return view('/content/cards/card-analytics', [
       'breadcrumbs' => $breadcrumbs
-    ], compact('unit', 'copyright'));
+    ], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Card Actions
@@ -80,6 +81,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
     ];
     return view('/content/cards/card-actions', [
       'breadcrumbs' => $breadcrumbs
-    ], compact('unit', 'copyright'));
+    ], compact('unit', 'copyright', 'courses_nav'));
   }
 }

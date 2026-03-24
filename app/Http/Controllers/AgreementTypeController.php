@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AgreementType;
 use App\Http\Requests\AgreementTypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\AgreementTypeService;
 use App\Services\AgreementTypeCreateService;
@@ -30,11 +31,12 @@ class AgreementTypeController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $types = AgreementType::with('agreements')->latest()->get();
-            return view('admin.bidding.agreement_type_index', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright'));
+            return view('admin.bidding.agreement_type_index', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Tipos Cadastrados!')->error();
@@ -79,7 +81,7 @@ class AgreementTypeController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $types = AgreementType::with('agreements')->latest()->get();
             $type_selected = $this->agreementTypeService->show($type_id);
-            return view('admin.bidding.agreement_type_show', compact('type_selected', 'types', 'unit', 'copyright'));
+            return view('admin.bidding.agreement_type_show', compact('type_selected', 'types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Contrato!')->error();
             return redirect()->back()->withInput();

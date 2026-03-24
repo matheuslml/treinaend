@@ -137,7 +137,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);
     Route::resource('/matriculas', RegistrationController::class);
     //Main - Treinaend - Student painel -----------------------------------------------------------------
-    Route::get('disciplines_student_index', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
+    Route::get('disciplines_student_index/{courseId}', [StudentPainel::class, 'disciplines_student_index'])->name('disciplines_student_index');
     Route::get('exercises_student_index/{disciplineId}', [StudentPainel::class, 'exercises_student_index'])->name('exercises_student_index');
     Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
     Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');

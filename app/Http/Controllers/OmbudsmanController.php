@@ -17,6 +17,7 @@ use App\Services\OmbudsmanUpdateService;
 use App\Models\TypeAccess;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
@@ -41,11 +42,12 @@ class OmbudsmanController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $ombudsmen = $this->ombudsmanService->get();
-            return view('admin.ombudsman.ombudsman_index', ['pageConfigs' => $pageConfigs], compact('ombudsmen', 'unit', 'copyright'));
+            return view('admin.ombudsman.ombudsman_index', ['pageConfigs' => $pageConfigs], compact('ombudsmen', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Manifestações Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -62,7 +64,7 @@ class OmbudsmanController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $ombudsman = $this->ombudsmanService->show($ombudsman_id);
-            return view('admin.ombudsman.ombudsman_show', compact('ombudsman', 'unit', 'copyright'));
+            return view('admin.ombudsman.ombudsman_show', compact('ombudsman', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Manifestação!')->error();
@@ -87,7 +89,7 @@ class OmbudsmanController extends Controller
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.ombudsman.index', compact('categories', 'institucional_pages', 'service_pages', 'banner', 'web_footer', 'type_requests', 'unit', 'copyright', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.ombudsman.index', compact('categories', 'institucional_pages', 'service_pages', 'banner', 'web_footer', 'type_requests', 'unit', 'copyright', 'courses_nav', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     /**
@@ -127,7 +129,7 @@ class OmbudsmanController extends Controller
             $ombudsman = Ombudsman::all();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.ombudsman.report_index', compact('ombudsman', 'unit', 'copyright'));
+            return view('admin.ombudsman.report_index', compact('ombudsman', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar os RAS Cadastrados!')->error();
             return redirect()->back()->withInput();

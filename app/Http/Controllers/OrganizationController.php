@@ -12,6 +12,7 @@ use App\Services\OrganizationCreateService;
 use App\Services\OrganizationUpdateService;
 use App\Http\Requests\OrganizationRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 
 class OrganizationController extends Controller
@@ -30,11 +31,12 @@ class OrganizationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $organizations = $this->organizationService->get();
-            return view('admin.organization.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'unit', 'copyright'));
+            return view('admin.organization.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Organizações Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -94,7 +96,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $organizations = $this->organizationService->get();
             $organization_selected = $this->organizationService->show($organization_id);
-            return view('admin.organization.show', compact('organization_selected', 'organizations', 'unit', 'copyright'));
+            return view('admin.organization.show', compact('organization_selected', 'organizations', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Organização!')->error();
@@ -112,6 +114,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $organization = Organization::find($organization);
             $organization->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $organizations = $this->organizationService->get();
             flash('Organização deletada com sucesso!')->success();

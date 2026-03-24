@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Departament;
 use App\Models\Occupation;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 use App\Services\DepartamentService;
@@ -34,12 +35,13 @@ class DepartamentController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $units = Unit::all();
             $departaments = $this->departamentService->get();
-            return view('admin.departament.index', ['pageConfigs' => $pageConfigs], compact('departaments', 'units', 'unit', 'copyright'));
+            return view('admin.departament.index', ['pageConfigs' => $pageConfigs], compact('departaments', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar os Departamentos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -80,7 +82,7 @@ class DepartamentController extends Controller
             $departaments = $this->departamentService->get();
             $units = Unit::all();
             $departament_selected = $this->departamentService->show($departament_id);
-            return view('admin.departament.show', compact('departament_selected', 'departaments', 'units', 'unit', 'copyright'));
+            return view('admin.departament.show', compact('departament_selected', 'departaments', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o departamento!')->error();
             return redirect()->back()->withInput();
@@ -118,6 +120,7 @@ class DepartamentController extends Controller
             $departament = Departament::find($departament);
             $departament->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             flash('Departamento deletado com sucesso!')->success();
             $units = Unit::all();
             $departaments = $this->departamentService->get();

@@ -10,6 +10,7 @@ use App\Models\BlankPage;
 use App\Models\Category;
 use App\Models\Tag;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use App\Services\NewsService;
@@ -44,13 +45,14 @@ class NewsController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $news = News::with('tags')
                                         ->latest()
                                         ->get();
-            return view('admin.news.news_index', ['pageConfigs' => $pageConfigs], compact('news', 'unit', 'copyright'));
+            return view('admin.news.news_index', ['pageConfigs' => $pageConfigs], compact('news', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Notícias Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -64,13 +66,14 @@ class NewsController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $tags = Tag::with('news')->orderBy('tag', 'asc')->get();
         $categories = Category::with('news')->orderBy('title', 'asc')->get();
 
-        return view('admin.news.news_create', ['pageConfigs' => $pageConfigs], compact('tags', 'categories', 'unit', 'copyright'));
+        return view('admin.news.news_create', ['pageConfigs' => $pageConfigs], compact('tags', 'categories', 'unit', 'copyright', 'courses_nav'));
 
     }
 
@@ -173,7 +176,7 @@ class NewsController extends Controller
             $tags = Tag::with('news')->orderBy('tag', 'asc')->get();
             $categories = Category::with('news')->orderBy('title', 'asc')->get();
 
-            return view('admin.news.news_show', compact('news', 'tags', 'categories', 'unit', 'copyright' ));
+            return view('admin.news.news_show', compact('news', 'tags', 'categories', 'unit', 'copyright', 'courses_nav' ));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a Notícia!')->error();
             return redirect()->back()->withInput();
@@ -328,7 +331,7 @@ class NewsController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
 
-        return view('web.news.index', compact('service_pages', 'institucional_pages', 'banner', 'news', 'unit', 'copyright', 'categories', 'tags', 'web_footer'));
+        return view('web.news.index', compact('service_pages', 'institucional_pages', 'banner', 'news', 'unit', 'copyright', 'courses_nav', 'categories', 'tags', 'web_footer'));
     }
 
     public function web_show($new_id)
@@ -342,7 +345,7 @@ class NewsController extends Controller
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
 
 
-        return view('web.news.show', compact('service_pages', 'institucional_pages','unit', 'copyright', 'new', 'news', 'web_footer'));
+        return view('web.news.show', compact('service_pages', 'institucional_pages','unit', 'copyright', 'courses_nav', 'new', 'news', 'web_footer'));
     }
 
 

@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Copyright;
 use App\Models\OfficialDiary;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\WebFooter;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;

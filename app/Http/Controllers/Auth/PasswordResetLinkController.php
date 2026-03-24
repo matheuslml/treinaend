@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\Copyright;
 use App\Models\Unit;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
 
@@ -19,7 +20,7 @@ class PasswordResetLinkController extends Controller
     {
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $unit = Unit::where('web', true)->first();
-        return view('auth.forgot-password', compact('unit', 'copyright'));
+        return view('auth.forgot-password', compact('unit', 'copyright', 'courses_nav'));
     }
 
     /**

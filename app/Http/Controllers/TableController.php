@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -17,7 +18,7 @@ class TableController extends Controller
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/table/table-bootstrap/table-bootstrap', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Datatable Basic
@@ -27,7 +28,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
-        return view('/content/table/table-datatable/table-datatable-basic', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright'));
+        return view('/content/table/table-datatable/table-datatable-basic', ['breadcrumbs' => $breadcrumbs], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Datatable Basic
@@ -41,6 +42,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/table/table-datatable/table-datatable-advance', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

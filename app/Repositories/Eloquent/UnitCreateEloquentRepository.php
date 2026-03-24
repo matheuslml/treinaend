@@ -3,6 +3,7 @@
 namespace App\Repositories\Eloquent;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;

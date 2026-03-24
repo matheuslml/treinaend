@@ -18,6 +18,7 @@ use App\Models\Person;
 use App\Models\Project;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\BiddingAgreementService;
 use App\Services\BiddingAgreementCreateService;
@@ -43,13 +44,14 @@ class BiddingAgreementController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $agreements = BiddingAgreement::with('bidding')
                                         ->latest()
                                         ->get();
-            return view('admin.bidding.agreement_index', ['pageConfigs' => $pageConfigs], compact('agreements', 'unit', 'copyright'));
+            return view('admin.bidding.agreement_index', ['pageConfigs' => $pageConfigs], compact('agreements', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Contratos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -63,6 +65,7 @@ class BiddingAgreementController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -75,7 +78,7 @@ class BiddingAgreementController extends Controller
         //$modalities = BiddingAgreementModality::with('biddingAgreements')->orderBy('title', 'asc')->get();
         //$situations = BiddingAgreementSituation::with('biddingAgreements')->orderBy('title', 'asc')->get();
 
-        return view('admin.bidding.agreement_create', ['pageConfigs' => $pageConfigs], compact('biddings', 'unit', 'copyright', 'origins', 'types', 'situations', 'document_types'));
+        return view('admin.bidding.agreement_create', ['pageConfigs' => $pageConfigs], compact('biddings', 'unit', 'copyright', 'courses_nav', 'origins', 'types', 'situations', 'document_types'));
 
     }
 
@@ -118,7 +121,7 @@ class BiddingAgreementController extends Controller
             $document_types = DocumentType::all();
             $biddings = Bidding::all();
 
-            return view('admin.bidding.agreement_show', compact('agreement', 'unit', 'copyright', 'agreement_files', 'biddings', 'origins', 'types', 'situations', 'document_types' ));
+            return view('admin.bidding.agreement_show', compact('agreement', 'unit', 'copyright', 'courses_nav', 'agreement_files', 'biddings', 'origins', 'types', 'situations', 'document_types' ));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();
@@ -180,7 +183,7 @@ class BiddingAgreementController extends Controller
         $agreements = BiddingAgreement::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(10);
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
-        return view('web.agreement.index', compact('service_pages', 'institucional_pages', 'banner', 'agreements', 'origins', 'types', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects'));
+        return view('web.agreement.index', compact('service_pages', 'institucional_pages', 'banner', 'agreements', 'origins', 'types', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects'));
     }
 
     public function web_index_filter(Request $request)
@@ -197,7 +200,7 @@ class BiddingAgreementController extends Controller
         $agreements = BiddingAgreement::filter($request->all())->where('status', 'PUBLISHED')->paginate(5);
         $news = News::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(3);
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
-        return view('web.agreement.index', compact('service_pages', 'institucional_pages', 'banner', 'agreements', 'origins', 'types', 'situations', 'unit', 'copyright', 'type_requests', 'news', 'projects'));
+        return view('web.agreement.index', compact('service_pages', 'institucional_pages', 'banner', 'agreements', 'origins', 'types', 'situations', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects'));
     }
 
     public function show_web($bidding_agreement_id): View
@@ -213,7 +216,7 @@ class BiddingAgreementController extends Controller
             $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
             $agreement_files = BiddingAgreementFile::where('bidding_agreement_id', $bidding_agreement_id)->paginate(10);
 
-            return view('web.agreement.show', compact('service_pages', 'institucional_pages', 'bidding_agreement', 'agreement_files', 'unit', 'copyright', 'type_requests', 'news', 'projects'));
+            return view('web.agreement.show', compact('service_pages', 'institucional_pages', 'bidding_agreement', 'agreement_files', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
             return redirect()->back()->withInput();

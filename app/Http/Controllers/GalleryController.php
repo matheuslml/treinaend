@@ -11,6 +11,7 @@ use App\Models\Leadership;
 use App\Models\News;
 use App\Models\Project;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
@@ -42,12 +43,13 @@ class GalleryController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $galleries = Gallery::all();
             $gallery_types = GalleryType::orderBy('slug', 'asc')->get();
-            return view('admin.gallery.index', ['pageConfigs' => $pageConfigs], compact('galleries', 'unit', 'copyright', 'gallery_types'));
+            return view('admin.gallery.index', ['pageConfigs' => $pageConfigs], compact('galleries', 'unit', 'copyright', 'courses_nav', 'gallery_types'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Imagens da Galeria Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -107,7 +109,7 @@ class GalleryController extends Controller
             $gallery_types = GalleryType::orderBy('slug', 'asc')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.gallery.show', compact('gallery', 'unit', 'copyright', 'gallery_types'));
+            return view('admin.gallery.show', compact('gallery', 'unit', 'copyright', 'courses_nav', 'gallery_types'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a imagem!')->error();
             return redirect()->back()->withInput();
@@ -232,6 +234,6 @@ class GalleryController extends Controller
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.gallery.index', compact('categories', 'service_pages', 'institucional_pages', 'web_footer', 'banner', 'galleries','unit', 'copyright', 'news', 'projects', 'leaderships', 'gallery_types'));
+        return view('web.gallery.index', compact('categories', 'service_pages', 'institucional_pages', 'web_footer', 'banner', 'galleries','unit', 'copyright', 'courses_nav', 'news', 'projects', 'leaderships', 'gallery_types'));
     }
 }

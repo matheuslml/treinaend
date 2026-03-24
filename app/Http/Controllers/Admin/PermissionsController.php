@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StorePermissionsRequest;
 use App\Http\Requests\Admin\UpdatePermissionsRequest;
+use App\Models\Course;
 use App\Models\Permission as ModelsPermission;
 use App\Models\PermissionInformation;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
-use function GuzzleHttp\Promise\all;
 
 class PermissionsController extends Controller
 {
@@ -32,8 +32,9 @@ class PermissionsController extends Controller
         $pageConfigs = ['pageHeader' => false,];
 
         $permissions = ModelsPermission::all();
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('/admin/rolesPermission/access-permissions', ['pageConfigs' => $pageConfigs], compact('permissions'));
+        return view('/admin/rolesPermission/access-permissions', ['pageConfigs' => $pageConfigs], compact('permissions', 'courses_nav'));
     }
 
     /**
@@ -50,8 +51,9 @@ class PermissionsController extends Controller
         $pageConfigs = ['pageHeader' => false,];
 
         $permissions = ModelsPermission::with('users')->get();
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('/admin/rolesPermission/access-permissions-create', ['pageConfigs' => $pageConfigs], compact('permissions'));
+        return view('/admin/rolesPermission/access-permissions-create', ['pageConfigs' => $pageConfigs], compact('permissions', 'courses_nav'));
     }
 
     /**
@@ -101,8 +103,9 @@ class PermissionsController extends Controller
         }
         
         $pageConfigs = ['pageHeader' => false,];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('/admin/rolesPermission/access-permissions-edit', ['pageConfigs' => $pageConfigs], compact('permission'));
+        return view('/admin/rolesPermission/access-permissions-edit', ['pageConfigs' => $pageConfigs], compact('permission', 'courses_nav'));
     }
 
     /**

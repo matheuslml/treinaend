@@ -10,6 +10,7 @@ use App\Services\GalleryTypeUpdateService;
 use App\Http\Requests\GalleryTypeRequest;
 use App\Models\GalleryType;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,11 +30,12 @@ class GalleryTypeController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $gallery_types = GalleryType::orderBy('slug', 'asc')->get();
-            return view('admin.gallery.type_index', ['pageConfigs' => $pageConfigs], compact('gallery_types', 'unit', 'copyright'));
+            return view('admin.gallery.type_index', ['pageConfigs' => $pageConfigs], compact('gallery_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Galerias Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ class GalleryTypeController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $gallery_types = GalleryType::orderBy('slug', 'asc')->get();
             $type_selected = $this->galleryTypeService->show($type_id);
-            return view('admin.gallery.type_show', compact('type_selected', 'gallery_types', 'unit', 'copyright'));
+            return view('admin.gallery.type_show', compact('type_selected', 'gallery_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Galeria!')->error();
             return redirect()->back()->withInput();
@@ -111,11 +113,12 @@ class GalleryTypeController extends Controller
             $type = GalleryType::find($type);
             $type->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $gallery_types = GalleryType::orderBy('slug', 'asc')->get();
-            return view('admin.gallery.type_index', ['pageConfigs' => $pageConfigs], compact('gallery_types', 'unit', 'copyright'));
+            return view('admin.gallery.type_index', ['pageConfigs' => $pageConfigs], compact('gallery_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao deletar o Tipo de Galeria!')->error();
             return redirect()->back()->withInput();

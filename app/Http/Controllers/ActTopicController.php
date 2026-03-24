@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\ActTopic;
 use App\Http\Requests\ActTopicRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\ActTopicService;
 use App\Services\ActTopicCreateService;
@@ -31,6 +32,7 @@ class ActTopicController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -50,7 +52,7 @@ class ActTopicController extends Controller
                 }
             }
 
-            return view('admin.official_diary.act_topic_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'act_topics'));
+            return view('admin.official_diary.act_topic_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'act_topics'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -86,6 +88,7 @@ class ActTopicController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -107,7 +110,7 @@ class ActTopicController extends Controller
                 }
             }
 
-            return view('admin.official_diary.act_topic_show', compact('act_topic_selected', 'act_topics', 'unit', 'copyright'));
+            return view('admin.official_diary.act_topic_show', compact('act_topic_selected', 'act_topics', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

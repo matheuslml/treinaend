@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -19,7 +20,7 @@ class FormsController extends Controller
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-input', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Input-groups
@@ -33,7 +34,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-input-groups', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Input-mask
@@ -47,7 +48,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-input-mask', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Textarea
@@ -61,7 +62,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-textarea', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Checkbox
@@ -75,7 +76,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-checkbox', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Radio
@@ -89,7 +90,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-radio', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - custom_options
@@ -103,7 +104,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-custom-options', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Switch
@@ -117,7 +118,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-switch', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Select
@@ -131,7 +132,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-select', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Number Input
@@ -145,7 +146,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-number-input', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // File Uploader
@@ -159,7 +160,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-file-uploader', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Quill Editor
@@ -173,7 +174,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-quill-editor', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Elements - Date & time Picker
@@ -187,7 +188,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-elements/form-date-time-picker', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Layouts
@@ -201,7 +202,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-layout', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Wizard
@@ -215,7 +216,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-wizard', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Form Validation
@@ -229,7 +230,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-validation', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
     // Form repeater
     public function form_repeater()
@@ -242,6 +243,6 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         return view('/content/forms/form-repeater', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

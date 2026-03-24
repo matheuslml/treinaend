@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WebFooter;
 use App\Http\Requests\WebFooterRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\WebFooterService;
 use App\Services\WebFooterCreateService;
@@ -36,12 +37,13 @@ class WebFooterController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $web_footers = WebFooter::all();
 
-            return view('admin.webfooter.index', ['pageConfigs' => $pageConfigs], compact('web_footers', 'unit', 'copyright'));
+            return view('admin.webfooter.index', ['pageConfigs' => $pageConfigs], compact('web_footers', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as WebFooter Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -168,7 +170,7 @@ class WebFooterController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $web_footers = WebFooter::all();
 
-            return view('admin.webfooter.show', compact('web_footer', 'web_footers', 'unit', 'copyright' ));
+            return view('admin.webfooter.show', compact('web_footer', 'web_footers', 'unit', 'copyright', 'courses_nav' ));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a WebFooter!')->error();
             return redirect()->back()->withInput();

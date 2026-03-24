@@ -6,6 +6,7 @@ use App\Models\DirectHireItem;
 use App\Http\Requests\DirectHireItemRequest;
 use App\Models\DirectHire;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\DirectHireItemService;
 use App\Services\DirectHireItemCreateService;
@@ -56,7 +57,7 @@ class DirectHireItemController extends Controller
             $item_selected = $this->directHireItemService->show($item_id);
             $directHire_id = $item_selected->directHire_id;
             $directHire = DirectHire::find($directHire_id);
-            return view('admin.DirectHire.Item_show', compact('item_selected', 'DirectHire', 'unit', 'copyright'));
+            return view('admin.DirectHire.Item_show', compact('item_selected', 'DirectHire', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

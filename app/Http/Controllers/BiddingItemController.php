@@ -6,6 +6,7 @@ use App\Models\BiddingItem;
 use App\Http\Requests\BiddingItemRequest;
 use App\Models\Bidding;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\BiddingItemService;
 use App\Services\BiddingItemCreateService;
@@ -55,7 +56,7 @@ class BiddingItemController extends Controller
             $item_selected = $this->biddingItemService->show($item_id);
             $bidding_id = $item_selected->bidding_id;
             $bidding = Bidding::find($bidding_id);
-            return view('admin.bidding.Item_show', compact('item_selected', 'bidding', 'unit', 'copyright'));
+            return view('admin.bidding.Item_show', compact('item_selected', 'bidding', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

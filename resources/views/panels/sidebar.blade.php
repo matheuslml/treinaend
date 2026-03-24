@@ -50,15 +50,17 @@ $configData = Helper::applClasses();
       </li>
       @can('Ver Menu do Aluno')
       <li class="navigation-header">
-        <span>Painel do Aluno</span>
+        <span>Cursos</span>
         <i data-feather="more-horizontal"></i>
       </li>
-      <li class="nav-item  ">
-        <a href="{{ route('disciplines_student_index') }}" class="d-flex align-items-center" target="_self">
-          <i data-feather="book"></i>
-          <span class="menu-title text-truncate">Disciplinas</span>
-        </a>
-      </li>
+        @foreach ($courses_nav as $course)
+          <li class="nav-item  ">
+            <a href="{{ route('disciplines_student_index', $course->id) }}" class="d-flex align-items-center" target="_self">
+              <i data-feather="book"></i>
+              <span class="menu-title text-truncate">{{ $course->name }}</span>
+            </a>
+          </li>
+        @endforeach
       @endcan
       @can('Ver Menu da Treinaend')
       <li class="navigation-header">

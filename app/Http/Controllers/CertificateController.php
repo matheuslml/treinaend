@@ -6,6 +6,7 @@ use App\Models\Certificate;
 use Illuminate\Http\Request;
 use App\Http\Requests\CertificateRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\CertificateService;
 use App\Services\CertificateCreateService;
@@ -32,12 +33,13 @@ class CertificateController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $certificates = Certificate::with('news')->latest()->get();
             dd($certificates);
-            return view('admin.certificate.index', ['pageConfigs' => $pageConfigs], compact('certificates', 'unit', 'copyright'));
+            return view('admin.certificate.index', ['pageConfigs' => $pageConfigs], compact('certificates', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Certificados Cadastrados!')->error();
@@ -82,7 +84,7 @@ class CertificateController extends Controller
             $certificate_selected = $this->certificateService->show($certificate_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.Certificate_show', compact('Certificate_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.news.Certificate_show', compact('Certificate_selected', 'categories', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

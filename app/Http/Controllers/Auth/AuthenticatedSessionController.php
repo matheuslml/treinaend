@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ class AuthenticatedSessionController extends Controller
     {
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $unit = Unit::where('web', true)->first();
-        return view('auth.auth-login-cover', compact('unit', 'copyright'));
+        return view('auth.auth-login-cover', compact('unit', 'copyright', 'courses_nav'));
     }
 
     /**

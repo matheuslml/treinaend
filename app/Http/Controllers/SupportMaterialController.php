@@ -7,6 +7,7 @@ use App\Models\SupportMaterial;
 use Illuminate\Http\Request;
 use App\Http\Requests\SupportMaterialRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Services\SupportMaterialService;
@@ -34,11 +35,12 @@ class SupportMaterialController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $support_materials = SupportMaterial::latest()->get();
-            return view('admin.support_material.index', ['pageConfigs' => $pageConfigs], compact('support_materials', 'unit', 'copyright', 'disciplines'));
+            return view('admin.support_material.index', ['pageConfigs' => $pageConfigs], compact('support_materials', 'unit', 'copyright', 'courses_nav', 'disciplines'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Material de Apoios Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -76,7 +78,7 @@ class SupportMaterialController extends Controller
             $support_material_selected = $this->supportMaterialService->show($support_material_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.support_material.show', compact('support_material_selected', 'disciplines', 'unit', 'copyright'));
+            return view('admin.support_material.show', compact('support_material_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

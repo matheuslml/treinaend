@@ -14,6 +14,7 @@ use App\Models\Certificate;
 use App\Models\Copyright;
 use App\Models\OfficialDiary;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\WebFooter;
 use App\Services\OfficialDiaryCreateService;
 use App\Services\OfficialDiaryService;
@@ -43,6 +44,7 @@ class OfficialDiaryController extends Controller
 
         try {
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -53,7 +55,7 @@ class OfficialDiaryController extends Controller
             return view(
                 'admin.official_diary.official_diary_index',
                 ['pageConfigs' => $pageConfigs],
-                compact('unit', 'copyright', 'official_diaries', 'pendents')
+                compact('unit', 'copyright', 'courses_nav', 'official_diaries', 'pendents')
             );
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
@@ -68,6 +70,7 @@ class OfficialDiaryController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -78,7 +81,7 @@ class OfficialDiaryController extends Controller
         return view(
             'admin.official_diary.official_diary_create',
             ['pageConfigs' => $pageConfigs],
-            compact('certificates', 'unit', 'copyright', 'acts')
+            compact('certificates', 'unit', 'copyright', 'courses_nav', 'acts')
         );
     }
 
@@ -123,6 +126,7 @@ class OfficialDiaryController extends Controller
 
         try {
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -136,7 +140,7 @@ class OfficialDiaryController extends Controller
 
             return view(
                 'admin.official_diary.official_diary_show',
-                compact('acts', 'unit', 'copyright', 'official_diary', 'certificates')
+                compact('acts', 'unit', 'copyright', 'courses_nav', 'official_diary', 'certificates')
             );
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Diário Oficial!')->error();
@@ -254,10 +258,10 @@ class OfficialDiaryController extends Controller
 
         $pdf = FacadePdf::loadView(
             'admin.official_diary.pdf_official_diary_acts',
-            compact('unit', 'copyright', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit')
+            compact('unit', 'copyright', 'courses_nav', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit')
         );
         $pdf->setPAper('a4', 'portrait');
-        //return view('admin.official_diary.pdf_official_diary_acts', compact('unit', 'copyright', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit' ));
+        //return view('admin.official_diary.pdf_official_diary_acts', compact('unit', 'copyright', 'courses_nav', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit' ));
 
         return $pdf->stream($official_diary->edition . '_diario_oficial.pdf');
     }
@@ -437,7 +441,7 @@ class OfficialDiaryController extends Controller
 
         $pdf = FacadePdf::loadView(
             'admin.official_diary.pdf_official_diary_acts',
-            compact('unit', 'copyright', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit')
+            compact('unit', 'copyright', 'courses_nav', 'official_diary', 'report_title', 'lines', 'act_topics', 'line_limit')
         );
         $pdf->setPAper('a4', 'portrait');
         return $pdf->stream($official_diary->edition . '_diario_oficial.pdf');

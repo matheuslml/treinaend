@@ -6,6 +6,7 @@ use App\Models\Legislation;
 use App\Http\Requests\LegislationBondRequest;
 use App\Models\LegislationBond;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\LegislationBondCreateService;
 use Illuminate\Contracts\View\View;
@@ -58,7 +59,7 @@ class LegislationBondController extends Controller
             $legislations = Legislation::with('category', 'situation', 'subjects')
                                         ->latest()
                                         ->get();
-            return view('admin.legislation.bond_show', compact('bond', 'legislations', 'unit', 'copyright'));
+            return view('admin.legislation.bond_show', compact('bond', 'legislations', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Vínculo!')->error();
             return redirect()->back()->withInput();

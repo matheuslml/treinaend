@@ -7,6 +7,7 @@ use App\Models\Registration;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Document;
 use App\Models\Person;
@@ -43,11 +44,12 @@ class RegistrationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $registrations = Registration::latest()->get();
             $people = Person::latest()->get();
-            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright', 'people'));
+            return view('admin.registration.index', ['pageConfigs' => $pageConfigs], compact('registrations', 'unit', 'copyright', 'courses_nav', 'people'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -87,7 +89,7 @@ class RegistrationController extends Controller
             $registration_selected = $this->registrationService->show($registration_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.registration.show', compact('registration_selected', 'people', 'unit', 'copyright'));
+            return view('admin.registration.show', compact('registration_selected', 'people', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

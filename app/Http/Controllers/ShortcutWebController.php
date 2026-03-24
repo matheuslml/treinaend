@@ -8,6 +8,7 @@ use App\Services\ShortcutWebCreateService;
 use App\Services\ShortcutWebUpdateService;
 use App\Http\Requests\ShortcutWebRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
@@ -34,11 +35,12 @@ class ShortcutWebController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $shortcut_webs = ShortcutWeb::all();
-            return view('admin.shortcutweb.index', ['pageConfigs' => $pageConfigs], compact('shortcut_webs', 'unit', 'copyright'));
+            return view('admin.shortcutweb.index', ['pageConfigs' => $pageConfigs], compact('shortcut_webs', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar os Atalhos Cadastrados!')->error();
@@ -92,7 +94,7 @@ class ShortcutWebController extends Controller
             $shortcut_web_selected = $this->shortcutWebService->show($shortcutWeb_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.shortcutweb.show', compact('shortcut_web_selected', 'shortcut_webs', 'unit', 'copyright'));
+            return view('admin.shortcutweb.show', compact('shortcut_web_selected', 'shortcut_webs', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Atalho!')->error();

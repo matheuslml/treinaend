@@ -11,6 +11,7 @@ use App\Models\Leadership;
 use App\Models\News;
 use App\Models\Project;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\AboutService;
 use App\Services\AboutCreateService;
@@ -31,7 +32,7 @@ class AboutController extends Controller
         protected AboutUpdateService $aboutUpdateService,
     ){}
 
-    public function create(): View
+    public function create()
     {
 
         if (! Gate::allows('Ver e Listar Sobre')) {
@@ -40,11 +41,12 @@ class AboutController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $units = Unit::all();
-            return view('admin.about.create', ['pageConfigs' => $pageConfigs], compact('units', 'unit', 'copyright'));
+            return view('admin.about.create', ['pageConfigs' => $pageConfigs], compact('units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Unidades Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -100,7 +102,7 @@ class AboutController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            return view('admin.about.show', compact('about', 'units', 'unit', 'copyright'));
+            return view('admin.about.show', compact('about', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar!')->error();
             return redirect()->back()->withInput();
@@ -190,6 +192,6 @@ class AboutController extends Controller
         $projects = Project::where('status', 'PUBLISHED')->orderBy('id', 'desc')->paginate(6);
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
-        return view('web.about.index', compact('service_pages' , 'institucional_pages', 'banner', 'unit', 'copyright', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.about.index', compact('service_pages' , 'institucional_pages', 'banner', 'unit', 'copyright', 'courses_nav', 'news', 'projects', 'leaderships', 'galleries'));
     }
 }

@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LegislationSubject;
 use App\Http\Requests\LegislationSubjectRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\LegislationSubjectService;
 use App\Services\LegislationSubjectCreateService;
@@ -33,11 +34,12 @@ class LegislationSubjectController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $legislation_subjects = LegislationSubject::with('legislations')->latest()->get();
-            return view('admin.legislation.subject_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'legislation_subjects'));
+            return view('admin.legislation.subject_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'legislation_subjects'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -83,7 +85,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $legislation_subjects = LegislationSubject::with('legislations')->latest()->get();
             $subject_selected = $this->legislationSubjectService->show($subject_id);
-            return view('admin.legislation.subject_show', compact('subject_selected', 'legislation_subjects', 'unit', 'copyright'));
+            return view('admin.legislation.subject_show', compact('subject_selected', 'legislation_subjects', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

@@ -10,6 +10,7 @@ use App\Services\TypeRequestUpdateService;
 use App\Http\Requests\TypeRequestRequest;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,11 +30,12 @@ class TypeRequestController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $type_requests = TypeRequest::with('ombudsmen')->latest()->get();
-            return view('admin.ombudsman.request_index', ['pageConfigs' => $pageConfigs], compact('type_requests', 'unit', 'copyright'));
+            return view('admin.ombudsman.request_index', ['pageConfigs' => $pageConfigs], compact('type_requests', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar os Requerimentos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_requests = TypeRequest::with('ombudsmen')->latest()->get();
             $request_selected = $this->typeRequestService->show($request_id);
-            return view('admin.ombudsman.request_show', compact('request_selected', 'type_requests', 'unit', 'copyright'));
+            return view('admin.ombudsman.request_show', compact('request_selected', 'type_requests', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Requerimento!')->error();
             return redirect()->back()->withInput();
@@ -110,6 +112,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_request = TypeRequest::find($request);
             $type_request->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $type_requests = TypeRequest::with('ombudsmen')->latest()->get();
             flash('Tipo de Requerimento deletado com sucesso!')->success();

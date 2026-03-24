@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 
-use App\Models\Course;
 use Illuminate\Http\Request;
 use App\Http\Requests\CourseRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Services\CourseService;
@@ -34,11 +34,12 @@ class CourseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $courses = Course::latest()->get();
-            return view('admin.course.index', ['pageConfigs' => $pageConfigs], compact('courses', 'unit', 'copyright'));
+            return view('admin.course.index', ['pageConfigs' => $pageConfigs], compact('courses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -96,7 +97,7 @@ class CourseController extends Controller
             $disciplines = Discipline::where('Course_id',$course_id)->latest()->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.course.show', compact('course_selected', 'unit', 'copyright', 'disciplines'));
+            return view('admin.course.show', compact('course_selected', 'unit', 'copyright', 'courses_nav', 'disciplines'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a Curso!')->error();
             return redirect()->back()->withInput();
@@ -154,7 +155,7 @@ class CourseController extends Controller
             $for_delete = Course::find($course);
             $for_delete->delete();
             flash('Curso deletado com sucesso!')->success();
-            return redirect('/Cursos');
+            return redirect('/cursos');
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao deletar a Categoria!')->error();

@@ -15,6 +15,7 @@ use App\Models\Person;
 use App\Models\State;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\PersonService;
 use App\Services\DirectHireWinnerService;
@@ -43,13 +44,14 @@ class DirectHireWinnerController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $person = Person::whereDoesntHave('departaments')
                                         ->latest()
                                         ->get();
-            return view('admin.directHire.winner_index', ['pageConfigs' => $pageConfigs], compact('person', 'unit', 'copyright'));
+            return view('admin.directHire.winner_index', ['pageConfigs' => $pageConfigs], compact('person', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -63,6 +65,7 @@ class DirectHireWinnerController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -72,7 +75,7 @@ class DirectHireWinnerController extends Controller
         $states = State::all();
         $cities = City::all();
 
-        return view('admin.directHire.winner_create', ['pageConfigs' => $pageConfigs], compact( 'unit', 'copyright',  'countries', 'states', 'cities'));
+        return view('admin.directHire.winner_create', ['pageConfigs' => $pageConfigs], compact( 'unit', 'copyright', 'courses_nav',  'countries', 'states', 'cities'));
 
     }
 
@@ -114,7 +117,7 @@ class DirectHireWinnerController extends Controller
             $directs_hires_winner = DirectHireWinner::where('person_id', $winner_id)
                                             ->latest()
                                             ->get();
-            return view('admin.directHire.winner_show', compact('person', 'unit', 'copyright', 'directs_hires_winner',   'countries', 'states', 'cities'));
+            return view('admin.directHire.winner_show', compact('person', 'unit', 'copyright', 'courses_nav', 'directs_hires_winner',   'countries', 'states', 'cities'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -245,7 +248,7 @@ class DirectHireWinnerController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_requests = TypeRequest::all();
             $person = $this->personService->show($winner_id);
-            return view('web.directHire.winner_show', compact('service_pages', 'institucional_pages', 'person', 'type_requests', 'unit', 'copyright'));
+            return view('web.directHire.winner_show', compact('service_pages', 'institucional_pages', 'person', 'type_requests', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
 

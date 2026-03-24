@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\LegislationCategory;
 use App\Http\Requests\LegislationCategoryRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\LegislationCategoryService;
 use App\Services\LegislationCategoryCreateService;
@@ -31,11 +32,12 @@ class LegislationCategoryController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $legislation_categories = LegislationCategory::with('legislations')->latest()->get();
-            return view('admin.legislation.category_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'legislation_categories'));
+            return view('admin.legislation.category_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'legislation_categories'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
@@ -80,7 +82,7 @@ class LegislationCategoryController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $legislation_categories = LegislationCategory::with('legislations')->latest()->get();
             $category_selected = $this->legislationCategoryService->show($category_id);
-            return view('admin.legislation.category_show', compact('category_selected', 'legislation_categories', 'unit', 'copyright'));
+            return view('admin.legislation.category_show', compact('category_selected', 'legislation_categories', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\WebFooterLogo;
 use App\Http\Requests\WebFooterLogoRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use App\Services\WebFooterLogoService;
@@ -75,7 +76,7 @@ class WebFooterLogoController extends Controller
             $web_footer = WebFooter::find($web_footer_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.webfooter.logo_create', compact('web_footer', 'unit', 'copyright'));
+            return view('admin.webfooter.logo_create', compact('web_footer', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a imagem!')->error();
@@ -94,7 +95,7 @@ class WebFooterLogoController extends Controller
             $web_footer = WebFooter::whereRelation('logos', 'web_footer_id', $web_footer_logo_id)->first();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.webfooter.logo_show', compact('web_footer', 'unit', 'copyright', 'web_footer_logo_selected'));
+            return view('admin.webfooter.logo_show', compact('web_footer', 'unit', 'copyright', 'courses_nav', 'web_footer_logo_selected'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a imagem!')->error();

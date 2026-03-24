@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\PostRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\PostService;
 use App\Services\PostCreateService;
@@ -32,12 +33,13 @@ class PostController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $posts = Post::with('user', 'type_post', 'media')->latest()->get();
 
-            return view('admin.post.index', ['pageConfigs' => $pageConfigs], compact('posts', 'unit', 'copyright'));
+            return view('admin.post.index', ['pageConfigs' => $pageConfigs], compact('posts', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as PostS Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -104,7 +106,7 @@ class PostController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $posts = Post::with('user', 'type_post', 'media')->latest()->get();
             $post_selected = $this->postService->show($post_id);
-            return view('admin.post.show', compact('post_selected', 'posts', 'unit', 'copyright'));
+            return view('admin.post.show', compact('post_selected', 'posts', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Capa!')->error();
