@@ -19,6 +19,7 @@ return new class extends Migration
             $table->integer('grade')->nullable();
             $table->boolean('online')->default(true);
             $table->float('payment_value', 16, 2)->nullable();
+            $table->string('image_certificate')->nullable();
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             $table->timestamps();
             $table->softDeletes();
