@@ -22,7 +22,7 @@
     <div class="col-md-4 col-12">
       <div class="card">
         <div class="card-header">
-          <h4 class="card-title">Editar Disciplina</h4>
+          <h4 class="card-title">Editar Curso</h4>
         </div>
         <div class="card-body">
           @include('flash::message')
@@ -38,7 +38,7 @@
                 </div>
             </div>
           @endif
-          <form class="form form-horizontal" method="POST" action="{{ route('disciplinas.update', $discipline_selected->id) }}" enctype="multipart/form-data">
+          <form class="form form-horizontal" method="POST" action="{{ route('cursos.update', $course_selected->id) }}" enctype="multipart/form-data">
             @csrf()
               @method('PUT')
             <div class="row">
@@ -48,7 +48,17 @@
                     <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome do Disciplina"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="name" name="name" value="{{ $discipline_selected->name }}" />
+                      <input type="text" class="form-control" id="name" name="name" value="{{ $course_selected->name }}" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="description">Descrição<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="description" name="description" value="{{ $course_selected->description }}" />
                   </div>
                 </div>
               </div>
@@ -59,7 +69,7 @@
                   </div>
                   <div class="col-sm-9">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="{{ $discipline_selected->order }}" id="order" name="order" />
+                        <input type="number" class="touchspin" value="{{ $course_selected->order }}" id="order" name="order" />
                     </div>
                   </div>
                 </div>
@@ -67,19 +77,84 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="days">Dias para Realização<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="grade">Nota<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                     <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="{{ $discipline_selected->days }}" id="days" name="days" />
+                        <input type="number" class="touchspin" value="{{ $course_selected->grade }}" id="grade" name="grade" />
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="online">Online <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <select class="select2 form-select" id="online" name="online">
+                        <optgroup label="Selecione">
+                            <option value="1" {{ $course_selected->online == 1 ? 'selected' : '' }} >Sim</option>
+                            <option value="2" {{ $course_selected->online == 2 ? 'selected' : '' }} >Não</option>
+                        </optgroup>
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="payment_value">Valor<tag data-bs-toggle="tooltip" title="Valor"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control used-balance" placeholder="10,000.00" value="{{ str_replace('.',',', $course_selected->payment_value) }}" id="payment_value" name="payment_value" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="image_certificate">Imagem do Certificado<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <img
+                        class="img-fluid rounded mb-75"
+                        src="{{asset('storage/images/courses/' . $course_selected->image_certificate)}}"
+                        alt="avatar img"
+                      />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="image_certificate">Imagem para editar<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="file" class="form-control" id="image_certificate" name="image_certificate" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="status">Status <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <select class="select2 form-select" id="status" name="status">
+                        <optgroup label="Selecione">
+                            <option value="PUBLISHED" >Publicado</option>
+                            <option value="DRAFT" >Editando</option>
+                            <option value="PENDING" >Pendente</option>
+                        </optgroup>
+                      </select>
                   </div>
                 </div>
               </div>
               <div class="col-12 mt-2">
                 <button type="submit" class="btn btn-primary me-1" style="position: relative; float: left;">Editar</button>
                 </form>
-                <form method="POST" name="form-delete" action="{{ route('disciplinas.destroy', $discipline_selected->id) }}">
+                <form method="POST" name="form-delete" action="{{ route('cursos.destroy', $course_selected->id) }}">
                     @csrf()
                     @method('delete')
                     <button type="submit" class="btn btn-danger" style="position: relative; float: left;"
@@ -94,19 +169,18 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Exercícios Cadastrados - Busca Avançada</h4>
+          <h4 class="card-title">Disciplinas Cadastradas - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
-        @if (count($exercises) >= 1)
+        @if (count($disciplines) >= 1)
           <table class="dt-advanced-search table">
             <thead>
               <tr>
                 <th></th>
-                <th>Imagem</th>
-                <th>Tipo</th>
-                <th>Questões</th>
-                <th>Correta</th>
+                <th>Título</th>
+                <th>Ordem</th>
+                <th>Curso</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -114,17 +188,16 @@
             <tfoot>
               <tr>
                 <th></th>
-                <th>Imagem</th>
-                <th>Tipo</th>
-                <th>Questões</th>
-                <th>Correta</th>
+                <th>Título</th>
+                <th>Ordem</th>
+                <th>Curso</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
             </tfoot>
             <tbody>
               @php $i = 0; @endphp
-              @foreach($exercises as $exercise)
+              @foreach($disciplines as $discipline)
                 @if($i == 0)
                   @php $i = 1; @endphp
                   <tr class="odd">
@@ -133,20 +206,12 @@
                   <tr class="even">
                 @endif
                     <td class="control sorting_1" tabindex="0" ></td>
+                    <td style="display: none;">{{ $discipline->name }}</td>
+                    <td style="display: none;">{{ $discipline->order }}</td>
+                    <td style="display: none;">{{ $discipline->course->name  }}</td>
+                    <td style="display: none;">{{isset($discipline->created_at) ? (($discipline->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
                     <td style="display: none;">
-                        <img
-                            src="{{ asset('storage/files/' . $exercise->file) }}"
-                            class="me-75"
-                            height="60"
-                            alt="Angular"
-                        />
-                    </td>
-                    <td style="display: none;">{{ $exercise->type }}</td>
-                    <td style="display: none;">{{ $exercise->answers }}</td>
-                    <td style="display: none;">{{ $exercise->correct_answer  }}</td>
-                    <td style="display: none;">{{isset($exercise->created_at) ? (($exercise->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
-                    <td style="display: none;">
-                      <a href="{{ route('exercicios.show', $exercise->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
+                      <a href="{{ route('disciplinas.show', $discipline->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>
                     </td>
                   </tr>
               @endforeach
@@ -156,7 +221,7 @@
             <div class="alert alert-warning" role="alert">
               <h4 class="alert-heading">Aviso</h4>
               <div class="alert-body">
-                Não existem Exercícios Armazenados.
+                Não existem Disciplinas Armazenadas.
               </div>
             </div>
           @endif
@@ -187,5 +252,6 @@
   <script src="{{ asset(mix('js/scripts/forms/form-select2.js')) }}"></script>
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
-  <script src="{{ asset(mix('js/scripts/tables/exercises.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/tables/disciplines.js')) }}"></script>
+<script src="{{ asset(mix('js/scripts/forms/expense-input-mask.js')) }}"></script>
 @endsection

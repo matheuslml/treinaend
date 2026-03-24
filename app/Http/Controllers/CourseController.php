@@ -74,7 +74,7 @@ class CourseController extends Controller
 
             $this->courseCreateService->create($courseArrayData);
 
-            flash('Curso criada com sucesso!')->success();
+            flash('Curso criado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
@@ -93,13 +93,13 @@ class CourseController extends Controller
 
         try{
             $course_selected = $this->courseService->show($course_id);
-            $Disciplines = Discipline::where('Course_id',$course_id)->latest()->get();
+            $disciplines = Discipline::where('Course_id',$course_id)->latest()->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.course.show', compact('Course_selected', 'unit', 'copyright', 'Disciplines'));
+            return view('admin.course.show', compact('course_selected', 'unit', 'copyright', 'disciplines'));
         } catch (\Exception $exception) {
             dd($exception);
-            flash('Erro ao buscar a Disciplina!')->error();
+            flash('Erro ao buscar a Curso!')->error();
             return redirect()->back()->withInput();
         }
     }
@@ -114,7 +114,7 @@ class CourseController extends Controller
             DB::beginTransaction();
             $this->courseUpdateService->update($request->toArray(), $course_id);
 
-            flash('Disciplina editada com sucesso!')->success();
+            flash('Curso editado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
@@ -133,7 +133,7 @@ class CourseController extends Controller
         try{
             $for_delete = Course::find($course);
             $for_delete->delete();
-            flash('Disciplina deletada com sucesso!')->success();
+            flash('Curso deletado com sucesso!')->success();
             return redirect('/Cursos');
         } catch (\Exception $exception) {
             dd($exception);

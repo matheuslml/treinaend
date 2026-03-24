@@ -120,7 +120,7 @@
 </head>
 <body>
     <div class="background">
-        <img src="{{ isset($registration->course->image_certificate) ? public_path('storage/images/certificates/' . $registration->course->image_certificate) : public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
+        <img src="{{ isset($registration->course->image_certificate) ? public_path('storage/images/courses/' . $registration->course->image_certificate) : public_path('assets-web/img/img_certificate.png') }}" alt="Fundo">
     </div>
 
     <div class="container">

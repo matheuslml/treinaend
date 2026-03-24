@@ -103,7 +103,7 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Matriculas Cadastradas - Busca Avançada</h4>
+          <h4 class="card-title">Disciplinas Cadastradas - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
