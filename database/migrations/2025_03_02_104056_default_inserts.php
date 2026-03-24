@@ -498,10 +498,6 @@ class DefaultInserts extends Migration
             [
                 'title' => 'Mais',
                 'slug' => 'mais'
-            ],
-            [
-                'title' => 'Parcerias',
-                'slug' => 'parcerias'
             ]
         ];
 
