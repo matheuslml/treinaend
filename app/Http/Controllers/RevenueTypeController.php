@@ -10,6 +10,7 @@ use App\Services\RevenueTypeUpdateService;
 use App\Http\Requests\RevenueTypeRequest;
 use App\Models\RevenueType;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,11 +30,12 @@ class RevenueTypeController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $revenue_types = RevenueType::with('revenues')->latest()->get();
-            return view('admin.revenue.type_index', ['pageConfigs' => $pageConfigs], compact('revenue_types', 'unit', 'copyright'));
+            return view('admin.revenue.type_index', ['pageConfigs' => $pageConfigs], compact('revenue_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Acessos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ class RevenueTypeController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $revenue_types = RevenueType::with('revenues')->latest()->get();
             $type_selected = $this->revenueTypeService->show($type_id);
-            return view('admin.revenue.type_show', compact('type_selected', 'revenue_types', 'unit', 'copyright'));
+            return view('admin.revenue.type_show', compact('type_selected', 'revenue_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();
@@ -111,6 +113,7 @@ class RevenueTypeController extends Controller
             $type_type = RevenueType::find($type);
             $type_type->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $revenue_types = RevenueType::with('revenues')->latest()->get();
             return view('admin.revenue.type_index', ['pageConfigs' => $pageConfigs], compact('revenue_types'));

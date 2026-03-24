@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\ProjectProgress;
 use App\Http\Requests\ProjectProgressRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Project;
 use App\Services\ProjectProgressService;
@@ -36,6 +37,7 @@ class ProjectProgressController extends Controller
 
             try{
                 $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
                 $unit = Unit::where('web', true)->first();
                 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -43,7 +45,7 @@ class ProjectProgressController extends Controller
                 $progresses = ProjectProgress::with('project')
                                             ->latest()
                                             ->get();
-                return view('admin.project.progress_index', ['pageConfigs' => $pageConfigs], compact('projects', 'progresses', 'unit', 'copyright'));
+                return view('admin.project.progress_index', ['pageConfigs' => $pageConfigs], compact('projects', 'progresses', 'unit', 'copyright', 'courses_nav'));
             } catch (\Throwable $throwable) {
                 flash('Erro ao procurar as Progressos Cadastrados!')->error();
                 return redirect()->back()->withInput();
@@ -125,7 +127,7 @@ class ProjectProgressController extends Controller
 
                 $projects = Project::orderBy('title', 'asc')->get();
 
-                return view('admin.project.progress_show', compact('progress_selected', 'projects', 'unit', 'copyright', 'progresses' ));
+                return view('admin.project.progress_show', compact('progress_selected', 'projects', 'unit', 'copyright', 'courses_nav', 'progresses' ));
             } catch (\Exception $exception) {
                 flash('Erro ao buscar a Progresso!')->error();
                 return redirect()->back()->withInput();

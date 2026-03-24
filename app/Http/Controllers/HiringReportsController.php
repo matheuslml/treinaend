@@ -15,6 +15,7 @@ use App\Models\DirectHireSituations;
 use App\Models\DirectHireWinner;
 use App\Models\Person;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\View\View;
@@ -58,7 +59,7 @@ class HiringReportsController extends Controller
                                         ->latest()
                                         ->get();
 
-            return view('admin.hiringReports.report_index', compact('unit', 'copyright', 'direct_hires', 'direct_hire_modalities', 'direct_hire_situations', 'direct_hire_winners',
+            return view('admin.hiringReports.report_index', compact('unit', 'copyright', 'courses_nav', 'direct_hires', 'direct_hire_modalities', 'direct_hire_situations', 'direct_hire_winners',
                                                                     'bidding_modalities', 'bidding_situations', 'biddings',
                                                                     'agreement_origins', 'agreement_types', 'agreement_situations', 'agreements'));
         } catch (\Throwable $throwable) {
@@ -477,7 +478,7 @@ class HiringReportsController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.hiringReports.direct_hire_pdf', compact('direct_hires', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.hiringReports.direct_hire_pdf', compact('direct_hires', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('direct_hires.pdf');
@@ -1319,7 +1320,7 @@ class HiringReportsController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.hiringReports.agreement_pdf', compact('agreements', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.hiringReports.agreement_pdf', compact('agreements', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('agreements.pdf');
@@ -1534,7 +1535,7 @@ class HiringReportsController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.hiringReports.bidding_pdf', compact('biddings', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.hiringReports.bidding_pdf', compact('biddings', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('biddings.pdf');

@@ -7,8 +7,8 @@ use App\Http\Requests\BlankPageRequest;
 use App\Models\Banner;
 use App\Models\BlankPageType;
 use App\Models\Unit;
-use App\Models\Copyright;
 use App\Models\Course;
+use App\Models\Copyright;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
 use App\Services\BlankPageService;
@@ -41,13 +41,14 @@ class BlankPageController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $blank_pages = BlankPage::where('status', 'PUBLISHED')
                                         ->latest()
                                         ->get();
-            return view('admin.blankpage.index', ['pageConfigs' => $pageConfigs], compact('blank_pages', 'unit', 'copyright'));
+            return view('admin.blankpage.index', ['pageConfigs' => $pageConfigs], compact('blank_pages', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Páginas em Branco Cadastradas!')->error();
@@ -62,12 +63,13 @@ class BlankPageController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $types = BlankPageType::with('blank_pages')->orderBy('title', 'asc')->get();
 
-        return view('admin.blankpage.create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright'));
+        return view('admin.blankpage.create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright', 'courses_nav'));
 
     }
 
@@ -160,8 +162,9 @@ class BlankPageController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $types = BlankPageType::with('blank_pages')->orderBy('title', 'asc')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-            return view('admin.blankpage.show', compact('blank_page', 'types', 'unit', 'copyright' ));
+            return view('admin.blankpage.show', compact('blank_page', 'types', 'unit', 'copyright', 'courses_nav' ));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Página em Branco!')->error();
@@ -327,7 +330,7 @@ dd($throwable);
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
 
-        return view('web.blankpage.show', compact('categories', 'page', 'banner', 'institucional_pages', 'unit', 'copyright', 'service_pages', 'web_footer', 'courses','partnership'));
+        return view('web.blankpage.show', compact('categories', 'page', 'banner', 'institucional_pages', 'unit', 'copyright', 'courses_nav', 'service_pages', 'web_footer', 'courses','partnership'));
     }
 }
 

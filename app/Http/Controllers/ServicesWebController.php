@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EnviromentalLicensing;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -14,69 +15,69 @@ class ServicesWebController extends Controller{
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentlicensing.home', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentlicensing.home', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function postlicense(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentlicensing.postlicense', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentlicensing.postlicense', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function checklist(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentlicensing.checklist', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentlicensing.checklist', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function forms(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentlicensing.forms', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentlicensing.forms', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function fiscalization(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.fiscalization', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.fiscalization', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function pruning(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.pruning', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.pruning', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function animalcause(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.animalcause', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.animalcause', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function environmentprotection(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentprotection', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentprotection', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function environmentquality(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmentquality', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmentquality', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 
     public function environmenteducation(){
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $enviromental_licensing = EnviromentalLicensing::orderBy('id', 'desc')->first();
-        return view('web.services.environmenteducation', compact('enviromental_licensing', 'unit', 'copyright' ));
+        return view('web.services.environmenteducation', compact('enviromental_licensing', 'unit', 'copyright', 'courses_nav' ));
     }
 }

@@ -14,6 +14,7 @@ use App\Models\Project;
 use App\Models\TypeExpense;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use Illuminate\Contracts\View\View;
@@ -40,11 +41,12 @@ class ExpenseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $expenses = $this->expenseService->get();
-            return view('admin.expense.expense_index', ['pageConfigs' => $pageConfigs], compact('expenses', 'unit', 'copyright'));
+            return view('admin.expense.expense_index', ['pageConfigs' => $pageConfigs], compact('expenses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Despesas Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -59,11 +61,12 @@ class ExpenseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $types = TypeExpense::orderBy('title', 'asc')->get();
-            return view('admin.expense.expense_create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright'));
+            return view('admin.expense.expense_create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Despesas Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -103,7 +106,7 @@ class ExpenseController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $types = TypeExpense::orderBy('title', 'asc')->get();
             $expense = $this->expenseService->show($expense_id);
-            return view('admin.expense.expense_show', compact('expense', 'types', 'unit', 'copyright'));
+            return view('admin.expense.expense_show', compact('expense', 'types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Receita!')->error();
             return redirect()->back()->withInput();
@@ -141,6 +144,7 @@ class ExpenseController extends Controller
             $expenseDelete = Expense::find($expense);
             $expenseDelete->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $expenses = $this->expenseService->get();
             return view('admin.expense.expense_index', ['pageConfigs' => $pageConfigs], compact('expenses'));
@@ -267,7 +271,7 @@ class ExpenseController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.expense.report_pdf', compact('expenses', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.expense.report_pdf', compact('expenses', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('expenses.pdf');
@@ -297,7 +301,7 @@ class ExpenseController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.expense.index', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expenses', 'types', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.expense.index', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expenses', 'types', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_index_filter(Request $request)
@@ -315,7 +319,7 @@ class ExpenseController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.expense.index', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expenses', 'types', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.expense.index', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expenses', 'types', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_show($expense_id)
@@ -333,7 +337,7 @@ class ExpenseController extends Controller
             $leaderships = Leadership::all();
             $galleries = Gallery::all();
             $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-            return view('web.expense.show', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expense', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+            return view('web.expense.show', compact('service_pages', 'institucional_pages', 'banner', 'web_footer', 'expense', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
         } catch (\Exception $exception) {
             session()->flash('show_expense_error', $expense['title'].' Erro ao tentar acessar! ');
             return redirect()->route('web.expenses_index');

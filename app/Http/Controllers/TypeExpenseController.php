@@ -10,6 +10,7 @@ use App\Services\TypeExpenseUpdateService;
 use App\Http\Requests\TypeExpenseRequest;
 use App\Models\TypeExpense;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Support\Facades\Gate;
 
@@ -29,11 +30,12 @@ class TypeExpenseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $type_expenses = TypeExpense::with('expenses')->latest()->get();
-            return view('admin.expense.type_index', ['pageConfigs' => $pageConfigs], compact('type_expenses', 'unit', 'copyright'));
+            return view('admin.expense.type_index', ['pageConfigs' => $pageConfigs], compact('type_expenses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Receitas Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type_expenses = TypeExpense::with('expenses')->latest()->get();
             $type_selected = $this->typeExpenseService->show($type_id);
-            return view('admin.expense.type_show', compact('type_selected', 'type_expenses', 'unit', 'copyright'));
+            return view('admin.expense.type_show', compact('type_selected', 'type_expenses', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Receita!')->error();
             return redirect()->back()->withInput();
@@ -110,6 +112,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $type = TypeExpense::find($type);
             $type->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $type_expenses = TypeExpense::with('expenses')->latest()->get();
             return view('admin.expense.type_index', ['pageConfigs' => $pageConfigs], compact('type_expenses'));

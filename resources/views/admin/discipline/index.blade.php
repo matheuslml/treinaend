@@ -54,6 +54,22 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
+                    <label class="col-form-label" for="course">Cursos <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <select class="select2 form-select" id="course_id" name="course_id">
+                        <optgroup label="Selecione">
+                          @foreach($courses as  $course)
+                            <option value="{{ $course->id }}" >{{ isset($course->name) ? $course->name : '' }}</option>
+                          @endforeach
+                        </optgroup>
+                      </select>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
                     <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
@@ -87,7 +103,7 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Matriculas Cadastradas - Busca Avançada</h4>
+          <h4 class="card-title">Disciplinas Cadastradas - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
@@ -98,7 +114,7 @@
                 <th></th>
                 <th>Título</th>
                 <th>Ordem</th>
-                <th>Dias</th>
+                <th>Curso</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -108,7 +124,7 @@
                 <th></th>
                 <th>Título</th>
                 <th>Ordem</th>
-                <th>Dias</th>
+                <th>Curso</th>
                 <th>Registrado em</th>
                 <th>Sistema</th>
               </tr>
@@ -126,7 +142,7 @@
                     <td class="control sorting_1" tabindex="0" ></td>
                     <td style="display: none;">{{ $discipline->name }}</td>
                     <td style="display: none;">{{ $discipline->order }}</td>
-                    <td style="display: none;">{{ $discipline->days  }}</td>
+                    <td style="display: none;">{{ $discipline->course->name  }}</td>
                     <td style="display: none;">{{isset($discipline->created_at) ? (($discipline->created_at)->format('d/m/Y H:m:s')) : ''}}</td>
                     <td style="display: none;">
                       <a href="{{ route('disciplinas.show', $discipline->id) }}" title="Editar" class="btn btn-info btn-sm" style="color: white; "><i data-feather="edit" class="font-small-4"></i></a>

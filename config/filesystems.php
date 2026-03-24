@@ -43,6 +43,13 @@ return [
         ],
 
         //treinaend
+        'courses' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/images/courses'),
+            'url' => env('APP_URL').'/storage/images/courses',
+            'visibility' => 'public',
+        ],
+
         'material_apoio' => [
             'driver' => 'local',
             'root' => storage_path('app/public/files'),

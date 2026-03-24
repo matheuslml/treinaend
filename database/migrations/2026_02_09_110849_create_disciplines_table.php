@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('disciplines', function (Blueprint $table) {
             $table->id();
-            $table->integer('course_id')->constrained('courses')->nullable();
+            $table->integer('course_id')->constrained('courses')->default(1);
             $table->string('name')->nullable();
             $table->integer('order')->nullable();
             $table->integer('days')->nullable();

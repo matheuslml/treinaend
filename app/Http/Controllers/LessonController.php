@@ -7,6 +7,7 @@ use App\Models\Lesson;
 use Illuminate\Http\Request;
 use App\Http\Requests\LessonRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Services\LessonService;
@@ -34,11 +35,12 @@ class LessonController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $lessons = Lesson::latest()->get();
-            return view('admin.lesson.index', ['pageConfigs' => $pageConfigs], compact('lessons', 'unit', 'copyright', 'disciplines'));
+            return view('admin.lesson.index', ['pageConfigs' => $pageConfigs], compact('lessons', 'unit', 'copyright', 'courses_nav', 'disciplines'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Aulas Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -75,8 +77,9 @@ class LessonController extends Controller
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $lesson_selected = $this->lessonService->show($lesson_id);
             $unit = Unit::where('web', true)->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.lesson.show', compact('lesson_selected', 'disciplines', 'unit', 'copyright'));
+            return view('admin.lesson.show', compact('lesson_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

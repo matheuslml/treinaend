@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\BiddingModality;
 use App\Http\Requests\BiddingModalityCreateRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\BiddingModalityService;
 use App\Services\BiddingModalityCreateService;
@@ -30,11 +31,12 @@ class BiddingModalityController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $bidding_modalities = BiddingModality::with('biddings')->latest()->get();
-            return view('admin.bidding.modality_index', ['pageConfigs' => $pageConfigs], compact('bidding_modalities', 'unit', 'copyright'));
+            return view('admin.bidding.modality_index', ['pageConfigs' => $pageConfigs], compact('bidding_modalities', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Modalidades Cadastrados!')->error();
@@ -79,7 +81,7 @@ class BiddingModalityController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $bidding_modalities = BiddingModality::with('biddings')->latest()->get();
             $modality_selected = $this->biddingModalityService->show($modality_id);
-            return view('admin.bidding.modality_show', compact('modality_selected', 'bidding_modalities', 'unit', 'copyright'));
+            return view('admin.bidding.modality_show', compact('modality_selected', 'bidding_modalities', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -15,8 +16,9 @@ class MiscellaneousController extends Controller
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-    return view('/content/miscellaneous/page-coming-soon', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright'));
+    return view('/content/miscellaneous/page-coming-soon', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Error
@@ -26,8 +28,9 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-    return view('/content/miscellaneous/error', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright'));
+    return view('/content/miscellaneous/error', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Not-authorized
@@ -37,8 +40,9 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-    return view('/content/miscellaneous/page-not-authorized', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright'));
+    return view('/content/miscellaneous/page-not-authorized', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
   }
 
   // Maintenance
@@ -48,6 +52,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
     return view('/content/miscellaneous/page-maintenance', [
       'pageConfigs' => $pageConfigs

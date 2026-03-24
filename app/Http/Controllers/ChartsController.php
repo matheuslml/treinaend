@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -17,10 +18,11 @@ class ChartsController extends Controller
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/content/charts-maps/chart-apex', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Chartjs Charts
@@ -32,9 +34,10 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/charts-maps/chart-chartjs', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Google Maps
@@ -46,8 +49,9 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $unit = Unit::where('web', true)->first();
 $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/charts-maps/maps-leaflet', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

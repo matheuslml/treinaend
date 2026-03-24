@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Http\Requests\CategoryRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\CategoryService;
 use App\Services\CategoryCreateService;
@@ -30,11 +31,12 @@ class CategoryController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $categories = Category::with('news')->latest()->get();
-            return view('admin.news.category_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright'));
+            return view('admin.news.category_index', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
@@ -79,7 +81,7 @@ class CategoryController extends Controller
             $category_selected = $this->categoryService->show($category_id);
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.news.category_show', compact('category_selected', 'categories', 'unit', 'copyright'));
+            return view('admin.news.category_show', compact('category_selected', 'categories', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

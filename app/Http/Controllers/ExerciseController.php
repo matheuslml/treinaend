@@ -7,6 +7,7 @@ use App\Models\Exercise;
 use Illuminate\Http\Request;
 use App\Http\Requests\ExerciseRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Services\ExerciseService;
@@ -34,11 +35,12 @@ class ExerciseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $exercises = Exercise::latest()->get();
-            return view('admin.exercise.index', ['pageConfigs' => $pageConfigs], compact('exercises', 'unit', 'copyright', 'disciplines'));
+            return view('admin.exercise.index', ['pageConfigs' => $pageConfigs], compact('exercises', 'unit', 'copyright', 'courses_nav', 'disciplines'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Categorias Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -78,9 +80,10 @@ class ExerciseController extends Controller
         try{
             $disciplines = Discipline::orderBy('name', 'asc')->get();
             $exercise_selected = $this->exerciseService->show($exercise_id);
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.exercise.show', compact('exercise_selected', 'disciplines', 'unit', 'copyright'));
+            return view('admin.exercise.show', compact('exercise_selected', 'disciplines', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar o Tipo de Acesso!')->error();
             return redirect()->back()->withInput();

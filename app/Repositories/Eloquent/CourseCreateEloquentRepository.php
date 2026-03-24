@@ -2,9 +2,7 @@
 
 namespace App\Repositories\Eloquent;
 
-use App\Models\Unit;
 use App\Models\Course;
-use App\Models\Copyright;
 use App\Repositories\EloquentRepository;
 use Illuminate\Contracts\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -12,12 +10,12 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use JetBrains\PhpStorm\Pure;
 
-class UnitUpdateEloquentRepository extends EloquentRepository
+class CourseCreateEloquentRepository extends EloquentRepository
 {
     //#[Pure]
     public function __construct()
     {
-        parent::__construct(new Unit());
+        parent::__construct(new Course());
     }
 
     public function get(): Collection
@@ -25,12 +23,12 @@ class UnitUpdateEloquentRepository extends EloquentRepository
         return parent::get();
     }
 
-    public function create(array $data): Unit | Model
+    public function create(array $data): Course | Model
     {
         return parent::create($data);
     }
 
-    public function find($id): Unit | Model
+    public function find($id): Course | Model
     {
         return parent::find($id);
     }
@@ -40,22 +38,22 @@ class UnitUpdateEloquentRepository extends EloquentRepository
         return parent::withTrashed();
     }
 
-    public function update($id, array $data): Unit | Model
+    public function update($id, array $data): Course | Model
     {
         return parent::update($id, $data);
     }
 
-    public function delete($id): Unit | Model
+    public function delete($id): Course | Model
     {
         return parent::delete($id);
     }
 
-    public function restore($id): Unit | Model
+    public function restore($id): Course | Model
     {
         return parent::restore($id);
     }
 
-    public function forceDelete($id): Unit | Model
+    public function forceDelete($id): Course | Model
     {
         return parent::forceDelete($id);
     }

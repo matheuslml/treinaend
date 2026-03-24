@@ -16,9 +16,9 @@ class NewStudent
     /**
      * @throws Exception
      */
-    public function handle($person_id): void
+    public function handle($person_id, $course_id): void
     {
-        $discipline = Discipline::where('order', 1)->first();
+        $discipline = Discipline::where('course_id', $course_id)->where('order', 1)->first();
         if((DisciplinePeople::where('person_id', $person_id)->first())==null){
             $today = Carbon::today();
             DisciplinePeople::updateOrCreate(

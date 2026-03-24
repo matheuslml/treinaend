@@ -14,6 +14,7 @@ use App\Models\Revenue;
 use App\Models\RevenueType;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use Illuminate\Contracts\View\View;
@@ -40,11 +41,12 @@ class RevenueController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $revenues = Revenue::with('files')->latest()->get();
-            return view('admin.revenue.revenue_index', ['pageConfigs' => $pageConfigs], compact('revenues', 'unit', 'copyright'));
+            return view('admin.revenue.revenue_index', ['pageConfigs' => $pageConfigs], compact('revenues', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Receitas Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -59,11 +61,12 @@ class RevenueController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $types = RevenueType::orderBy('title', 'asc')->get();
-            return view('admin.revenue.revenue_create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright'));
+            return view('admin.revenue.revenue_create', ['pageConfigs' => $pageConfigs], compact('types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Receitas Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -139,6 +142,7 @@ class RevenueController extends Controller
             $revenueDelete = Revenue::find($revenue);
             $revenueDelete->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $revenues = $this->revenueService->get();
             return view('admin.revenue.revenue_index', ['pageConfigs' => $pageConfigs], compact('revenues'));
@@ -160,7 +164,7 @@ class RevenueController extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $revenues = Revenue::all();
             $types = RevenueType::orderBy('title', 'asc')->get();
-            return view('admin.revenue.report_index', compact('revenues', 'types', 'unit', 'copyright'));
+            return view('admin.revenue.report_index', compact('revenues', 'types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar!')->error();
             return redirect()->back()->withInput();
@@ -267,7 +271,7 @@ class RevenueController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $pdf = FacadePdf::loadView('admin.revenue.report_pdf', compact('revenues', 'report_title', 'report_schedule', 'unit', 'copyright'));
+            $pdf = FacadePdf::loadView('admin.revenue.report_pdf', compact('revenues', 'report_title', 'report_schedule', 'unit', 'copyright', 'courses_nav'));
             $pdf->setPAper('a4', 'portrait');
 
             return $pdf->stream('revenues.pdf');
@@ -297,7 +301,7 @@ class RevenueController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.revenue.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenues', 'types', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.revenue.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenues', 'types', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_index_filter(Request $request)
@@ -315,7 +319,7 @@ class RevenueController extends Controller
         $leaderships = Leadership::all();
         $galleries = Gallery::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.revenue.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenues', 'types', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.revenue.index', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenues', 'types', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
     }
 
     public function web_show($revenue_id)
@@ -333,7 +337,7 @@ class RevenueController extends Controller
             $leaderships = Leadership::all();
             $galleries = Gallery::all();
             $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-            return view('web.revenue.show', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenue', 'unit', 'copyright', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
+            return view('web.revenue.show', compact('institucional_pages', 'service_pages', 'banner', 'web_footer', 'revenue', 'unit', 'copyright', 'courses_nav', 'type_requests', 'news', 'projects', 'leaderships', 'galleries'));
         } catch (\Exception $exception) {
             session()->flash('show_revenue_error', $revenue['title'].' Erro ao tentar acessar! ');
             return redirect()->route('web.revenue_index');

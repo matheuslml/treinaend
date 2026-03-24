@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreUsersRequest;
 use App\Http\Requests\Admin\UpdateUsersRequest;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Contracts\View\View;
@@ -23,8 +24,9 @@ class UsersController extends Controller
         }
 
         $users = User::all();
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('admin.usuarios.index', compact('users'));
+        return view('admin.usuarios.index', compact('users', 'courses_nav'));
     }
 
     public function create()
@@ -34,8 +36,9 @@ class UsersController extends Controller
         }
 
         $roles = ModelsRole::get()->pluck('name', 'name'); 
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('admin.usuarios.create', compact('roles'));
+        return view('admin.usuarios.create', compact('roles', 'courses_nav'));
     }
 
     public function store(StoreUsersRequest $request)
@@ -65,8 +68,9 @@ class UsersController extends Controller
         }
 
         $roles = ModelsRole::get()->pluck('name', 'name');
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('admin.usuarios.edit', compact('user', 'roles'));
+        return view('admin.usuarios.edit', compact('user', 'roles', 'courses_nav'));
     }
 
     public function update(UpdateUsersRequest $request, User $user): RedirectResponse
@@ -96,8 +100,9 @@ class UsersController extends Controller
         }
 
         $user->load('roles');
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
-        return view('admin.users.show', compact('user'));
+        return view('admin.users.show', compact('user', 'courses_nav'));
     }
 
     public function destroy(User $user)

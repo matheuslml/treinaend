@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Banner;
 use App\Models\BannerType;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Http\Requests\BannerRequest;
 use App\Services\BannerService;
@@ -35,12 +36,13 @@ class BannerController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $banner_types = BannerType::orderBy('title', 'asc')->get();
 
-            return view('admin.banner.index', ['pageConfigs' => $pageConfigs], compact('banner_types', 'unit', 'copyright'));
+            return view('admin.banner.index', ['pageConfigs' => $pageConfigs], compact('banner_types', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Banner Cadastrados!')->error();

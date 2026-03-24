@@ -8,6 +8,7 @@ use App\Models\Act;
 use App\Http\Requests\ActRequest;
 use App\Models\ActTopic;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\ActService;
 use App\Services\ActCreateService;
@@ -26,7 +27,7 @@ class ActController extends Controller
         protected ActUpdateService $actUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Diário Oficial')) {
             return view('pages.not-authorized');
@@ -34,13 +35,14 @@ class ActController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $acts = Act::orderBy('created_at', 'desc')->get();
             $pendents = count(Act::where('status', 'PENDING')->orWhere('status', 'DRAFT')->get());
 
-            return view('admin.official_diary.act_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'acts', 'pendents'));
+            return view('admin.official_diary.act_index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'acts', 'pendents'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Assuntos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -54,6 +56,7 @@ class ActController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -73,7 +76,7 @@ class ActController extends Controller
             }
         }
 
-        return view('admin.official_diary.act_create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'act_topics'));
+        return view('admin.official_diary.act_create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'act_topics'));
 
     }
 
@@ -146,6 +149,7 @@ class ActController extends Controller
         }
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -167,7 +171,7 @@ class ActController extends Controller
                 }
             }
 
-            return view('admin.official_diary.act_show', compact('act', 'act_topics', 'unit', 'copyright'));
+            return view('admin.official_diary.act_show', compact('act', 'act_topics', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar o Tipo de Acesso!')->error();

@@ -24,7 +24,7 @@
   <div class="card " >
     <div class="card-body text-left">
       <!-- main title -->
-      <h2 class="text-primary">Desciplinas da TreinaEnd</h2>
+      <h2 class="text-primary">Desciplinas do Curso {{ $course->name }}</h2>
 
       <!-- subtitle -->
       <p class="card-text ">conhecimento que abre caminhos</p>
@@ -33,57 +33,59 @@
 </section>
 <!-- /search header -->
 
-<!-- frequently asked questions tabs pills -->
+<!-- frequently asked questions tabs pillss -->
 <section id="faq-tabs">
   <!-- vertical tab pill -->
-  <div class="row">
-        @php
-            $pivot = $discipline_atual->person->first()?->pivot;
-        @endphp
-        <div class="col-md-8 col-lg-8 " >
-            <div class="card text-center card-congratulations">
-                <div class="card-header">
-                    <div class="avatar avatar-xl bg-primary shadow">
-                        <div class="avatar-content">
-                            <i data-feather="{{ ($discipline_atual->person->first()?->pivot?->score >= 7) ? "award" : (($discipline_atual->person->first()?->pivot?->exam_date ? "play-circle" : "x-circle" )) }}" class="font-large-1"></i>
-                        </div>
-                    </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title mb-1 text-white">{{ $discipline_atual->name }}</h4>
-                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white" >Acessar</a>
-                </div>
-                <div class="card-footer text-muted ">
-                    <p class="card-text m-auto w-75 text-white">
-                        Prova: {{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}
-                    </p>
-                </div>
-            </div>
-        </div>
-    @foreach ($disciplines as $discipline)
-        @php
-            $pivot = $discipline->person->first()?->pivot;
-        @endphp
-        @if ($discipline->id != $discipline_atual->id)
-            <div class="col-md-6 col-lg-4">
-                <div class="card text-center">
+  @if (count($disciplines) > 0)
+    <div class="row">
+            @php
+                $pivot = $discipline_atual->person->first()?->pivot;
+            @endphp
+            <div class="col-md-8 col-lg-8 " >
+                <div class="card text-center card-congratulations">
                     <div class="card-header">
-                        <div class="avatar avatar-lg bg-primary shadow">
+                        <div class="avatar avatar-xl bg-primary shadow">
                             <div class="avatar-content">
-                                <i data-feather="{{ ($pivot?->score >= 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}" class="font-large-1"></i>
+                                <i data-feather="{{ ($discipline_atual->person->first()?->pivot?->score >= 7) ? "award" : (($discipline_atual->person->first()?->pivot?->exam_date ? "play-circle" : "x-circle" )) }}" class="font-large-1"></i>
                             </div>
                         </div>
                     </div>
                     <div class="card-body">
-                    <h4 class="card-title">{{ $discipline->name }}</h4>
-                    <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'disabled' }}">Acessar</a>
+                        <h4 class="card-title mb-1 text-white">{{ $discipline_atual->name }}</h4>
+                        <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white" >Acessar</a>
                     </div>
-                    <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
+                    <div class="card-footer text-muted ">
+                        <p class="card-text m-auto w-75 text-white">
+                            Prova: {{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}
+                        </p>
+                    </div>
                 </div>
             </div>
-        @endif
-    @endforeach
-  </div>
+        @foreach ($disciplines as $discipline)
+            @php
+                $pivot = $discipline->person->first()?->pivot;
+            @endphp
+            @if ($discipline->id != $discipline_atual->id)
+                <div class="col-md-6 col-lg-4">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <div class="avatar avatar-lg bg-primary shadow">
+                                <div class="avatar-content">
+                                    <i data-feather="{{ ($pivot?->score >= 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}" class="font-large-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                        <h4 class="card-title">{{ $discipline->name }}</h4>
+                        <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'disabled' }}">Acessar</a>
+                        </div>
+                        <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
+                    </div>
+                </div>
+            @endif
+        @endforeach
+    </div>
+  @endif
 </section>
 <!-- / frequently asked questions tabs pills -->
 

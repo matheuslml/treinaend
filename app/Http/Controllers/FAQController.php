@@ -13,6 +13,7 @@ use App\Models\Leadership;
 use App\Models\News;
 use App\Models\Project;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\ProjectCategory;
 use App\Services\FaqService;
@@ -38,11 +39,12 @@ class FaqController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $faqs = Faq::all();
-            return view('admin.faq.index', ['pageConfigs' => $pageConfigs], compact('faqs', 'unit', 'copyright'));
+            return view('admin.faq.index', ['pageConfigs' => $pageConfigs], compact('faqs', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as FAQs Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -80,7 +82,7 @@ class FaqController extends Controller
             $faqs = Faq::all();
             $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.faq.show', compact('faq', 'faqs', 'unit', 'copyright'));
+            return view('admin.faq.show', compact('faq', 'faqs', 'unit', 'copyright', 'courses_nav'));
 
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar registro!')->error();
@@ -142,6 +144,6 @@ class FaqController extends Controller
         $galleries = Gallery::all();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.faq.index', compact('categories', 'service_pages', 'institucional_pages', 'banner', 'faqs', 'unit', 'copyright', 'news', 'projects', 'leaderships', 'galleries'));
+        return view('web.faq.index', compact('categories', 'service_pages', 'institucional_pages', 'banner', 'faqs', 'unit', 'copyright', 'courses_nav', 'news', 'projects', 'leaderships', 'galleries'));
     }
 }

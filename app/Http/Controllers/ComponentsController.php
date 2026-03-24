@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-accordion', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Alert
@@ -31,9 +34,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-alerts', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component - Avatar
@@ -45,9 +50,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-avatar', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Badges
@@ -59,9 +66,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-badges', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Breadcrumbs
@@ -73,9 +82,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-breadcrumbs', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Buttons
@@ -87,9 +98,11 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-buttons', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Carousel
@@ -101,9 +114,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-carousel', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Collapse
@@ -115,9 +129,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-collapse', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component - Divider
@@ -129,9 +144,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-divider', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Dropdowns
@@ -143,9 +159,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-dropdowns', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component List Group
@@ -157,9 +174,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-list-group', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Modals
@@ -171,9 +189,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-modals', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Navs
@@ -185,9 +204,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-navs', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component offcanvas
@@ -199,9 +219,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-offcanvas', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Pagination
@@ -213,9 +234,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pagination', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Pill Badges
@@ -227,9 +249,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pill-badges', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Pills
@@ -241,9 +264,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-pills', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Tabs
@@ -255,9 +279,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-tabs', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
 
@@ -270,9 +295,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-tooltips', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Popovers
@@ -284,9 +310,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-popovers', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Progress
@@ -298,9 +325,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-progress', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Spinner
@@ -312,9 +340,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-spinner', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Timeline
@@ -326,9 +355,10 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-timeline', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Component Toast
@@ -340,8 +370,9 @@ class ComponentsController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/components/component-bs-toast', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

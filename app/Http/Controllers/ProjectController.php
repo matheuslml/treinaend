@@ -8,6 +8,7 @@ use App\Models\Banner;
 use App\Models\BlankPage;
 use App\Models\ProjectCategory;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\ProjectProgress;
 use App\Models\ProjectResponsible;
@@ -41,13 +42,14 @@ class ProjectController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $projects = Project::with('category')
                                         ->latest()
                                         ->get();
-            return view('admin.project.index', ['pageConfigs' => $pageConfigs], compact('projects', 'unit', 'copyright'));
+            return view('admin.project.index', ['pageConfigs' => $pageConfigs], compact('projects', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Projetos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -61,13 +63,14 @@ class ProjectController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::with('projects')->orderBy('title', 'asc')->get();
         $responsibles = ProjectResponsible::with('projects')->orderBy('title', 'asc')->get();
 
-        return view('admin.project.create', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright', 'responsibles'));
+        return view('admin.project.create', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright', 'courses_nav', 'responsibles'));
 
     }
 
@@ -183,7 +186,7 @@ class ProjectController extends Controller
             $responsibles = ProjectResponsible::with('projects')->orderBy('title', 'asc')->get();
             $progresses = ProjectProgress::where('project_id', $project_id)->get();
 
-            return view('admin.project.show', compact('progresses', 'project', 'project_files', 'categories', 'unit', 'copyright', 'responsibles'));
+            return view('admin.project.show', compact('progresses', 'project', 'project_files', 'categories', 'unit', 'copyright', 'courses_nav', 'responsibles'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a Projeto!')->error();
             return redirect()->back()->withInput();
@@ -343,7 +346,7 @@ class ProjectController extends Controller
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
         $category_selected = ProjectCategory::find($category_id);
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.index', compact('banner', 'projects', 'categories', 'category_selected', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.project.index', compact('banner', 'projects', 'categories', 'category_selected', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index()
@@ -356,7 +359,7 @@ class ProjectController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = ProjectCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index_filter_title(Request $request)
@@ -369,7 +372,7 @@ class ProjectController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = ProjectCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index_filter_category($category_id)
@@ -382,7 +385,7 @@ class ProjectController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = ProjectCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index_filter_tag($tag_id)
@@ -395,7 +398,7 @@ class ProjectController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = ProjectCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.project.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_show($project_id)
@@ -408,6 +411,6 @@ class ProjectController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $categories = ProjectCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.project.show', compact('projects', 'project', 'unit', 'copyright', 'web_footer', 'categories', 'institucional_pages', 'service_pages'));
+        return view('web.project.show', compact('projects', 'project', 'unit', 'copyright', 'courses_nav', 'web_footer', 'categories', 'institucional_pages', 'service_pages'));
     }
 }

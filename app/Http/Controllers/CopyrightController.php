@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CopyrightRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\CopyrightService;
 use App\Services\CopyrightCreateService;
@@ -23,7 +24,7 @@ class CopyrightController extends Controller
         protected CopyrightUpdateService $copyrightUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
 
         if (! Gate::allows('Ver e Listar Copyright')) {
@@ -32,11 +33,12 @@ class CopyrightController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $copyrights = Copyright::all();
-            return view('admin.copyright.index', ['pageConfigs' => $pageConfigs], compact('copyrights', 'unit', 'copyright'));
+            return view('admin.copyright.index', ['pageConfigs' => $pageConfigs], compact('copyrights', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as CopyRights Cadastradas!')->error();
@@ -93,7 +95,8 @@ class CopyrightController extends Controller
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.copyright.show', compact('copyright_selected', 'unit', 'copyright'));
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            return view('admin.copyright.show', compact('copyright_selected', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a copyright!')->error();
             return redirect()->back()->withInput();

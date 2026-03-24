@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Repositories\RepositoryInterface;
 use Illuminate\Contracts\Pagination\Paginator;

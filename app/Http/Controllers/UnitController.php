@@ -7,6 +7,7 @@ use App\Models\Organization;
 use App\Models\SocialMedia;
 use App\Models\SocialMediaUnit;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 use App\Services\UnitService;
@@ -25,7 +26,7 @@ class UnitController extends Controller
         protected UnitUpdateService $unitUpdateService,
     ){}
 
-    public function index(): View
+    public function index()
     {
         if (! Gate::allows('Ver e Listar Unidades')) {
             return view('pages.not-authorized');
@@ -33,12 +34,13 @@ class UnitController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
-$copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $organizations = Organization::all();
             $units = $this->unitService->get();
-            return view('admin.unit.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'units', 'unit', 'copyright'));
+            return view('admin.unit.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Unidades Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -214,9 +216,10 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $unit = Unit::find($unit_id);
             $organizations = Organization::all();
             $unit_selected = $this->unitService->show($unit_id);
+            $courses_nav = Course::where('status', 'PUBLISHED')->get(); 
             $social_media = SocialMedia::all();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
-            return view('admin.unit.show', compact('social_media', 'unit', 'copyright', 'organizations', 'unit_selected'));
+            return view('admin.unit.show', compact('social_media', 'unit', 'copyright', 'courses_nav', 'organizations', 'unit_selected'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a unidade!')->error();
@@ -234,6 +237,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $unit = Unit::find($unit);
             $unit->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             flash('Unidade deletado com sucesso!')->success();
             $unit = Unit::where('web', true)->first();
@@ -241,7 +245,7 @@ $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $organizations = Organization::all();
             $units = $this->unitService->get();
-            return view('admin.unit.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'units', 'unit', 'copyright'));
+            return view('admin.unit.index', ['pageConfigs' => $pageConfigs], compact('organizations', 'units', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao deletar a unidade!')->error();
             dd($exception);

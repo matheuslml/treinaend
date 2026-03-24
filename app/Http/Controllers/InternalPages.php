@@ -9,6 +9,7 @@ use App\Models\Banner;
 use App\Models\BlankPage;
 use App\Models\Faq;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\ProjectCategory;
 use App\Models\WebFooter;
@@ -27,7 +28,7 @@ class InternalPages extends Controller
             $banner = Banner::where('banner_type_id', 2)->first();
             $categories = ProjectCategory::orderBy('title', 'asc')->get();
             $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-            return view('web.internal_pages.links', compact('web_footer', 'categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner'));
+            return view('web.internal_pages.links', compact('web_footer', 'categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'courses_nav', 'banner'));
         } catch (\Throwable $throwable) {
             flash('Erro ao abrir Os links úteis!')->error();
             return redirect()->back()->withInput();

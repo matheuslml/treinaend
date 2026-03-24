@@ -6,6 +6,7 @@ use App\Actions\Discipline\NewStudent;
 use App\Models\Orderly;
 use App\Models\Unit;
 use App\Models\Copyright;
+use App\Models\Course;
 use App\Models\Discipline;
 use App\Models\Exercise;
 use App\Models\ExerciseUser;
@@ -19,6 +20,7 @@ class DashboardController extends Controller
   public function dashboardAnalytics()
   {
     $pageConfigs = ['pageHeader' => false];
+    $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
     return view('admin/dashboard/dashboard-ecommerce', ['pageConfigs' => $pageConfigs]);
   }
@@ -27,6 +29,7 @@ class DashboardController extends Controller
   public function dashboard()
   {
     $pageConfigs = ['pageHeader' => false];
+    $courses_nav = Course::where('status', 'PUBLISHED')->get();
     $copyright = Copyright::where('status', 'PUBLISHED')->first();
     $unit = Unit::where('web', true)->first();
 
@@ -36,10 +39,10 @@ class DashboardController extends Controller
     $person_id = $user->person_id;
     $exercise_user_count = ExerciseUser::where('user_id', $userId)->count();
 
-
+    
     //para testar se o Aluno nunca usou aula no sistema antigo
     $new_student = resolve(NewStudent::class);
-    $new_student->handle($person_id);
+    $new_student->handle($person_id, 1);
 
 
     $discipline_atual = Discipline::orderBy('order', 'desc')
@@ -59,6 +62,6 @@ class DashboardController extends Controller
         }])
         ->first();
 
-    return view('admin/dashboard/dashboard', compact('unit', 'copyright', 'copyright', 'exercises_count', 'exercise_user_count', 'discipline_atual'));
+    return view('admin/dashboard/dashboard', compact('unit', 'copyright', 'courses_nav', 'courses_nav', 'exercises_count', 'exercise_user_count', 'discipline_atual'));
   }
 }

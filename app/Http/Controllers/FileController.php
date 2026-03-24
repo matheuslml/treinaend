@@ -26,6 +26,7 @@ use App\Models\FileType;
 use App\Models\Legislation;
 use App\Models\TypeRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use Illuminate\Http\Request;

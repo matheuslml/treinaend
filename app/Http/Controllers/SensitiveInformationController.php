@@ -9,6 +9,7 @@ use App\Models\BlankPage;
 use App\Models\SensitiveInformationCategory;
 use App\Models\SensitiveInformationResponsible;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\WebFooter;
 use App\Services\SensitiveInformationService;
@@ -40,6 +41,7 @@ class SensitiveInformationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -47,7 +49,7 @@ class SensitiveInformationController extends Controller
                                         ->latest()
                                         ->get();
 
-            return view('admin.sensitive_information.index', ['pageConfigs' => $pageConfigs], compact('projects', 'unit', 'copyright'));
+            return view('admin.sensitive_information.index', ['pageConfigs' => $pageConfigs], compact('projects', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Projetos Cadastrados!')->error();
             return redirect()->back()->withInput();
@@ -61,12 +63,13 @@ class SensitiveInformationController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = SensitiveInformationCategory::with('projects')->orderBy('degree', 'asc')->get();
         $responsibles = SensitiveInformationResponsible::with('projects')->orderBy('name', 'asc')->get();
-        return view('admin.sensitive_information.create', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright', 'responsibles'));
+        return view('admin.sensitive_information.create', ['pageConfigs' => $pageConfigs], compact('categories', 'unit', 'copyright', 'courses_nav', 'responsibles'));
 
     }
 
@@ -181,7 +184,7 @@ class SensitiveInformationController extends Controller
             $categories = SensitiveInformationCategory::with('projects')->orderBy('degree', 'asc')->get();
             $responsibles = SensitiveInformationResponsible::with('projects')->orderBy('name', 'asc')->get();
 
-            return view('admin.sensitive_information.show', compact('project', 'project_files', 'categories', 'unit', 'copyright', 'responsibles' ));
+            return view('admin.sensitive_information.show', compact('project', 'project_files', 'categories', 'unit', 'copyright', 'courses_nav', 'responsibles' ));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a Projeto!')->error();
             dd($exception);
@@ -351,7 +354,7 @@ class SensitiveInformationController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = SensitiveInformationCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.sensitive_information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.sensitive_information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index_filter_category($category_id)
@@ -364,7 +367,7 @@ class SensitiveInformationController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = SensitiveInformationCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.sensitive-information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.sensitive-information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_index_filter_tag($tag_id)
@@ -377,7 +380,7 @@ class SensitiveInformationController extends Controller
         $banner = Banner::where('banner_type_id', 3)->first();
         $categories = SensitiveInformationCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.sensitive-information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'web_footer', 'institucional_pages', 'service_pages'));
+        return view('web.sensitive-information.index', compact('banner', 'projects', 'categories', 'unit', 'copyright', 'courses_nav', 'web_footer', 'institucional_pages', 'service_pages'));
     }
 
     public function web_show($project_id)
@@ -390,6 +393,6 @@ class SensitiveInformationController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $categories = SensitiveInformationCategory::all();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
-        return view('web.sensitive-information.show', compact('projects', 'project', 'unit', 'copyright', 'web_footer', 'categories', 'institucional_pages', 'service_pages'));
+        return view('web.sensitive-information.show', compact('projects', 'project', 'unit', 'copyright', 'courses_nav', 'web_footer', 'categories', 'institucional_pages', 'service_pages'));
     }
 }

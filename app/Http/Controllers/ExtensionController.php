@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 
@@ -17,9 +18,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-sweet-alerts', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // block ui
@@ -31,9 +33,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-block-ui', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Toastr
@@ -45,9 +48,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-toastr', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // NoUi Slider
@@ -59,9 +63,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-sliders', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Drag Drop
@@ -73,22 +78,25 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-drag-drop', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Tour
     public function faq()
     {
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('admin/help/faq', [
             'pageConfigs' => $pageConfigs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Clipboard
@@ -100,9 +108,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-clipboard', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Media Player
@@ -114,9 +123,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-media-player', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // Context Menu
@@ -128,9 +138,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-context-menu', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // swiper
@@ -142,9 +153,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-swiper', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // tree
@@ -156,9 +168,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-tree', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // ratings
@@ -170,9 +183,10 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/extensions/ext-component-ratings', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 
     // I18n
@@ -184,8 +198,9 @@ class ExtensionController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         return view('/content/locale/locale', [
             'breadcrumbs' => $breadcrumbs
-        ], compact('unit', 'copyright'));
+        ], compact('unit', 'copyright', 'courses_nav'));
     }
 }

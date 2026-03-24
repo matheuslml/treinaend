@@ -7,6 +7,7 @@ use App\Models\City;
 use App\Models\Departament;
 use App\Models\Occupation;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use Illuminate\Http\Request;
 use App\Services\OccupationService;
@@ -32,12 +33,13 @@ class OccupationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
             $departaments = Departament::all();
             $occupations = $this->occupationService->get();
-            return view('admin.occupation.index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'occupations', 'departaments'));
+            return view('admin.occupation.index', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav', 'occupations', 'departaments'));
         } catch (\Throwable $throwable) {
 
             flash('Erro ao procurar as Ocupações Cadastradas!')->error();
@@ -78,7 +80,7 @@ class OccupationController extends Controller
             $occupations = $this->occupationService->get();
             $departaments = Departament::all();
             $occupation_selected = $this->occupationService->show($occupation_id);
-            return view('admin.occupation.show', compact('occupation_selected', 'occupations', 'departaments', 'unit', 'copyright'));
+            return view('admin.occupation.show', compact('occupation_selected', 'occupations', 'departaments', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a ocupação!')->error();
             return redirect()->back()->withInput();
@@ -116,6 +118,7 @@ class OccupationController extends Controller
             $occupation = Occupation::find($occupation);
             $occupation->delete();
             $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
             flash('Ocupação deletada com sucesso!')->success();
             $departaments = Departament::all();
             $occupations = $this->occupationService->get();

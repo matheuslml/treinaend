@@ -17,6 +17,7 @@ use App\Models\Departament;
 use App\Models\Occupation;
 use App\Models\State;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Models\Exercise;
@@ -47,11 +48,12 @@ class PersonController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
-        return view('admin.user.index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright'));
+        return view('admin.user.index', ['pageConfigs' => $pageConfigs], compact('users', 'unit', 'copyright', 'courses_nav'));
     }
 
     public function show($user_id)
@@ -59,6 +61,7 @@ class PersonController extends Controller
         try{
             $user = User::find($user_id);
             $person_id = $user->person_id;
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
@@ -82,7 +85,7 @@ class PersonController extends Controller
                 }])
                 ->count();
 
-            return view('admin.user.show', compact('unit', 'copyright', 'audits', 'user', 'disciplines_count', 'exercises_count' ));
+            return view('admin.user.show', compact('unit', 'copyright', 'courses_nav', 'audits', 'user', 'disciplines_count', 'exercises_count' ));
         } catch (\Throwable $throwable) {
             flash('Erro ao buscar a pessoa!')->error();
             return redirect()->back()->withInput();
@@ -96,10 +99,11 @@ class PersonController extends Controller
         }
 
         $pageConfigs = ['pageHeader' => false];
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright'));
+        return view('admin.user.create', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
 
     }
 

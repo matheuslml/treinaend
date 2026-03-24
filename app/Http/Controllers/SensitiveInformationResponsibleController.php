@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\SensitiveInformationResponsible;
 use App\Http\Requests\SensitiveInformationResponsibleRequest;
 use App\Models\Unit;
+use App\Models\Course;
 use App\Models\Copyright;
 use App\Services\SensitiveInformationResponsibleService;
 use App\Services\SensitiveInformationResponsibleCreateService;
@@ -29,11 +30,12 @@ public function index(): View
 
     try{
         $pageConfigs = ['pageHeader' => false];
+$courses_nav = Course::where('status', 'PUBLISHED')->get();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $responsibles = SensitiveInformationResponsible::with('projects')->latest()->get();
-        return view('admin.sensitive_information.responsible_index', ['pageConfigs' => $pageConfigs], compact('responsibles', 'unit', 'copyright'));
+        return view('admin.sensitive_information.responsible_index', ['pageConfigs' => $pageConfigs], compact('responsibles', 'unit', 'copyright', 'courses_nav'));
     } catch (\Throwable $throwable) {
         flash('Erro ao procurar os Responsáveis Cadastrados!')->error();
         return redirect()->back()->withInput();
@@ -72,7 +74,7 @@ public function show($responsible_id)
         $responsible_selected = $this->projectResponsibleService->show($responsible_id);
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
-        return view('admin.sensitive_information.responsible_show', compact('responsible_selected', 'responsibles', 'unit', 'copyright'));
+        return view('admin.sensitive_information.responsible_show', compact('responsible_selected', 'responsibles', 'unit', 'copyright', 'courses_nav'));
     } catch (\Exception $exception) {
         flash('Erro ao buscar o Responsável!')->error();
         return redirect()->back()->withInput();

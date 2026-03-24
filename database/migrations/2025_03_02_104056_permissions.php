@@ -65,6 +65,11 @@ class Permissions extends Migration
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Disciplinas', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Disciplinas', 'guard_name' => 'web']);
 
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Cursos', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Cursos', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Editar Cursos', 'guard_name' => 'web']);
+        Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Deletar Cursos', 'guard_name' => 'web']);
+
         // Transparência
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Ver e Listar Sobre', 'guard_name' => 'web']);
         Role::findByName('Desenvolvedor')->permissions()->firstOrCreate(['name' => 'Criar Sobre', 'guard_name' => 'web']);

@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Gate;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\StoreRolesRequest;
 use App\Http\Requests\Admin\UpdateRolesRequest;
+use App\Models\Course;
 use App\Models\Role as ModelsRole;
 use App\Models\Permission as ModelsPermission;
 use App\Models\User;
@@ -30,7 +31,9 @@ class RolesController extends Controller
         $roles = ModelsRole::with('users')->get();
         $users = User::with('roles')->get();
 
-        return view('/admin/rolesPermission/access-roles', ['pageConfigs' => $pageConfigs], compact('roles', 'users'));
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
+        return view('/admin/rolesPermission/access-roles', ['pageConfigs' => $pageConfigs], compact('roles', 'courses_nav', 'users'));
     }
 
     /**
@@ -50,7 +53,9 @@ class RolesController extends Controller
 
         $permissions = ModelsPermission::all();
 
-        return view('/admin/rolesPermission/access-roles-create', ['pageConfigs' => $pageConfigs], compact('roles', 'permissions'));
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
+        return view('/admin/rolesPermission/access-roles-create', ['pageConfigs' => $pageConfigs], compact('roles', 'courses_nav', 'permissions'));
     }
 
     /**
@@ -78,10 +83,12 @@ class RolesController extends Controller
 
             $permissions = ModelsPermission::all();
 
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
 
             flash('Regra Criada Com Sucessso!')->success();
             DB::commit();
-            return view('/admin/rolesPermission/access-roles-create', ['pageConfigs' => $pageConfigs], compact('roles', 'permissions'));
+            return view('/admin/rolesPermission/access-roles-create', ['pageConfigs' => $pageConfigs], compact('roles', 'courses_nav', 'permissions'));
         }catch (\Throwable $throwable){
             DB::rollBack();
             flash('Erro ao criar a Regra!')->error();
@@ -107,7 +114,9 @@ class RolesController extends Controller
 
             $permissions = ModelsPermission::get()->pluck('name', 'id');
 
-            return view('/admin/rolesPermission/access-roles-edit', ['pageConfigs' => $pageConfigs], compact('role', 'permissions'));
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
+            return view('/admin/rolesPermission/access-roles-edit', ['pageConfigs' => $pageConfigs], compact('role', 'courses_nav', 'permissions'));
         }catch (\Throwable $throwable){
             DB::rollBack();
 
@@ -184,9 +193,11 @@ class RolesController extends Controller
             $roles = ModelsRole::with('users')->get();
             $users = User::with('roles')->get();
 
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
             flash('Deletada com Sucesso!')->success();
             DB::commit();
-            return view('/admin/rolesPermission/access-roles', ['pageConfigs' => $pageConfigs], compact('roles', 'users'));
+            return view('/admin/rolesPermission/access-roles', ['pageConfigs' => $pageConfigs], compact('roles', 'courses_nav', 'users'));
         }catch (\Throwable $throwable){
             DB::rollBack();
             flash('Erro ao deletar a Regra!')->error();
@@ -218,7 +229,9 @@ class RolesController extends Controller
         $roles = ModelsRole::with('users')->get();
         $user_finded = User::find($idUser)->load('roles');
 
-        return view('/admin/rolesPermission/access-roles-users', ['pageConfigs' => $pageConfigs], compact('roles', 'user_finded', 'roles_list'));
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
+
+        return view('/admin/rolesPermission/access-roles-users', ['pageConfigs' => $pageConfigs], compact('roles', 'courses_nav', 'user_finded', 'roles_list'));
     }
 
     public function user_rule_store(Request $request)

@@ -34,7 +34,7 @@ class HomeWebController extends Controller
         $leaderships = Leadership::where('type', 'HEADSHIP')->where('status', 'PUBLISHED')->orderBy('order', 'asc')->get();
         $detect = new MobileDetect();
         $isMobile = $detect->isMobile();
-        return view('web.home.home', compact('partnership','isMobile', 'leaderships', 'copyright', 'posts', 'unit', 'copyright', 'web_shortcuts', 'news', 'news_mob', 'web_footer', 'courses', 'service_pages'));
+        return view('web.home.home', compact('partnership','isMobile', 'leaderships', 'copyright', 'posts', 'unit', 'copyright', 'courses_nav', 'web_shortcuts', 'news', 'news_mob', 'web_footer', 'courses', 'service_pages'));
     }
 
 }
