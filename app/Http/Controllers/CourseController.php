@@ -34,7 +34,7 @@ class CourseController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
@@ -97,6 +97,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $disciplines = Discipline::where('Course_id',$course_id)->latest()->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             return view('admin.course.show', compact('course_selected', 'unit', 'copyright', 'courses_nav', 'disciplines'));
         } catch (\Exception $exception) {
             flash('Erro ao buscar a Curso!')->error();

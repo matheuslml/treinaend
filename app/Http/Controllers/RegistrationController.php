@@ -183,7 +183,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             DB::beginTransaction();
 
             $cpf = preg_replace('/\D/', '', $request->cpf);
-            $cpf = ltrim($cpf, '0');
+            $cpf = ltrim($cpf, '0');    
 
             $document = Document::whereRaw("
                             TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
@@ -205,7 +205,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
                 Document::create([
                     'person_id' => $person->id,
-                    'document' => $request['cpf'],
+                    'document' => $cpf,
                     'document_type_id' => 1
                 ]);
                 flash('Matrícula criada com sucesso!')->success();
