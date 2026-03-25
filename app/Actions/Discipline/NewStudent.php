@@ -19,20 +19,20 @@ class NewStudent
     public function handle($person_id, $course_id): void
     {
         $discipline = Discipline::where('course_id', $course_id)->where('order', 1)->first();
-        if((DisciplinePeople::where('person_id', $person_id)->first())==null){
-            $today = Carbon::today();
-            DisciplinePeople::updateOrCreate(
-                [
-                    'discipline_id' => $discipline->id,
-                    'person_id' => $person_id
-                ],
-                [
-                    'exam_date' => $today->copy()->addDays(2),
-                    'started_at' => $today,
-                    'exam_nr' => 0
-                ]
-            );
-        }
+        $today = Carbon::today();
+        $exam_date = $today->copy()->addDays(2);
+        //dd('aqui');
+        DisciplinePeople::updateOrCreate(
+            [
+                'discipline_id' => $discipline->id,
+                'person_id' => $person_id
+            ],
+            [
+                'exam_date' => $exam_date->toDateString(),
+                'started_at' => $today->toDateString(),
+                'exam_nr' => 0
+            ]
+        );
     }
 
 }

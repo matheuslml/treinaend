@@ -143,9 +143,9 @@
                   <div class="col-sm-9">
                       <select class="select2 form-select" id="status" name="status">
                         <optgroup label="Selecione">
-                            <option value="PUBLISHED" >Publicado</option>
-                            <option value="DRAFT" >Editando</option>
-                            <option value="PENDING" >Pendente</option>
+                            <option value="PUBLISHED" {{ $course_selected->status == 'PUBLISHED' ? 'selected' : '' }} >Publicado</option>
+                            <option value="DRAFT" {{ $course_selected->status == 'DRAFT' ? 'selected' : '' }}>Editando</option>
+                            <option value="PENDING" {{ $course_selected->status == 'PENDING' ? 'selected' : '' }} >Pendente</option>
                         </optgroup>
                       </select>
                   </div>

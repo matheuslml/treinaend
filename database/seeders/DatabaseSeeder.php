@@ -23,7 +23,7 @@ class DatabaseSeeder extends Seeder
          $this->call(DisciplineSeeder::class);
          $this->call(LessonSeeder::class);
          $this->call(ExerciseSeeder::class);
-         $this->call(DisciplinePersonSeeder::class);
+         //$this->call(DisciplinePersonSeeder::class);
          $this->call(SupportMaterialSeeder::class);
          $this->call(RegistrationSeeder::class);
          $this->call(UserSeeder::class);

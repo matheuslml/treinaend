@@ -48,7 +48,6 @@ $configData = Helper::applClasses();
           </li>
         </ul>
       </li>
-      @can('Ver Menu do Aluno')
       <li class="navigation-header">
         <span>Cursos</span>
         <i data-feather="more-horizontal"></i>
@@ -61,7 +60,6 @@ $configData = Helper::applClasses();
             </a>
           </li>
         @endforeach
-      @endcan
       @can('Ver Menu da Treinaend')
       <li class="navigation-header">
         <span>Treinaend</span>

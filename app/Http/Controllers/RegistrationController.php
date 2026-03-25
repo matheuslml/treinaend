@@ -26,6 +26,7 @@ use Endroid\QrCode\Label\LabelAlignment;
 use Endroid\QrCode\Label\Font\OpenSans;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
+use App\Actions\Discipline\NewStudent;
 class RegistrationController extends Controller
 {
 
@@ -208,6 +209,9 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
                     'document' => $cpf,
                     'document_type_id' => 1
                 ]);
+
+                $new_student = resolve(NewStudent::class);
+                $new_student->handle($person->id, $request['course_id']);
                 flash('Matrícula criada com sucesso!')->success();
             }
 

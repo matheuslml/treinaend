@@ -29,6 +29,7 @@ class StudentPainel extends Controller
         }*/
 
         try{
+
             $pageConfigs = ['pageHeader' => false];
             $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
@@ -40,8 +41,8 @@ class StudentPainel extends Controller
 
             //fazer a verificação se o curso está pago
             $course = Course::find($course_id);
-            $new_student = resolve(NewStudent::class);
-            $new_student->handle($person_id, $course_id);
+            /*$new_student = resolve(NewStudent::class);
+            $new_student->handle($person_id, $course_id);*/
 
             $disciplines = Discipline::where('course_id', $course_id)->orderBy('order', 'asc')
                 ->with(['person' => function ($query) use ($person_id) {
@@ -81,10 +82,11 @@ class StudentPainel extends Controller
         }*/
 
         try{
+
             $userId = Auth::id();
             $user = User::find($userId);
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
@@ -231,8 +233,8 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
                         'answer' => $answer
                     ]);
                 }
-                if($score >=7){
-                //Salvar dados da prova
+                if($score > 0){
+                //Salvar dados da prova não está coreto
                     DisciplinePeople::updateOrCreate(
                         [
                             'discipline_id' => $exercise->discipline_id,
@@ -245,17 +247,19 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
                     );
 
                 //criar proxima disciplina
-                    DisciplinePeople::updateOrCreate(
-                        [
-                            'discipline_id' => $exercise->discipline->order + 1,
-                            'person_id' => $person->id
-                        ],
-                        [
-                            'exam_date' => $today->copy()->addDays($days),
-                            'started_at' => $today,
-                            'exam_nr' => 0
-                        ]
-                    );
+                    if(($person->registration->course_id == $discipline_person->discipline->course_id) && ($person->registration->payment_status = 'S')){
+                        DisciplinePeople::updateOrCreate(
+                            [
+                                'discipline_id' => $exercise->discipline->order + 1,
+                                'person_id' => $person->id
+                            ],
+                            [
+                                'exam_date' => $today->copy()->addDays($days),
+                                'started_at' => $today,
+                                'exam_nr' => 0
+                            ]
+                        );
+                    }
                 }else{
                     DisciplinePeople::updateOrCreate(
                         [
