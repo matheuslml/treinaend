@@ -13,6 +13,7 @@ use App\Models\Person;
 use App\Models\SupportMaterial;
 use App\Models\Unit;
 use App\Models\Course;
+use App\Models\Registration;
 use App\Models\User;
 use Carbon\Carbon;
 use Detection\MobileDetect;
@@ -66,6 +67,9 @@ class StudentPainel extends Controller
                         });
                 }])
                 ->first();
+                if($discipline_atual == null){
+                    $discipline_atual = $disciplines->first();
+                }
 
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
@@ -233,7 +237,7 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
-                if($score > 0){
+                if($score >= 0){
                 //Salvar dados da prova não está coreto
                     DisciplinePeople::updateOrCreate(
                         [
@@ -242,12 +246,14 @@ class StudentPainel extends Controller
                         ],
                         [
                             'finished_at' => $today,
-                            'score' => $score
+                            'score' => $score,
+                            'exam_nr' => $exam_nr+1
                         ]
                     );
 
                 //criar proxima disciplina
-                    if(($person->registration->course_id == $discipline_person->discipline->course_id) && ($person->registration->payment_status = 'S')){
+                    $registration = Registration::where('person_id', $person->id)->where('course_id', $exercise->discipline->course->id)->get();
+                    if(($exercise->discipline->order == count($exercise->discipline->course->disciplines)) && ($registration->payment_status == 'S')){
                         DisciplinePeople::updateOrCreate(
                             [
                                 'discipline_id' => $exercise->discipline->order + 1,

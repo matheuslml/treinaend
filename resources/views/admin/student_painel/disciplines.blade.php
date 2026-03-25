@@ -24,7 +24,7 @@
   <div class="card " >
     <div class="card-body text-left">
       <!-- main title -->
-      <h2 class="text-primary">Desciplinas do Curso {{ $course->name }}</h2>
+      <h2 class="text-primary">Disciplinas do Curso {{ $course->name }}</h2>
 
       <!-- subtitle -->
       <p class="card-text ">conhecimento que abre caminhos</p>

@@ -21,7 +21,7 @@ class NewStudent
         $discipline = Discipline::where('course_id', $course_id)->where('order', 1)->first();
         $today = Carbon::today();
         $exam_date = $today->copy()->addDays(2);
-        //dd('aqui');
+
         DisciplinePeople::updateOrCreate(
             [
                 'discipline_id' => $discipline->id,
