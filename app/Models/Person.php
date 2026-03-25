@@ -68,8 +68,8 @@ class Person extends Model implements Auditable
         $this->attributes['full_name'] = mb_strtoupper($value);
     }
 
-    public function registration(): HasOne
+    public function registrations(): HasMany
     {
-        return $this->hasOne(Registration::class, 'person_id');
+        return $this->hasMany(Registration::class, 'person_id');
     }
 }

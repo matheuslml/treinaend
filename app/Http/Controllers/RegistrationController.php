@@ -22,10 +22,9 @@ use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Endroid\QrCode\Builder\Builder;
 use Endroid\QrCode\Encoding\Encoding;
 use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\Label\LabelAlignment;
-use Endroid\QrCode\Label\Font\OpenSans;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
+use App\Actions\Discipline\NewStudent;
 class RegistrationController extends Controller
 {
 
@@ -44,7 +43,7 @@ class RegistrationController extends Controller
 
         try{
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $registrations = Registration::latest()->get();
@@ -183,7 +182,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
             DB::beginTransaction();
 
             $cpf = preg_replace('/\D/', '', $request->cpf);
-            $cpf = ltrim($cpf, '0');
+            $cpf = ltrim($cpf, '0');    
 
             $document = Document::whereRaw("
                             TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
@@ -205,9 +204,12 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
                 Document::create([
                     'person_id' => $person->id,
-                    'document' => $request['cpf'],
+                    'document' => $cpf,
                     'document_type_id' => 1
                 ]);
+
+                $new_student = resolve(NewStudent::class);
+                $new_student->handle($person->id, $request['course_id']);
                 flash('Matrícula criada com sucesso!')->success();
             }
 

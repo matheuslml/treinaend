@@ -207,7 +207,7 @@
                           @endif
                         </div>
                       </td>
-                      <td style="display: none;">{{ isset($user->person->registration) ? $user->person->registration->code : 'Administrador' }}</td>
+                      <td style="display: none;">{{ isset($user->person->registrations->first()) ? $user->person->registrations->first()->code : 'Administrador' }}</td>
                       <td style="display: none;">
                         <span class="badge bg-light-{{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'success' : 'danger' ) : 'warning'}}">
                           {{ isset($user->person->status) ? ( $user->person->status == 'active' ? 'Ativo' : 'Bloqueado' ) : '-'}}

@@ -86,7 +86,7 @@
           </div>
         </div>
         <h3>{{ Auth::user()->name }}</h3>
-        <span class="badge badge-light-primary profile-badge">{{ isset(Auth::user()->person->registration->code) ? 'Aluno' : 'Desenvolvedor' }}</span>
+        <span class="badge badge-light-primary profile-badge">{{ isset(Auth::user()->person->registrations->first()->code) ? 'Aluno' : 'Desenvolvedor' }}</span>
         <hr class="mb-2" />
       </div>
     </div>

@@ -22,7 +22,7 @@ class AuthenticatedSessionController extends Controller
     {
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $unit = Unit::where('web', true)->first();
-        return view('auth.auth-login-cover', compact('unit', 'copyright', 'courses_nav'));
+        return view('auth.auth-login-cover', compact('unit', 'copyright'));
     }
 
     /**
@@ -33,20 +33,25 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request)
     {
-        // Normaliza o CPF removendo pontos e traço
-        $cpfFinal = ltrim(preg_replace('/\D/', '', $request->cpf), '0');
 
-        // Substitui o valor no próprio request para seguir no fluxo
-        $request->merge([
-            'cpf' => $cpfFinal,
-        ]);
+        try{
+            // Normaliza o CPF removendo pontos e traço
+            $cpfFinal = ltrim(preg_replace('/\D/', '', $request->cpf), '0');
 
-        // Continua o processo de autenticação
-        $request->authenticate();
+            // Substitui o valor no próprio request para seguir no fluxo
+            $request->merge([
+                'cpf' => $cpfFinal,
+            ]);
 
-        $request->session()->regenerate();
+            // Continua o processo de autenticação
+            $request->authenticate();
 
-        return redirect()->intended(RouteServiceProvider::HOME);
+            $request->session()->regenerate();
+
+            return redirect()->intended(RouteServiceProvider::HOME);
+        } catch (\Throwable $throwable) {
+        dd($throwable);
+        }
     }
 
     /**

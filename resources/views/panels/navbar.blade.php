@@ -131,7 +131,7 @@
           </span>
           <span class="user-status">
             @if (Auth::check())
-              {{ isset(Auth::user()->person->registration->code) ? 'Aluno' : 'Desenvolvedor' }}
+              {{ isset(Auth::user()->person->registrations->first()->code) ? 'Aluno' : 'Desenvolvedor' }}
             @else
               sem ocupação
             @endif

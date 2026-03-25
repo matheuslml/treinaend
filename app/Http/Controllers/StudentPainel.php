@@ -13,6 +13,7 @@ use App\Models\Person;
 use App\Models\SupportMaterial;
 use App\Models\Unit;
 use App\Models\Course;
+use App\Models\Registration;
 use App\Models\User;
 use Carbon\Carbon;
 use Detection\MobileDetect;
@@ -29,6 +30,7 @@ class StudentPainel extends Controller
         }*/
 
         try{
+
             $pageConfigs = ['pageHeader' => false];
             $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
@@ -40,8 +42,8 @@ class StudentPainel extends Controller
 
             //fazer a verificação se o curso está pago
             $course = Course::find($course_id);
-            $new_student = resolve(NewStudent::class);
-            $new_student->handle($person_id, $course_id);
+            /*$new_student = resolve(NewStudent::class);
+            $new_student->handle($person_id, $course_id);*/
 
             $disciplines = Discipline::where('course_id', $course_id)->orderBy('order', 'asc')
                 ->with(['person' => function ($query) use ($person_id) {
@@ -65,6 +67,9 @@ class StudentPainel extends Controller
                         });
                 }])
                 ->first();
+                if($discipline_atual == null){
+                    $discipline_atual = $disciplines->first();
+                }
 
             return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
@@ -81,10 +86,11 @@ class StudentPainel extends Controller
         }*/
 
         try{
+
             $userId = Auth::id();
             $user = User::find($userId);
             $pageConfigs = ['pageHeader' => false];
-$courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
@@ -231,8 +237,8 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
                         'answer' => $answer
                     ]);
                 }
-                if($score >=7){
-                //Salvar dados da prova
+                if($score >= $exercise->discipline->course->grade){
+                //Salvar dados da prova não está coreto
                     DisciplinePeople::updateOrCreate(
                         [
                             'discipline_id' => $exercise->discipline_id,
@@ -240,22 +246,26 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
                         ],
                         [
                             'finished_at' => $today,
-                            'score' => $score
+                            'score' => $score,
+                            'exam_nr' => $exam_nr+1
                         ]
                     );
 
                 //criar proxima disciplina
-                    DisciplinePeople::updateOrCreate(
-                        [
-                            'discipline_id' => $exercise->discipline->order + 1,
-                            'person_id' => $person->id
-                        ],
-                        [
-                            'exam_date' => $today->copy()->addDays($days),
-                            'started_at' => $today,
-                            'exam_nr' => 0
-                        ]
-                    );
+                    $registration = Registration::where('person_id', $person->id)->where('course_id', $exercise->discipline->course->id)->first();
+                    if(($exercise->discipline->order < count($exercise->discipline->course->disciplines)) && ($registration->qualification == "S")){
+                        DisciplinePeople::updateOrCreate(
+                            [
+                                'discipline_id' => $exercise->discipline->order + 1,
+                                'person_id' => $person->id
+                            ],
+                            [
+                                'exam_date' => $today->copy()->addDays($days),
+                                'started_at' => $today,
+                                'exam_nr' => 0
+                            ]
+                        );
+                    }
                 }else{
                     DisciplinePeople::updateOrCreate(
                         [
