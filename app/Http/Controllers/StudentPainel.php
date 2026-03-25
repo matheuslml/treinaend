@@ -237,7 +237,7 @@ class StudentPainel extends Controller
                         'answer' => $answer
                     ]);
                 }
-                if($score >= 0){
+                if($score >= $exercise->discipline->course->grade){
                 //Salvar dados da prova não está coreto
                     DisciplinePeople::updateOrCreate(
                         [
@@ -252,8 +252,8 @@ class StudentPainel extends Controller
                     );
 
                 //criar proxima disciplina
-                    $registration = Registration::where('person_id', $person->id)->where('course_id', $exercise->discipline->course->id)->get();
-                    if(($exercise->discipline->order == count($exercise->discipline->course->disciplines)) && ($registration->payment_status == 'S')){
+                    $registration = Registration::where('person_id', $person->id)->where('course_id', $exercise->discipline->course->id)->first();
+                    if(($exercise->discipline->order < count($exercise->discipline->course->disciplines)) && ($registration->qualification == "S")){
                         DisciplinePeople::updateOrCreate(
                             [
                                 'discipline_id' => $exercise->discipline->order + 1,

@@ -67,12 +67,14 @@ document.addEventListener("DOMContentLoaded", function () {
         })
         .then(response => response.json())
         .then(data => {
-            alert("Respostas salvas com sucesso!");
             console.log("Resposta do servidor:", data);
+            location.reload(true);
+            alert("Respostas salvas com sucesso!");
         })
         .catch(error => {
             console.error("Erro ao salvar:", error);
             alert("Erro ao salvar as respostas.");
+            location.reload(true);
         });
     });
 
