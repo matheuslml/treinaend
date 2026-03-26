@@ -78,13 +78,6 @@ return [
             'visibility' => 'public',
         ],
 
-        'official_diaries' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/images/official_diaries'),
-            'url' => env('APP_URL').'/storage/images/official_diaries',
-            'visibility' => 'public',
-        ],
-
         'projects' => [
             'driver' => 'local',
             'root' => storage_path('app/public/images/projects'),
@@ -103,13 +96,6 @@ return [
             'driver' => 'local',
             'root' => storage_path('app/public/images/projects/responsibles'),
             'url' => env('APP_URL').'/storage/images/projects/responsibles',
-            'visibility' => 'public',
-        ],
-
-        'sensitive_information' => [
-            'driver' => 'local',
-            'root' => storage_path('app/public/files/sensitive_informations'),
-            'url' => env('APP_URL').'/storage/files/sensitive_informations',
             'visibility' => 'public',
         ],
 
