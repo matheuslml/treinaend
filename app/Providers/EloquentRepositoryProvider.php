@@ -131,30 +131,6 @@ use App\Repositories\Eloquent\PostEloquentRepository;
 use App\Repositories\Eloquent\PostCreateEloquentRepository;
 use App\Repositories\Eloquent\PostUpdateEloquentRepository;
 
-use App\Repositories\Eloquent\BiddingEloquentRepository;
-use App\Repositories\Eloquent\BiddingCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingUpdateEloquentRepository;
-use App\Repositories\Eloquent\BiddingModalityEloquentRepository;
-use App\Repositories\Eloquent\BiddingModalityCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingModalityUpdateEloquentRepository;
-use App\Repositories\Eloquent\BiddingAreaEloquentRepository;
-use App\Repositories\Eloquent\BiddingAreaCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingAreaUpdateEloquentRepository;
-use App\Repositories\Eloquent\BiddingItemEloquentRepository;
-use App\Repositories\Eloquent\BiddingItemCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingItemUpdateEloquentRepository;
-use App\Repositories\Eloquent\BiddingWinnerEloquentRepository;
-use App\Repositories\Eloquent\BiddingWinnerCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingWinnerUpdateEloquentRepository;
-use App\Repositories\Eloquent\BiddingAgreementEloquentRepository;
-use App\Repositories\Eloquent\BiddingAgreementCreateEloquentRepository;
-use App\Repositories\Eloquent\BiddingAgreementUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\AgreementFileEloquentRepository;
-use App\Repositories\Eloquent\AgreementTypeEloquentRepository;
-use App\Repositories\Eloquent\AgreementTypeCreateEloquentRepository;
-use App\Repositories\Eloquent\AgreementTypeUpdateEloquentRepository;
-
 use App\Repositories\Eloquent\DirectHireEloquentRepository;
 use App\Repositories\Eloquent\DirectHireCreateEloquentRepository;
 use App\Repositories\Eloquent\DirectHireUpdateEloquentRepository;
@@ -374,30 +350,6 @@ use App\Services\PostService;
 use App\Services\PostCreateService;
 use App\Services\PostUpdateService;
 
-use App\Services\BiddingService;
-use App\Services\BiddingCreateService;
-use App\Services\BiddingUpdateService;
-use App\Services\BiddingModalityService;
-use App\Services\BiddingModalityCreateService;
-use App\Services\BiddingModalityUpdateService;
-use App\Services\BiddingAreaService;
-use App\Services\BiddingAreaCreateService;
-use App\Services\BiddingAreaUpdateService;
-use App\Services\BiddingItemService;
-use App\Services\BiddingItemCreateService;
-use App\Services\BiddingItemUpdateService;
-use App\Services\BiddingWinnerService;
-use App\Services\BiddingWinnerCreateService;
-use App\Services\BiddingWinnerUpdateService;
-use App\Services\BiddingAgreementService;
-use App\Services\BiddingAgreementCreateService;
-use App\Services\BiddingAgreementUpdateService;
-
-use App\Services\AgreementFileService;
-use App\Services\AgreementTypeService;
-use App\Services\AgreementTypeCreateService;
-use App\Services\AgreementTypeUpdateService;
-
 use App\Services\DirectHireService;
 use App\Services\DirectHireCreateService;
 use App\Services\DirectHireUpdateService;
@@ -597,36 +549,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         NewsService::class => NewsEloquentRepository::class,
         NewsCreateService::class => NewsCreateEloquentRepository::class,
         NewsUpdateService::class => NewsUpdateEloquentRepository::class,
-
-        BiddingService::class => BiddingEloquentRepository::class,
-        BiddingCreateService::class => BiddingCreateEloquentRepository::class,
-        BiddingUpdateService::class => BiddingUpdateEloquentRepository::class,
-
-        BiddingModalityService::class => BiddingModalityEloquentRepository::class,
-        BiddingModalityCreateService::class => BiddingModalityCreateEloquentRepository::class,
-        BiddingModalityUpdateService::class => BiddingModalityUpdateEloquentRepository::class,
-
-        BiddingAreaService::class => BiddingAreaEloquentRepository::class,
-        BiddingAreaCreateService::class => BiddingAreaCreateEloquentRepository::class,
-        BiddingAreaUpdateService::class => BiddingAreaUpdateEloquentRepository::class,
-
-        BiddingItemService::class => BiddingItemEloquentRepository::class,
-        BiddingItemCreateService::class => BiddingItemCreateEloquentRepository::class,
-        BiddingItemUpdateService::class => BiddingItemUpdateEloquentRepository::class,
-
-        BiddingWinnerService::class => BiddingWinnerEloquentRepository::class,
-        BiddingWinnerCreateService::class => BiddingWinnerCreateEloquentRepository::class,
-        BiddingWinnerUpdateService::class => BiddingWinnerUpdateEloquentRepository::class,
-
-        BiddingAgreementService::class => BiddingAgreementEloquentRepository::class,
-        BiddingAgreementCreateService::class => BiddingAgreementCreateEloquentRepository::class,
-        BiddingAgreementUpdateService::class => BiddingAgreementUpdateEloquentRepository::class,
-
-        AgreementFileService::class => AgreementFileEloquentRepository::class,
-
-        AgreementTypeService::class => AgreementTypeEloquentRepository::class,
-        AgreementTypeCreateService::class => AgreementTypeCreateEloquentRepository::class,
-        AgreementTypeUpdateService::class => AgreementTypeUpdateEloquentRepository::class,
 
         LegislationService::class => LegislationEloquentRepository::class,
         LegislationCreateService::class => LegislationCreateEloquentRepository::class,

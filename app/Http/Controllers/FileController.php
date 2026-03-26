@@ -3,38 +3,25 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\FileRequest;
-use App\Models\Bidding;
-use App\Models\BiddingAgreement;
 use App\Services\FileService;
 use App\Services\FileCreateService;
 use App\Services\FileUpdateService;
 
-use App\Models\BiddingAgreementFile;
-use App\Models\BiddingFile;
 use App\Models\ExpenseFile;
 use App\Models\File;
 use App\Models\FileProject;
 use App\Models\FileLegislation;
 use App\Models\FileRevenue;
-use App\Models\Legislation;
 use Illuminate\Http\Request;
-use App\Services\BiddingAgreementService;
-use App\Services\BiddingService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Support\Facades\Response;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Detection\MobileDetect;
 use Exception;
 
 class FileController extends Controller
 {
     public function __construct(
-        protected BiddingAgreementService $biddingAgreementService,
-        protected BiddingService $biddingService,
         protected FileService $fileService,
         protected FileCreateService $fileCreateService,
         protected FileUpdateService $fileUpdateService,
@@ -61,22 +48,6 @@ class FileController extends Controller
                         'title' => $request['files']['title'][$key],
                         'url' => $pathfile
                     ]);
-
-                    //Contrato
-                    if($request->type == 'bidding_agreement'){
-                        BiddingAgreementFile::create([
-                            'bidding_agreement_id' => $request->id,
-                            'file_id' => $file->id
-                        ]);
-                    }
-
-                    //Licitação
-                    if($request->type == 'bidding'){
-                        BiddingFile::create([
-                            'bidding_id' => $request->id,
-                            'file_id' => $file->id
-                        ]);
-                    }
 
                     //Legislação
                     if($request->type == 'legislation'){
@@ -209,16 +180,6 @@ class FileController extends Controller
                 unlink($old_path);
                 session()->flash('success', 'Registro deletado com sucesso! ');
             DB::commit();
-            if(count($file->agreements) > 0){
-                return redirect()->action(
-                    [BiddingAgreementController::class, 'show'], ['licitacao_contrato' => $file->agreements->first()->id]
-                );
-            }
-            if(count($file->biddings) > 0){
-                return redirect()->action(
-                    [BiddingController::class, 'show'], ['licitaco' => $file->biddings->first()->id]
-                );
-            }
             if(count($file->legislations) > 0){
                 return redirect()->action(
                     [LegislationController::class, 'show'], ['legislaco' => $file->legislations->first()->id]
@@ -240,23 +201,5 @@ class FileController extends Controller
             return redirect()->back()->withInput();
         }
 
-    }
-
-
-    public function getRegisters(int $idType): JsonResponse
-    {
-        if($idType == 0){
-            $registers = BiddingAgreement::all();
-
-        }
-        elseif($idType == 1){
-            $registers = Bidding::all();
-
-        }
-        elseif($idType == 2){
-            $registers = Legislation::all();
-
-        }
-        return Response::json($registers);
     }
 }

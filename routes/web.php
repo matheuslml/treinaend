@@ -9,13 +9,7 @@ use App\Http\Controllers\PersonController;
 use App\Http\Controllers\Admin\PermissionsController;
 use App\Http\Controllers\Admin\RolesController;
 use App\Http\Controllers\Admin\UsersController;
-use App\Http\Controllers\AgreementTypeController;
 use App\Http\Controllers\BannerController;
-use App\Http\Controllers\BiddingAgreementController;
-use App\Http\Controllers\BiddingController;
-use App\Http\Controllers\BiddingItemController;
-use App\Http\Controllers\BiddingModalityController;
-use App\Http\Controllers\BiddingWinnerController;
 use App\Http\Controllers\BlankPageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartamentController;
@@ -173,13 +167,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/legislacao_categorias', LegislationCategoryController::class);
     Route::resource('/legislacao_situacoes', LegislationSituationController::class);
     Route::resource('/legislacao_vinculos', LegislationBondController::class);
-    //Main - Transparência - Licitações
-    Route::resource('/licitacoes', BiddingController::class);
-    Route::resource('/licitacao_modalidades', BiddingModalityController::class);
-    Route::resource('/licitacao_items', BiddingItemController::class);
-    Route::resource('/licitacao_vencedores', BiddingWinnerController::class);
-    Route::resource('/licitacao_contratos', BiddingAgreementController::class);
-    Route::resource('/licitacao_contrato_tipos', AgreementTypeController::class);
     //Main - Transparência - Contatações diretas
     Route::resource('/contratacoes_diretas', DirectHireController::class);
     Route::resource('/contratacao_direta_modalidades', DirectHireModality::class);
@@ -234,10 +221,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('departament/get-departamentos/{idUnit}', 'App\Http\Controllers\DepartamentController@getDepartamentos');
     Route::get('departament/get-occupations/{idDepartament}', 'App\Http\Controllers\DepartamentController@getOccupations');
 
-    //licitação Vínculo de winner e itens
-    Route::post('winner_add_itens/{person_id}', [BiddingWinnerController::class, 'winner_add_itens'])->name('winner_add_itens');
-    Route::post('winner_remove_itens', [BiddingWinnerController::class, 'winner_remove_itens'])->name('winner_remove_itens');
-    Route::get('winner_itens/{person_id}', [BiddingWinnerController::class, 'winner_itens'])->name('winner_itens');
 
 
     //reports ----------------------------- REPORTS -----------------------------------------------------------
