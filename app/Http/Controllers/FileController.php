@@ -49,30 +49,6 @@ class FileController extends Controller
                         'url' => $pathfile
                     ]);
 
-                    //Legislação
-                    if($request->type == 'legislation'){
-                        FileLegislation::create([
-                            'legislation_id' => $request->id,
-                            'file_id' => $file->id
-                        ]);
-                    }
-
-                    //Receitas
-                    if($request->type == 'revenue'){
-                        FileRevenue::create([
-                            'file_id' => $file->id,
-                            'revenue_id' => $request->id
-                        ]);
-                    }
-
-                    //Despesas
-                    if($request->type == 'expense'){
-                        ExpenseFile::create([
-                            'file_id' => $file->id,
-                            'expense_id' => $request->id
-                        ]);
-                    }
-
                     //Projetos
                     if($request->type == 'project'){
                         FileProject::create([
@@ -180,21 +156,6 @@ class FileController extends Controller
                 unlink($old_path);
                 session()->flash('success', 'Registro deletado com sucesso! ');
             DB::commit();
-            if(count($file->legislations) > 0){
-                return redirect()->action(
-                    [LegislationController::class, 'show'], ['legislaco' => $file->legislations->first()->id]
-                );
-            }
-            if(count($file->revenues) > 0){
-                return redirect()->action(
-                    [RevenueController::class, 'show'], ['receita' => $file->revenues->first()->id]
-                );
-            }
-            if(count($file->expenses) > 0){
-                return redirect()->action(
-                    [ExpenseController::class, 'show'], ['despesa' => $file->expenses->first()->id]
-                );
-            }
         } catch (\Exception $exception) {
             DB::rollBack();
             session()->flash('error', 'Aconteceu alguem erro!! ');

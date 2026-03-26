@@ -13,23 +13,14 @@ use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BlankPageController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\DepartamentController;
-use App\Http\Controllers\DirectHireController;
-use App\Http\Controllers\DirectHireWinnerController;
-use App\Http\Controllers\DirectHireItemController;
 use App\Http\Controllers\UnitController;
 use App\Http\Controllers\EmailController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\EntryReportsController;
-use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\FileController;
 use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LeadershipController;
-use App\Http\Controllers\LegislationBondController;
-use App\Http\Controllers\LegislationCategoryController;
-use App\Http\Controllers\LegislationController;
-use App\Http\Controllers\LegislationSituationController;
-use App\Http\Controllers\LegislationSubjectController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\OccupationController;
@@ -40,20 +31,13 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMediaController;
-use App\Http\Controllers\SensitiveInformationCategoryController;
-use App\Http\Controllers\SensitiveInformationController;
-use App\Http\Controllers\SensitiveInformationResponsibleController;
 use App\Http\Controllers\CopyrightController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\ExerciseController;
-use App\Http\Controllers\InternalPages;
 
-use App\Http\Controllers\RevenueController;
-use App\Http\Controllers\RevenueTypeController;
 use App\Http\Controllers\TagController;
 use App\Http\Controllers\TypeAccessController;
-use App\Http\Controllers\TypeExpenseController;
 use App\Http\Controllers\TypeRequestController;
 use App\Http\Controllers\UserController;
 use App\Models\DirectHireModality;
@@ -66,7 +50,6 @@ use App\Http\Controllers\PublicationWebController;
 use App\Http\Controllers\FAQWebController;
 use App\Http\Controllers\GalleryTypeController;
 use App\Http\Controllers\LessonController;
-use App\Http\Controllers\OfficialDiaryController;
 use App\Http\Controllers\ProjectProgressController;
 use App\Http\Controllers\ProjectResponsibleController;
 use App\Http\Controllers\RegistrationController;
@@ -154,24 +137,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/ouvidoria_manifestacoes', OmbudsmanController::class);
     Route::resource('/ouvidoria_acessos', TypeAccessController::class);
     Route::resource('/ouvidoria_requisicoes', TypeRequestController::class);
-    //Main - Transparência - Diário Official
-    //Main - Transparência - Despesas
-    Route::resource('/despesa_tipos', TypeExpenseController::class);
-    Route::resource('/despesas', ExpenseController::class);
-    //Main - Transparência - Receitas
-    Route::resource('/receita_tipos', RevenueTypeController::class);
-    Route::resource('/receitas', RevenueController::class);
-    //Main - Transparência - Legislações
-    Route::resource('/legislacoes', LegislationController::class);
-    Route::resource('/legislacao_assuntos', LegislationSubjectController::class);
-    Route::resource('/legislacao_categorias', LegislationCategoryController::class);
-    Route::resource('/legislacao_situacoes', LegislationSituationController::class);
-    Route::resource('/legislacao_vinculos', LegislationBondController::class);
-    //Main - Transparência - Contatações diretas
-    Route::resource('/contratacoes_diretas', DirectHireController::class);
-    Route::resource('/contratacao_direta_modalidades', DirectHireModality::class);
-    Route::resource('/contratacao_direta_vencedores', DirectHireWinnerController::class);
-    Route::resource('/contratacao_direta_itens', DirectHireItemController::class);
     //Main - Projetos
     Route::resource('/projetos', ProjectController::class);
     Route::resource('/projeto_categorias', ProjectCategoryController::class);
@@ -179,11 +144,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/projeto_progressos', ProjectProgressController::class);
     Route::resource('/projeto_medias', ProjectMediaController::class);
 
-    //Main - Sensitive Informations
-    Route::resource('/info_sensiveis', SensitiveInformationController::class);
-    Route::resource('/info_sensiveis_categorias', SensitiveInformationCategoryController::class);
-    Route::resource('/info_sensiveis_responsaveis', SensitiveInformationResponsibleController::class);
-    //Route::resource('/info_sensiveis_medias', SensitiveInformationMediaController::class);
     //Main - faq
     Route::resource('/faqs', FAQController::class);
     //Main - Gallery
@@ -212,8 +172,6 @@ Route::group(['middleware' => ['auth']], function () {
     //Route::post('ajaxRegister', ['as' => 'ajax.storecontent', 'uses' => 'App\Http\Controllers\NewsController@store_content']);
     Route::post('/savenewscontent', [NewsController::class, 'store_content'])->name('store_content');
 
-    //Legislation Vínculo
-    Route::post('legislacao_vinculo/{base}', [LegislationController::class, 'legislacao_vinculo'])->name('legislacao_vinculo');
 
     //Notifications
     Route::get('notification/readed/{idNotification}', 'App\Http\Controllers\NotificationController@changeReaded');
@@ -292,12 +250,6 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/projeto_web/{project_id}', [ProjectController::class, 'web_show'])->name('project_web_show');
     Route::get('/projeto_web', [ProjectController::class, 'web_index'])->name('projects_web_index');
     Route::get('/project_category_web/{category_id}', [ProjectController::class, 'web_category_show'])->name('project_category_web');
-
-    // ROTA SIGILOS WEB
-    Route::get('/info_sensiveis_web/{project_id}', [SensitiveInformationController::class, 'web_show'])->name('projectinfo_sensiveis_web_show');
-    Route::get('/info_sensiveis_web', [SensitiveInformationController::class, 'web_index'])->name('info_sensiveis_web_index');
-    Route::get('/info_sensiveis_category_web/{category_id}', [SensitiveInformationController::class, 'web_category_show'])->name('info_sensiveis_category_web');
-
 
     // WEB TRANSPARÊNCIA
     Route::any('/despesas_index', 'App\Http\Controllers\ExpenseController@web_index')->name('web_expense_index');

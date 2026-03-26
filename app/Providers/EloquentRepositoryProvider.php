@@ -35,9 +35,6 @@ use App\Repositories\Eloquent\UnitUpdateEloquentRepository;
 use App\Repositories\Eloquent\UserEloquentRepository;
 
 //TREINAEND -------------------------------------------------------------
-use App\Repositories\Eloquent\CertificateEloquentRepository;
-use App\Repositories\Eloquent\CertificateCreateEloquentRepository;
-use App\Repositories\Eloquent\CertificateUpdateEloquentRepository;
 use App\Repositories\Eloquent\ExerciseEloquentRepository;
 use App\Repositories\Eloquent\ExerciseCreateEloquentRepository;
 use App\Repositories\Eloquent\ExerciseUpdateEloquentRepository;
@@ -83,18 +80,6 @@ use App\Repositories\Eloquent\TypeRequestEloquentRepository;
 use App\Repositories\Eloquent\TypeRequestCreateEloquentRepository;
 use App\Repositories\Eloquent\TypeRequestUpdateEloquentRepository;
 
-use App\Repositories\Eloquent\RevenueEloquentRepository;
-use App\Repositories\Eloquent\RevenueCreateEloquentRepository;
-use App\Repositories\Eloquent\RevenueUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\RevenueTypeEloquentRepository;
-use App\Repositories\Eloquent\RevenueTypeCreateEloquentRepository;
-use App\Repositories\Eloquent\RevenueTypeUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\ExpenseEloquentRepository;
-use App\Repositories\Eloquent\ExpenseCreateEloquentRepository;
-use App\Repositories\Eloquent\ExpenseUpdateEloquentRepository;
-
 use App\Repositories\Eloquent\CategoryEloquentRepository;
 use App\Repositories\Eloquent\CategoryCreateEloquentRepository;
 use App\Repositories\Eloquent\CategoryUpdateEloquentRepository;
@@ -107,22 +92,6 @@ use App\Repositories\Eloquent\TagEloquentRepository;
 use App\Repositories\Eloquent\TagCreateEloquentRepository;
 use App\Repositories\Eloquent\TagUpdateEloquentRepository;
 
-use App\Repositories\Eloquent\LegislationEloquentRepository;
-use App\Repositories\Eloquent\LegislationCreateEloquentRepository;
-use App\Repositories\Eloquent\LegislationUpdateEloquentRepository;
-use App\Repositories\Eloquent\LegislationBondEloquentRepository;
-use App\Repositories\Eloquent\LegislationBondCreateEloquentRepository;
-use App\Repositories\Eloquent\LegislationBondUpdateEloquentRepository;
-use App\Repositories\Eloquent\LegislationCategoryEloquentRepository;
-use App\Repositories\Eloquent\LegislationCategoryCreateEloquentRepository;
-use App\Repositories\Eloquent\LegislationCategoryUpdateEloquentRepository;
-use App\Repositories\Eloquent\LegislationSituationEloquentRepository;
-use App\Repositories\Eloquent\LegislationSituationCreateEloquentRepository;
-use App\Repositories\Eloquent\LegislationSituationUpdateEloquentRepository;
-use App\Repositories\Eloquent\LegislationSubjectEloquentRepository;
-use App\Repositories\Eloquent\LegislationSubjectCreateEloquentRepository;
-use App\Repositories\Eloquent\LegislationSubjectUpdateEloquentRepository;
-
 use App\Repositories\Eloquent\NewsEloquentRepository;
 use App\Repositories\Eloquent\NewsCreateEloquentRepository;
 use App\Repositories\Eloquent\NewsUpdateEloquentRepository;
@@ -130,18 +99,6 @@ use App\Repositories\Eloquent\NewsUpdateEloquentRepository;
 use App\Repositories\Eloquent\PostEloquentRepository;
 use App\Repositories\Eloquent\PostCreateEloquentRepository;
 use App\Repositories\Eloquent\PostUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\DirectHireEloquentRepository;
-use App\Repositories\Eloquent\DirectHireCreateEloquentRepository;
-use App\Repositories\Eloquent\DirectHireUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\DirectHireWinnerEloquentRepository;
-use App\Repositories\Eloquent\DirectHireWinnerCreateEloquentRepository;
-use App\Repositories\Eloquent\DirectHireWinnerUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\DirectHireItemEloquentRepository;
-use App\Repositories\Eloquent\DirectHireItemCreateEloquentRepository;
-use App\Repositories\Eloquent\DirectHireItemUpdateEloquentRepository;
 
 use App\Repositories\Eloquent\ProjectEloquentRepository;
 use App\Repositories\Eloquent\ProjectCreateEloquentRepository;
@@ -203,22 +160,6 @@ use App\Repositories\Eloquent\ProjectResponsibleEloquentRepository;
 use App\Repositories\Eloquent\ProjectResponsibleCreateEloquentRepository;
 use App\Repositories\Eloquent\ProjectResponsibleUpdateEloquentRepository;
 
-use App\Repositories\Eloquent\SensitiveInformationEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationCreateEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\SensitiveInformationCategoryEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationCategoryCreateEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationCategoryUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\SensitiveInformationMediaEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationMediaCreateEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationMediaUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\SensitiveInformationResponsibleEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationResponsibleCreateEloquentRepository;
-use App\Repositories\Eloquent\SensitiveInformationResponsibleUpdateEloquentRepository;
-
 use App\Repositories\RepositoryInterface;
 
 
@@ -254,9 +195,6 @@ use App\Services\UnitUpdateService;
 use App\Services\UserService;
 
 //TREINAEND ---------------------------------------------------------
-use App\Services\CertificateService;
-use App\Services\CertificateCreateService;
-use App\Services\CertificateUpdateService;
 use App\Services\ExerciseService;
 use App\Services\ExerciseCreateService;
 use App\Services\ExerciseUpdateService;
@@ -302,18 +240,6 @@ use App\Services\TypeRequestService;
 use App\Services\TypeRequestCreateService;
 use App\Services\TypeRequestUpdateService;
 
-use App\Services\RevenueService;
-use App\Services\RevenueCreateService;
-use App\Services\RevenueUpdateService;
-
-use App\Services\RevenueTypeService;
-use App\Services\RevenueTypeCreateService;
-use App\Services\RevenueTypeUpdateService;
-
-use App\Services\ExpenseService;
-use App\Services\ExpenseCreateService;
-use App\Services\ExpenseUpdateService;
-
 use App\Services\CategoryService;
 use App\Services\CategoryCreateService;
 use App\Services\CategoryUpdateService;
@@ -326,22 +252,6 @@ use App\Services\TagService;
 use App\Services\TagCreateService;
 use App\Services\TagUpdateService;
 
-use App\Services\LegislationService;
-use App\Services\LegislationCreateService;
-use App\Services\LegislationUpdateService;
-use App\Services\LegislationBondService;
-use App\Services\LegislationBondCreateService;
-use App\Services\LegislationBondUpdateService;
-use App\Services\LegislationCategoryService;
-use App\Services\LegislationCategoryCreateService;
-use App\Services\LegislationCategoryUpdateService;
-use App\Services\LegislationSituationService;
-use App\Services\LegislationSituationCreateService;
-use App\Services\LegislationSituationUpdateService;
-use App\Services\LegislationSubjectService;
-use App\Services\LegislationSubjectCreateService;
-use App\Services\LegislationSubjectUpdateService;
-
 use App\Services\NewsService;
 use App\Services\NewsCreateService;
 use App\Services\NewsUpdateService;
@@ -353,14 +263,6 @@ use App\Services\PostUpdateService;
 use App\Services\DirectHireService;
 use App\Services\DirectHireCreateService;
 use App\Services\DirectHireUpdateService;
-
-use App\Services\DirectHireWinnerService;
-use App\Services\DirectHireWinnerCreateService;
-use App\Services\DirectHireWinnerUpdateService;
-
-use App\Services\DirectHireItemService;
-use App\Services\DirectHireItemCreateService;
-use App\Services\DirectHireItemUpdateService;
 
 use App\Services\ProjectService;
 use App\Services\ProjectCreateService;
@@ -422,22 +324,6 @@ use App\Services\ProjectProgressService;
 use App\Services\ProjectProgressCreateService;
 use App\Services\ProjectProgressUpdateService;
 
-use App\Services\SensitiveInformationService;
-use App\Services\SensitiveInformationCreateService;
-use App\Services\SensitiveInformationtUpdateService;
-
-use App\Services\SensitiveInformationCategoryService;
-use App\Services\SensitiveInformationCategoryCreateService;
-use App\Services\SensitiveInformationCategoryUpdateService;
-
-use App\Services\SensitiveInformationMediaService;
-use App\Services\SensitiveInformationMediaCreateService;
-use App\Services\SensitiveInformationMediaUpdateService;
-
-use App\Services\SensitiveInformationResponsibleService;
-use App\Services\SensitiveInformationResponsibleCreateService;
-use App\Services\SensitiveInformationResponsibleUpdateService;
-
 use Illuminate\Support\ServiceProvider;
 
 class EloquentRepositoryProvider extends ServiceProvider
@@ -474,9 +360,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         UnitUpdateService::class => UnitUpdateEloquentRepository::class,
         UserService::class => UserEloquentRepository::class,
         //TREINAEND ---------------------------------------------------------
-        CertificateService::class => CertificateEloquentRepository::class,
-        CertificateCreateService::class => CertificateCreateEloquentRepository::class,
-        CertificateUpdateService::class => CertificateUpdateEloquentRepository::class,
 
         ExerciseService::class => ExerciseEloquentRepository::class,
         ExerciseCreateService::class => ExerciseCreateEloquentRepository::class,
@@ -522,18 +405,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         TypeRequestCreateService::class => TypeRequestCreateEloquentRepository::class,
         TypeRequestUpdateService::class => TypeRequestUpdateEloquentRepository::class,
 
-        RevenueService::class => RevenueEloquentRepository::class,
-        RevenueCreateService::class => RevenueCreateEloquentRepository::class,
-        RevenueUpdateService::class => RevenueUpdateEloquentRepository::class,
-
-        RevenueTypeService::class => RevenueTypeEloquentRepository::class,
-        RevenueTypeCreateService::class => RevenueTypeCreateEloquentRepository::class,
-        RevenueTypeUpdateService::class => RevenueTypeUpdateEloquentRepository::class,
-
-        ExpenseService::class => ExpenseEloquentRepository::class,
-        ExpenseCreateService::class => ExpenseCreateEloquentRepository::class,
-        ExpenseUpdateService::class => ExpenseUpdateEloquentRepository::class,
-
         CategoryService::class => CategoryEloquentRepository::class,
         CategoryCreateService::class => CategoryCreateEloquentRepository::class,
         CategoryUpdateService::class => CategoryUpdateEloquentRepository::class,
@@ -550,41 +421,9 @@ class EloquentRepositoryProvider extends ServiceProvider
         NewsCreateService::class => NewsCreateEloquentRepository::class,
         NewsUpdateService::class => NewsUpdateEloquentRepository::class,
 
-        LegislationService::class => LegislationEloquentRepository::class,
-        LegislationCreateService::class => LegislationCreateEloquentRepository::class,
-        LegislationUpdateService::class => LegislationUpdateEloquentRepository::class,
-
         PostService::class => PostEloquentRepository::class,
         PostCreateService::class => PostCreateEloquentRepository::class,
         PostUpdateService::class => PostUpdateEloquentRepository::class,
-
-        LegislationBondService::class => LegislationBondEloquentRepository::class,
-        LegislationBondCreateService::class => LegislationBondCreateEloquentRepository::class,
-        LegislationBondUpdateService::class => LegislationBondUpdateEloquentRepository::class,
-
-        LegislationCategoryService::class => LegislationCategoryEloquentRepository::class,
-        LegislationCategoryCreateService::class => LegislationCategoryCreateEloquentRepository::class,
-        LegislationCategoryUpdateService::class => LegislationCategoryUpdateEloquentRepository::class,
-
-        LegislationSituationService::class => LegislationSituationEloquentRepository::class,
-        LegislationSituationCreateService::class => LegislationSituationCreateEloquentRepository::class,
-        LegislationSituationUpdateService::class => LegislationSituationUpdateEloquentRepository::class,
-
-        LegislationSubjectService::class => LegislationSubjectEloquentRepository::class,
-        LegislationSubjectCreateService::class => LegislationSubjectCreateEloquentRepository::class,
-        LegislationSubjectUpdateService::class => LegislationSubjectUpdateEloquentRepository::class,
-
-        DirectHireService::class => DirectHireEloquentRepository::class,
-        DirectHireCreateService::class => DirectHireCreateEloquentRepository::class,
-        DirectHireUpdateService::class => DirectHireUpdateEloquentRepository::class,
-
-        DirectHireWinnerService::class => DirectHireWinnerEloquentRepository::class,
-        //DirectHireWinnerCreateService::class => DirectHireWinnerCreateEloquentRepository::class,
-        DirectHireWinnerUpdateService::class => DirectHireWinnerUpdateEloquentRepository::class,
-
-        DirectHireItemService::class => DirectHireItemEloquentRepository::class,
-        DirectHireItemCreateService::class => DirectHireItemCreateEloquentRepository::class,
-        DirectHireItemUpdateService::class => DirectHireItemUpdateEloquentRepository::class,
 
         ProjectService::class => ProjectEloquentRepository::class,
         ProjectCreateService::class => ProjectCreateEloquentRepository::class,
@@ -649,22 +488,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         ProjectProgressService::class => ProjectProgressEloquentRepository::class,
         ProjectProgressCreateService::class => ProjectProgressCreateEloquentRepository::class,
         ProjectProgressUpdateService::class => ProjectProgressUpdateEloquentRepository::class,
-
-        SensitiveInformationService::class => SensitiveInformationEloquentRepository::class,
-        SensitiveInformationCreateService::class => SensitiveInformationCreateEloquentRepository::class,
-        //SensitiveInformationUpdateService::class => SensitiveInformationUpdateEloquentRepository::class,
-
-        SensitiveInformationCategoryService::class => SensitiveInformationCategoryEloquentRepository::class,
-        SensitiveInformationCategoryCreateService::class => SensitiveInformationCategoryCreateEloquentRepository::class,
-        SensitiveInformationCategoryUpdateService::class => SensitiveInformationCategoryUpdateEloquentRepository::class,
-
-        SensitiveInformationMediaService::class => SensitiveInformationMediaEloquentRepository::class,
-        SensitiveInformationMediaCreateService::class => SensitiveInformationMediaCreateEloquentRepository::class,
-        //SensitiveInformationMediaUpdateService::class => SensitiveInformationMediaUpdateEloquentRepository::class,
-
-        SensitiveInformationResponsibleService::class => SensitiveInformationResponsibleEloquentRepository::class,
-        SensitiveInformationResponsibleCreateService::class => SensitiveInformationResponsibleCreateEloquentRepository::class,
-        SensitiveInformationResponsibleUpdateService::class => SensitiveInformationResponsibleUpdateEloquentRepository::class,
 
     ];
 
