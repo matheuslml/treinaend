@@ -1,25 +1,7 @@
 <?php
 
-use App\Models\AgreementOrigin;
-use App\Models\AgreementSituation;
-use App\Models\BiddingSituation;
-use App\Models\DocumentType;
-use App\Models\FileType;
-
-use App\Models\LegislationAuthor;
-
-use App\Models\NotificationStatus;
-use App\Models\NotificationType;
-use App\Models\PermissionInformation;
-use App\Models\TypeMedia;
-use App\Models\TypePost;
-use App\Models\TypeRequest;
-use App\Models\User;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Migrations\Migration;
 use Spatie\Permission\Models\Role;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Hash;
 
 class Permissions extends Migration
 {

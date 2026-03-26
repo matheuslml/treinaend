@@ -11,28 +11,15 @@ use App\Services\FileUpdateService;
 
 use App\Models\BiddingAgreementFile;
 use App\Models\BiddingFile;
-use App\Models\BlankPage;
-use App\Models\Category;
-use App\Models\EnviromentalLicensing;
 use App\Models\ExpenseFile;
 use App\Models\File;
 use App\Models\FileProject;
-use App\Models\FileManagementReport;
-use App\Models\ManagementReport;
-use App\Models\Project;
 use App\Models\FileLegislation;
 use App\Models\FileRevenue;
-use App\Models\FileType;
 use App\Models\Legislation;
-use App\Models\TypeRequest;
-use App\Models\Unit;
-use App\Models\Course;
-use App\Models\Copyright;
-use App\Models\WebFooter;
 use Illuminate\Http\Request;
 use App\Services\BiddingAgreementService;
 use App\Services\BiddingService;
-use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
@@ -245,11 +232,6 @@ class FileController extends Controller
             if(count($file->expenses) > 0){
                 return redirect()->action(
                     [ExpenseController::class, 'show'], ['despesa' => $file->expenses->first()->id]
-                );
-            }
-            if(count($file->official_diaries) > 0){
-                return redirect()->action(
-                    [OfficialDiaryController::class, 'show'], ['official_diary' => $file->expenses->first()->id]
                 );
             }
         } catch (\Exception $exception) {

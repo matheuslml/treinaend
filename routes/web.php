@@ -1,9 +1,6 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\ActController;
-use App\Http\Controllers\ActTopicController;
-use App\Http\Controllers\OfficialDiarySearchController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ExtensionController;
@@ -164,9 +161,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/ouvidoria_acessos', TypeAccessController::class);
     Route::resource('/ouvidoria_requisicoes', TypeRequestController::class);
     //Main - Transparência - Diário Official
-    Route::resource('/diarios_oficiais', OfficialDiaryController::class);
-    Route::resource('/atos', ActController::class);
-    Route::resource('/ato_topicos', ActTopicController::class);
     //Main - Transparência - Despesas
     Route::resource('/despesa_tipos', TypeExpenseController::class);
     Route::resource('/despesas', ExpenseController::class);

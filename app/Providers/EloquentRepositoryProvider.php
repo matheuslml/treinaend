@@ -243,24 +243,9 @@ use App\Repositories\Eloquent\SensitiveInformationResponsibleEloquentRepository;
 use App\Repositories\Eloquent\SensitiveInformationResponsibleCreateEloquentRepository;
 use App\Repositories\Eloquent\SensitiveInformationResponsibleUpdateEloquentRepository;
 
-use App\Repositories\Eloquent\ActEloquentRepository;
-use App\Repositories\Eloquent\ActCreateEloquentRepository;
-use App\Repositories\Eloquent\ActUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\ActTopicEloquentRepository;
-use App\Repositories\Eloquent\ActTopicCreateEloquentRepository;
-use App\Repositories\Eloquent\ActTopicUpdateEloquentRepository;
-
-use App\Repositories\Eloquent\OfficialDiaryEloquentRepository;
-use App\Repositories\Eloquent\OfficialDiaryCreateEloquentRepository;
-use App\Repositories\Eloquent\OfficialDiaryUpdateEloquentRepository;
-
 use App\Repositories\RepositoryInterface;
 
 
-use App\Services\AddressService;
-use App\Services\AddressCreateService;
-use App\Services\AddressUpdateService;
 use App\Services\CityService;
 use App\Services\CountryService;
 use App\Services\DocumentService;
@@ -500,18 +485,6 @@ use App\Services\SensitiveInformationMediaUpdateService;
 use App\Services\SensitiveInformationResponsibleService;
 use App\Services\SensitiveInformationResponsibleCreateService;
 use App\Services\SensitiveInformationResponsibleUpdateService;
-
-use App\Services\ActService;
-use App\Services\ActCreateService;
-use App\Services\ActUpdateService;
-
-use App\Services\ActTopicService;
-use App\Services\ActTopicCreateService;
-use App\Services\ActTopicUpdateService;
-
-use App\Services\OfficialDiaryService;
-use App\Services\OfficialDiaryCreateService;
-use App\Services\OfficialDiaryUpdateService;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -770,18 +743,6 @@ class EloquentRepositoryProvider extends ServiceProvider
         SensitiveInformationResponsibleService::class => SensitiveInformationResponsibleEloquentRepository::class,
         SensitiveInformationResponsibleCreateService::class => SensitiveInformationResponsibleCreateEloquentRepository::class,
         SensitiveInformationResponsibleUpdateService::class => SensitiveInformationResponsibleUpdateEloquentRepository::class,
-
-        ActService::class => ActEloquentRepository::class,
-        ActCreateService::class => ActCreateEloquentRepository::class,
-        ActUpdateService::class => ActUpdateEloquentRepository::class,
-
-        ActTopicService::class => ActTopicEloquentRepository::class,
-        ActTopicCreateService::class => ActTopicCreateEloquentRepository::class,
-        ActTopicUpdateService::class => ActTopicUpdateEloquentRepository::class,
-
-        OfficialDiaryService::class => OfficialDiaryEloquentRepository::class,
-        OfficialDiaryCreateService::class => OfficialDiaryCreateEloquentRepository::class,
-        OfficialDiaryUpdateService::class => OfficialDiaryUpdateEloquentRepository::class,
 
     ];
 
