@@ -53,31 +53,34 @@
         }
 
         .certificate-text {
-            width: 60%;
+            width: 70%;
             margin-left: auto; /* empurra o bloco para a borda direita */
             text-align: right;
             color: #000; /* texto preto */
             font-family: 'Georgia', serif;
-            padding: 20mm; /* margem interna igual em todos os lados */
+            padding: 5mm 20mm 5mm 20mm ; /* margem interna igual em todos os lados */
             box-sizing: border-box; /* garante que o padding não estoure a largura */
         }
 
         .title {
-            font-size: 60px; /* maior */
-            font-weight: bold;
+            font-size: 70px; /* maior */
+            font-weight: 900;
             text-transform: uppercase;
-            margin-bottom: 10px;
-            letter-spacing: 2px;
+            margin-bottom: 0px;
+            padding-bottom: 0px;
+            letter-spacing: 5px;
         }
 
         .subtitle {
             font-size: 28px; /* menor que o título */
+            margin-top: 0px;
+            padding-top: 0px;
             margin-bottom: 20px;
             font-style: italic;
         }
 
         .name {
-            font-size: 40px;
+            font-size: 50px;
             font-weight: bold;
             margin-bottom: 25px;
             color: #000;
@@ -91,29 +94,29 @@
             color: #000;
         }
         .qrcode-container {
-            position: absolute;
-            bottom: 20mm;
-            right: 20mm;
-            display: flex;          /* coloca lado a lado */
-            flex-direction: row;    /* garante orientação horizontal */
-            align-items: center;    /* alinha verticalmente */
-            gap: 15px;              /* espaço entre texto e QR */
+            display: flex;              /* coloca lado a lado */
+            flex-direction: row;        /* orientação horizontal */
+            align-items: center;        /* centraliza verticalmente */
+            justify-content: flex-end;  /* empurra tudo para a direita */
+            gap: 10px;                  /* espaço entre texto e QR */
+            margin-top: 20px;           /* espaço acima */
         }
 
-        .qrcode-container .validation {
+        .validation {
+            flex: 1;                    /* ocupa espaço proporcional */
             font-size: 14px;
             color: #333;
-            margin: 0;
-            text-align: left;       /* texto alinhado à esquerda */
-            max-width: 200px;
+            margin: 0 0 20px 0;
+            text-align: right;          /* texto alinhado à direita */
         }
 
-        .qrcode-container img {
-            width: 120px;
-            height: 120px;
-            display: block;         /* evita comportamento inline estranho */
+        .image-qrcode {
+            flex: 0 0 auto;             /* não cresce nem encolhe */
         }
 
+        .image-qrcode img {
+            height: 80%;
+        }
 
 
     </style>
@@ -129,7 +132,7 @@
             <div class="certificate-text">
                 <h1 class="title">Certificado</h1>
                 <h3 class="subtitle">Conferimos a</h3>
-                <h2 class="name">{{ $registration->person->full_name }}</h2>
+                <h2 class="name">{{ $registration->person->full_name }}  Matheus de Lima Mendonça</h2>
                 <p class="description">
                     O presente certificado pela conclusão do curso de<br>
                     <strong>{{ $registration->course->name }}</strong><br>
@@ -142,9 +145,10 @@
                         Consulte a veracidade da qualificação do aluno no site<br>
                         <strong>www.treinaend.com.br</strong>, no menu "Consulta de Profissionais".
                     </div>
-                    <img src="{{ $qrcode }}" alt="QR Code">
+                    <div class="image-qrcode">
+                        <img src="{{ $qrcode }}" alt="QR Code">
+                    </div>
                 </div>
-
 
             </div>
         </div>
