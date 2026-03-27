@@ -26,6 +26,12 @@ class Course extends Model implements Auditable
         'online',
         'payment_value',
         'image_certificate',
+        'image_banner',
+        'type',
+        'excerpt',
+        'body',
+        'meta_description',
+        'meta_keywords',
         'status'
     ];
 

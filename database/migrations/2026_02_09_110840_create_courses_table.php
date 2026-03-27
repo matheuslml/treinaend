@@ -20,6 +20,12 @@ return new class extends Migration
             $table->boolean('online')->default(true);
             $table->float('payment_value', 16, 2)->nullable();
             $table->string('image_certificate')->nullable();
+            $table->string('image_banner')->nullable();
+            $table->enum('type', ['LOCAL', 'WEB', 'BOUTH'])->default('BOUTH');
+            $table->text('excerpt')->nullable();
+            $table->text('body')->nullable();
+            $table->text('meta_description')->nullable();
+            $table->text('meta_keywords')->nullable();
             $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
             $table->timestamps();
             $table->softDeletes();
