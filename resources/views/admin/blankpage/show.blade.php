@@ -24,7 +24,7 @@
 @section('content')
   <div class="row">
 
-    <!-- Register-->
+    <!-- Registers-->
     <div class="col-lg-12  ">
       <div class="card ">
         <div class="card-body ">

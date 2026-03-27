@@ -2,9 +2,6 @@
 
 namespace App\Providers;
 
-use App\Repositories\Eloquent\AddressEloquentRepository;
-use App\Repositories\Eloquent\AddressCreateEloquentRepository;
-use App\Repositories\Eloquent\AddressUpdateEloquentRepository;
 use App\Repositories\Eloquent\CityEloquentRepository;
 use App\Repositories\Eloquent\CountryEloquentRepository;
 use App\Repositories\Eloquent\DocumentEloquentRepository;
@@ -259,10 +256,6 @@ use App\Services\NewsUpdateService;
 use App\Services\PostService;
 use App\Services\PostCreateService;
 use App\Services\PostUpdateService;
-
-use App\Services\DirectHireService;
-use App\Services\DirectHireCreateService;
-use App\Services\DirectHireUpdateService;
 
 use App\Services\ProjectService;
 use App\Services\ProjectCreateService;
