@@ -3,9 +3,16 @@
 
 @section('content')
 
+
+    <section class="title-section">
+        <div class="container">
+            <h2>Curso</h2>
+            <h3>{{$course_selected->name}}</h3>
+        </div>
+    </section>
     <section id="news">
         <div class="container">
-            <div class="row mt-5">
+            <div class="row ">
                 <!-- Projeto -->
                 <div class="col-md-12">
                     <div class="">
@@ -25,17 +32,6 @@
                                     </div>
                                 </div>
                                 <!-- Imagem FIM -->
-
-                                <!-- Título -->
-                                <div class="d-flex flex-column justify-content-center">
-                                    <div class="mt-5 section-title text-start">
-                                        <h1 class="mb-0 pb-0 text-center">
-                                            {{$course_selected->name}}
-                                        </h1>
-                                        <h4 class="ps-4 mt-5" style="font-size: 18px; color: #6d6d6d">{{$course_selected->description}}</h4>
-                                    </div>
-                                </div>
-                                <!-- Título FIM -->
 
                                 <!-- Descrição -->
                                 <!-- Descrição FIM -->
