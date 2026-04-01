@@ -20,11 +20,12 @@ class Course extends Model implements Auditable
 
     protected $fillable = [
         'name',
-        'description',
+        'acronym',
         'order',
         'grade',
-        'online',
         'payment_value',
+        'observation_certificate',
+        'coordinator_certificate',
         'image_certificate',
         'image_banner',
         'type',
