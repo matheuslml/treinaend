@@ -115,7 +115,7 @@ class CourseController extends Controller
         }
         try {
             DB::beginTransaction();
-                if($request['type'] == null){
+                if($request['type'] != null){
                     if(isset($request['image_certificate'])){
 
                         $request->validate([
@@ -230,7 +230,6 @@ class CourseController extends Controller
                     $old_path = $course->image_banner;
 
                     $course->image_banner = isset($courseData['path']) ? $courseData['path']  : $old_path;
-                    $course->type = $courseData['type'];
                     $course->excerpt = $courseData['content'];
                     $course->body = $courseData['content'];
                     $course->meta_description = $courseData['content'];
@@ -243,7 +242,7 @@ class CourseController extends Controller
 
                     flash('Página do Curso editada com sucesso!')->success();
                 }
-                    
+
 
 
             DB::commit();

@@ -44,7 +44,7 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="name">Nome<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                       <input type="text" class="form-control" id="name" name="name" />
@@ -54,10 +54,10 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="description">Descrição<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="acronym">Sigla<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="description" name="description" />
+                      <input type="text" class="form-control" id="acronym" name="acronym" />
                   </div>
                 </div>
               </div>
@@ -88,13 +88,13 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="online">Online <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="type">Tipo <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <select class="select2 form-select" id="online" name="online">
+                      <select class="select2 form-select" id="type" name="type">
                         <optgroup label="Selecione">
-                            <option value="1" >Sim</option>
-                            <option value="2" >Não</option>
+                            <option value="EAD" >EAD</option>
+                            <option value="PRESENCIAL" >Presencial</option>
                         </optgroup>
                       </select>
                   </div>
@@ -107,6 +107,26 @@
                   </div>
                   <div class="col-sm-9">
                       <input type="text" class="form-control used-balance" placeholder="10,000.00" id="payment_value" name="payment_value" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="coordinator_certificate">Coordenador<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="coordinator_certificate" name="coordinator_certificate" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="observation_certificate">Observação do Certificado<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="observation_certificate" name="observation_certificate" />
                   </div>
                 </div>
               </div>
@@ -130,7 +150,8 @@
                         <optgroup label="Selecione">
                             <option value="PUBLISHED" >Publicado</option>
                             <option value="DRAFT" >Editando</option>
-                            <option value="PENDING" >Pendente</option>
+                            <option value="BKDNEWREGISTRATION" >Bloqueado para novas Matrículas</option>
+                            <option value="BLOCKED" >Bloqueado</option>
                         </optgroup>
                       </select>
                   </div>

@@ -25,7 +25,7 @@ class DisciplinePeople extends Model implements Auditable
         'finished_at',
         'score',
         'exam_nr',
-        'registration'
+        'registration'//remover
     ];
 
     protected $dates = [

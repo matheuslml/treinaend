@@ -31,15 +31,17 @@ class CourseCreateService
 
                 Course::create([
                     'name' => $changed['name'],
-                    'description' => $changed['description'],
+                    'acronym' => $changed['acronym'],
                     'order' => $changed['order'],
                     'grade' => $changed['grade'],
-                    'online' => $changed['online'],
                     'payment_value' => $changed['payment_value'],
+                    'observation_certificate' => $changed['observation_certificate'],
+                    'coordinator_certificate' => $changed['coordinator_certificate'],
                     'image_certificate' => isset($changed['path']) ? $changed['path']  : '',
+                    'type' => $changed['type'],
                     'status' => $changed['status']
                 ]);
-
+                
             DB::commit();
         } catch (Exception $exception) {
             //Bugsnag::notifyException($exception);

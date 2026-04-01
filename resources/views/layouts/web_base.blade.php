@@ -70,11 +70,23 @@
                   <li class="menu-button"   {{ (request()->is('contato*')) || (request()->is('contato*')) ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('contact') }}">Contato</a>
                   </li>
+<<<<<<< Updated upstream
                   <li class="menu-button"   {{ (request()->is('login*')) || (request()->is('login*')) ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('login') }}">EAD</a>
                   </li>
                   <li class="menu-button"   {{ (request()->is('consulta*')) || (request()->is('consulta*')) ? 'active' : '' }}">
                     <a class="menu-link" href="{{ route('professional_consult') }}">Consulta de Profissionais</a>
+=======
+
+                  <li class="drop-down menu-button">
+                    <a class="menu-link" href="">Mais</a>
+                    <ul>
+                      <li class="">
+                        <a  class="menu-link" href="{{ route('login') }}">Meu EAD                         </a></li>
+                      <li class="">
+                        <a  class="menu-link" href="">Consulta de Profissionais</a></li>
+                    </ul>
+>>>>>>> Stashed changes
                   </li>
                   <li>
                     <a href="{{ route('membership') }}"

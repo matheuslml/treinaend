@@ -51,7 +51,7 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="name">Título<tag data-bs-toggle="tooltip" title="Nome do Disciplina"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="name">Nome<tag data-bs-toggle="tooltip" title="Nome do Disciplina"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                       <input type="text" class="form-control" id="name" name="name" value="{{ $course_selected->name }}" />
@@ -61,10 +61,10 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="description">Descrição<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="acronym">Sigla<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="description" name="description" value="{{ $course_selected->description }}" />
+                      <input type="text" class="form-control" id="acronym" name="acronym" value="{{ $course_selected->acronym }}" />
                   </div>
                 </div>
               </div>
@@ -95,13 +95,13 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="online">Online <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="type">tipo <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <select class="select2 form-select" id="online" name="online">
+                      <select class="select2 form-select" id="type" name="type">
                         <optgroup label="Selecione">
-                            <option value="1" {{ $course_selected->online == 1 ? 'selected' : '' }} >Sim</option>
-                            <option value="2" {{ $course_selected->online == 2 ? 'selected' : '' }} >Não</option>
+                            <option value="EAD" {{ $course_selected->type == 'EAD' ? 'selected' : '' }} >EAD</option>
+                            <option value="PRESENCIAL" {{ $course_selected->type == 'PRESENCIAL' ? 'selected' : '' }} >PRESENCIAL</option>
                         </optgroup>
                       </select>
                   </div>
@@ -114,6 +114,26 @@
                   </div>
                   <div class="col-sm-9">
                       <input type="text" class="form-control used-balance" placeholder="10,000.00" value="{{ str_replace('.',',', $course_selected->payment_value) }}" id="payment_value" name="payment_value" />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="coordinator_certificate">Coordenador<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="coordinator_certificate" name="coordinator_certificate" value="{{ $course_selected->coordinator_certificate }}"  />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="observation_certificate">Observação do Certificado<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="text" class="form-control" id="observation_certificate" name="observation_certificate" value="{{ $course_selected->observation_certificate }}" />
                   </div>
                 </div>
               </div>
@@ -151,7 +171,8 @@
                         <optgroup label="Selecione">
                             <option value="PUBLISHED" {{ $course_selected->status == 'PUBLISHED' ? 'selected' : '' }} >Publicado</option>
                             <option value="DRAFT" {{ $course_selected->status == 'DRAFT' ? 'selected' : '' }}>Editando</option>
-                            <option value="PENDING" {{ $course_selected->status == 'PENDING' ? 'selected' : '' }} >Pendente</option>
+                            <option value="BKDNEWREGISTRATION" {{ $course_selected->status == 'BKDNEWREGISTRATION' ? 'selected' : '' }} >Bloqueado para novas Matrículas</option>
+                            <option value="BLOCKED" {{ $course_selected->status == 'BLOCKED' ? 'selected' : '' }} >Bloqueado</option>
                         </optgroup>
                       </select>
                   </div>
@@ -265,15 +286,6 @@
                     <div class="col-md-4 mb-1">
                       <label class="form-label" for="meta_keywords">Nome da Página</label>
                       <input type="text" value="{{ $course_selected->meta_keywords }}" name="meta_keywords" id="meta_keywords" class="form-control" />
-                    </div>
-                    <div class="col-md-4 mb-1">
-                      <label class="form-label" for="type">Tipo</label>
-                      <select class="form-select" id="type" name="type" >
-                        <option value="" class="">Selecione</option>
-                          <option value="LOCAL" {{ 'LOCAL' == $course_selected->type ? 'selected' : '' }} >Apenas Interno</option>
-                          <option value="WEB" {{ 'WEB' == $course_selected->type ? 'selected' : '' }} >Apenas Web</option>
-                          <option value="BOUTH" {{ 'BOUTH' == $course_selected->type ? 'selected' : '' }} >Ambos</option>
-                      </select>
                     </div>
                     <div class="col-md-12 mb-1">
                       <label class="form-label">Imagem da Capa</label>

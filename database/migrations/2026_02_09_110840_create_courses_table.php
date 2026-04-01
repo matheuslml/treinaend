@@ -14,19 +14,20 @@ return new class extends Migration
         Schema::create('courses', function (Blueprint $table) {
             $table->id();
             $table->string('name')->nullable();
-            $table->string('description')->nullable();
+            $table->string('acronym')->nullable();
             $table->integer('order')->nullable();
             $table->integer('grade')->nullable();
-            $table->boolean('online')->default(true);
             $table->float('payment_value', 16, 2)->nullable();
+            $table->string('observation_certificate')->nullable();
+            $table->string('coordinator_certificate')->nullable();
             $table->string('image_certificate')->nullable();
             $table->string('image_banner')->nullable();
-            $table->enum('type', ['LOCAL', 'WEB', 'BOUTH'])->default('BOUTH');
+            $table->enum('type', ['EAD', 'PRESENCIAL'])->default('EAD');
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keywords')->nullable();
-            $table->enum('status', ['PUBLISHED', 'DRAFT', 'PENDING'])->default('DRAFT');
+            $table->enum('status', ['PUBLISHED', 'DRAFT', 'BKDNEWREGISTRATION', 'BLOCKED'])->default('DRAFT');
             $table->timestamps();
             $table->softDeletes();
         });
