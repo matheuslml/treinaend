@@ -107,12 +107,12 @@ class RegistrationController extends Controller
             DB::beginTransaction();
             $this->registrationUpdateService->update($request->toArray(), $registration_id);
 
-            flash('Categoria editada com sucesso!')->success();
+            flash('Matrícula editada com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-
+            dd($throwable);
             flash('Erro ao editar!')->error();
             return redirect()->back()->withInput();
         }

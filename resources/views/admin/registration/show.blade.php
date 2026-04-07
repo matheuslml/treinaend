@@ -45,7 +45,7 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="title">Título <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="title">Nome do Aluno <tag data-bs-toggle="tooltip" title="Não obrigatório, não aparece se não colocar"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
                       <select class="select2 form-select" id="person_id" name="person_id">
