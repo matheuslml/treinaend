@@ -231,6 +231,8 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/certificado/{registration_id}', 'App\Http\Controllers\RegistrationController@certificate')->name('certificate');
 
     // Cursos
+    Route::post('/treinamen', [RegistrationController::class, 'web_store'])->name('web_store');
+
     Route::get('curso/{courseId}', [CourseController::class, 'pagina_web_course'])->name('pagina_web_course');
 
     // BlankPages

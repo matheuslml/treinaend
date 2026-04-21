@@ -163,8 +163,7 @@
                                 será uma conquista no futuro. Continue avançando com confiança e determinação!
                             </p>
 
-                            <h3 class=" mt-4 text-white">Nota na Disciplina: {{ $discipline_person->score == 0 ? '-' : $discipline_person->score }}</h3>
-                            <h3 class="mb-75  text-white" {{ $discipline_person->score < 7 ? '' : 'hidden' }}>Prova: {{ $examDateFormated }}</h3>
+                            <h3 class="mt-4 mb-75  text-white" {{ $discipline_person->score < 7 ? '' : 'hidden' }}>Prova: {{ $examDateFormated }}</h3>
                         </div>
 
                     </div>
