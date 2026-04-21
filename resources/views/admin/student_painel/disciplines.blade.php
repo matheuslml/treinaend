@@ -41,7 +41,7 @@
             @php
                 $pivot = $discipline_atual->person->first()?->pivot;
             @endphp
-            <div class="col-md-8 col-lg-8 " >
+            <div class="col-md-8 col-lg-7 " >
                 <div class="card text-center card-congratulations">
                     <div class="card-header">
                         <div class="avatar avatar-xl bg-primary shadow">
@@ -51,7 +51,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <h4 class="card-title mb-1 text-white">{{ $discipline_atual->name }}</h4>
+                        <h4 class="card-title mb-1 text-white">{{ $discipline_atual->order . ' - ' .  $discipline_atual->name}}</h4>
                         <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" class="btn btn-outline-primary  text-white" >Acessar</a>
                     </div>
                     <div class="card-footer text-muted ">
@@ -61,29 +61,28 @@
                     </div>
                 </div>
             </div>
-        @foreach ($disciplines as $discipline)
-            @php
-                $pivot = $discipline->person->first()?->pivot;
-            @endphp
-            @if ($discipline->id != $discipline_atual->id)
-                <div class="col-md-6 col-lg-4">
-                    <div class="card text-center">
-                        <div class="card-header">
-                            <div class="avatar avatar-lg bg-primary shadow">
-                                <div class="avatar-content">
-                                    <i data-feather="{{ ($pivot?->score >= 7) ? "award" : (($pivot?->exam_date ? "play-circle" : "x-circle" )) }}" class="font-large-1"></i>
+            <div class="col-md-6 col-lg-5">
+                @foreach ($disciplines as $discipline)
+                    @php
+                        $pivot = $discipline->person->first()?->pivot;
+                    @endphp
+                    @if ($discipline->id != $discipline_atual->id)
+                        <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" >
+                            <div class="card text-center ">
+                                <div class="card-header d-flex align-items-center ">
+                                    <div class="avatar avatar-lg bg-primary shadow">
+                                        <div class="avatar-content">
+                                            <i data-feather="{{ ($pivot?->score >= 7) ? 'award' : (($pivot?->exam_date ? 'play-circle' : 'x-circle')) }}" class="font-large-1"></i>
+                                        </div>
+                                    </div>
+                                    <h4 class="text-left ml-2">{{ $discipline->name . ' - ' .  $discipline->order}}</h4>
                                 </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                        <h4 class="card-title">{{ $discipline->name }}</h4>
-                        <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}" class="btn btn-outline-primary {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'disabled' }}">Acessar</a>
-                        </div>
-                        <div class="card-footer text-muted">Prova: {{ $pivot?->exam_date ? \Carbon\Carbon::parse($pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</div>
-                    </div>
-                </div>
-            @endif
-        @endforeach
+                        </a>
+
+                    @endif
+                @endforeach
+            </div>
     </div>
   @endif
 </section>
