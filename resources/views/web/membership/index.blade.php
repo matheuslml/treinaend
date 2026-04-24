@@ -1,6 +1,11 @@
 @extends('layouts.web_base')
 
 @section('page-style')
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -13,7 +18,7 @@
             <div class="info-overlay">
                 <h2>Bem-vindo à TREINAEND</h2>
                 <p>
-                    Cadastre-se para iniciar sua jornada de capacitação profissional.  
+                    Cadastre-se para iniciar sua jornada de capacitação profissional.
                     Oferecemos cursos alinhados com a realidade da indústria brasileira.
                 </p>
             </div>
@@ -24,43 +29,45 @@
             <h3>Cadastro de Aluno</h3>
             <form class="form form-horizontal" method="POST" action="{{ route('web_store') }}"">
                 @csrf()
-                <div class="form-group">
-                    <label for="course">Cursos</label>
-                    <select id="course_id" name="course_id">
-                        <option value="">Selecione um curso</option>
-                        @foreach ($courses as $course)
-                            <option value="{{ $course->id }}">{{ $course->name }}</option>
-                        @endforeach
-                    </select>
-                </div>
+                    <div class="form-group">
+                        <label for="course">Cursos</label>
+                        <select id="course_id" name="course_id">
+                            <option value="">Selecione um curso</option>
+                            @foreach ($courses as $course)
+                                <option value="{{ $course->id }}" {{ ($course_selected != null) && ($course_selected->id == $course->id) ? 'selected' : '' }} >{{ $course->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
 
-                <div class="form-group">
-                    <label for="name">Nome completo</label>
-                    <input type="text" id="name" name="name" placeholder="Seu nome">
-                </div>
+                    <div class="form-group " >
+                        <label for="cpf">CPF</label>
+                        <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
+                        <small id="cpf-error" style="color:red; display:none;">CPF inválido</small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="cpf">CPF</label>
-                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" maxlength="14">
-                    <small id="cpf-error" style="color:red; display:none;">CPF inválido</small>
-                </div>
+                    <!-- As demais começam escondidas -->
+                    <div class="form-group hidden" id="name-div">
+                        <label for="name">Nome completo</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome">
+                    </div>
 
-                <div class="form-group">
-                    <label for="email">E-mail</label>
-                    <input type="email" id="email" name="email" placeholder="email@exemplo.com">
-                </div>
+                    <div class="form-group hidden" id="email-div">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="email@exemplo.com">
+                    </div>
 
-                <div class="form-group">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" placeholder="Crie uma senha">
-                    <small id="passwordError" style="color:red"></small>
-                </div>
+                    <div class="form-group hidden" id="password-div">
+                        <label for="password">Senha</label>
+                        <input type="password" id="password" name="password" placeholder="Crie uma senha">
+                        <small id="passwordError" style="color:red"></small>
+                    </div>
 
-                <div class="form-group">
-                    <label for="password_confirmed">Confirmação de Senha</label>
-                    <input type="password" id="password_confirmed" placeholder="Confirme sua senha">
-                    <small id="confirmError" style="color:red"></small>
-                </div>
+                    <div class="form-group hidden" id="confirm-div">
+                        <label for="password_confirmed">Confirmação de Senha</label>
+                        <input type="password" id="password_confirmed" placeholder="Confirme sua senha">
+                        <small id="confirmError" style="color:red"></small>
+                    </div>
+
 
                 <button type="submit" class="register-button" style="display:none;">Cadastrar</button>
             </form>
@@ -73,6 +80,54 @@
 @section('page-script')
 
     <script src="assets-web/js/site/site.js" src=""></script>
+
+    <script>
+        async function verificarCPF(cpf) {
+            try {
+                const response = await fetch(`/verificar_cpf/${cpf}`);
+                const data = await response.json();
+
+                const nameDiv = document.getElementById('name-div');
+                const nameInput = document.getElementById('name');
+                const emailDiv = document.getElementById('email-div');
+                const passwordDiv = document.getElementById('password-div');
+                const confirmDiv = document.getElementById('confirm-div');
+                const registerButton = document.querySelector('.register-button');
+
+                if (data.encontrado) {
+                    // CPF já existe → mostra só nome e botão person_name
+                    nameDiv.classList.remove('hidden');
+                    emailDiv.classList.add('hidden');
+                    passwordDiv.classList.add('hidden');
+                    confirmDiv.classList.add('hidden');
+                    registerButton.style.display = 'inline-block';
+                    if (data.person_name) {
+                        nameInput.value = data.person_name;
+                    }
+                } else {
+                    // CPF não existe → mostra todos os campos
+                    nameDiv.classList.remove('hidden');
+                    emailDiv.classList.remove('hidden');
+                    passwordDiv.classList.remove('hidden');
+                    confirmDiv.classList.remove('hidden');
+                    registerButton.style.display = 'none'; // só aparece depois da validação de senha
+                    nameInput.value = '';
+                }
+            } catch (error) {
+                console.error('Erro ao verificar CPF:', error);
+            }
+        }
+
+        document.getElementById("cpf").addEventListener("input", function() {
+            const cpf = this.value.replace(/\D/g, ""); // remove caracteres não numéricos
+            if (cpf.length === 11) {
+                // quando atingir 11 dígitos, chama a função
+                verificarCPF(cpf);
+            }
+        });
+
+    </script>
+
     <script>
         // Função para validar CPF
         function validarCPF(cpf) {

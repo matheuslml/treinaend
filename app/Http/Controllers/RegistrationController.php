@@ -155,7 +155,7 @@ class RegistrationController extends Controller
                 margin: 20,
                 roundBlockSizeMode: RoundBlockSizeMode::Margin,
             );
-            
+
             $result = $builder->build();
 
             // gera data URI pronto para usar em <img>
@@ -164,7 +164,7 @@ class RegistrationController extends Controller
 
 
             $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration', 'qrcode'));
-            
+
             $pdf->setPAper('a4', 'landscape');
 
             return $pdf->stream('certificate.pdf');
@@ -176,17 +176,28 @@ class RegistrationController extends Controller
         }
     }
 
+    public function verificarCPF($cpf)
+    {
+
+        $document = Document::where('document', $cpf)->first();
+
+        return response()->json([
+            'encontrado' => $document ? true : false,
+            'person_name' => $document ? $document->person->full_name : null
+        ]);
+    }
+
     public function web_store(Request $request)
     {
         try {
             DB::beginTransaction();
 
             $cpf = preg_replace('/\D/', '', $request->cpf);
-            $cpf = ltrim($cpf, '0');    
+            $cpf = ltrim($cpf, '0');
 
             $document = Document::whereRaw("
                             TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
-                            ", [$cpf])->first();    
+                            ", [$cpf])->first();
 
             if ($document) {
                 flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
