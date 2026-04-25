@@ -58,7 +58,6 @@ class CouponController extends Controller
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
-            dd($throwable);
             flash('Erro ao adicionar nova Cupom!')->error();
             return redirect()->back()->withInput();
         }
@@ -80,6 +79,7 @@ class CouponController extends Controller
             return redirect()->back();
         }catch (\Throwable $throwable){
             DB::rollBack();
+            dd($throwable);
             flash('Erro ao editar a Cupom!')->error();
             return redirect()->back()->withInput();
         }
@@ -97,7 +97,8 @@ class CouponController extends Controller
             $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $coupons = $this->couponService->get();
             $coupon_selected = $this->couponService->show($coupon_id);
-            return view('admin.coupon.show', compact('coupon_selected', 'coupons', 'unit', 'copyright', 'courses_nav'));
+            $courses = Course::where('status', 'PUBLISHED')->get();
+            return view('admin.coupon.show', compact('coupon_selected', 'coupons', 'unit', 'copyright', 'courses_nav', 'courses'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Cupom!')->error();
