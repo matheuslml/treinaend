@@ -50,13 +50,16 @@ use App\Repositories\Eloquent\DisciplineUpdateEloquentRepository;
 use App\Repositories\Eloquent\CourseEloquentRepository;
 use App\Repositories\Eloquent\CourseCreateEloquentRepository;
 use App\Repositories\Eloquent\CourseUpdateEloquentRepository;
+use App\Repositories\Eloquent\CouponEloquentRepository;
+use App\Repositories\Eloquent\CouponCreateEloquentRepository;
+use App\Repositories\Eloquent\CouponUpdateEloquentRepository;
 
-//SEMAS -------------------------------------------------------------
+//SSHOTCUT -------------------------------------------------------------
 use App\Repositories\Eloquent\ShortcutWebEloquentRepository;
 use App\Repositories\Eloquent\ShortcutWebCreateEloquentRepository;
 use App\Repositories\Eloquent\ShortcutWebUpdateEloquentRepository;
 
-//FIPAC -------------------------------------------------------------
+//OLD -------------------------------------------------------------
 use App\Repositories\Eloquent\OrganizationEloquentRepository;
 use App\Repositories\Eloquent\OrganizationCreateEloquentRepository;
 use App\Repositories\Eloquent\OrganizationUpdateEloquentRepository;
@@ -210,13 +213,16 @@ use App\Services\DisciplineUpdateService;
 use App\Services\CourseService;
 use App\Services\CourseCreateService;
 use App\Services\CourseUpdateService;
+use App\Services\CouponService;
+use App\Services\CouponCreateService;
+use App\Services\CouponUpdateService;
 
-//SEMAS ---------------------------------------------------------
+//ShortcutWeb ---------------------------------------------------------
 use App\Services\ShortcutWebService;
 use App\Services\ShortcutWebCreateService;
 use App\Services\ShortcutWebUpdateService;
 
-//FIPAC ---------------------------------------------------------
+//old ---------------------------------------------------------
 use App\Services\OrganizationService;
 use App\Services\OrganizationCreateService;
 use App\Services\OrganizationUpdateService;
@@ -377,7 +383,11 @@ class EloquentRepositoryProvider extends ServiceProvider
         CourseService::class => CourseEloquentRepository::class,
         CourseCreateService::class => CourseCreateEloquentRepository::class,
         CourseUpdateService::class => CourseUpdateEloquentRepository::class,
-        //FIPAC ---------------------------------------------------------
+
+        CouponService::class => CouponEloquentRepository::class,
+        CouponCreateService::class => CouponCreateEloquentRepository::class,
+        CouponUpdateService::class => CouponUpdateEloquentRepository::class,
+        //Old ---------------------------------------------------------
         OrganizationService::class => OrganizationEloquentRepository::class,
         OrganizationCreateService::class => OrganizationCreateEloquentRepository::class,
         OrganizationUpdateService::class => OrganizationUpdateEloquentRepository::class,

@@ -32,6 +32,7 @@ use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMediaController;
 use App\Http\Controllers\CopyrightController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\ExerciseController;
@@ -106,6 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Main - Treinaend -----------------------------------------------------------------
     Route::resource('/aulas', LessonController::class);
     Route::resource('/disciplinas', DisciplineController::class);
+    Route::resource('/cupons', CouponController::class);
     Route::resource('/cursos', CourseController::class);
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);

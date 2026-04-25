@@ -32,8 +32,9 @@ class CouponController extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $coupons = $this->couponService->get();
-            return view('admin.Coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons', 'unit', 'copyright', 'courses_nav'));
+            $coupons = Course::latest()->get();
+            dd($coupons);
+            return view('admin.coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons', 'unit', 'copyright', 'courses_nav'));
         } catch (\Throwable $throwable) {
             flash('Erro ao procurar as Organizações Cadastradas!')->error();
             return redirect()->back()->withInput();
@@ -94,7 +95,7 @@ class CouponController extends Controller
             $courses_nav = Course::where('status', 'PUBLISHED')->get();
             $coupons = $this->couponService->get();
             $coupon_selected = $this->couponService->show($coupon_id);
-            return view('admin.Coupon.show', compact('coupon_selected', 'coupons', 'unit', 'copyright', 'courses_nav'));
+            return view('admin.coupon.show', compact('coupon_selected', 'coupons', 'unit', 'copyright', 'courses_nav'));
         } catch (\Exception $exception) {
             dd($exception);
             flash('Erro ao buscar a Organização!')->error();
@@ -116,7 +117,7 @@ class CouponController extends Controller
 
             $coupons = $this->couponService->get();
             flash('Organização deletada com sucesso!')->success();
-            return view('admin.Coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons'));
+            return view('admin.coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons'));
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Organização!')->error();
             return redirect()->back()->withInput();
