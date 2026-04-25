@@ -36,7 +36,7 @@
     @foreach ($courses_nav as $course)
         <div class="col-md-6 col-lg-4">
             <div class="card">
-                <img class="card-img-top" src="{{asset('images/slider/04.jpg')}}" alt="Card image cap" />
+                <img class="card-img-top" src="{{asset('storage/images/courses/' . $course->image_banner)}}" alt="Card image cap" />
                 <div class="card-body">
                 <h4 class="card-title">{{ $course->name }}</h4>
                 <p class="card-text">
