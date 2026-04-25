@@ -9,118 +9,48 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/toastr.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/dataTables.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/extensions/plyr.min.css')) }}">
 @endsection
 @section('page-style')
   <!-- Page css files -->
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/charts/chart-apex.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-toastr.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/extensions/ext-component-media-player.css')) }}">
   @endsection
 
 @section('content')
-<!-- Dashboard Analytics Start -->
-<section id="dashboard-analytics">
 
-  <div class="row match-height" >
-    <div class="col-lg-3 col-sm-6 col-12">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <h2 class="fw-bolder mb-0">{{ $exercise_user_count }}</h2>
-            <p class="card-text">Exercícios Feitos</p>
-          </div>
-          <div class="avatar bg-light-primary p-50 m-0">
-            <div class="avatar-content">
-              <i data-feather="book-open" class="font-medium-5"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-12">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <h2 class="fw-bolder mb-0">{{ $exercises_count }}</h2>
-            <p class="card-text">Total de Exercícios</p>
-          </div>
-          <div class="avatar bg-light-success p-50 m-0">
-            <div class="avatar-content">
-              <i data-feather="book" class="font-medium-5"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-sm-6 col-12">
-      <div class="card">
-        <div class="card-header">
-          <div>
-            <h2 class="fw-bolder mb-0">{{ count(Auth::user()->notifications->where('status_id', 2)) }}</h2>
-            <p class="card-text">Notficações</p>
-          </div>
-          <div class="avatar bg-light-danger p-50 m-0">
-            <div class="avatar-content">
-              <i data-feather="bell" class="font-medium-5"></i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+<!-- Examples -->
+<section id="card-demo-example">
+  <div class="row match-height">
 
-<div class="row match-height">
-  <!-- Profile Card -->
-  <div class="col-lg-4 col-md-6 col-12">
-    <div class="card card-profile">
-      <img
-        src="{{asset('images/banner/banner.png')}}"
-        class="img-fluid card-img-top"
-        alt="Profile Cover Photo"
-      />
-      <div class="card-body">
-        <div class="profile-image-wrapper">
-          <div class="profile-image">
-            <div class="avatar">
-              <img src="{{ Auth::user() && isset(Auth::user()->profile_photo_path) ? asset(Auth::user()->profile_photo_path) : asset('images/portrait/small/avatar-icon.png') }}" alt="Profile Picture" />
+    <div class="col-md-8 col-lg-8">
+      <div class="card">
+        <div class="card-body">
+          <div class="video-player" id="plyr-video-player">
+            <iframe src="https://www.youtube.com/embed/bTqVqk7FSmY" allowfullscreen allow="autoplay"></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+    @foreach ($courses_nav as $course)
+        <div class="col-md-6 col-lg-4">
+            <div class="card">
+                <img class="card-img-top" src="{{asset('images/slider/04.jpg')}}" alt="Card image cap" />
+                <div class="card-body">
+                <h4 class="card-title">{{ $course->name }}</h4>
+                <p class="card-text">
+                    Some quick example text to build on the card title and make up the bulk of the card's content.
+                </p>
+                <a href="#" class="btn btn-outline-primary">Ver</a>
+                </div>
             </div>
-          </div>
         </div>
-        <h3>{{ Auth::user()->name }}</h3>
-        <span class="badge badge-light-primary profile-badge">{{ isset(Auth::user()->person->registrations->first()->code) ? 'Aluno' : 'Desenvolvedor' }}</span>
-        <hr class="mb-2" />
-      </div>
-    </div>
-  </div>
-  <!--/ Profile Card -->
-  <!-- Developer Meetup Card -->
-  <div class="col-lg-4 col-md-6 col-12">
-    <div class="card card-developer-meetup">
-      <div class="meetup-img-wrapper rounded-top text-center">
-        <img src="{{asset('images/illustration/email.svg')}}" alt="Meeting Pic" height="170" />
-      </div>
-      <div class="card-body">
-        <div class="meetup-header d-flex align-items-center">
-          <div class="my-auto">
-            <h4 class="card-title mb-25">Data da Prova</h4>
-            <p class="card-text mb-0">Se prepare antecipadamente</p>
-          </div>
-        </div>
-        <div class="d-flex flex-row meetings">
-          <div class="content-body">
-            @php
-                $pivot = $discipline_atual->person->first()?->pivot;
-            @endphp
-            <h2 class="m1-10">{{ $discipline_atual->person->first()?->pivot?->exam_date ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') : null ?? 'Disciplina Bloqueada' }}</h2>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--/ Developer Meetup Card   -->
+    @endforeach
 
-</div>
+  </div>
 </section>
-<!-- Dashboard Analytics end -->
+<!-- Examples -->
 @endsection
 
 @section('vendor-script')
@@ -133,8 +63,11 @@
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.bootstrap5.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/dataTables.responsive.min.js')) }}"></script>
   <script src="{{ asset(mix('vendors/js/tables/datatable/responsive.bootstrap5.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.min.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/extensions/plyr.polyfilled.min.js')) }}"></script>
 @endsection
 @section('page-script')
   <!-- Page js files -->
   <script src="{{ asset(mix('js/scripts/pages/dashboard-analytics.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/extensions/ext-component-media-player.js')) }}"></script>
 @endsection

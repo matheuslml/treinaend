@@ -39,7 +39,7 @@ class DashboardController extends Controller
     $person_id = $user->person_id;
     $exercise_user_count = ExerciseUser::where('user_id', $userId)->count();
 
-    
+
     //para testar se o Aluno nunca usou aula no sistema antigo
     $new_student = resolve(NewStudent::class);
     $new_student->handle($person_id, 1);
@@ -62,6 +62,6 @@ class DashboardController extends Controller
         }])
         ->first();
 
-    return view('admin/dashboard/dashboard', compact('unit', 'copyright', 'courses_nav', 'courses_nav', 'exercises_count', 'exercise_user_count', 'discipline_atual'));
+    return view('admin/dashboard/dashboard', compact('unit', 'copyright', 'courses_nav', 'exercises_count', 'exercise_user_count', 'discipline_atual'));
   }
 }
