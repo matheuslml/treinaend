@@ -8,11 +8,15 @@
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/tables/datatable/responsive.bootstrap5.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
   <link rel="stylesheet" href="{{ asset(mix('vendors/css/forms/select/select2.min.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/pickadate/pickadate.css')) }}">
+  <link rel="stylesheet" href="{{ asset(mix('vendors/css/pickers/flatpickr/flatpickr.min.css')) }}">
 @endsection
 
 @section('page-style')
   {{-- Page Css files --}}
   <link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/form-validation.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-flat-pickr.css')) }}">
+<link rel="stylesheet" href="{{ asset(mix('css/base/plugins/forms/pickers/form-pickadate.css')) }}">
 @endsection
 
 @section('content')
@@ -44,57 +48,34 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="name">Nome<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="title">Título<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="name" name="name" />
+                      <input type="text" class="form-control" id="title" name="title" />
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="acronym">Sigla<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="code">Código<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="acronym" name="acronym" />
+                      <input type="text" class="form-control" id="code" name="code" />
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="order">Ordem<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="course_id">Curso <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                    <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="1" id="order" name="order" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="grade">Nota<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                    <div class="input-group input-group-lg">
-                        <input type="number" class="touchspin" value="7" id="grade" name="grade" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="type">Tipo <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <select class="select2 form-select" id="type" name="type">
+                      <select class="select2 form-select" id="course_id" name="course_id">
                         <optgroup label="Selecione">
-                            <option value="EAD" >EAD</option>
-                            <option value="PRESENCIAL" >Presencial</option>
+                            @foreach ($courses as $course)
+                                <option value="{{  $course->id }}" >{{  $course->name }}</option>
+                            @endforeach
                         </optgroup>
                       </select>
                   </div>
@@ -103,40 +84,58 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="payment_value">Valor<tag data-bs-toggle="tooltip" title="Valor"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="observation">Observação<tag data-bs-toggle="tooltip" title="descrição"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control used-balance" placeholder="10,000.00" id="payment_value" name="payment_value" />
+                      <input type="text" class="form-control" id="observation" name="observation" />
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="coordinator_certificate">Coordenador<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="amount">Quantidade<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="coordinator_certificate" name="coordinator_certificate" />
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="touchspin" value="50" id="amount" name="amount" />
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="observation_certificate">Observação do Certificado<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="discount_percentage">Desconto<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="observation_certificate" name="observation_certificate" />
+                    <div class="input-group input-group-lg">
+                        <input type="number" class="touchspin" value="25" id="discount_percentage" name="discount_percentage" />
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="image_certificate">Imagem do Certificado<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="started_at">Data de Início<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="file" class="form-control" id="image_certificate" name="image_certificate" >
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="started_at" name="started_at" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" />
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="finished_at">Data de Término<tag data-bs-toggle="tooltip" title="Valor do Pagamento em Real"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                    <div class="input-group input-group-lg">
+                        <input type="text" id="finished_at" name="finished_at" class="form-control flatpickr-basic" placeholder="YYYY-MM-DD" />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -150,7 +149,6 @@
                         <optgroup label="Selecione">
                             <option value="PUBLISHED" >Publicado</option>
                             <option value="DRAFT" >Editando</option>
-                            <option value="BKDNEWREGISTRATION" >Bloqueado para novas Matrículas</option>
                             <option value="BLOCKED" >Bloqueado</option>
                         </optgroup>
                       </select>
@@ -180,7 +178,7 @@
                 <th></th>
                 <th>Título</th>
                 <th>Código</th>
-                <th>Porcentagem</th>
+                <th>Desconto ( % )</th>
                 <th>Curso</th>
                 <th>Status</th>
                 <th>Registrado em</th>
@@ -192,7 +190,7 @@
                 <th></th>
                 <th>Título</th>
                 <th>Código</th>
-                <th>Porcentagem</th>
+                <th>Desconto ( % )</th>
                 <th>Curso</th>
                 <th>Status</th>
                 <th>Registrado em</th>
@@ -251,6 +249,11 @@
   <script src="{{asset(mix('vendors/js/forms/cleave/cleave.min.js'))}}"></script>
   <script src="{{asset(mix('vendors/js/forms/cleave/addons/cleave-phone.br.js'))}}"></script>
   <script src="{{ asset(mix('vendors/js/forms/spinner/jquery.bootstrap-touchspin.js'))}}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.date.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/picker.time.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/pickadate/legacy.js')) }}"></script>
+  <script src="{{ asset(mix('vendors/js/pickers/flatpickr/flatpickr.min.js')) }}"></script>
 @endsection
 
 @section('page-script')
@@ -260,4 +263,5 @@
   <script src="{{asset(mix('js/scripts/components/components-alerts.js'))}}"></script>
   <script src="{{ asset(mix('js/scripts/forms/form-number-input.js'))}}"></script>
 <script src="{{ asset(mix('js/scripts/forms/expense-input-mask.js')) }}"></script>
+  <script src="{{ asset(mix('js/scripts/forms/pickers/form-pickers.js')) }}"></script>
 @endsection
