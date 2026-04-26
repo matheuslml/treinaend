@@ -46,9 +46,15 @@
                     </div>
 
                     <!-- As demais começam escondidas -->
+
                     <div class="form-group hidden" id="name-div">
                         <label for="name">Nome completo</label>
                         <input type="text" id="name" name="name" placeholder="Seu nome">
+                    </div>
+
+                    <div class="form-group hidden" id="cupom-div">
+                        <label for="cupom">Cupom de Desconto</label>
+                        <input type="text" id="cupom" name="cupom" placeholder="#NOMEDOCUPOM">
                     </div>
 
                     <div class="form-group hidden" id="email-div">
@@ -88,6 +94,7 @@
                 const data = await response.json();
 
                 const nameDiv = document.getElementById('name-div');
+                const cupomDiv = document.getElementById('cupom-div');
                 const nameInput = document.getElementById('name');
                 const emailDiv = document.getElementById('email-div');
                 const passwordDiv = document.getElementById('password-div');
@@ -97,6 +104,7 @@
                 if (data.encontrado) {
                     // CPF já existe → mostra só nome e botão person_name
                     nameDiv.classList.remove('hidden');
+                    cupomDiv.classList.remove('hidden');
                     emailDiv.classList.add('hidden');
                     passwordDiv.classList.add('hidden');
                     confirmDiv.classList.add('hidden');
@@ -107,6 +115,7 @@
                 } else {
                     // CPF não existe → mostra todos os campos
                     nameDiv.classList.remove('hidden');
+                    cupomDiv.classList.remove('hidden');
                     emailDiv.classList.remove('hidden');
                     passwordDiv.classList.remove('hidden');
                     confirmDiv.classList.remove('hidden');

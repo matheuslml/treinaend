@@ -44,6 +44,7 @@
           @endif
           <form class="form form-horizontal" method="POST" action="{{ route('cupons.update', $coupon_selected->id) }}" enctype="multipart/form-data">
             @csrf()
+            @method('PUT')
             <div class="row">
               <div class="col-12">
                 <div class="mb-1 row">
@@ -157,11 +158,17 @@
                 </div>
               </div>
               <div class="col-sm-9 offset-sm-3">
-                <button type="submit" class="btn btn-primary me-1">Salvar</button>
-                <button type="reset" class="btn btn-outline-secondary">Resetar</button>
+                <button type="submit" class="btn btn-primary me-1" style="position: relative; float: left;">Editar</button>
+                </form>
+                <form method="POST" name="form-delete" action="{{ route('cupons.destroy', $coupon_selected->id) }}">
+                    @csrf()
+                    @method('delete')
+                    <button type="submit" class="btn btn-danger" style="position: relative; float: left;"
+                      onclick="return confirm('Tem certeza que deseja deletar o Cupom?');">Deletar
+                    </button>
+                </form>
               </div>
             </div>
-          </form>
         </div>
       </div>
     </div>

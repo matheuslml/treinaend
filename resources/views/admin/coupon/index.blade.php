@@ -167,7 +167,7 @@
     <div class="col-md-8 col-12">
       <div class="card">
         <div class="card-header border-bottom">
-          <h4 class="card-title">Cursos Cadastrados - Busca Avançada</h4>
+          <h4 class="card-title">Cupons Cadastrados - Busca Avançada</h4>
         </div>
         <hr class="my-0" />
         <div class="card-datatable">
@@ -225,7 +225,7 @@
             <div class="alert alert-warning" role="alert">
               <h4 class="alert-heading">Aviso</h4>
               <div class="alert-body">
-                Não existem Cursos Armazenados.
+                Não existem Cupons Armazenados.
               </div>
             </div>
           @endif

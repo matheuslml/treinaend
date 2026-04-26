@@ -22,7 +22,7 @@ class CouponController extends Controller
 
     public function index()
     {
-        /*if (! Gate::allows('Ver e Listar Organizações')) {
+        /*if (! Gate::allows('Ver e Listar Cupom')) {
             return view('pages.not-authorized');
         }*/
 
@@ -37,7 +37,7 @@ class CouponController extends Controller
 
             return view('admin.coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons', 'unit', 'copyright', 'courses_nav', 'courses'));
         } catch (\Throwable $throwable) {
-            flash('Erro ao procurar as Organizações Cadastradas!')->error();
+            flash('Erro ao procurar as Cupom Cadastradas!')->error();
             return redirect()->back()->withInput();
         }
     }
@@ -45,7 +45,7 @@ class CouponController extends Controller
     public function store(
         Request $request
     ){
-        /*if (! Gate::allows('Criar Organizações')) {
+        /*if (! Gate::allows('Criar Cupom')) {
             return view('pages.not-authorized');
         }*/
 
@@ -53,7 +53,7 @@ class CouponController extends Controller
             DB::beginTransaction();
             $this->couponCreateService->create($request->toArray());
 
-            flash('Cupom criada com sucesso!')->success();
+            flash('Cupom criado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
@@ -66,7 +66,7 @@ class CouponController extends Controller
     public function update(
         Request $request, $coupon_id
     ){
-        /*if (! Gate::allows('Editar Organizações')) {
+        /*if (! Gate::allows('Editar Cupom')) {
             return view('pages.not-authorized');
         }*/
 
@@ -74,7 +74,7 @@ class CouponController extends Controller
             DB::beginTransaction();
             $this->couponUpdateService->update($request->toArray(), $coupon_id);
 
-            flash('Cupom editada com sucesso!')->success();
+            flash('Cupom editado com sucesso!')->success();
             DB::commit();
             return redirect()->back();
         }catch (\Throwable $throwable){
@@ -87,7 +87,7 @@ class CouponController extends Controller
 
     public function show($coupon_id)
     {
-        /*if (! Gate::allows('Editar Organizações')) {
+        /*if (! Gate::allows('Editar Cupom')) {
             return view('pages.not-authorized');
         }*/
 
@@ -117,10 +117,15 @@ class CouponController extends Controller
             $coupon->delete();
             $pageConfigs = ['pageHeader' => false];
             $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $unit = Unit::where('web', true)->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
-            $coupons = $this->couponService->get();
-            flash('Cupom deletada com sucesso!')->success();
-            return view('admin.coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons'));
+            $coupons = Coupon::latest()->get();
+            $courses = Course::where('status', 'PUBLISHED')->get();
+
+            flash('Cupom deletado com sucesso!')->success();
+
+            return view('admin.coupon.index', ['pageConfigs' => $pageConfigs], compact('coupons', 'unit', 'copyright', 'courses_nav', 'courses'));
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Cupom!')->error();
             return redirect()->back()->withInput();
