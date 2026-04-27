@@ -25,6 +25,8 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
 use App\Actions\Discipline\NewStudent;
+use App\Models\Coupon;
+
 class RegistrationController extends Controller
 {
 
@@ -201,6 +203,7 @@ class RegistrationController extends Controller
 
             $registration = Registration::where('course_id', $request->course_id)->where('person_id', $document->person->id)->first();
 
+
             if ($registration) {//verificar se está se cadastrando para um curso que ja é cadastrado
                 flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
             }else{
@@ -226,10 +229,10 @@ class RegistrationController extends Controller
                         'document_type_id' => 1
                     ]);
 
-                    $new_student->handle($person->id, $request['course_id']);
+                    $new_student->handle($person->id, $request['course_id'], $request->cupom);
 
                 }else{
-                    $new_student->handle($document->person->id, $request['course_id']);
+                    $new_student->handle($document->person->id, $request['course_id'], $request->cupom);
                 }
 
 

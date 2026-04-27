@@ -42,7 +42,7 @@ class DashboardController extends Controller
 
     //para testar se o Aluno nunca usou aula no sistema antigo
     $new_student = resolve(NewStudent::class);
-    $new_student->handle($person_id, 1);
+    $new_student->handle($person_id, 1, '');
 
 
     $discipline_atual = Discipline::orderBy('order', 'desc')

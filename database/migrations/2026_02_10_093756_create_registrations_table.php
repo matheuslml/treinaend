@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('course_id')->constrained('courses')->default(1)->nullable();
             $table->integer('person_id')->constrained('people')->nullable();
-            $table->integer('coupon_id')->constrained('coupons')->default(1)->nullable();
+            $table->integer('coupon_id')->constrained('coupons')->nullable();
             $table->string('payment_form')->nullable();
             $table->enum('payment_status', ['S', 'N', 'NãoNPagoNpelaNBASF', ''])->default('N')->nullable();
             $table->float('payment_value', 16, 2)->nullable();

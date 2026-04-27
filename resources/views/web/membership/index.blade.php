@@ -74,8 +74,23 @@
                         <small id="confirmError" style="color:red"></small>
                     </div>
 
+                    <div class="card mt-4">
+                        <div class="card-header bg-primary text-white">
+                            Detalhes do Pagamento
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Curso Selecionado:</strong> <span id="selected-course">---</span></p>
+                            <p><strong>Valor do Curso:</strong> R$ <span id="course-price">0,00</span></p>
+                            <p><strong>Valor Final:</strong> R$ <span id="final-price">0,00</span></p>
+                        </div>
+                        <div class="card-footer text-center">
+                            <button type="submit" class="btn btn-success register-button" style="display:none;">
+                                Confirmar Inscrição
+                            </button>
+                        </div>
+                    </div>
 
-                <button type="submit" class="register-button" style="display:none;">Cadastrar</button>
+
             </form>
         </div>
     </div>
