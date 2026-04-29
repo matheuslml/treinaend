@@ -98,6 +98,12 @@ $configData = Helper::applClasses();
           </a>
         </li>
         <li class="nav-item  ">
+          <a href="{{ route('cupons.index') }}" class="d-flex align-items-center" target="_self">
+            <i data-feather="percent"></i>
+            <span class="menu-title text-truncate">Cupons</span>
+          </a>
+        </li>
+        <li class="nav-item  ">
           <a href="{{ route('cursos.index') }}" class="d-flex align-items-center" target="_self">
             <i data-feather="book"></i>
             <span class="menu-title text-truncate">Cursos</span>

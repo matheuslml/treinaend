@@ -16,6 +16,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-login-basic', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -27,6 +28,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-login-cover', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -38,6 +40,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-register-basic', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -49,6 +52,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-register-cover', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -60,6 +64,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-forgot-password-basic', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -71,6 +76,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/reset-password', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -82,6 +88,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-verify-email-basic', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -93,6 +100,7 @@ class AuthenticationController extends Controller
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-verify-email', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }
@@ -128,6 +136,7 @@ $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
+        $courses_nav = Course::where('status', 'PUBLISHED')->get();
 
         return view('/auth/auth-forgot-password', ['pageConfigs' => $pageConfigs], compact('unit', 'copyright', 'courses_nav'));
     }

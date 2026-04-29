@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
+use Illuminate\Support\Str;
 
 class Course extends Model implements Auditable
 {
@@ -20,6 +21,7 @@ class Course extends Model implements Auditable
 
     protected $fillable = [
         'name',
+        'slug',
         'acronym',
         'order',
         'grade',
@@ -40,6 +42,11 @@ class Course extends Model implements Auditable
         'expires_at',
         'deleted_at'
     ];
+
+    public function setTitleAttribute($value){
+        $this->attributes['name'] = $value;
+        $this->attributes['slug'] = Str::slug($value);
+    }
 
     public function disciplines(): HasMany
     {

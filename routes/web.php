@@ -32,6 +32,7 @@ use App\Http\Controllers\ProjectCategoryController;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\ProjectMediaController;
 use App\Http\Controllers\CopyrightController;
+use App\Http\Controllers\CouponController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\DisciplineController;
 use App\Http\Controllers\ExerciseController;
@@ -106,6 +107,7 @@ Route::group(['middleware' => ['auth']], function () {
     //Main - Treinaend -----------------------------------------------------------------
     Route::resource('/aulas', LessonController::class);
     Route::resource('/disciplinas', DisciplineController::class);
+    Route::resource('/cupons', CouponController::class);
     Route::resource('/cursos', CourseController::class);
     Route::resource('/exercicios', ExerciseController::class);
     Route::resource('/materiais_de_apoio', SupportMaterialController::class);
@@ -225,12 +227,15 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/sobre', 'App\Http\Controllers\WebController@about')->name('about');
     Route::get('/contato', 'App\Http\Controllers\WebController@contact')->name('contact');
     Route::get('/consulta', 'App\Http\Controllers\WebController@professional_consult')->name('professional_consult');
-    Route::get('/matricula', 'App\Http\Controllers\WebController@membership')->name('membership');
+    Route::get('/matricula/{courseName}', 'App\Http\Controllers\WebController@membership')->name('membership');
+    Route::get('/verificar_cpf/{cpf}', 'App\Http\Controllers\RegistrationController@verificarCPF')->name('verificar_cpf');
     Route::post('/get_registration', [RegistrationController::class, 'get_registration'])->name('get_registration');
     Route::post('/cadastro', [RegistrationController::class, 'web_store'])->name('web_store');
     Route::get('/certificado/{registration_id}', 'App\Http\Controllers\RegistrationController@certificate')->name('certificate');
 
-    // Cursos
+    // Cursos verificarCPF
+    Route::post('/treinamen', [RegistrationController::class, 'web_store'])->name('web_store');
+
     Route::get('curso/{courseId}', [CourseController::class, 'pagina_web_course'])->name('pagina_web_course');
 
     // BlankPages

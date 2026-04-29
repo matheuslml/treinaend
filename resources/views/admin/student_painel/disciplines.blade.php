@@ -24,10 +24,10 @@
   <div class="card " >
     <div class="card-body text-left">
       <!-- main title -->
-      <h2 class="text-primary">Disciplinas do Curso {{ $course->name }}</h2>
+      <h2 class="text-primary">Curso: {{ $course->name }}</h2>
 
       <!-- subtitle -->
-      <p class="card-text ">conhecimento que abre caminhos</p>
+      <p class="card-text ">Disciplinas Realizadas: 1 / {{ count($course->disciplines) }} </p>
     </div>
   </div>
 </section>

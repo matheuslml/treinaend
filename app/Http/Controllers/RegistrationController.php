@@ -25,6 +25,8 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
 use App\Actions\Discipline\NewStudent;
+use App\Models\Coupon;
+
 class RegistrationController extends Controller
 {
 
@@ -155,7 +157,7 @@ class RegistrationController extends Controller
                 margin: 20,
                 roundBlockSizeMode: RoundBlockSizeMode::Margin,
             );
-            
+
             $result = $builder->build();
 
             // gera data URI pronto para usar em <img>
@@ -164,7 +166,7 @@ class RegistrationController extends Controller
 
 
             $pdf = FacadePdf::loadView('pages.cetificate', compact('copyright', 'unit', 'registration', 'qrcode'));
-            
+
             $pdf->setPAper('a4', 'landscape');
 
             return $pdf->stream('certificate.pdf');
@@ -176,40 +178,64 @@ class RegistrationController extends Controller
         }
     }
 
+    public function verificarCPF($cpf)
+    {
+
+        $document = Document::where('document', $cpf)->first();
+
+        return response()->json([
+            'encontrado' => $document ? true : false,
+            'person_name' => $document ? $document->person->full_name : null
+        ]);
+    }
+
     public function web_store(Request $request)
     {
         try {
             DB::beginTransaction();
 
             $cpf = preg_replace('/\D/', '', $request->cpf);
-            $cpf = ltrim($cpf, '0');    
+            $cpf = ltrim($cpf, '0');
 
             $document = Document::whereRaw("
                             TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
-                            ", [$cpf])->first();    
+                            ", [$cpf])->first();
 
-            if ($document) {
+            $registration = Registration::where('course_id', $request->course_id)->where('person_id', $document->person->id)->first();
+
+
+            if ($registration) {//verificar se está se cadastrando para um curso que ja é cadastrado
                 flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
             }else{
-                $person = Person::create([
-                    'full_name' => $request['name']
-                ]);
-
-                User::create([
-                    'person_id' => $person->id,
-                    'name' => $request['name'],
-                    'email' => $request['email'],
-                    'password' => Hash::make($request['password'])
-                ]);
-
-                Document::create([
-                    'person_id' => $person->id,
-                    'document' => $cpf,
-                    'document_type_id' => 1
-                ]);
 
                 $new_student = resolve(NewStudent::class);
-                $new_student->handle($person->id, $request['course_id']);
+
+                if($document == null){
+
+                    $person = Person::create([
+                        'full_name' => $request['name']
+                    ]);
+
+                    User::create([
+                        'person_id' => $person->id,
+                        'name' => $request['name'],
+                        'email' => $request['email'],
+                        'password' => Hash::make($request['password'])
+                    ]);
+
+                    Document::create([
+                        'person_id' => $person->id,
+                        'document' => $cpf,
+                        'document_type_id' => 1
+                    ]);
+
+                    $new_student->handle($person->id, $request['course_id'], $request->cupom);
+
+                }else{
+                    $new_student->handle($document->person->id, $request['course_id'], $request->cupom);
+                }
+
+
                 flash('Matrícula criada com sucesso!')->success();
             }
 
@@ -217,6 +243,7 @@ class RegistrationController extends Controller
             return redirect('/login');
         } catch (\Throwable $throwable) {
             DB::rollBack();
+            dd($throwable);
             flash('Erro Criar a Matrícula, entre em contato!')->error();
             return redirect()->back()->withInput();
         }

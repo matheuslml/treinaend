@@ -77,7 +77,7 @@
                     <a class="menu-link" href="{{ route('professional_consult') }}">Consulta de Profissionais</a>
                   </li>
                   <li>
-                    <a href="{{ route('membership') }}"
+                    <a href="{{ route('membership', 'cursos') }}"
                         class="btn-matricula">
                         MATRÍCULA
                     </a>
@@ -148,9 +148,9 @@
                                 {{ isset($unit->organization) ? $unit->operation : '' }}<br><br>
                             </p>
                             <p class="">
-                                <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a> 
+                                <a  href="mailto:{{ isset($unit->email) ? $unit->email : '' }}"><i class="fa fa-envelope"></i> {{ isset($unit->email) ? $unit->email : '' }}</a>
                             </p>
-                            <p class="">           
+                            <p class="">
                                 <a
                                     href="
                                     {{ isset($unit) ?
@@ -160,7 +160,7 @@
                                             : ''
                                     }}" ><i class="fab fa-whatsapp"></i> {{ isset($unit->phone) ? $unit->phone : '' }}</a>
                             </p>
-                            <p class=""> 
+                            <p class="">
                                 <a  href="{{ isset($unit) ? $unit->operation : '' }}"><i class="fa fa-home"></i> {{ isset($unit->operation) ? $unit->operation : '' }}</a>
                             </p>
                         </div>

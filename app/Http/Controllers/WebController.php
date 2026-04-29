@@ -71,9 +71,10 @@ class WebController extends Controller
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
         return view('web.professional.index', compact('categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
     }
-    public function membership()
+    public function membership($course_name)
     {
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
+        $course_selected = Course::where('name', $course_name)->first();
         $partnership = BlankPage::where('blank_page_type_id', 4)->where('status', 'PUBLISHED')->first();
         $institucional_pages = BlankPage::where('blank_page_type_id', 1)->orderBy('meta_keywords', 'asc')->get();
         $service_pages = BlankPage::where('blank_page_type_id', 2)->orderBy('meta_keywords', 'asc')->get();
@@ -81,7 +82,7 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $banner = Banner::where('banner_type_id', 2)->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.membership.index', compact('categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
+        return view('web.membership.index', compact('course_selected','categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
     }
 
     public function transparency_index()

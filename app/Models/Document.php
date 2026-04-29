@@ -30,6 +30,11 @@ class Document extends Model implements Auditable
         'deleted_at'
     ];
 
+    public function person(): BelongsTo
+    {
+        return $this->belongsTo(Person::class, 'person_id');
+    }
+
     public function document_type(): BelongsTo
     {
         return $this->belongsTo(DocumentType::class, 'document_type_id');

@@ -21,6 +21,7 @@ class Registration extends Model implements Auditable
     protected $fillable = [
         'course_id',
         'person_id',
+        'coupon_id',
         'payment_form',
         'payment_status',
         'payment_value',
@@ -44,6 +45,11 @@ class Registration extends Model implements Auditable
     public function person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'person_id');
+    }
+
+    public function coupon(): BelongsTo
+    {
+        return $this->belongsTo(Coupon::class, 'coupon_id');
     }
 
 }
