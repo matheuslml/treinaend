@@ -24,6 +24,7 @@ class Registration extends Model implements Auditable
         'coupon_id',
         'payment_form',
         'payment_status',
+        'payment_total',
         'payment_value',
         'code',
         'information',
