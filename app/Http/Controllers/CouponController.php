@@ -11,6 +11,7 @@ use App\Services\CouponUpdateService;
 use App\Models\Unit;
 use App\Models\Course;
 use App\Models\Copyright;
+use Carbon\Carbon;
 
 class CouponController extends Controller
 {
@@ -129,6 +130,42 @@ class CouponController extends Controller
         } catch (\Exception $exception) {
             flash('Erro ao deletar a Cupom!')->error();
             return redirect()->back()->withInput();
+        }
+    }
+
+    public function validateCoupon($code, $courseId)
+    {
+
+        try{
+            $today = Carbon::now();
+
+            $coupon = Coupon::where('code', $code)
+                ->where('course_id', $courseId)
+                ->where('status', 'PUBLISHED')
+                ->where('started_at', '<=', $today)
+                ->where('finished_at', '>=', $today)
+                ->where('amount', '>', 0)
+                ->with('course') // carrega o curso vinculado
+                ->first();
+
+            if ($coupon) {
+                return response()->json([
+                    'valid' => true,
+                    'discount_percentage' => $coupon->discount_percentage,
+                    'payment_value' => $coupon->course->payment_value,
+                ]);
+            }
+
+            // Cupom inválido
+            return response()->json([
+                'valid' => false,
+                'discount_percentage' => 0,
+                'payment_value' => 0,
+            ]);
+        } catch (\Exception $exception) {
+            return response()->json([
+                'error' => $exception
+            ]);
         }
     }
 }

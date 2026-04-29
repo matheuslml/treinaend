@@ -231,7 +231,10 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/verificar_cpf/{cpf}', 'App\Http\Controllers\RegistrationController@verificarCPF')->name('verificar_cpf');
     Route::post('/get_registration', [RegistrationController::class, 'get_registration'])->name('get_registration');
     Route::post('/cadastro', [RegistrationController::class, 'web_store'])->name('web_store');
-    Route::get('/certificado/{registration_id}', 'App\Http\Controllers\RegistrationController@certificate')->name('certificate');
+    Route::get('/certificado/{registration_id}', 'App\Http\Controllers\RegistrationController@certificate')->name('certificate');;
+
+    Route::get('/courses/get-info/{id}', [CourseController::class, 'getInfo']);
+    Route::get('/coupons/validate/{code}/{courseId}', [CouponController::class, 'validateCoupon']);
 
     // Cursos verificarCPF
     Route::post('/treinamen', [RegistrationController::class, 'web_store'])->name('web_store');

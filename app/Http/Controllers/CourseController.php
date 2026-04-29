@@ -283,4 +283,14 @@ class CourseController extends Controller
 
         return view('web.course.show', compact('course_selected', 'unit', 'copyright', 'web_footer', 'courses'));
     }
+    
+    public function getInfo($id)
+    {
+        $course = Course::findOrFail($id);
+
+        return response()->json([
+            'name' => $course->name,
+            'payment_value' => $course->payment_value,
+        ]);
+    }
 }
