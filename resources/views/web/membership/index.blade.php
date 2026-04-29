@@ -81,8 +81,8 @@
                         <div class="card-body">
                             <p><strong>Curso Selecionado:</strong> <span id="selected-course">---</span></p>
                             <p><strong>Valor do Curso:</strong> <span id="course-price">0,00</span></p>
-                            <p><strong>Valor do Cupom:</strong> R$ <span id="coupon-percentage">0,00</span></p>
-                            <p><strong>Valor Final:</strong> R$ <span id="final-price">0,00</span></p>
+                            <p><strong>Valor do Cupom:</strong> <span id="coupon-percentage">0,00</span></p>
+                            <p><strong>Valor Final:</strong> <span id="final-price">0,00</span></p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-success register-button" style="display:none;">
@@ -131,7 +131,6 @@
 
             if (code.length > 2) { // só busca se tiver pelo menos 3 caracteres
                 try {
-                    console.log(code);
 
                     const courseId = document.getElementById('course_id').value;
 

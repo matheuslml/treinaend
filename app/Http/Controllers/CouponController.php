@@ -135,7 +135,6 @@ class CouponController extends Controller
 
     public function validateCoupon($code, $courseId)
     {
-
         try{
             $today = Carbon::now();
 
