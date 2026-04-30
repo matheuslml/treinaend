@@ -138,6 +138,8 @@ class CouponController extends Controller
         try{
             $today = Carbon::now();
 
+            $course = Course::find($courseId);
+
             $coupon = Coupon::where('code', $code)
                 ->where('course_id', $courseId)
                 ->where('status', 'PUBLISHED')
@@ -151,7 +153,7 @@ class CouponController extends Controller
                 return response()->json([
                     'valid' => true,
                     'discount_percentage' => $coupon->discount_percentage,
-                    'payment_value' => $coupon->course->payment_value,
+                    'payment_value' => $course->payment_value,
                 ]);
             }
 
@@ -159,7 +161,7 @@ class CouponController extends Controller
             return response()->json([
                 'valid' => false,
                 'discount_percentage' => 0,
-                'payment_value' => 0,
+                'payment_value' => $course->payment_value,
             ]);
         } catch (\Exception $exception) {
             return response()->json([

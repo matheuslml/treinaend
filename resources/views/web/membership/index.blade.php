@@ -119,6 +119,10 @@
                         style: 'currency',
                         currency: 'BRL'
                     });
+                    document.getElementById("final-price").textContent = data.payment_value.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
                 } catch (error) {
                     console.error("Erro ao buscar informações do curso:", error);
                 }
