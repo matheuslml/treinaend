@@ -43,7 +43,9 @@ class Course extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function setTitleAttribute($value){
+    // Mutator para gerar slug automaticamente
+    public function setNameAttribute($value)
+    {
         $this->attributes['name'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }

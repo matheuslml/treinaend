@@ -53,7 +53,7 @@
                     <ul>
                       @foreach ($courses as $course)
                           <li class="">
-                              <a class="menu-link" href="{{ route('pagina_web_course', $course->id) }}">{{ $course->name }}</a>
+                              <a class="menu-link" href="{{ route('pagina_web_course', $course->slug) }}">{{ $course->name }}</a>
                           </li>
                       @endforeach
                     </ul>

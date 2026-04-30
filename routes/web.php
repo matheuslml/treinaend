@@ -236,10 +236,7 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/courses/get-info/{id}', [CourseController::class, 'getInfo']);
     Route::get('/coupons/validate/{code}/{courseId}', [CouponController::class, 'validateCoupon']);
 
-    // Cursos verificarCPF
-    Route::post('/treinamen', [RegistrationController::class, 'web_store'])->name('web_store');
-
-    Route::get('curso/{courseId}', [CourseController::class, 'pagina_web_course'])->name('pagina_web_course');
+    Route::get('curso/{courseSlug}', [CourseController::class, 'pagina_web_course'])->name('pagina_web_course');
 
     // BlankPages
     Route::get('page/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');
