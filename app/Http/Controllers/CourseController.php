@@ -280,8 +280,9 @@ class CourseController extends Controller
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
+        $header_title = $course_selected->name;
 
-        return view('web.course.show', compact('course_selected', 'unit', 'copyright', 'web_footer', 'courses'));
+        return view('web.course.show', compact('course_selected', 'unit', 'copyright', 'web_footer', 'courses', 'header_title'));
     }
     
     public function getInfo($id)
