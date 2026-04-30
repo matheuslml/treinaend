@@ -80,8 +80,9 @@
                         </div>
                         <div class="card-body">
                             <p><strong>Curso Selecionado:</strong> <span id="selected-course">---</span></p>
-                            <p><strong>Valor do Curso:</strong> R$ <span id="course-price">0,00</span></p>
-                            <p><strong>Valor Final:</strong> R$ <span id="final-price">0,00</span></p>
+                            <p><strong>Valor do Curso:</strong> <span id="course-price">0,00</span></p>
+                            <p><strong>Valor do Cupom:</strong> <span id="coupon-percentage">0,00</span></p>
+                            <p><strong>Valor Final:</strong> <span id="final-price">0,00</span></p>
                         </div>
                         <div class="card-footer text-center">
                             <button type="submit" class="btn btn-success register-button" style="display:none;">
@@ -103,6 +104,74 @@
     <script src="assets-web/js/site/site.js" src=""></script>
 
     <script>
+        //pegar course
+        document.getElementById("course_id").addEventListener("change", async function() {
+            const courseId = this.value;
+
+            if (courseId) {
+                try {
+                    const response = await fetch(`/courses/get-info/${courseId}`);
+                    const data = await response.json();
+
+                    // Atualiza os spans
+                    document.getElementById("selected-course").textContent = data.name;
+                    document.getElementById("course-price").textContent = data.payment_value.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                    document.getElementById("final-price").textContent = data.payment_value.toLocaleString('pt-BR', {
+                        style: 'currency',
+                        currency: 'BRL'
+                    });
+                } catch (error) {
+                    console.error("Erro ao buscar informações do curso:", error);
+                }
+            }
+        });
+
+        //pegar coupon
+        document.getElementById("cupom").addEventListener("input", async function() {
+            const code = this.value.trim();
+
+            if (code.length > 2) { // só busca se tiver pelo menos 3 caracteres
+                try {
+
+                    const courseId = document.getElementById('course_id').value;
+
+                    const response = await fetch(`/coupons/validate/${code}/${courseId}`);
+                    const data = await response.json();
+                    console.log(data);
+
+                    const couponSpan = document.getElementById("coupon-percentage");
+                    const finalPriceSpan = document.getElementById("final-price");
+
+                    if (data.valid) {
+                        // Mostra desconto
+                        couponSpan.textContent = data.discount_percentage + "%";
+
+                        // Calcula valor final
+                        const paymentValue = data.payment_value;
+                        const discount = (paymentValue * data.discount_percentage) / 100;
+                        const finalValue = paymentValue - discount;
+
+                        finalPriceSpan.textContent = finalValue.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                    } else {
+                        // Cupom inválido → zera desconto
+                        couponSpan.textContent = "0,00";
+                        finalPriceSpan.textContent = data.payment_value.toLocaleString('pt-BR', {
+                            style: 'currency',
+                            currency: 'BRL'
+                        });
+                    }
+                } catch (error) {
+                    console.error("Erro ao validar cupom:", error);
+                }
+            }
+        });
+
         async function verificarCPF(cpf) {
             try {
                 const response = await fetch(`/verificar_cpf/${cpf}`);

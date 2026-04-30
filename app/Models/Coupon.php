@@ -38,7 +38,9 @@ class Coupon extends Model implements Auditable
         'deleted_at'
     ];
 
-    public function setTitleAttribute($value){
+    // Mutator para gerar slug automaticamente
+    public function setNameAttribute($value)
+    {
         $this->attributes['title'] = $value;
         $this->attributes['slug'] = Str::slug($value);
     }

@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ isset($unit->organization->title) ? $unit->organization->title : '' }}</title>
+    <title>{{ isset($header_title) ? $header_title : (isset($unit->organization->title) ? $unit->organization->title : '') }}</title>
     <meta name="description" content="Escola especializada em capacitação industrial. Curso de Inspeção de Equipamentos Online e Treinamentos em NR 33 e 35 com atuação há mais de 12 anos.">
 
 
@@ -53,7 +53,7 @@
                     <ul>
                       @foreach ($courses as $course)
                           <li class="">
-                              <a class="menu-link" href="{{ route('pagina_web_course', $course->id) }}">{{ $course->name }}</a>
+                              <a class="menu-link" href="{{ route('pagina_web_course', $course->slug) }}">{{ $course->name }}</a>
                           </li>
                       @endforeach
                     </ul>

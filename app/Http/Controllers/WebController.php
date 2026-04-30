@@ -57,7 +57,8 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $banner = Banner::where('banner_type_id', 2)->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.about.index', compact('categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
+        $header_title = 'Sobre';
+        return view('web.about.index', compact('header_title', 'categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
     }
     public function professional_consult()
     {
@@ -69,7 +70,8 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $banner = Banner::where('banner_type_id', 2)->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.professional.index', compact('categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
+        $header_title = 'Consulta Profissional';
+        return view('web.professional.index', compact('header_title', 'categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
     }
     public function membership($course_name)
     {
@@ -82,7 +84,8 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $banner = Banner::where('banner_type_id', 2)->first();
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.membership.index', compact('course_selected','categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
+        $header_title = 'Matrícula';
+        return view('web.membership.index', compact('header_title', 'course_selected','categories', 'service_pages', 'institucional_pages', 'unit', 'copyright', 'banner','courses', 'partnership'));
     }
 
     public function transparency_index()
@@ -114,7 +117,8 @@ class WebController extends Controller
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
         $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.contact.index', compact('partnership','categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries','courses'));
+        $header_title = 'Contato';
+        return view('web.contact.index', compact('header_title', 'partnership','categories', 'news', 'unit', 'copyright', 'projects', 'leaderships', 'galleries','courses'));
 
     }
 
@@ -181,7 +185,8 @@ class WebController extends Controller
 
             $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
             $categories = ProjectCategory::orderBy('title', 'asc')->get();
-        return view('web.news.index', compact('partnership','categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
+            $header_title = 'Blog';
+        return view('web.news.index', compact('header_title','partnership','categories', 'banner', 'news', 'tags', 'categories', 'unit', 'copyright', 'projects', 'leaderships', 'galleries', 'web_footer','courses'));
         } catch (\Throwable $throwable) {
 
         dd($throwable);

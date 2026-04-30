@@ -47,13 +47,27 @@ class NewStudent
                 'person_id' => $person_id
             ],
             [
-                'coupon_id' => $coupon != null ? $coupon->id : null,
-                'payment_value' => $course->payment_value,
+                'coupon_id' => ($coupon != null) && ($coupon->amount > 0) ? $coupon->id : null,
+                'payment_total' => $course->payment_value,
+                'payment_value' => ($coupon != null) && ($coupon->amount > 0) ? 
+                                        $course->payment_value - ($course->payment_value * $coupon->discount_percentage / 100) : $course->payment_value,
                 'code' => $course->acronym . $today->format('y') . '0' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT),
                 'exam_date' => $exam_date->toDateString(),
                 'started_at' => $today->toDateString(),
                 'exam_nr' => 0
             ]
         );
+
+        if(($coupon != null) && ($coupon->amount > 0)){
+
+            Coupon::updateOrCreate(
+                [
+                    'id' => $coupon->id
+                ],
+                [
+                    'amount' => $coupon->amount - 1
+                ]
+            );
+        }
     }
 }

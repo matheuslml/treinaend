@@ -194,21 +194,16 @@ class RegistrationController extends Controller
         try {
             DB::beginTransaction();
 
-            $cpf = preg_replace('/\D/', '', $request->cpf);
-            $cpf = ltrim($cpf, '0');
-
-            $document = Document::whereRaw("
-                            TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
-                            ", [$cpf])->first();
-
-            $registration = Registration::where('course_id', $request->course_id)->where('person_id', $document->person->id)->first();
-
-
-            if ($registration) {//verificar se está se cadastrando para um curso que ja é cadastrado
-                flash('Cadastro já Existente tente fazer Login ou alterar Senha!')->error();
-            }else{
-
                 $new_student = resolve(NewStudent::class);
+
+                $course = Course::find($request['course_id']);
+
+                $cpf = preg_replace('/\D/', '', $request->cpf);
+                $cpf = ltrim($cpf, '0');
+
+                $document = Document::whereRaw("
+                                TRIM(LEADING '0' FROM REPLACE(REPLACE(REPLACE(document, '.', ''), '-', ''), ' ', '')) = ?
+                                ", [$cpf])->first();
 
                 if($document == null){
 
@@ -231,19 +226,25 @@ class RegistrationController extends Controller
 
                     $new_student->handle($person->id, $request['course_id'], $request->cupom);
 
+
+                    flash($person->full_name . ' sua Matrícula aqui na TREINAEND no curso ' . $course->name . ' foi criada com sucesso! Faça seu login para Acessar o Painel do Aluno')->success();
+
                 }else{
-                    $new_student->handle($document->person->id, $request['course_id'], $request->cupom);
+
+                    $registration = Registration::where('course_id', $request->course_id)->where('person_id', $document->person->id)->first();
+                    
+                    if ($registration) {//verificar se está se cadastrando para um curso que ja é cadastrado
+                        flash($registration->person->full_name . ' sua Matrícula  no curso ' . $course->name . ' já Existe tente fazer Login ou alterar sua Senha!')->error();
+                    }else{
+                        $new_student->handle($document->person->id, $request['course_id'], $request->cupom);
+                        flash($document->person->full_name . ' sua Matrícula  no curso ' . $course->name . ' foi criada com sucesso!')->success();
+                    }
                 }
-
-
-                flash('Matrícula criada com sucesso!')->success();
-            }
 
             DB::commit();
             return redirect('/login');
         } catch (\Throwable $throwable) {
             DB::rollBack();
-            dd($throwable);
             flash('Erro Criar a Matrícula, entre em contato!')->error();
             return redirect()->back()->withInput();
         }

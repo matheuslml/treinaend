@@ -273,14 +273,25 @@ class CourseController extends Controller
         }
     }
 
-    public function pagina_web_course($course_id)
+    public function pagina_web_course($course_slug)
     {
         $courses = Course::where('status', 'PUBLISHED')->orderBy('name', 'asc')->get();
-        $course_selected = Course::find($course_id);
+        $course_selected = Course::where('slug', $course_slug)->first();
         $unit = Unit::where('web', true)->first();
         $copyright = Copyright::where('status', 'PUBLISHED')->first();
         $web_footer = WebFooter::where('status', 'PUBLISHED')->first();
+        $header_title = $course_selected->name;
 
-        return view('web.course.show', compact('course_selected', 'unit', 'copyright', 'web_footer', 'courses'));
+        return view('web.course.show', compact('course_selected', 'unit', 'copyright', 'web_footer', 'courses', 'header_title'));
+    }
+    
+    public function getInfo($id)
+    {
+        $course = Course::findOrFail($id);
+
+        return response()->json([
+            'name' => $course->name,
+            'payment_value' => $course->payment_value,
+        ]);
     }
 }
