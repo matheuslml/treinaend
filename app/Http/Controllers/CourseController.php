@@ -329,4 +329,17 @@ class CourseController extends Controller
             'payment_value' => $course->payment_value,
         ]);
     }
+    public function viewCertificate($id)
+    {
+        $course = Course::findOrFail($id);
+
+        $path = storage_path('app/public/files/courses/certificates/' . str_replace("certificates/", "", $course->certificate_file));
+
+        if (!file_exists($path)) {
+            abort(404, 'Arquivo não encontrado');
+        }
+
+        return response()->file($path); // abre o PDF direto no navegador
+    }
+
 }

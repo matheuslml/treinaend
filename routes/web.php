@@ -237,6 +237,9 @@ Route::group(['middleware' => ['auth'], 'prefix' => 'help'], function () {
     Route::get('/coupons/validate/{code}/{courseId}', [CouponController::class, 'validateCoupon']);
 
     Route::get('curso/{courseSlug}', [CourseController::class, 'pagina_web_course'])->name('pagina_web_course');
+    
+    Route::get('/certificate/view/{id}', [CourseController::class, 'viewCertificate'])->name('certificate.view');
+
 
     // BlankPages
     Route::get('page/{blank_page}', [BlankPageController::class, 'pagina_web'])->name('pagina_web');

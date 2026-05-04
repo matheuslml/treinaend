@@ -118,6 +118,24 @@
                 </div>
               </div>
               <div class="col-12">
+                  <div class="mb-1 row">
+                      <div class="col-sm-3">
+                          <label class="col-form-label" for="certificate_file_view">
+                              Ver PDF
+                              <tag data-bs-toggle="tooltip" title="Arquivo PDF">
+                                  <i data-feather='info'></i>
+                              </tag>
+                          </label>
+                      </div>
+                      <div class="col-sm-9">
+                          <a href="{{ route('certificate.view', $course_selected->id) }}" target="_blank" class="btn btn-primary">
+                              Abrir Certificado Salvo
+                          </a>
+                      </div>
+                  </div>
+              </div>
+
+              <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
                     <label class="col-form-label" for="certificate_file">PDF para editar<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
