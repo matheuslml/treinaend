@@ -32,7 +32,8 @@ class CourseUpdateService
                 $changed = array_replace($request, $replacements);
 
                 $course = Course::find($course_id);
-                $old_path = $course->image_certificate;
+                $old_path = $course->image_card;
+                $old_path_file = $course->certificate_file;
 
                 $course->name = isset($changed['name']) ? $changed['name']  : '';
                 $course->acronym = isset($changed['acronym']) ? $changed['acronym']  : '';
@@ -40,11 +41,21 @@ class CourseUpdateService
                 $course->grade = $changed['grade'];
                 $course->type = $changed['type'];
                 $course->payment_value = isset($changed['payment_value']) ? $changed['payment_value']  : 0;
-                $course->observation_certificate = isset($changed['observation_certificate']) ? $changed['observation_certificate']  : '';
-                $course->coordinator_certificate = isset($changed['coordinator_certificate']) ? $changed['coordinator_certificate']  : '';
-                $course->image_certificate = isset($changed['path']) ? $changed['path']  : $old_path;
+                $course->certificate_file = isset($changed['path_file']) ? $changed['path_file']  : $old_path_file;
+                $course->image_card = isset($changed['path']) ? $changed['path']  : $old_path;
                 $course->status = $changed['status'];
                 $course->save();
+
+                if(isset($changed['path'])){
+                    $old_path = storage_path() . '/app/public/images/courses/cards/' . str_replace("cards/", "", $old_path);
+                    unlink($old_path);
+                }
+
+                if(isset($changed['path_file'])){
+                    $old_path_file = storage_path() . '/app/public/files/courses/certificates/' . str_replace("certificates/", "", $old_path_file);
+                    unlink($old_path_file);
+
+                }
 
             DB::commit();
         } catch (Exception $exception) {

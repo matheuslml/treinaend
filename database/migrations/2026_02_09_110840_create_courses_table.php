@@ -19,9 +19,8 @@ return new class extends Migration
             $table->integer('order')->nullable();
             $table->integer('grade')->nullable();
             $table->float('payment_value', 16, 2)->nullable();
-            $table->string('observation_certificate')->nullable();//colocar só um pdf
-            $table->string('coordinator_certificate')->nullable();
-            $table->string('image_certificate')->nullable();//trocar para imagem card
+            $table->string('certificate_file')->nullable();
+            $table->string('image_card')->nullable();
             $table->string('image_banner')->nullable();//imagem pagina
             $table->enum('type', ['EAD', 'PRESENCIAL'])->default('EAD');
             $table->text('excerpt')->nullable();
