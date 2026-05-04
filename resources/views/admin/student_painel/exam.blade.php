@@ -35,317 +35,17 @@
 <!-- /search header -->
 
 <!-- frequently asked questions tabs pills -->
-<section id="faq-tabs">
+<section id="">
   <!-- vertical tab pill -->
   <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-12">
-      <div class="faq-navigation d-flex justify-content-between flex-column mb-2 mb-md-0">
-        <!-- pill tabs navigation -->
-        <ul class="nav nav-pills nav-left flex-column" role="tablist">
-          <!-- open exercise -->
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              id="intro"
-              data-bs-toggle="pill"
-              href="#faq-intro"
-              aria-expanded="true"
-              role="tab"
-            >
-              <i data-feather="help-circle" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Introdução</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="lesson"
-              data-bs-toggle="pill"
-              href="#faq-lesson"
-              aria-expanded="true"
-              role="tab"
-            >
-              <i data-feather="book-open" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Aulas</span>
-            </a>
-          </li>
-
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="exercise"
-              data-bs-toggle="pill"
-              href="#faq-exercise"
-              aria-expanded="true"
-              role="tab"
-            >
-              <i data-feather="book-open" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Exercício em Aberto</span>
-            </a>
-          </li>
-
-          <!-- exercise done -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="exercise-done"
-              data-bs-toggle="pill"
-              href="#faq-exercise-done"
-              aria-expanded="false"
-              role="tab"
-            >
-              <i data-feather="check-circle" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Exercício Realizado</span>
-            </a>
-          </li>
-
-          <!-- Support-material -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="Support-material"
-              data-bs-toggle="pill"
-              href="#faq-Support-material"
-              aria-expanded="false"
-              role="tab"
-            >
-              <i data-feather="file-text" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Material de Apoio</span>
-            </a>
-          </li>
-
-          <!-- cancellation and return -->
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              id="exam"
-              data-bs-toggle="pill"
-              href="#faq-exam"
-              aria-expanded="false"
-              role="tab"
-            >
-              <i data-feather="{{ $discipline_person->score >= 7 ? 'award' : 'clock' }}" class="font-medium-3 me-1"></i>
-              <span class="fw-bold">Prova {{ $discipline_person->score < 7 ? ('- ' . $examDateFormated) : '' }}</span>
-            </a>
-          </li>
-        </ul>
-
-        <!-- FAQ image -->
-        <img
-          src="{{asset('images/illustration/faq-illustrations.svg')}}"
-          class="img-fluid d-none d-md-block"
-          alt="demand img"
-        />
-      </div>
-    </div>
-
-    <div class="col-lg-9 col-md-8 col-sm-12">
-      <!-- pill tabs tab content -->
-      <div class="tab-content">
-        <!-- Intro panel -->
-        <div role="tabpanel" class="tab-pane active" id="faq-intro" aria-labelledby="intro" aria-expanded="true">
-
-            <!-- Congratulations Card  -->
-            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
-                <div class="card card-congratulations">
-                    <div class="card-body text-center">
-                        <div class="avatar avatar-xl bg-primary shadow">
-                        <div class="avatar-content">
-                            <i data-feather="play-circle" class="font-large-1"></i>
-                        </div>
-                        </div>
-                        <div class="text-center">
-                            <h1 class="mb-1 text-white">Bons Estudos, <br>{{ auth()->user()->name }}!</h1>
-                            <p class="card-text m-auto w-75">
-                                Este é mais um passo importante na sua jornada de aprendizado.
-                                Mantenha o foco, a disciplina e a curiosidade — cada esforço de hoje
-                                será uma conquista no futuro. Continue avançando com confiança e determinação!
-                            </p>
-
-                            <h3 class="mt-4 mb-75  text-white" {{ $discipline_person->score < 7 ? '' : 'hidden' }}>Prova: {{ $examDateFormated }}</h3>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!--/ Congratulations Card -->
-            <!-- Medal Card -->
-            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
-                <div class="card card-congratulation-medal">
-                <div class="card-body">
-                        <h2>Parabéns!!! 🎉</h2>
-                        <h3>{{ auth()->user()->name }}!</h3>
-                        <p class="card-text font-small-3">
-                            É com grande satisfação que reconhecemos sua dedicação e esforço.<br>
-                            Continue avançando com confiança e determinação!
-                        </p>
-
-                        <h3 class="mb-75 mt-4">Nota na Disciplina: {{ $discipline_person->score }}</h3>
-                        <img src="{{asset('images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
-                    </div>
-                </div>
-            </div>
-            <!--/ Medal Card -->
-        </div>
-
-        <!-- lesson panel -->
-        <div role="tabpanel" class="tab-pane" id="faq-lesson" aria-labelledby="lesson" aria-expanded="false">
-          <!-- icon and header -->
-            <div class="row match-height">
-                @php
-                    $i=0;
-                @endphp
-                @foreach ($lessons as $lesson)
-                    @php
-                        $i++;
-                    @endphp
-                    <div class="col-md-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                            <h4 class="card-title">Aula {{ $i }}: </h4>
-                                <div class="video-player" id="">
-                                    <iframe src="{{ $lesson->link_video }}" allowfullscreen allow="autoplay"></iframe>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- exercise panel -->
-        <div role="tabpanel" class="tab-pane" id="faq-exercise" aria-labelledby="exercise" aria-expanded="false">
-          <!-- icon and header -->
-            <div class="row match-height">
-                @foreach ($exercises as $exercise)
-                    <div class="col-md-6 col-lg-6">
-                        <div class="card">
-                            <img
-                                src="{{ asset('storage/files/' . $exercise->file) }}"
-                                class="card-img-top"
-                            />
-                            <div class="card-body">
-                                <form class="form form-horizontal" method="POST" action="{{ route('student_answer_exercise') }}">
-                                    @csrf()
-                                    <input type="text"  id="exercise_id" name="exercise_id" value="{{ $exercise->id }}" hidden />
-                                    <div class="row">
-                                        <label class="" for="type">Selecione<tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
-                                        <div class="col-sm-8">
-                                            @php
-                                                $quantity = $exercise->answers;
-                                                $i = 0;
-                                            @endphp
-                                            <select class="form-select" id="answer" name="answer" required >
-                                                <option value="" class="">Respostas</option>
-                                                @while ($quantity > 0)
-                                                    @php
-                                                        $i++;
-                                                        $quantity--;
-                                                    @endphp
-                                                    <option value="{{ $i }}"  >{{ $i }}</option>
-                                                @endwhile
-                                            </select>
-                                        </div>
-                                        <div class="col-sm-4 ">
-                                            <button type="submit" class="btn btn-primary me-1">Salvar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- exercise done panel -->
-        <div role="tabpanel" class="tab-pane" id="faq-exercise-done" aria-labelledby="exercise-done" aria-expanded="false">
-          <!-- icon and header -->
-            <div class="row match-height">
-                @foreach ($exercises_dones as $exercise_done)
-                        <div class="col-md-6 col-lg-6">
-                            <div class="card {{ $exercise_done->correct_answer == $exercise_done->users->first()->pivot->answer ? 'bg-success' : 'bg-danger' }} text-white">
-                                <img
-                                    src="{{ asset('storage/files/' . $exercise_done->file) }}"
-                                    class="card-img-top"
-                                />
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-sm-6 col-md-6 text-start">
-                                            <p class="card-text text-white">{{ 'Resposta Correta: ' . $exercise_done->correct_answer }}</p>
-                                        </div>
-                                        <div class="col-sm-6 col-md-6 text-end">
-                                            <h4 class="card-title text-white">{{ 'Selecionada: ' . $exercise_done->users->first()->pivot->answer }}</h4>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                @endforeach
-            </div>
-        </div>
-
-        <!-- Support-material panel -->
-        <div class="tab-pane" id="faq-Support-material" role="tabpanel" aria-labelledby="Support-material" aria-expanded="false">
-          <!-- icon and header -->
-            <!-- Transaction card -->
-            <div class="col-lg-8 col-md-8 col-12">
-                <div class="card card-transaction">
-                    <div class="card-header">
-                        <h4 class="card-title">Materiais de Apoio</h4>
-                    </div>
-                    <div class="card-body">
-                        @foreach ($support_materials as $support_material)
-                            <div class="transaction-item">
-                                <div class="d-flex flex-row">
-                                    <div class="avatar bg-light-primary rounded">
-                                        <div class="avatar-content">
-                                            <i data-feather="{{ $support_material->icon == "reader" ? 'file-text' : 'image' }}" class="avatar-icon font-medium-3"></i>
-                                        </div>
-                                    </div>
-                                    <div class="transaction-info">
-                                        <h6 class="transaction-title">{{ $support_material->title }}</h6>
-                                        <small>{{ $support_material->icon == "reader" ? 'Arquivo de Texto' : 'Slides em PowerPoint' }}</small>
-                                    </div>
-                                </div>
-                                <div class="fw-bolder text-danger">
-                                    <a href="{{ route('download_support_material', $support_material->id) }}" class="btn-sm btn-primary me-1">
-                                        <i data-feather="download" class="avatar-icon font-medium-3"></i>
-                                    </a>
-                                </div>
-                            </div>
-                        @endforeach
-                    </div>
-                </div>
-            </div>
-            <!--/ Transaction card -->
-        </div>
+    <div class="col-12">
 
         <!-- exam fazer tela para completar e falhar em prova  ---------------------------------------------------------------------------------->
         <div class="tab-pane" id="faq-exam" role="tabpanel" aria-labelledby="exam" aria-expanded="false" >
 
-
-            <!-- Medal Card -->
-            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
-                <div class="card card-congratulation-medal">
-                <div class="card-body">
-                        <h2>Parabéns!!! 🎉</h2>
-                        <h3>{{ auth()->user()->name }}!</h3>
-                        <p class="card-text font-small-3">
-                            É com grande satisfação que reconhecemos sua dedicação e esforço.<br>
-                            Continue avançando com confiança e determinação!
-                        </p>
-
-                        <h3 class="mb-75 mt-4">Nota na Disciplina: {{ $discipline_person->score }}</h3>
-                        <img src="{{asset('images/illustration/badge.svg')}}" class="congratulation-medal" alt="Medal Pic" />
-                    </div>
-                </div>
-            </div>
-            <!--/ Medal Card -->
           <!-- icon and header exam_questions -->
           <div class="d-flex align-items-center col-12">
-            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
+            <div class="bs-stepper vertical vertical-wizard-example" >
                 <div class="bs-stepper-header">
                     <div class="step" data-target="#question-0-vertical" role="tab" id="question-0-vertical-trigger">
                         <button type="button" class="step-trigger">
@@ -414,7 +114,7 @@
                                             <label class="" for="type">Selecione   <tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
                                             <div class="col-12">
                                                 @php
-                                                    $quantity = $exercise->answers;
+                                                    $quantity = $question->answers;
                                                     $j = 0;
                                                 @endphp
                                                 <input type="number" value="{{ $question->id }}" id="question-{{ $i }}" name="question" hidden/>
@@ -425,7 +125,7 @@
                                                             $j++;
                                                             $quantity--;
                                                         @endphp
-                                                        <option value="{{ $j }}"  >{{ $j }}{{ $exercise->correct_answer }}</option>
+                                                        <option value="{{ $j }}"  >{{ $j }}{{ $question->correct_answer }}</option>
                                                     @endwhile
                                                 </select>
                                             </div>
@@ -454,8 +154,6 @@
             </div>
           </div>
         </div>
-
-      </div>
     </div>
   </div>
 </section>

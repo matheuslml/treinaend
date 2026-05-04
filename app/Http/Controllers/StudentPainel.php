@@ -222,6 +222,58 @@ class StudentPainel extends Controller
         }
     }
 
+    public function exam_start($discipline_id)
+    {
+        try{
+
+            $userId = Auth::id();
+            $user = User::find($userId);
+            $pageConfigs = ['pageHeader' => false];
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
+            $unit = Unit::where('web', true)->first();
+            $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $discipline = Discipline::find($discipline_id);
+            $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id', $user->person_id)->first();
+            $examDate = Carbon::parse($discipline_person->exam_date);
+            $examDateFormated = Carbon::parse($examDate)->format('d/m/Y');
+            $today = Carbon::today();
+            $exam_date = false;
+            if ($examDate->lessThanOrEqualTo($today)) $exam_date = true;
+
+            $lessons = Lesson::where('discipline_id', $discipline_id)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+
+            $exercises = Exercise::where('discipline_id', $discipline_id)
+                                    ->whereIn('type', ['E', 'A'])
+                                    ->whereDoesntHave('users', function($q) use ($userId) {
+                                        $q->where('user_id', $userId);
+                                    })
+                                    ->get();
+
+            $exercises_dones = Exercise::where('discipline_id', $discipline_id)
+                                    ->whereIn('type', ['E', 'A'])
+                                    ->whereHas('users', function($q) use ($userId) { $q->where('user_id', $userId); })
+                                    ->with(['users' => function($q) use ($userId) { $q->where('user_id', $userId); }])
+                                    ->get();
+
+            $support_materials = SupportMaterial::where('discipline_id', $discipline_id)
+                                    ->orderBy('order', 'asc')
+                                    ->get();
+
+            $exam_questions = Exercise::where('discipline_id', $discipline_id)
+                                    ->whereIn('type', ['P', 'A'])
+                                    ->inRandomOrder()
+                                    ->limit(10)
+                                    ->get();
+
+            return view('admin.student_painel.exam', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'courses_nav', 'exercises', 'exercises_dones', 'support_materials', 'exam_questions', 'lessons'));
+        } catch (\Throwable $throwable) {
+            flash('Erro ao procurar as Matrículas Cadastras!')->error();
+            return redirect()->back()->withInput();
+        }
+    }
+
     public function student_save_lesson(Request $request)
     {
         try{
