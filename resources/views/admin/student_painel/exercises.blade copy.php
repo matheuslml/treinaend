@@ -326,7 +326,7 @@
         <div class="tab-pane" id="faq-exam" role="tabpanel" aria-labelledby="exam" aria-expanded="false" >
 
 
-            <!-- Medal Card Aprovado -->
+            <!-- Medal Card -->
             <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score < 7 ? 'hidden' : '' }}>
                 <div class="card card-congratulation-medal">
                 <div class="card-body">
@@ -342,35 +342,117 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Card - Disciplina não concluída -->
-            <div class="col-12 col-md-12 col-lg-12" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
-                <div class="card border-warning shadow-sm">
-                    <div class="card-body text-center">
-                        <h1 class="fw-bold text-warning mb-3">Prova Pendente ⚠️</h1>
-                        <h2 class="fw-bold text-dark mb-2">{{ auth()->user()->name }}</h2>
-                        <p class="card-text text-muted mb-4">
-
-                            Você ainda não completou esta disciplina.<br>
-                            Para avançar no curso, realize o exame correspondente.
-                        </p>
-
+            <!--/ Medal Card -->
+          <!-- icon and header exam_questions -->
+          <div class="d-flex align-items-center col-12">
+            <div class="bs-stepper vertical vertical-wizard-example" {{ $discipline_person->score >= 7 ? 'hidden' : '' }}>
+                <div class="bs-stepper-header">
+                    <div class="step" data-target="#question-0-vertical" role="tab" id="question-0-vertical-trigger">
+                        <button type="button" class="step-trigger">
+                            <span class="bs-stepper-box">0</span>
+                        </button>
+                    </div>
+                    @php
+                        $i = 0;
+                    @endphp
+                    @foreach ($exam_questions as $question)
                         @php
-                            use Carbon\Carbon;
-
-                            $examDate = $discipline_person->exam_date ? Carbon::parse($discipline_person->exam_date) : null;
-                            $canDoExam = $examDate && $examDate->isToday() || ($examDate && $examDate->lessThanOrEqualTo(Carbon::today()));
+                            $i++;
                         @endphp
-
-                        <a href="{{ $canDoExam ? route('exam_start', ['disciplineId' => $discipline_person->discipline_id]) : '#' }}" 
-                        class="btn fw-bold px-4 py-2 {{ $canDoExam ? 'btn-warning' : 'btn-secondary disabled' }}">
-                            {{ $canDoExam ? 'Realizar Prova' : 'Prova Bloqueada' }}
-                        </a>
-
+                        <div class="step" data-target="#question-{{ $i }}-vertical" role="tab" id="question-{{ $i }}-vertical-trigger">
+                            <button type="button" class="step-trigger" id="btn-number-lesson-{{ $i }}" disabled>
+                                <span class="bs-stepper-box">{{ $i }}</span>
+                            </button>
+                        </div>
+                    @endforeach
+                </div>
+                <div class="bs-stepper-content">
+                <div
+                    id="question-0-vertical"
+                    class="content"
+                    role="tabpanel"
+                    aria-labelledby="question-0-vertical-trigger"
+                >
+                    <div class="content-header">
+                        <h5 class="mb-0">Prova </h5>
+                        <small class="text-muted">Data: {{ $examDateFormated }}</small>
+                    </div>
+                    <div class="row">
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label" for="vertical-username" {{ $exam_date == false ? 'hidden' : '' }} >Chegou a hora de colocar em prática tudo o que você estudou. Respire fundo, mantenha a concentração e faça o seu melhor.</label>
+                            <label class="form-label" for="vertical-username" {{ $exam_date == true ? 'hidden' : '' }} >Ainda não é o dia da prova. Aproveite este tempo para revisar o conteúdo, reforçar os pontos que você tem mais dificuldade e se preparar com calma. Mantenha o foco nos estudos, organize seu cronograma e use cada dia como uma oportunidade para estar mais seguro quando chegar a hora.</label>
+                        </div>
+                        <div class="" >
+                        <button class="btn btn-primary btn-next" id="btn-start"  {{ $exam_date == false ? 'hidden' : '' }} >
+                            <span class="align-middle d-sm-inline-block d-none">Começar</span>
+                            <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                        </button>
+                        </div>
                     </div>
                 </div>
+                @php
+                    $i = 0;
+                @endphp
+                @foreach ($exam_questions as $question)
+                    @php
+                        $i++;
+                    @endphp
+                    <div id="question-{{ $i }}-vertical" class="content" role="tabpanel" aria-labelledby="question-{{ $i }}-vertical-trigger">
+                        <div class="content-header">
+                            <h5 class="mb-0">Questão: {{ $i }} </h5>
+                            <small>Faça com calma!</small>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12 col-lg-12">
+                                <div class="card">
+                                    <img
+                                        src="{{ asset('storage/files/' . $question->file) }}"
+                                        class="card-img-top"
+                                    />
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <label class="" for="type">Selecione   <tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
+                                            <div class="col-12">
+                                                @php
+                                                    $quantity = $exercise->answers;
+                                                    $j = 0;
+                                                @endphp
+                                                <input type="number" value="{{ $question->id }}" id="question-{{ $i }}" name="question" hidden/>
+                                                <select class="form-select" id="answer-{{ $i }}" name="answer" required >
+                                                    <option value="" class="">Respostas</option>
+                                                    @while ($quantity > 0)
+                                                        @php
+                                                            $j++;
+                                                            $quantity--;
+                                                        @endphp
+                                                        <option value="{{ $j }}"  >{{ $j }}{{ $exercise->correct_answer }}</option>
+                                                    @endwhile
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary btn-prev">
+                                <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
+                                <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                            </button>
+                            <button  id="btn-next-{{ $i }}" class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
+                                <span class="align-middle d-sm-inline-block d-none">Próximo</span>
+                                <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                            </button>
+                            <button  id="btn-lesson-save-{{ $i }}" class="btn btn-success" {{ $i < 10 ? 'hidden' : '' }} >
+                                <span class="align-middle d-sm-inline-block d-none">Salvar</span>
+                                <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                            </button>
+                        </div>
+                    </div>
+                @endforeach
+                </div>
             </div>
-
+          </div>
         </div>
 
       </div>

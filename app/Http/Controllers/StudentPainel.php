@@ -43,7 +43,7 @@ class StudentPainel extends Controller
             //fazer a verificação se o curso está pago
             $course = Course::find($course_id);
             /*$new_student = resolve(NewStudent::class);
-            $new_student->handle($person_id, $course_id);*/
+            $new_student->handle($person_id, $course_id, '');*/
 
             $disciplines = Discipline::where('course_id', $course_id)->orderBy('order', 'asc')
                 ->with(['person' => function ($query) use ($person_id) {
@@ -71,7 +71,26 @@ class StudentPainel extends Controller
                     $discipline_atual = $disciplines->first();
                 }
 
-            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
+
+            $disciplines_person = Discipline::where('course_id', $course_id)
+                ->orderBy('order', 'desc')
+                ->whereHas('person', function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id)
+                        ->where(function ($q) {
+                            $q->where('discipline_people.score', '>=', 7)
+                                ->orWhereNotNull('discipline_people.finished_at'); // agora só pega finished_at preenchido
+                        });
+                })
+                ->with(['person' => function ($query) use ($person_id) {
+                    $query->where('person_id', $person_id)
+                        ->where(function ($q) {
+                            $q->where('discipline_people.score', '>=', 7)
+                                ->orWhereNotNull('discipline_people.finished_at'); // mesma lógica no eager loading
+                        });
+                }])
+                ->get();
+
+            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines_person', 'course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
