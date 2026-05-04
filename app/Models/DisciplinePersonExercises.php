@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class DisciplinePeople extends Model implements Auditable
+class DisciplinePersonExercises extends Model implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
@@ -19,36 +18,24 @@ class DisciplinePeople extends Model implements Auditable
     protected $table = 'discipline_people';
 
     protected $fillable = [
-        'discipline_id',
-        'person_id',
-        'exam_date',
-        'started_at',
-        'finished_at',
-        'score',
-        'exam_nr',
-        'registration'//remover
+        'discipline_person_id',
+        'exercise_id',
+        'answer',
+        'correct'
     ];
 
     protected $dates = [
-        'exam_date',
-        'started_at',
-        'finished_at',
         'expires_at',
         'deleted_at'
     ];
 
-    public function person(): BelongsTo
+    public function discipline_person(): BelongsTo
     {
         return $this->belongsTo(Person::class, 'person_id');
     }
 
-    public function discipline(): BelongsTo
+    public function exercise(): BelongsTo
     {
         return $this->belongsTo(Discipline::class, 'discipline_id');
-    }
-
-    public function exercises(): HasMany
-    {
-        return $this->hasMany(Exercise::class, 'exercise_id');
     }
 }
