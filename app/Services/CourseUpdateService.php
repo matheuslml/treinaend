@@ -46,12 +46,12 @@ class CourseUpdateService
                 $course->status = $changed['status'];
                 $course->save();
 
-                if(isset($changed['path'])){
+                if(isset($changed['path']) && isset($old_path)){
                     $old_path = storage_path() . '/app/public/images/courses/cards/' . str_replace("cards/", "", $old_path);
                     unlink($old_path);
                 }
 
-                if(isset($changed['path_file'])){
+                if(isset($changed['path_file']) && isset($old_path_file)){
                     $old_path_file = storage_path() . '/app/public/files/courses/certificates/' . str_replace("certificates/", "", $old_path_file);
                     unlink($old_path_file);
 
@@ -60,7 +60,6 @@ class CourseUpdateService
             DB::commit();
         } catch (Exception $exception) {
             //Bugsnag::notifyException($exception);
-            dd($exception);
             DB::rollBack();
             throw new Exception($exception);
         }
