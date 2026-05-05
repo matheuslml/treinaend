@@ -100,13 +100,13 @@
                     <div id="question-{{ $i }}-vertical" class="content" role="tabpanel" aria-labelledby="question-{{ $i }}-vertical-trigger">
                         <div class="content-header">
                             <h5 class="mb-0">Questão: {{ $i }} </h5>
-                            <small>Faça com calma!</small>
+                            <small>Faça com calma! </small>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
                                 <div class="card">
                                     <img
-                                        src="{{ asset('storage/files/' . $question->file) }}"
+                                        src="{{ asset('storage/files/' . $question->exercise->file) }}"
                                         class="card-img-top"
                                     />
                                     <div class="card-body">
@@ -114,7 +114,7 @@
                                             <label class="" for="type">Selecione   <tag data-bs-toggle="tooltip" title="Escolha a Sua Resposta"><i data-feather='info'></i></tag></label>
                                             <div class="col-12">
                                                 @php
-                                                    $quantity = $question->answers;
+                                                    $quantity = $question->exercise->answers;
                                                     $j = 0;
                                                 @endphp
                                                 <input type="number" value="{{ $question->id }}" id="question-{{ $i }}" name="question" hidden/>
@@ -125,7 +125,7 @@
                                                             $j++;
                                                             $quantity--;
                                                         @endphp
-                                                        <option value="{{ $j }}"  >{{ $j }}{{ $question->correct_answer }}</option>
+                                                        <option value="{{ $j }}"  >{{ $j }}-{{ $question->exercise->correct_answer }}</option>
                                                     @endwhile
                                                 </select>
                                             </div>

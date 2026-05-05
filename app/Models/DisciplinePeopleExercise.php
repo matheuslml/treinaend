@@ -9,16 +9,16 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use OwenIt\Auditing\Auditable as AuditableTrait;
 use OwenIt\Auditing\Contracts\Auditable;
 
-class DisciplinePersonExercises extends Model implements Auditable
+class DisciplinePeopleExercise extends Model implements Auditable
 {
     use HasFactory;
     use SoftDeletes;
     use AuditableTrait;
 
-    protected $table = 'discipline_people';
+    protected $table = 'discipline_people_exercise';
 
     protected $fillable = [
-        'discipline_person_id',
+        'discipline_people_id',
         'exercise_id',
         'answer',
         'correct'
@@ -36,6 +36,6 @@ class DisciplinePersonExercises extends Model implements Auditable
 
     public function exercise(): BelongsTo
     {
-        return $this->belongsTo(Discipline::class, 'discipline_id');
+        return $this->belongsTo(Exercise::class, 'exercise_id');
     }
 }
