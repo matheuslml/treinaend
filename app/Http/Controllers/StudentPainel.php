@@ -344,8 +344,76 @@ class StudentPainel extends Controller
 
 
 
+    public function saveExam(Request $request)
+    {
+        try{
+            $validated = $request->validate([
+                'last_question' => 'required|integer',
+            ]);
 
-    public function student_save_lesson(Request $request)
+            $score = 0;
+
+            $disciplinePeopleExercise = DisciplinePeopleExercise::findOrFail($validated['last_question']);
+
+            $today = Carbon::today();
+            $days = $disciplinePeopleExercise->discipline_person->discipline->days ?? 0;
+
+            $exercises = $disciplinePeopleExercise->discipline_person->exercises;
+
+            foreach($exercises as $exercise){
+                $score += $exercise->correct ? 1 : 0;
+            }
+
+            if($score >= $disciplinePeopleExercise->exercise->course->grade){
+                DisciplinePeople::updateOrCreate(
+                    [
+                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id,
+                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                    ],
+                    [
+                        'finished_at' => $today,
+                        'score' => $score,
+                        'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
+                    ]
+                );
+
+                //criar proxima disciplina
+                //arrumar depois a verificação
+                DisciplinePeople::updateOrCreate(
+                    [
+                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->order + 1,
+                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                    ],
+                    [
+                        'exam_date' => $today->copy()->addDays($days),
+                        'started_at' => $today,
+                        'exam_nr' => 0
+                    ]
+                );
+            }else{
+                DisciplinePeople::updateOrCreate(
+                    [
+                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id,
+                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                    ],
+                    [
+                        'exam_date' => $today->copy()->addDays($days),
+                        'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
+                    ]
+                );
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => 'Prova realizada com sucesso!'
+            ]);
+        } catch (\Throwable $throwable) {
+            return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
+        }
+
+    }
+
+    public function oldsaveExam(Request $request)
     {
         try{
             //ok testar e ver se a interface está fechando e indo pra próxima

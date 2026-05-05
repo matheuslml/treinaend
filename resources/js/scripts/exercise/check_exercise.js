@@ -66,7 +66,28 @@ document.addEventListener("DOMContentLoaded", async function () {
                     nextBtn.removeAttribute("disabled");
                     nextBtn.click();
                 } else {
-                    alert("Você concluiu todas as questões!");
+                    // 🚀 Última questão concluída → chama saveExam no backend
+                    fetch("/save_exam", {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json",
+                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+                        },
+                        body: JSON.stringify({
+                            last_question: questionInput.value // envia a última questão
+                        })
+                    })
+                    .then(resp => resp.json())
+                    .then(result => {
+                        alert("Prova concluída com sucesso!");
+                        console.log("Resultado final:", result);
+                        // exemplo: redirecionar para painel do aluno
+                        // window.location.href = "/painel_aluno";
+                    })
+                    .catch(err => {
+                        console.error("Erro ao finalizar prova:", err);
+                        alert("Erro ao finalizar a prova.");
+                    });
                 }
             })
             .catch(error => {

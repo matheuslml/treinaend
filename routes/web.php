@@ -118,8 +118,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/student_answer_exercise', [StudentPainel::class, 'student_answer_exercise'])->name('student_answer_exercise');
     Route::get('/download_support_material/{id}', [SupportMaterialController::class, 'download'])->name('download_support_material');
     Route::post('/student_save_discipline', [StudentPainel::class, 'student_save_discipline'])->name('student_save_discipline');
-    //Route::post('/student_save_lesson', [StudentPainel::class, 'student_save_lesson'])->name('student_save_lesson');use App\Http\Controllers\ExamController;
 
+    Route::post('/save_exam', [StudentPainel::class, 'saveExam'])->name('save_exam');
     Route::post('/student_save_lesson', [StudentPainel::class, 'saveLesson'])->name('student.save.lesson');
     Route::get('exam_start/{disciplineId}', [StudentPainel::class, 'exam_start'])->name('exam_start');
     Route::get('/student_current_question', [StudentPainel::class, 'getCurrentQuestion']);
