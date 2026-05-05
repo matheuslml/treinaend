@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('discipline_people_id')->constrained('discipline_people')->nullable();
             $table->integer('exercise_id')->constrained('exercises')->nullable();
+            $table->integer('order')->nullable();
             $table->string('answer')->nullable();
             $table->boolean('correct')->default(false);
             $table->timestamps();

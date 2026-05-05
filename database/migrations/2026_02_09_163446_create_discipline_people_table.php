@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('exam_date', $precision = 0)->nullable();
             $table->date('started_at', $precision = 0)->nullable();
             $table->date('finished_at', $precision = 0)->nullable();
+            $table->unsignedInteger('current_question')->nullable();
             $table->integer('score')->nullable()->default(0);
             $table->integer('exam_nr')->nullable()->default(0);
             $table->string('registration')->nullable();

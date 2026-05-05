@@ -25,6 +25,7 @@ class DisciplinePeople extends Model implements Auditable
         'exam_date',
         'started_at',
         'finished_at',
+        'current_question',
         'score',
         'exam_nr',
         'registration'//remover
@@ -50,6 +51,6 @@ class DisciplinePeople extends Model implements Auditable
 
     public function exercises(): BelongsToMany
     {
-        return $this->belongsToMany(Exercise::class)->withPivot('answer', 'correct')->withTimestamps();
+        return $this->belongsToMany(Exercise::class)->withPivot('order', 'answer', 'correct')->withTimestamps();
     }
 }

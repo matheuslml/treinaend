@@ -44,6 +44,6 @@ class Exercise extends Model implements Auditable
 
     public function disciplines_person(): BelongsToMany
     {
-        return $this->belongsToMany(DisciplinePeople::class)->withPivot('answer', 'correct')->withTimestamps();
+        return $this->belongsToMany(DisciplinePeople::class)->withPivot('order', 'answer', 'correct')->withTimestamps();
     }
 }

@@ -20,6 +20,7 @@ class DisciplinePeopleExercise extends Model implements Auditable
     protected $fillable = [
         'discipline_people_id',
         'exercise_id',
+        'order',
         'answer',
         'correct'
     ];
@@ -31,7 +32,7 @@ class DisciplinePeopleExercise extends Model implements Auditable
 
     public function discipline_person(): BelongsTo
     {
-        return $this->belongsTo(Person::class, 'person_id');
+        return $this->belongsTo(DisciplinePeople::class, 'discipline_people_id');
     }
 
     public function exercise(): BelongsTo

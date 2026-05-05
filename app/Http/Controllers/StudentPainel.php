@@ -283,6 +283,68 @@ class StudentPainel extends Controller
         }
     }
 
+
+// Controller
+    public function saveLesson(Request $request)
+    {
+        $validated = $request->validate([
+            'question' => 'required|integer',
+            'answer'   => 'required|string',
+        ]);
+
+        // Busca o exercício vinculado ao aluno
+        $disciplinePeopleExercise = DisciplinePeopleExercise::findOrFail($validated['question']);
+
+        // Calcula o próximo order
+        $nextOrder = $disciplinePeopleExercise->order;
+        if (empty($nextOrder)) {
+            $maxOrder = DisciplinePeopleExercise::where('discipline_people_id', $disciplinePeopleExercise->discipline_people_id)
+                ->max('order');
+            $nextOrder = $maxOrder ? $maxOrder + 1 : 1;
+        } else {
+            $nextOrder = $nextOrder + 1;
+        }
+
+        // Atualiza a resposta do exercício
+        $disciplinePeopleExercise->update([
+            'answer'  => $validated['answer'],
+            'correct' => $validated['answer'] == $disciplinePeopleExercise->exercise->correct_answer,
+            'order'   => $nextOrder,
+        ]);
+
+        // Atualiza a questão atual do aluno
+        $disciplinePeople = $disciplinePeopleExercise->discipline_person;
+        if ($disciplinePeople) {
+            $disciplinePeople->update([
+                'current_question' => $nextOrder
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Resposta salva com sucesso!',
+            'next_question' => $disciplinePeople->current_question ?? null
+        ]);
+
+    }
+
+
+
+    public function getCurrentQuestion()
+    {
+        $userId = Auth::id();
+        $personId = User::findOrFail($userId)->person->id;
+
+        $disciplinePeople = DisciplinePeople::where('person_id', $personId)->first();
+
+        return response()->json([
+            'current_question' => $disciplinePeople->current_question ?? null
+        ]);
+    }
+
+
+
+
     public function student_save_lesson(Request $request)
     {
         try{

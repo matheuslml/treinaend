@@ -99,8 +99,8 @@
                     @endphp
                     <div id="question-{{ $i }}-vertical" class="content" role="tabpanel" aria-labelledby="question-{{ $i }}-vertical-trigger">
                         <div class="content-header">
-                            <h5 class="mb-0">Questão: {{ $i }}</h5>
-                            <small>Faça com calma!</small>
+                            <h5 class="mb-0">Questão: {{ $i }} </h5>
+                            <small>Faça com calma! </small>
                         </div>
                         <div class="row">
                             <div class="col-md-12 col-lg-12">
@@ -134,10 +134,18 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-between mt-2">
-                            <button class="btn btn-success btn-save" data-question="{{ $i }}">
-                                <span class="align-middle">Salvar</span>
-                                <i data-feather="check" class="align-middle ms-1"></i>
+                        <div class="d-flex justify-content-between">
+                            <button class="btn btn-primary btn-prev">
+                                <i data-feather="arrow-left" class="align-middle me-sm-25 me-0"></i>
+                                <span class="align-middle d-sm-inline-block d-none">Anterior</span>
+                            </button>
+                            <button  id="btn-next-{{ $i }}" class="btn btn-primary btn-next"  {{ $i == 10 ? 'hidden' : '' }} >
+                                <span class="align-middle d-sm-inline-block d-none">Próximo</span>
+                                <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
+                            </button>
+                            <button  id="btn-lesson-save-{{ $i }}" class="btn btn-success" {{ $i < 10 ? 'hidden' : '' }} >
+                                <span class="align-middle d-sm-inline-block d-none">Salvar</span>
+                                <i data-feather="arrow-right" class="align-middle ms-sm-25 ms-0"></i>
                             </button>
                         </div>
                     </div>
