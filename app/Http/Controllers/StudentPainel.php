@@ -250,7 +250,7 @@ class StudentPainel extends Controller
                                     ->get();
 
             //primeira tentativa
-            if(count($discipline_person->exercises) == 0 ){
+            if(count($discipline_person->discipline_people_exercises) == 0 ){
                 $exercises = Exercise::where('discipline_id', $discipline_id)
                                         ->whereIn('type', ['P', 'A'])
                                         ->inRandomOrder()
@@ -346,25 +346,26 @@ class StudentPainel extends Controller
 
     public function saveExam(Request $request)
     {
+        //aainda n terminei
         try{
             $validated = $request->validate([
                 'last_question' => 'required|integer',
             ]);
-
             $score = 0;
 
             $disciplinePeopleExercise = DisciplinePeopleExercise::findOrFail($validated['last_question']);
 
+
             $today = Carbon::today();
             $days = $disciplinePeopleExercise->discipline_person->discipline->days ?? 0;
 
-            $exercises = $disciplinePeopleExercise->discipline_person->exercises;
+            $exercises = $disciplinePeopleExercise->discipline_person->discipline_people_exercises;
 
             foreach($exercises as $exercise){
                 $score += $exercise->correct ? 1 : 0;
             }
 
-            if($score >= $disciplinePeopleExercise->exercise->course->grade){
+            if($score >= $disciplinePeopleExercise->exercise->discipline->course->grade){
                 DisciplinePeople::updateOrCreate(
                     [
                         'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id,
@@ -376,9 +377,6 @@ class StudentPainel extends Controller
                         'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
                     ]
                 );
-
-                //criar proxima disciplina
-                //arrumar depois a verificação
                 DisciplinePeople::updateOrCreate(
                     [
                         'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->order + 1,
@@ -397,10 +395,15 @@ class StudentPainel extends Controller
                         'person_id' => $disciplinePeopleExercise->discipline_person->person->id
                     ],
                     [
+                        'current_question' => null,
                         'exam_date' => $today->copy()->addDays($days),
                         'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
                     ]
                 );
+                foreach ($exercises as $exercise) {
+                    // faz soft delete do exercício
+                    $exercise->delete();
+                }
             }
 
             return response()->json([

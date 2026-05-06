@@ -67,6 +67,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                     nextBtn.click();
                 } else {
                     // 🚀 Última questão concluída → chama saveExam no backend
+                    console.log(questionInput.value);
                     fetch("/save_exam", {
                         method: "POST",
                         headers: {
@@ -74,7 +75,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                             "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
                         },
                         body: JSON.stringify({
-                            last_question: questionInput.value // envia a última questão
+                            last_question: questionInput.value, // envia a última questão
                         })
                     })
                     .then(resp => resp.json())

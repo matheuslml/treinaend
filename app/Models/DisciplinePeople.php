@@ -53,4 +53,9 @@ class DisciplinePeople extends Model implements Auditable
     {
         return $this->belongsToMany(Exercise::class)->withPivot('order', 'answer', 'correct')->withTimestamps();
     }
+
+    public function discipline_people_exercises(): HasMany
+    {
+        return $this->hasMany(DisciplinePeopleExercise::class, 'discipline_people_id');
+    }
 }
