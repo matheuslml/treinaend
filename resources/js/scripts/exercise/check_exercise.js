@@ -82,8 +82,10 @@ document.addEventListener("DOMContentLoaded", async function () {
                     .then(result => {
                         alert("Prova concluída com sucesso!");
                         console.log("Resultado final:", result);
-                        // exemplo: redirecionar para painel do aluno
-                        // window.location.href = "/painel_aluno";
+                        // 🔄 Redireciona para exercises_student_index/{disciplineId}
+                        if (result.discipline_id) {
+                            window.location.href = "/exercises_student_index/" + result.discipline_id;
+                        }
                     })
                     .catch(err => {
                         console.error("Erro ao finalizar prova:", err);

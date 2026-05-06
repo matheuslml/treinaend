@@ -408,7 +408,8 @@ class StudentPainel extends Controller
 
             return response()->json([
                 'success' => true,
-                'message' => 'Prova realizada com sucesso!'
+                'message' => 'Prova realizada com sucesso!',
+                'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id
             ]);
         } catch (\Throwable $throwable) {
             return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
