@@ -38,7 +38,7 @@
                   </g>
                 </g>
               </svg></span>
-            <h2 class="brand-text mb-0">GMAC</h2>
+            <h2 class="brand-text mb-0">TREINAEND</h2>
           </a>
         </li>
       </ul>
