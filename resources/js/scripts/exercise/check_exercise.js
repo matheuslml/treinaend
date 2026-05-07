@@ -67,30 +67,20 @@ document.addEventListener("DOMContentLoaded", async function () {
                     nextBtn.click();
                 } else {
                     // 🚀 Última questão concluída → chama saveExam no backend
-                    console.log(questionInput.value);
-                    fetch("/save_exam", {
-                        method: "POST",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
-                        },
-                        body: JSON.stringify({
-                            last_question: questionInput.value, // envia a última questão
+                    fetch("/save_exam")
+                        .then(resp => resp.json())
+                        .then(result => {
+                            alert("Prova concluída com sucesso!");
+                            console.log("Resultado final:", result);
+                            if (result.discipline_id) {
+                                window.location.href = "/exercises_student_index/" + result.discipline_id;
+                            }
                         })
-                    })
-                    .then(resp => resp.json())
-                    .then(result => {
-                        alert("Prova concluída com sucesso!");
-                        console.log("Resultado final:", result);
-                        // 🔄 Redireciona para exercises_student_index/{disciplineId}
-                        if (result.discipline_id) {
-                            window.location.href = "/exercises_student_index/" + result.discipline_id;
-                        }
-                    })
-                    .catch(err => {
-                        console.error("Erro ao finalizar prova:", err);
-                        alert("Erro ao finalizar a prova.");
-                    });
+                        .catch(err => {
+                            console.error("Erro ao finalizar prova:", err);
+                            alert("Erro ao finalizar a prova.");
+                        });
+
                 }
             })
             .catch(error => {

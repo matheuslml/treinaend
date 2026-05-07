@@ -23,6 +23,8 @@ class DisciplinePeople extends Model implements Auditable
         'discipline_id',
         'person_id',
         'exam_date',
+        'exam_started_at',
+        'exam_finished_at',
         'started_at',
         'finished_at',
         'current_question',
@@ -33,6 +35,8 @@ class DisciplinePeople extends Model implements Auditable
 
     protected $dates = [
         'exam_date',
+        'exam_started_at',
+        'exam_finished_at',
         'started_at',
         'finished_at',
         'expires_at',

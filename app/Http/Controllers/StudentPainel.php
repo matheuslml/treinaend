@@ -236,6 +236,7 @@ class StudentPainel extends Controller
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
             $discipline = Discipline::find($discipline_id);
             $discipline_person = DisciplinePeople::where('discipline_id', $discipline_id)->where('person_id', $user->person_id)->first();
+            
 
             $examDate = Carbon::parse($discipline_person->exam_date);
             $examDateFormated = Carbon::parse($examDate)->format('d/m/Y');
@@ -268,12 +269,24 @@ class StudentPainel extends Controller
                         ]
                     );
                 }
+
+
+                $now = now();
+
+                $discipline_person->update([
+                    'exam_started_at'  => $now,
+                    'exam_finished_at' => $now->copy()->addHours(2),
+                ]);
             }
 
             $exam_questions = DisciplinePeopleExercise::where('discipline_people_id', $discipline_person->id)->get();
 
+            if ($discipline_person->exam_finished_at && now()->greaterThan($discipline_person->exam_finished_at)) {
+                // 🚀 redireciona direto para a rota GET /save_exam
+                return redirect()->route('save_exam');
+            }
 
-            //dd($exam_questions->exercise);
+
 
             return view('admin.student_painel.exam', ['pageConfigs' => $pageConfigs], compact('discipline_person','exam_date', 'examDateFormated', 'discipline', 'unit', 'copyright', 'courses_nav', 'exam_questions', 'lessons'));
         } catch (\Throwable $throwable) {
@@ -287,6 +300,7 @@ class StudentPainel extends Controller
 // Controller
     public function saveLesson(Request $request)
     {
+
         $validated = $request->validate([
             'question' => 'required|integer',
             'answer'   => 'required|string',
@@ -294,6 +308,12 @@ class StudentPainel extends Controller
 
         // Busca o exercício vinculado ao aluno
         $disciplinePeopleExercise = DisciplinePeopleExercise::findOrFail($validated['question']);
+        if (now()->greaterThan($disciplinePeopleExercise->discipline_person->exam_finished_at)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tempo de prova expirado!',
+            ], 403);
+        }
 
         // Calcula o próximo order
         $nextOrder = $disciplinePeopleExercise->order;
@@ -344,43 +364,44 @@ class StudentPainel extends Controller
 
 
 
-    public function saveExam(Request $request)
+    public function saveExam()
     {
-        //aainda n terminei
         try{
-            $validated = $request->validate([
-                'last_question' => 'required|integer',
-            ]);
+            $userId = Auth::id();
+            $user = User::find($userId);
+
             $score = 0;
+            $discipline = $user->person->disciplines()
+                ->wherePivotNull('finished_at')
+                ->first();
 
-            $disciplinePeopleExercise = DisciplinePeopleExercise::findOrFail($validated['last_question']);
-
+            $disciplinePerson = DisciplinePeople::find($discipline->discipline_people->first()->id);
 
             $today = Carbon::today();
-            $days = $disciplinePeopleExercise->discipline_person->discipline->days ?? 0;
+            $days = $disciplinePerson->days ?? 0;
 
-            $exercises = $disciplinePeopleExercise->discipline_person->discipline_people_exercises;
+            $exercises = $disciplinePerson->discipline_people_exercises;
 
             foreach($exercises as $exercise){
                 $score += $exercise->correct ? 1 : 0;
             }
 
-            if($score >= $disciplinePeopleExercise->exercise->discipline->course->grade){
+            if($score >= $disciplinePerson->discipline->course->grade){
                 DisciplinePeople::updateOrCreate(
                     [
-                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id,
-                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                        'discipline_id' => $disciplinePerson->discipline->id,
+                        'person_id' => $user->person->id
                     ],
                     [
                         'finished_at' => $today,
                         'score' => $score,
-                        'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
+                        'exam_nr' => $disciplinePerson->exam_nr + 1
                     ]
                 );
                 DisciplinePeople::updateOrCreate(
                     [
-                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->order + 1,
-                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                        'discipline_id' => $disciplinePerson->discipline->order + 1,
+                        'person_id' => $user->person->id
                     ],
                     [
                         'exam_date' => $today->copy()->addDays($days),
@@ -391,13 +412,13 @@ class StudentPainel extends Controller
             }else{
                 DisciplinePeople::updateOrCreate(
                     [
-                        'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id,
-                        'person_id' => $disciplinePeopleExercise->discipline_person->person->id
+                        'discipline_id' => $disciplinePerson->discipline->id,
+                        'person_id' => $user->person->id
                     ],
                     [
                         'current_question' => null,
                         'exam_date' => $today->copy()->addDays($days),
-                        'exam_nr' => $disciplinePeopleExercise->discipline_person->exam_nr + 1
+                        'exam_nr' => $disciplinePerson->exam_nr + 1
                     ]
                 );
                 foreach ($exercises as $exercise) {
@@ -405,101 +426,15 @@ class StudentPainel extends Controller
                     $exercise->delete();
                 }
             }
-
             return response()->json([
                 'success' => true,
                 'message' => 'Prova realizada com sucesso!',
-                'discipline_id' => $disciplinePeopleExercise->discipline_person->discipline->id
+                'discipline_id' => $disciplinePerson->discipline->id
             ]);
         } catch (\Throwable $throwable) {
             return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
         }
 
-    }
-
-    public function oldsaveExam(Request $request)
-    {
-        try{
-            //ok testar e ver se a interface está fechando e indo pra próxima
-            $userId = Auth::id();
-            $user = User::find($userId);
-            $person = Person::find($user->person_id);
-            $today = Carbon::today();
-            $processed = [];
-            $answers = $request->input('answers', []);
-            $questions = $request->input('questions', []);
-            $score = 0;
-            $discipline_person_id = 0;
-            $exam_nr = 0;
-            $days = 0;
-            if (is_array($answers) && is_array($questions)) {
-                //Salvar exercícios feitos
-                foreach ($answers as $index => $answer) {
-                    $question_id = $questions[$index];
-                    $exercise = Exercise::find($question_id);
-                    if($discipline_person_id == 0){
-                        $discipline_person = DisciplinePeople::where('discipline_id', $exercise->discipline_id)->where('person_id', $person->id)->first();
-                        $discipline_person_id = $discipline_person->id ?? 0;
-                        $exam_nr = $discipline_person->exam_nr ?? 0;
-                        $days = $discipline_person->discipline->days ?? 0;
-                    }
-                    if ($exercise->correct_answer == $answer) $score++;
-
-                    ExerciseUser::create([
-                        'user_id' => $userId,
-                        'exercise_id' => $question_id,
-                        'answer' => $answer
-                    ]);
-                }
-                if($score >= $exercise->discipline->course->grade){
-                //Salvar dados da prova não está coreto
-                    DisciplinePeople::updateOrCreate(
-                        [
-                            'discipline_id' => $exercise->discipline_id,
-                            'person_id' => $person->id
-                        ],
-                        [
-                            'finished_at' => $today,
-                            'score' => $score,
-                            'exam_nr' => $exam_nr+1
-                        ]
-                    );
-
-                //criar proxima disciplina
-                    $registration = Registration::where('person_id', $person->id)->where('course_id', $exercise->discipline->course->id)->first();
-                    if(($exercise->discipline->order < count($exercise->discipline->course->disciplines)) && ($registration->qualification == "S")){
-                        DisciplinePeople::updateOrCreate(
-                            [
-                                'discipline_id' => $exercise->discipline->order + 1,
-                                'person_id' => $person->id
-                            ],
-                            [
-                                'exam_date' => $today->copy()->addDays($days),
-                                'started_at' => $today,
-                                'exam_nr' => 0
-                            ]
-                        );
-                    }
-                }else{
-                    DisciplinePeople::updateOrCreate(
-                        [
-                            'discipline_id' => $exercise->discipline_id,
-                            'person_id' => $person->id
-                        ],
-                        [
-                            'exam_date' => $today->copy()->addDays($days),
-                            'exam_nr' => $exam_nr+1
-                        ]
-                    );
-                }
-
-                return response()->json([ 'status' => 'ok', 'answers' => $processed ]);
-            }else{
-                return response()->json([ 'status' => 'error', 'answers' => "Nenhuma resposta recebida." ]);
-            }
-        } catch (\Throwable $throwable) {
-            return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
-        }
     }
 
 }
