@@ -275,7 +275,8 @@ class StudentPainel extends Controller
 
                 $discipline_person->update([
                     'exam_started_at'  => $now,
-                    'exam_finished_at' => $now->copy()->addHours(2),
+                    //'exam_finished_at' => $now->copy()->addHours(2)
+                    'exam_finished_at' => $now->copy()->addMinutes(2)
                 ]);
             }
 
