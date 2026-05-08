@@ -44,15 +44,25 @@
       </div>
       <div class="card-body">
         <ul class="timeline ms-50">
-          @foreach(Auth::user()->notifications->where('status_id', 2) as $newNotification)
+          @foreach(
+                      Auth::user()
+                          ->notifications()
+                          ->orderBy('created_at', 'desc')
+                          ->take(10)
+                          ->get() 
+                      as $newNotification
+                  )
             <li class="timeline-item">
-              <span class="timeline-point timeline-point-danger timeline-point-indicator"></span>
+              <span class="timeline-point timeline-point-{{ $newNotification->status_id == 1 ? 'success' :
+                                                            ($newNotification->status_id == 2 ? 'warning' : 
+                                                            ($newNotification->status_id == 3 ? 'primary' : 
+                                                            ($newNotification->status_id == 4 ? 'danger' : 'info'))) }} timeline-point-indicator"></span>
               <div class="timeline-event">
                 <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
-                  <h6>{{ $newNotification->title }}</h6>
-                  <span class="timeline-event-time me-1">5 day ago</span>
+                  <h6>{{ $newNotification->type->title . ' - ' . $newNotification->title }}</h6>
+                  <span class="timeline-event-time me-1">{{ $newNotification->created_at }}</span>
                 </div>
-                <p class="mb-0">{{ $newNotification->type->title }}</p>
+                <p class="mb-0">{{ $newNotification->content }}</p>
               </div>
             </li>
           @endforeach

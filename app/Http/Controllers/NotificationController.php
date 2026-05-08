@@ -36,19 +36,31 @@ class NotificationController extends Controller
         }
 
         try{
+
+            $userId = Auth::id();
+            $user = User::find($userId);
+
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
+            $courses_nav = Course::where('status', 'PUBLISHED')->get();
             //user notifications
             $notifications = Notification::with('users')->orderBy('created_at', 'desc')->get();
-            $readeds = $notifications->where('status_id', 1);
-            $not_readeds = $notifications->where('status_id', '!=', 1);
-            $sendeds = Notification::where('sender_id', Auth::user()->id)->get();
+
+            $my_notifications = Notification::whereHas('users', function ($q) use ($user) {
+                $q->where('users.id', $user->id);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+            $readeds = $my_notifications->where('status_id', 1);
+            $not_readeds = $my_notifications->where('status_id', '!=', 1);
+            $sendeds = Notification::where('sender_id', $user->id)->get();
 
             $statuses = NotificationStatus::orderBy('status', 'asc')->get();
             $types = NotificationType::orderBy('title', 'asc')->get();
             $users = User::with('person')->latest()->get(['id', 'email', 'person_id']);
             return view('admin.notification.index', compact('unit', 'copyright', 'courses_nav', 'notifications', 'readeds', 'not_readeds', 'sendeds', 'users', 'statuses', 'types'));
         } catch (\Throwable $throwable) {
+            dd($throwable);
             flash('Erro ao procurar as notificações Cadastradas!')->error();
             return redirect()->back()->withInput();
         }

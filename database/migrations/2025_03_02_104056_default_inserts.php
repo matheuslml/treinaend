@@ -371,11 +371,11 @@ class DefaultInserts extends Migration
                 'active' => 1
             ],
             [
-                'title' => 'Atividades da Conta',
+                'title' => 'Informativo',
                 'active' => 1
             ],
             [
-                'title' => 'Acessos de novos navegadores',
+                'title' => 'Atividades da Conta',
                 'active' => 1
             ]
         ];
