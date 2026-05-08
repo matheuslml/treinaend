@@ -50,6 +50,13 @@ return [
             'visibility' => 'public',
         ],
 
+        'courses_files' => [
+            'driver' => 'local',
+            'root' => storage_path('app/public/files/courses'),
+            'url' => env('APP_URL').'/storage/files/courses',
+            'visibility' => 'public',
+        ],
+
         'material_apoio' => [
             'driver' => 'local',
             'root' => storage_path('app/public/files'),

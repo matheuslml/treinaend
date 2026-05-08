@@ -33,18 +33,57 @@
         </div>
       </div>
     </div>
-    @foreach ($courses_nav as $course)
-        <div class="col-md-6 col-lg-4">
-            <div class="card">
-                <img class="card-img-top" src="{{asset('storage/images/courses/' . $course->image_banner)}}" alt="Card image cap" />
-                <div class="card-body">
-                <h4 class="card-title">{{ $course->name }}</h4>
-                <p class="card-text">
-                    Some quick example text to build on the card title and make up the bulk of the card's content.
-                </p>
-                <a href="#" class="btn btn-outline-primary">Ver</a>
+  <!-- User Timeline Card -->
+  <div class="col-lg-4 col-12">
+    <div class="card card-user-timeline">
+      <div class="card-header">
+        <div class="d-flex align-items-center">
+          <i data-feather="list" class="user-timeline-title-icon"></i>
+          <h4 class="card-title">Histórioco de Mensagens</h4>
+        </div>
+      </div>
+      <div class="card-body">
+        <ul class="timeline ms-50">
+          @foreach(
+                      Auth::user()
+                          ->notifications()
+                          ->orderBy('created_at', 'desc')
+                          ->take(5)
+                          ->get() 
+                      as $newNotification
+                  )
+            <li class="timeline-item">
+              <span class="timeline-point timeline-point-{{ $newNotification->status_id == 1 ? 'success' :
+                                                            ($newNotification->status_id == 2 ? 'warning' : 
+                                                            ($newNotification->status_id == 3 ? 'primary' : 
+                                                            ($newNotification->status_id == 4 ? 'danger' : 'info'))) }} timeline-point-indicator"></span>
+              <div class="timeline-event">
+                <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
+                  <h6>{{ $newNotification->type->title . ' - ' . $newNotification->title }}</h6>
+                  <span class="timeline-event-time me-1">
+                    {{ $newNotification->created_at->format('d/m/Y H:i') }}
+                </span>
                 </div>
-            </div>
+                <p class="mb-0">{{ $newNotification->content }}</p>
+              </div>
+            </li>
+          @endforeach
+
+        </ul>
+      </div>
+    </div>
+  </div>
+  <!--/ User Timeline Card -->
+    @foreach ($courses_nav as $course)
+        <div class="col-md-4 col-lg-4">
+            <a href="#" >
+              <div class="card">
+                  <img class="card-img-top" src="{{asset('storage/images/courses/' . $course->image_card)}}" alt="Card image cap" />
+                  <div class="card-body">
+                  <h4 class="card-title">{{ $course->name }}</h4>
+                  </div>
+              </div>
+            </a>
         </div>
     @endforeach
 

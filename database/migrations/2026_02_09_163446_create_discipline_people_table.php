@@ -16,8 +16,11 @@ return new class extends Migration
             $table->integer('discipline_id')->constrained('disciplines')->nullable();
             $table->integer('person_id')->constrained('people')->nullable();
             $table->date('exam_date', $precision = 0)->nullable();
+            $table->timestamp('exam_started_at')->nullable();
+            $table->timestamp('exam_finished_at')->nullable();
             $table->date('started_at', $precision = 0)->nullable();
             $table->date('finished_at', $precision = 0)->nullable();
+            $table->unsignedInteger('current_question')->nullable();
             $table->integer('score')->nullable()->default(0);
             $table->integer('exam_nr')->nullable()->default(0);
             $table->string('registration')->nullable();

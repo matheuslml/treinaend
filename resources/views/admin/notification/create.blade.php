@@ -85,7 +85,7 @@
 <section id="advanced-search-datatable">
   <div class="row">
     @can('Criar Notificações')
-      <div class="col-md-4 col-12">
+      <div class="col-md-6 col-12">
         <div class="card">
           <div class="card-header">
             <h4 class="card-title">Enviar Nova Notificação</h4>
@@ -191,7 +191,7 @@
         </div>
       </div>
     @endcan
-    <div class="col-md-8 col-12">
+    <div class="col-md-6 col-12">
       <div class="card">
         <div class="card-header border-bottom">
           <h4 class="card-title">Suas Notificações - Busca Avançada</h4>
@@ -303,10 +303,10 @@
               @foreach($notifications as $notification)
                 @if($i == 0)
                   @php $i = 1; @endphp
-                  <tr class="odd" onclick="window.location='{{ route('notificacoes.show', $notification->id) }}'">
+                  <tr class="odd">
                 @else
                   @php $i = 0; @endphp
-                  <tr class="even" onclick="window.location='{{ route('notificacoes.show', $notification->id) }}'">
+                  <tr class="even">
                 @endif
                     <td class="control sorting_1" tabindex="0" onclick="readNotification('{{ $notification->id }}')" ></td>
                     <td style="display: none;">{{ isset($notification->sender->person) ? $notification->sender->person->full_name : $notification->sender->name }}</td>

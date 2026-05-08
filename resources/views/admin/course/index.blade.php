@@ -113,30 +113,20 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="coordinator_certificate">Coordenador<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="certificate_file">PDF do Certificado<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="coordinator_certificate" name="coordinator_certificate" />
+                      <input type="file" class="form-control" id="certificate_file" name="certificate_file" >
                   </div>
                 </div>
               </div>
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
-                    <label class="col-form-label" for="observation_certificate">Observação do Certificado<tag data-bs-toggle="tooltip" title="Nome"><i data-feather='info'></i></tag></label>
+                    <label class="col-form-label" for="image_card">Imagem do CARD<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">
-                      <input type="text" class="form-control" id="observation_certificate" name="observation_certificate" />
-                  </div>
-                </div>
-              </div>
-              <div class="col-12">
-                <div class="mb-1 row">
-                  <div class="col-sm-3">
-                    <label class="col-form-label" for="image_certificate">Imagem do Certificado<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
-                  </div>
-                  <div class="col-sm-9">
-                      <input type="file" class="form-control" id="image_certificate" name="image_certificate" >
+                      <input type="file" class="form-control" id="image_card" name="image_card" >
                   </div>
                 </div>
               </div>

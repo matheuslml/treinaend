@@ -44,12 +44,17 @@ class Discipline extends Model implements Auditable
     public function person(): BelongsToMany
     {
         return $this->belongsToMany(Person::class, 'discipline_people', 'discipline_id', 'person_id')
-                    ->withPivot(['score', 'exam_date', 'started_at', 'finished_at', 'exam_nr', 'registration'])
+                    ->withPivot(['id','score', 'exam_date', 'started_at', 'finished_at', 'exam_nr', 'registration'])
                     ->withTimestamps();
     }
 
     public function support_materials(): HasMany
     {
         return $this->hasMany(SupportMaterial::class, 'discipline_id');
+    }
+
+    public function discipline_people(): HasMany
+    {
+        return $this->hasMany(DisciplinePeople::class, 'discipline_id');
     }
 }
