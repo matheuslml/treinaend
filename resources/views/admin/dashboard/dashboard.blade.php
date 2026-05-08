@@ -48,7 +48,7 @@
                       Auth::user()
                           ->notifications()
                           ->orderBy('created_at', 'desc')
-                          ->take(10)
+                          ->take(5)
                           ->get() 
                       as $newNotification
                   )

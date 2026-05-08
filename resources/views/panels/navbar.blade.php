@@ -89,7 +89,7 @@
         <li class="scrollable-container media-list">
 
           @foreach(Auth::user()->notifications->where('status_id', 2) as $newNotification)
-            <a class="d-flex" href="javascript:void(0)">
+            <a class="d-flex" href="{{ route('notificacoes.show', $newNotification->id) }}">
               <div class="list-item d-flex align-items-start">
                 <div class="me-1">
                   <div class="avatar">
@@ -104,14 +104,6 @@
               </div>
             </a>
           @endforeach
-
-          <div class="list-item d-flex align-items-center">
-            <h6 class="fw-bolder me-auto mb-0">Sistema de Notificações</h6>
-            <div class="form-check form-check-primary form-switch">
-              <input class="form-check-input" id="systemNotification" type="checkbox" checked="">
-              <label class="form-check-label" for="systemNotification"></label>
-            </div>
-          </div>
         </li>
         <li class="dropdown-menu-footer">
           <a class="btn btn-primary w-100" href="{{ route('notificacoes.index') }}">Leia todas as Notificações</a>
