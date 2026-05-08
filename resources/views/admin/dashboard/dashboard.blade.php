@@ -60,7 +60,9 @@
               <div class="timeline-event">
                 <div class="d-flex justify-content-between flex-sm-row flex-column mb-sm-0 mb-1">
                   <h6>{{ $newNotification->type->title . ' - ' . $newNotification->title }}</h6>
-                  <span class="timeline-event-time me-1">{{ $newNotification->created_at }}</span>
+                  <span class="timeline-event-time me-1">
+                    {{ $newNotification->created_at->format('d/m/Y H:i') }}
+                </span>
                 </div>
                 <p class="mb-0">{{ $newNotification->content }}</p>
               </div>

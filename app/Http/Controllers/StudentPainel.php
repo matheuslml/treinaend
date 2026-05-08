@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Discipline\NewStudent;
+use App\Actions\Notifications\SendInternalNotification;
 use App\Models\Copyright;
 use App\Models\Discipline;
 use App\Models\DisciplinePeople;
@@ -371,6 +372,8 @@ class StudentPainel extends Controller
             $userId = Auth::id();
             $user = User::find($userId);
 
+            $send_internal_notification = resolve(SendInternalNotification::class);
+
             $score = 0;
             $discipline = $user->person->disciplines()
                 ->wherePivotNull('finished_at')
@@ -410,6 +413,7 @@ class StudentPainel extends Controller
                         'exam_nr' => 0
                     ]
                 );
+                $send_internal_notification->handle("discipline_notification", "aproved", $userId);
             }else{
                 DisciplinePeople::updateOrCreate(
                     [
@@ -426,6 +430,7 @@ class StudentPainel extends Controller
                     // faz soft delete do exercício
                     $exercise->delete();
                 }
+                $send_internal_notification->handle("discipline_notification", "notaproved", $userId);
             }
             return response()->json([
                 'success' => true,

@@ -25,6 +25,7 @@ use Endroid\QrCode\ErrorCorrectionLevel;
 use Endroid\QrCode\RoundBlockSizeMode;
 use Endroid\QrCode\Writer\PngWriter;
 use App\Actions\Discipline\NewStudent;
+use App\Actions\Notifications\SendInternalNotification;
 use App\Models\Coupon;
 
 class RegistrationController extends Controller
@@ -196,6 +197,7 @@ class RegistrationController extends Controller
 
                 $new_student = resolve(NewStudent::class);
 
+                $send_internal_notification = resolve(SendInternalNotification::class);
                 $course = Course::find($request['course_id']);
 
                 $cpf = preg_replace('/\D/', '', $request->cpf);
@@ -211,7 +213,7 @@ class RegistrationController extends Controller
                         'full_name' => $request['name']
                     ]);
 
-                    User::create([
+                    $user = User::create([
                         'person_id' => $person->id,
                         'name' => $request['name'],
                         'email' => $request['email'],
@@ -225,6 +227,7 @@ class RegistrationController extends Controller
                     ]);
 
                     $new_student->handle($person->id, $request['course_id'], $request->cupom);
+                    $send_internal_notification->handle("newregistration", "aproved", $user->id);
 
 
                     flash($person->full_name . ' sua Matrícula aqui na TREINAEND no curso ' . $course->name . ' foi criada com sucesso! Faça seu login para Acessar o Painel do Aluno')->success();
@@ -237,6 +240,7 @@ class RegistrationController extends Controller
                         flash($registration->person->full_name . ' sua Matrícula  no curso ' . $course->name . ' já Existe tente fazer Login ou alterar sua Senha!')->error();
                     }else{
                         $new_student->handle($document->person->id, $request['course_id'], $request->cupom);
+                        $send_internal_notification->handle("newregistration", "aproved", $document->person->user->id);
                         flash($document->person->full_name . ' sua Matrícula  no curso ' . $course->name . ' foi criada com sucesso!')->success();
                     }
                 }
@@ -245,6 +249,7 @@ class RegistrationController extends Controller
             return redirect('/login');
         } catch (\Throwable $throwable) {
             DB::rollBack();
+            dd($throwable);
             flash('Erro Criar a Matrícula, entre em contato!')->error();
             return redirect()->back()->withInput();
         }
