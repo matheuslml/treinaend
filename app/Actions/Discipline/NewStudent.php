@@ -27,6 +27,13 @@ class NewStudent
         $today = Carbon::today();
         $exam_date = $today->copy()->addDays(2);
 
+        $code = $course->acronym . str_pad(rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+        $registration = Registration::where('code', $code)->first();
+        while($registration != null){
+            $code = $course->acronym . str_pad(rand(0, 9999999), 7, '0', STR_PAD_LEFT);
+            $registration = Registration::where('code', $code)->first();
+        }
+
         $coupon = Coupon::where('code', $coupon)->first();
 
         DisciplinePeople::updateOrCreate(
@@ -49,9 +56,9 @@ class NewStudent
             [
                 'coupon_id' => ($coupon != null) && ($coupon->amount > 0) ? $coupon->id : null,
                 'payment_total' => $course->payment_value,
-                'payment_value' => ($coupon != null) && ($coupon->amount > 0) ? 
+                'payment_value' => ($coupon != null) && ($coupon->amount > 0) ?
                                         $course->payment_value - ($course->payment_value * $coupon->discount_percentage / 100) : $course->payment_value,
-                'code' => $course->acronym . $today->format('y') . '0' . str_pad(rand(0, 9999), 4, '0', STR_PAD_LEFT),
+                'code' => $code,
                 'exam_date' => $exam_date->toDateString(),
                 'started_at' => $today->toDateString(),
                 'exam_nr' => 0
