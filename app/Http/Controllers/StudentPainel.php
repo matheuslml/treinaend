@@ -38,6 +38,8 @@ class StudentPainel extends Controller
             $unit = Unit::where('web', true)->first();
             $copyright = Copyright::where('status', 'PUBLISHED')->first();
 
+            $finished = false;
+
             $userId = Auth::id();
             $user = User::find($userId);
             $person_id = $user->person_id;
@@ -70,7 +72,7 @@ class StudentPainel extends Controller
                 }])
                 ->first();
                 if($discipline_atual == null){
-                    $discipline_atual = $disciplines->first();
+                    $finished = true;
                 }
 
 
@@ -92,7 +94,7 @@ class StudentPainel extends Controller
                 }])
                 ->get();
 
-            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('disciplines_person', 'course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
+            return view('admin.student_painel.disciplines', ['pageConfigs' => $pageConfigs], compact('user', 'finished','disciplines_person', 'course', 'disciplines', 'unit', 'copyright', 'courses_nav', 'discipline_atual'));
         } catch (\Throwable $throwable) {
             dd($throwable);
             flash('Erro ao procurar as Matrículas Cadastras!')->error();
@@ -276,8 +278,8 @@ class StudentPainel extends Controller
 
                 $discipline_person->update([
                     'exam_started_at'  => $now,
-                    //'exam_finished_at' => $now->copy()->addHours(2)
-                    'exam_finished_at' => $now->copy()->addMinutes(2)
+                    'exam_finished_at' => $now->copy()->addHours(2)
+                    //'exam_finished_at' => $now->copy()->addMinutes(2)
                 ]);
             }
 
@@ -357,7 +359,7 @@ class StudentPainel extends Controller
         $userId = Auth::id();
         $personId = User::findOrFail($userId)->person->id;
 
-        $disciplinePeople = DisciplinePeople::where('person_id', $personId)->first();
+        $disciplinePeople = DisciplinePeople::where('person_id', $personId)->where('finished_at', null)->first();
 
         return response()->json([
             'current_question' => $disciplinePeople->current_question ?? null
@@ -402,17 +404,20 @@ class StudentPainel extends Controller
                         'exam_nr' => $disciplinePerson->exam_nr + 1
                     ]
                 );
-                DisciplinePeople::updateOrCreate(
-                    [
-                        'discipline_id' => $disciplinePerson->discipline->order + 1,
-                        'person_id' => $user->person->id
-                    ],
-                    [
-                        'exam_date' => $today->copy()->addDays($days),
-                        'started_at' => $today,
-                        'exam_nr' => 0
-                    ]
-                );
+                //verificar se é o ultimo------------------
+                if ($disciplinePerson->discipline->order < count($disciplinePerson->discipline->course->disciplines)) {
+                    DisciplinePeople::updateOrCreate(
+                        [
+                            'discipline_id' => $disciplinePerson->discipline->order + 1,
+                            'person_id' => $user->person->id
+                        ],
+                        [
+                            'exam_date' => $today->copy()->addDays($days),
+                            'started_at' => $today,
+                            'exam_nr' => 0
+                        ]
+                    );
+                }
                 $send_internal_notification->handle("discipline_notification", "aproved", $userId);
             }else{
                 DisciplinePeople::updateOrCreate(

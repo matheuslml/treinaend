@@ -34,6 +34,7 @@ class CourseUpdateService
                 $course = Course::find($course_id);
                 $old_path = $course->image_card;
                 $old_path_file = $course->certificate_file;
+                $old_path_image_conclusion = $course->image_conclusion;
 
                 $course->name = isset($changed['name']) ? $changed['name']  : '';
                 $course->acronym = isset($changed['acronym']) ? $changed['acronym']  : '';
@@ -43,12 +44,18 @@ class CourseUpdateService
                 $course->payment_value = isset($changed['payment_value']) ? $changed['payment_value']  : 0;
                 $course->certificate_file = isset($changed['path_file']) ? $changed['path_file']  : $old_path_file;
                 $course->image_card = isset($changed['path']) ? $changed['path']  : $old_path;
+                $course->image_conclusion = isset($changed['path_image_conclusion']) ? $changed['path_image_conclusion']  : $old_path_image_conclusion;
                 $course->status = $changed['status'];
                 $course->save();
 
                 if(isset($changed['path']) && isset($old_path)){
                     $old_path = storage_path() . '/app/public/images/courses/cards/' . str_replace("cards/", "", $old_path);
                     unlink($old_path);
+                }
+
+                if(isset($changed['path_image_conclusion']) && isset($old_path_image_conclusion)){
+                    $old_path_image_conclusion = storage_path() . '/app/public/images/courses/cards/' . str_replace("cards/", "", $old_path_image_conclusion);
+                    unlink($old_path_image_conclusion);
                 }
 
                 if(isset($changed['path_file']) && isset($old_path_file)){

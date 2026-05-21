@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('certificate_file')->nullable();
             $table->string('image_card')->nullable();
             $table->string('image_banner')->nullable();//imagem pagina
+            $table->string('image_conclusion')->nullable();//imagem pagina
             $table->enum('type', ['EAD', 'PRESENCIAL'])->default('EAD');
             $table->text('excerpt')->nullable();
             $table->text('body')->nullable();

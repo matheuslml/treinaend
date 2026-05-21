@@ -172,6 +172,30 @@
               <div class="col-12">
                 <div class="mb-1 row">
                   <div class="col-sm-3">
+                    <label class="col-form-label" for="image_conclusion">Imagem da Conclusão<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <img
+                        class="img-fluid rounded mb-75"
+                        src="{{asset('storage/images/courses/' . $course_selected->image_conclusion)}}"
+                        alt="avatar img"
+                      />
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
+                    <label class="col-form-label" for="image_conclusion">Imagem da Conclusão para editar<tag data-bs-toggle="tooltip" title="Imagem"><i data-feather='info'></i></tag></label>
+                  </div>
+                  <div class="col-sm-9">
+                      <input type="file" class="form-control" id="image_conclusion" name="image_conclusion" >
+                  </div>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="mb-1 row">
+                  <div class="col-sm-3">
                     <label class="col-form-label" for="status">Status <tag data-bs-toggle="tooltip" title=""><i data-feather='info'></i></tag></label>
                   </div>
                   <div class="col-sm-9">

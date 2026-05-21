@@ -59,7 +59,27 @@ class CourseController extends Controller
 
             $courseArrayData = $request->toArray();
 
-            if(isset($request['image_card'])){
+            if(isset($request['image_card']) && isset($request['image_conclusion'])){
+
+                $request->validate([
+                    'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'image_conclusion' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'certificate_file' => 'required|mimes:pdf|max:2048'
+                ]);
+
+                $path = Storage::disk('courses')->put('cards', $request->file( key:'image_card'));
+                $path_image_conclusion = Storage::disk('courses')->put('cards', $request->file( key:'image_conclusion'));
+                $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
+
+                $courseArrayData = array_merge(
+                    $request->toArray(),
+                    [
+                        'path'  => $path,
+                        'path_image_conclusion' => $path_image_conclusion,
+                        'path_file'  => $path_file
+                    ]
+                );
+            }elseif(isset($request['image_card']) && !isset($request['image_conclusion'])){
 
                 $request->validate([
                     'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
@@ -73,6 +93,24 @@ class CourseController extends Controller
                     $request->toArray(),
                     [
                         'path'  => $path,
+                        'path_file'  => $path_file
+                    ]
+                );
+
+            }else{
+                
+                $request->validate([
+                    'image_conclusion' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                    'certificate_file' => 'required|mimes:pdf|max:2048'
+                ]);
+
+                $path_image_conclusion = Storage::disk('courses')->put('cards', $request->file( key:'image_conclusion'));
+                $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
+
+                $courseArrayData = array_merge(
+                    $request->toArray(),
+                    [
+                        'path_image_conclusion' => $path_image_conclusion,
                         'path_file'  => $path_file
                     ]
                 );

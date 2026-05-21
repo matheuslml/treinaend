@@ -36,38 +36,71 @@
 <!-- frequently asked questions tabs pillss -->
 <section id="faq-tabs">
   <!-- vertical tab pill -->
-  @if (count($disciplines) > 0)
-    <div class="row">
-            @php
-                $pivot = $discipline_atual->person->first()?->pivot;
-            @endphp
-            <div class="col-md-8 col-lg-7">
-                <div class="card text-center card-congratulations">
-                    <div class="card-header">
-                        <div class="avatar avatar-xl bg-success shadow"> <!-- fundo verde -->
+     @if (count($disciplines) > 0)
+        <div class="row">
+            @if ($finished)
+                <!-- Congratulations Card  -->
+                <div class="col-12 col-md-6 col-lg-7">
+                    <div class="card card-congratulations">
+                        <div class="card-body text-center">
+                            <img
+                            src="{{asset('images/elements/decore-left.png')}}"
+                            class="congratulations-img-left"
+                            alt="card-img-left"
+                            />
+                            <img
+                            src="{{asset('images/elements/decore-right.png')}}"
+                            class="congratulations-img-right"
+                            alt="card-img-right"
+                            />
+                            <div class="avatar avatar-xl bg-primary shadow">
                             <div class="avatar-content">
-                                <i data-feather="{{ ($discipline_atual->person->first()?->pivot?->score >= 7) ? 'award' : (($discipline_atual->person->first()?->pivot?->exam_date ? 'play-circle' : 'x-circle')) }}" class="font-large-1"></i>
+                                <i data-feather="award" class="font-large-1"></i>
+                            </div>
+                            </div>
+                            <div class="text-center">
+                            <h1 class="mb-1 text-white">Parabéns {{ $user->person->full_name . ', o Curso ' . $course->name }} foi Concluído com Sucesso!!</h1>
+                            <p class="card-text m-auto w-75">
+                                Você demonstrou <strong> dedicação e perseverança</strong> ao longo da jornada. Continue aplicando seus conhecimentos e conquiste novos desafios!
+                            </p>
                             </div>
                         </div>
-                    </div>
-                    <div class="card-body">
-                        <h4 class="card-title mb-1 text-white">
-                            {{ $discipline_atual->order . ' - ' .  $discipline_atual->name }}
-                        </h4>
-                        <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" 
-                        class="btn btn-success text-white"> <!-- botão verde -->
-                            Acessar
-                        </a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        <p class="card-text m-auto w-75 text-white">
-                            Prova: {{ $discipline_atual->person->first()?->pivot?->exam_date 
-                                ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') 
-                                : null ?? 'Disciplina Bloqueada' }}
-                        </p>
+                        <img class="card-img-bottom" src="{{asset('images/slider/09.jpg')}}" alt="Card image cap" />
                     </div>
                 </div>
-            </div>
+                <!--/ Congratulations Card -->
+            @else
+                @php
+                    $pivot = $discipline_atual->person->first()?->pivot;
+                @endphp
+                <div class="col-md-8 col-lg-7">
+                    <div class="card text-center card-congratulations">
+                        <div class="card-header">
+                            <div class="avatar avatar-xl bg-success shadow"> <!-- fundo verde -->
+                                <div class="avatar-content">
+                                    <i data-feather="{{ ($discipline_atual->person->first()?->pivot?->score >= 7) ? 'award' : (($discipline_atual->person->first()?->pivot?->exam_date ? 'play-circle' : 'x-circle')) }}" class="font-large-1"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <h4 class="card-title mb-1 text-white">
+                                {{ $discipline_atual->order . ' - ' .  $discipline_atual->name }}
+                            </h4>
+                            <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline_atual->id]) }}" 
+                            class="btn btn-success text-white"> <!-- botão verde -->
+                                Acessar
+                            </a>
+                        </div>
+                        <div class="card-footer text-muted">
+                            <p class="card-text m-auto w-75 text-white">
+                                Prova: {{ $discipline_atual->person->first()?->pivot?->exam_date 
+                                    ? \Carbon\Carbon::parse($discipline_atual->person->first()?->pivot->exam_date)->format('d/m/Y') 
+                                    : null ?? 'Disciplina Bloqueada' }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            @endif
 
             <div class="col-md-6 col-lg-5">
                 @foreach ($disciplines as $discipline)
@@ -78,7 +111,7 @@
                         $iconBgClass = ($pivot?->score < 7) ? 'bg-warning' : 'bg-primary'; // ícone amarelo se score < 7
                     @endphp
 
-                    @if ($discipline->id != $discipline_atual->id)
+                    @if ($finished)
                         <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}">
                             <div class="card text-center {{ $cardClass }}">
                                 <div class="card-header d-flex align-items-center">
@@ -93,6 +126,23 @@
                                 </div>
                             </div>
                         </a>
+                    @else
+                        @if ($discipline->id != $discipline_atual->id)
+                            <a href="{{ route('exercises_student_index', ['disciplineId' => $discipline->id]) }}">
+                                <div class="card text-center {{ $cardClass }}">
+                                    <div class="card-header d-flex align-items-center">
+                                        <div class="avatar avatar-lg {{ $iconBgClass }} shadow">
+                                            <div class="avatar-content">
+                                                <i data-feather="{{ $icon }}" class="font-large-1"></i>
+                                            </div>
+                                        </div>
+                                        <h4 class="text-left ml-2">
+                                            {{ $discipline->name . ' - ' .  $discipline->order }}
+                                        </h4>
+                                    </div>
+                                </div>
+                            </a>
+                        @endif
                     @endif
                 @endforeach
             </div>

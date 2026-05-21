@@ -18,12 +18,21 @@ class CourseResource extends JsonResource
         return [
             'id' => $this->id,
             'name' => $this->name,
+            'slug' => $this->slug,
+            'acronym' => $this->acronym,
             'description' => $this->description,
             'order' => $this->order,
             'grade' => $this->grade,
-            'online' => $this->online,
             'payment_value' => $this->payment_value,
-            'image_certificate' => $this->image_certificate,
+            'certificate_file' => $this->certificate_file,
+            'image_card' => $this->image_card,
+            'image_banner' => $this->image_banner,
+            'image_conclusion' => $this->image_conclusion,
+            'type' => $this->type,
+            'excerpt' => $this->excerpt,
+            'body' => $this->body,
+            'meta_description' => $this->meta_description,
+            'meta_keywords' => $this->meta_keywords,
             'status' => $this->status
         ];
     }

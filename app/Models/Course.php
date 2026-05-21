@@ -29,6 +29,7 @@ class Course extends Model implements Auditable
         'certificate_file',
         'image_card',
         'image_banner',
+        'image_conclusion',
         'type',
         'excerpt',
         'body',
