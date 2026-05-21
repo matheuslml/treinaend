@@ -65,7 +65,7 @@
                             </p>
                             </div>
                         </div>
-                        <img class="card-img-bottom" src="{{asset('images/slider/09.jpg')}}" alt="Card image cap" />
+                        <img class="card-img-bottom" src="{{asset('storage/images/courses/' . $course->image_conclusion)}}" alt="Card image cap" />
                     </div>
                 </div>
                 <!--/ Congratulations Card -->

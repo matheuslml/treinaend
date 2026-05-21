@@ -48,86 +48,67 @@ class CourseController extends Controller
         }
     }
 
-    public function store(
-        CourseRequest $request
-    ){
+    public function store(CourseRequest $request)
+    {
         if (! Gate::allows('Editar Cursos')) {
             return view('pages.not-authorized');
         }
+
         try {
             DB::beginTransaction();
 
-            $courseArrayData = $request->toArray();
+            $path_file = null;
+            $path_card = null;
+            $path_image_conclusion = null;
 
-            if(isset($request['image_card']) && isset($request['image_conclusion'])){
+            // Validações centralizadas
+            $request->validate([
+                'certificate_file' => 'nullable|mimes:pdf|max:2048',
+                'image_card'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                'image_conclusion' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            ]);
 
-                $request->validate([
-                    'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    'image_conclusion' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    'certificate_file' => 'required|mimes:pdf|max:2048'
-                ]);
-
-                $path = Storage::disk('courses')->put('cards', $request->file( key:'image_card'));
-                $path_image_conclusion = Storage::disk('courses')->put('cards', $request->file( key:'image_conclusion'));
-                $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
-
-                $courseArrayData = array_merge(
-                    $request->toArray(),
-                    [
-                        'path'  => $path,
-                        'path_image_conclusion' => $path_image_conclusion,
-                        'path_file'  => $path_file
-                    ]
-                );
-            }elseif(isset($request['image_card']) && !isset($request['image_conclusion'])){
-
-                $request->validate([
-                    'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    'certificate_file' => 'required|mimes:pdf|max:2048'
-                ]);
-
-                $path = Storage::disk('courses')->put('cards', $request->file( key:'image_card'));
-                $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
-
-                $courseArrayData = array_merge(
-                    $request->toArray(),
-                    [
-                        'path'  => $path,
-                        'path_file'  => $path_file
-                    ]
-                );
-
-            }else{
-                
-                $request->validate([
-                    'image_conclusion' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                    'certificate_file' => 'required|mimes:pdf|max:2048'
-                ]);
-
-                $path_image_conclusion = Storage::disk('courses')->put('cards', $request->file( key:'image_conclusion'));
-                $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
-
-                $courseArrayData = array_merge(
-                    $request->toArray(),
-                    [
-                        'path_image_conclusion' => $path_image_conclusion,
-                        'path_file'  => $path_file
-                    ]
-                );
+            // Uploads
+            if ($request->hasFile('certificate_file')) {
+                $path_file = Storage::disk('courses_files')
+                    ->put('certificates', $request->file('certificate_file'));
             }
+
+            if ($request->hasFile('image_card')) {
+                $path_card = Storage::disk('courses')
+                    ->put('cards', $request->file('image_card'));
+            }
+
+            if ($request->hasFile('image_conclusion')) {
+                $path_image_conclusion = Storage::disk('courses')
+                    ->put('cards', $request->file('image_conclusion'));
+            }
+
+            // Monta array final
+            $courseArrayData = array_merge(
+                $request->toArray(),
+                [
+                    'path_card'                => $path_card,
+                    'path_image_conclusion' => $path_image_conclusion,
+                    'path_file'           => $path_file,
+                ]
+            );
 
             $this->courseCreateService->create($courseArrayData);
 
             flash('Curso criado com sucesso!')->success();
             DB::commit();
+
             return redirect()->back();
-        }catch (\Throwable $throwable){
+
+        } catch (\Throwable $throwable) {
             DB::rollBack();
-            dd($throwable);
-            flash('Erro Cadastrar!')->error();
+
+            flash('Erro ao cadastrar curso!')->error();
             return redirect()->back()->withInput();
         }
     }
+
 
     public function show($course_id)
     {
@@ -157,58 +138,47 @@ class CourseController extends Controller
         try {
             DB::beginTransaction();
                 if($request['type'] != null){
-                    if(isset($request['image_card']) && isset($request['certificate_file'])){//pega os dois
-                        $request->validate([
-                            'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-                            'certificate_file' => 'required|mimes:pdf|max:2048'
-                        ]);
+                    $request->validate([
+                        'certificate_file' => 'nullable|mimes:pdf|max:2048',
+                        'image_card'       => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+                        'image_conclusion' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
+                    ]);
+                                                                                                        $path_file = null;
+                    $path_card = null;
+                    $path_image_conclusion = null;
+                    $path_banner = null;
 
-                        $path = Storage::disk('courses')->put('cards', $request->file( key:'image_card'));
-                        $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
-
-                        $courseArrayData = array_merge(
-                            $request->toArray(),
-                            [
-                                'path'  => $path,
-                                'path_file'  => $path_file
-                            ]
-                        );
-                        $this->courseUpdateService->update($courseArrayData, $course_id);
-                    }elseif(isset($request['image_card']) && !isset($request['certificate_file'])){//pega image_card
-
-                        $request->validate([
-                            'image_card' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048'
-                        ]);
-
-                        $path = Storage::disk('courses')->put('cards', $request->file( key:'image_card'));
-
-                        $courseArrayData = array_merge(
-                            $request->toArray(),
-                            [
-                                'path'  => $path
-                            ]
-                        );
-                        $this->courseUpdateService->update($courseArrayData, $course_id);
-
-                    }elseif(!isset($request['image_card']) && isset($request['certificate_file'])){//pega certificate_file
-
-                        $request->validate([
-                            'certificate_file' => 'required|mimes:pdf|max:2048'
-                        ]);
-
-                        $path_file = Storage::disk('courses_files')->put('certificates', $request->file( key:'certificate_file'));
-
-                        $courseArrayData = array_merge(
-                            $request->toArray(),
-                            [
-                                'path_file'  => $path_file
-                            ]
-                        );
-                        $this->courseUpdateService->update($courseArrayData, $course_id);
-                    }else{//não pega nenhum dos dois
-                        $this->courseUpdateService->update($request->toArray(), $course_id);
+                    // Uploads
+                    if ($request->hasFile('certificate_file')) {
+                        $path_file = Storage::disk('courses_files')
+                            ->put('certificates', $request->file('certificate_file'));
                     }
+
+                    if ($request->hasFile('image_card')) {
+                        $path_card = Storage::disk('courses')
+                            ->put('cards', $request->file('image_card'));
+                    }
+
+                    if ($request->hasFile('image_conclusion')) {
+                        $path_image_conclusion = Storage::disk('courses')
+                            ->put('cards', $request->file('image_conclusion'));
+                    }
+
+                    // Monta array final
+                    $courseArrayData = array_merge(
+                        $request->toArray(),
+                        [
+                            'path_card'                => $path_card,
+                            'path_image_conclusion' => $path_image_conclusion,
+                            'path_file'           => $path_file,
+                        ]
+                    );
+
+                    // Atualiza curso
+                    $this->courseUpdateService->update($courseArrayData, $course_id);   
+
                     flash('Curso editado com sucesso!')->success();
+
                 }else{
                     $course = Course::find($course_id);
                     //for server and local unlink

@@ -36,7 +36,7 @@ class CourseCreateService
                     'grade' => $changed['grade'],
                     'payment_value' => $changed['payment_value'],
                     'certificate_file' => isset($changed['path_file']) ? $changed['path_file']  : '',
-                    'image_card' => isset($changed['path']) ? $changed['path']  : '',
+                    'image_card' => isset($changed['path_card']) ? $changed['path_card']  : '',
                     'image_conclusion' => isset($changed['path_image_conclusion']) ? $changed['path_image_conclusion']  : '',
                     'type' => $changed['type'],
                     'status' => $changed['status']
