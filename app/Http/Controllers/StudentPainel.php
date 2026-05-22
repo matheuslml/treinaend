@@ -367,10 +367,9 @@ class StudentPainel extends Controller
     }
 
 
-
     public function saveExam()
     {
-        try{
+        try {
             $userId = Auth::id();
             $user = User::find($userId);
 
@@ -388,65 +387,80 @@ class StudentPainel extends Controller
 
             $exercises = $disciplinePerson->discipline_people_exercises;
 
-            foreach($exercises as $exercise){
+            foreach ($exercises as $exercise) {
                 $score += $exercise->correct ? 1 : 0;
             }
 
-            if($score >= $disciplinePerson->discipline->course->grade){
+            $whatsAppUrl = null; // variável para guardar o link
+
+            if ($score >= $disciplinePerson->discipline->course->grade) {
                 DisciplinePeople::updateOrCreate(
                     [
                         'discipline_id' => $disciplinePerson->discipline->id,
-                        'person_id' => $user->person->id
+                        'person_id'     => $user->person->id
                     ],
                     [
                         'finished_at' => $today,
-                        'score' => $score,
-                        'exam_nr' => $disciplinePerson->exam_nr + 1
+                        'score'       => $score,
+                        'exam_nr'     => $disciplinePerson->exam_nr + 1
                     ]
                 );
-                //verificar se é o ultimo------------------
+
+                // verifica se há próxima disciplina
                 if ($disciplinePerson->discipline->order < count($disciplinePerson->discipline->course->disciplines)) {
                     DisciplinePeople::updateOrCreate(
                         [
                             'discipline_id' => $disciplinePerson->discipline->order + 1,
-                            'person_id' => $user->person->id
+                            'person_id'     => $user->person->id
                         ],
                         [
-                            'exam_date' => $today->copy()->addDays($days),
+                            'exam_date'  => $today->copy()->addDays($days),
                             'started_at' => $today,
-                            'exam_nr' => 0
+                            'exam_nr'    => 0
                         ]
                     );
                 }
+
+                // se for a última disciplina, pega a URL do WhatsApp
+                if ($disciplinePerson->discipline->order == count($disciplinePerson->discipline->course->disciplines)) {
+                    $whatsAppUrl = $send_internal_notification->handle("course_notification", "aproved", $userId);
+                }
+
                 $send_internal_notification->handle("discipline_notification", "aproved", $userId);
-            }else{
+            } else {
                 DisciplinePeople::updateOrCreate(
                     [
                         'discipline_id' => $disciplinePerson->discipline->id,
-                        'person_id' => $user->person->id
+                        'person_id'     => $user->person->id
                     ],
                     [
                         'current_question' => null,
-                        'exam_date' => $today->copy()->addDays($days),
-                        'exam_nr' => $disciplinePerson->exam_nr + 1
+                        'exam_date'        => $today->copy()->addDays($days),
+                        'exam_nr'          => $disciplinePerson->exam_nr + 1
                     ]
                 );
+
                 foreach ($exercises as $exercise) {
-                    // faz soft delete do exercício
-                    $exercise->delete();
+                    $exercise->delete(); // soft delete
                 }
+
                 $send_internal_notification->handle("discipline_notification", "notaproved", $userId);
             }
+
             return response()->json([
-                'success' => true,
-                'message' => 'Prova realizada com sucesso!',
-                'discipline_id' => $disciplinePerson->discipline->id
+                'success'       => true,
+                'message'       => 'Prova realizada com sucesso!',
+                'discipline_id' => $disciplinePerson->discipline->id,
+                'whatsapp_url'  => $whatsAppUrl // só vem se curso finalizado
             ]);
         } catch (\Throwable $throwable) {
-            return response()->json([ 'status' => 'error', 'errors' => $throwable->getMessage() ]);
+            return response()->json([
+                'status' => 'error',
+                'errors' => $throwable->getMessage()
+            ]);
         }
-
     }
+
 
 }
 

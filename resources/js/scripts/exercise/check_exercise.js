@@ -66,13 +66,19 @@ document.addEventListener("DOMContentLoaded", async function () {
                     nextBtn.removeAttribute("disabled");
                     nextBtn.click();
                 } else {
+                    // 🚀 Última  concluídaquestão → chama saveExam no backend
                     // 🚀 Última questão concluída → chama saveExam no backend
                     fetch("/save_exam")
                         .then(resp => resp.json())
                         .then(result => {
                             alert("Prova concluída com sucesso!");
                             console.log("Resultado final:", result);
-                            if (result.discipline_id) {
+
+                            if (result.whatsapp_url) {
+                                // Se veio a URL do WhatsApp, redireciona para lá
+                                window.location.href = result.whatsapp_url;
+                            } else if (result.discipline_id) {
+                                // Caso contrário, continua para exercises_student_index
                                 window.location.href = "/exercises_student_index/" + result.discipline_id;
                             }
                         })
@@ -80,7 +86,6 @@ document.addEventListener("DOMContentLoaded", async function () {
                             console.error("Erro ao finalizar prova:", err);
                             alert("Erro ao finalizar a prova.");
                         });
-
                 }
             })
             .catch(error => {

@@ -7,24 +7,17 @@ use App\Models\NotificationUser;
 use App\Models\User;
 use Exception;
 use Lorisleiva\Actions\Concerns\AsAction;
-use Illuminate\Support\Facades\Auth;
 
 class SendInternalNotification
 {
     use AsAction;
 
-    /**
-     * Envia notificação de acordo com o tipo
-     * @throws Exception
-     */
-    public function handle(string $type, string $function, int $user_id): void
+    public function handle(string $type, string $function, int $user_id)
     {
-
         $user = User::findOrFail($user_id);
         $title   = '';
         $content = '';
 
-        // pega último registro e disciplina de forma eficiente
         $latestRegistration = $user->person->registrations()
             ->orderByDesc('created_at')
             ->first();
@@ -60,16 +53,34 @@ class SendInternalNotification
         }
 
         $notification = Notification::create([
-            'type_id' => 3,
+            'type_id'   => 3,
             'status_id' => 2,
             'sender_id' => 1,
-            'title'   => $title,
-            'content' => $content,
+            'title'     => $title,
+            'content'   => $content,
         ]);
 
         NotificationUser::create([
             'notification_id' => $notification->id,
             'user_id'         => $user->id,
         ]);
+
+        // Retorna a URL do WhatsApp apenas em course_notification aprovado
+        if ($type === 'course_notification' && $function === 'aproved') {
+            return $this->sendWhatsAppMessage("{$title}\n{$content}");
+        }
+
+        return null;
+    }
+
+    /**
+     * Gera e retorna a URL do WhatsApp
+     */
+    protected function sendWhatsAppMessage(string $message): string
+    {
+        $phoneNumber = '5522997377972';
+        $encodedMessage = urlencode($message);
+
+        return "https://wa.me/{$phoneNumber}?text={$encodedMessage}";
     }
 }
