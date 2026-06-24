@@ -383,7 +383,7 @@ class StudentPainel extends Controller
             $disciplinePerson = DisciplinePeople::find($discipline->discipline_people->first()->id);
 
             $today = Carbon::today();
-            $days = $disciplinePerson->days ?? 0;
+            $days = $disciplinePerson->days ?? 2;
 
             $exercises = $disciplinePerson->discipline_people_exercises;
 
@@ -426,7 +426,13 @@ class StudentPainel extends Controller
                     $whatsAppUrl = $send_internal_notification->handle("course_notification", "aproved", $userId);
                 }
 
-                $send_internal_notification->handle("discipline_notification", "aproved", $userId);
+                // se for a segunda disciplina, pega a URL do WhatsApp mensagem de pagamento
+                if ($disciplinePerson->discipline->order == 2) {
+                    $whatsAppUrl = $send_internal_notification->handle("discipline_notification", "aproved", $userId);
+                }else{
+                    $send_internal_notification->handle("discipline_notification", "aproved", $userId);
+                }
+
             } else {
                 DisciplinePeople::updateOrCreate(
                     [

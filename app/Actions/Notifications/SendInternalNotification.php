@@ -33,10 +33,15 @@ class SendInternalNotification
                 break;
 
             case 'discipline_notification':
-                $title   = $function === 'aproved' ? 'Aprovado na Disciplina' : 'Não Aprovado na Disciplina';
-                $content = $function === 'aproved'
-                    ? "Disciplina: {$latestDiscipline?->name} foi realizada com sucesso."
-                    : "Disciplina: {$latestDiscipline?->name} não foi realizada com sucesso.";
+                if($latestDiscipline?->order == 2 && $function === 'aproved'){
+                    $title = 'Aprovado na Disciplina';
+                    $content = 'Para continuar o curso Faça o Pagamento';
+                }else{
+                    $title   = $function === 'aproved' ? 'Aprovado na Disciplina' : 'Não Aprovado na Disciplina';
+                    $content = $function === 'aproved'
+                        ? "Disciplina: {$latestDiscipline?->name} foi realizada com sucesso."
+                        : "Disciplina: {$latestDiscipline?->name} não foi realizada com sucesso.";
+                 }
                 break;
 
             case 'course_notification':
@@ -70,6 +75,11 @@ class SendInternalNotification
             return $this->sendWhatsAppMessage("{$title}\n{$content}");
         }
 
+        // Retorna a URL do WhatsApp apenas em discipline_notification aprovado cobrança
+        if ($type === 'discipline_notification' && $latestDiscipline?->order == 2 && $function === 'aproved') {
+            return $this->sendWhatsAppMessage("{$title}\n{$content}");
+        }
+
         return null;
     }
 
@@ -78,7 +88,7 @@ class SendInternalNotification
      */
     protected function sendWhatsAppMessage(string $message): string
     {
-        $phoneNumber = '5522997377972';
+        $phoneNumber = '5522998973216';
         $encodedMessage = urlencode($message);
 
         return "https://wa.me/{$phoneNumber}?text={$encodedMessage}";

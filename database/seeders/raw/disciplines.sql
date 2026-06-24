@@ -1,8 +1,8 @@
 INSERT INTO disciplines (course_id,name,`order`,days,deleted_at,created_at,updated_at) VALUES
     (1,'Noções de Processamentos Químicos e Outros',1,1,NULL,NOW(),NULL),
-    (1,'Segurança e Saúde no Trabalho',2,1,NULL,NOW(),NULL);
-    /*(1,'Noções sobre Qualidade',3,1,NULL,NOW(),NULL),
-    (1,'Noções sobre Proteção Ambiental',4,1,NULL,NOW(),NULL),
+    (1,'Segurança e Saúde no Trabalho',2,1,NULL,NOW(),NULL),
+    (1,'Noções sobre Qualidade',3,1,NULL,NOW(),NULL);
+    /*(1,'Noções sobre Proteção Ambiental',4,1,NULL,NOW(),NULL),
     (1,'Noções sobre Aspéctos Legais da Insp. Equip.',5,1,NULL,NOW(),NULL),
     (1,'Papel da Inspeção de Equipamentos nas Organizações',6,1,NULL,NOW(),NULL),
     (1,'Normalização Técnica',7,1,NULL,NOW(),NULL),
