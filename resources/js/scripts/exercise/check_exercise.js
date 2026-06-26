@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", async function () {
             })
             .then(response => response.json())
             .then(data => {
-                console.log("Resposta salva:", data);
+                //console.log("Resposta salva:", data);
                 alert("Questão " + qIndex + " salva com sucesso!");
 
                 // 🔒 Bloqueia a questão atual
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", async function () {
                         .then(resp => resp.json())
                         .then(result => {
                             alert("Prova concluída com sucesso!");
-                            console.log("Resultado final:", result);
+                            //console.log("Resultado final:", result);
 
                             if (result.whatsapp_url) {
                                 // Se veio a URL do WhatsApp, redireciona para lá

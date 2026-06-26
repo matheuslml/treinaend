@@ -370,6 +370,7 @@ class StudentPainel extends Controller
     public function saveExam()
     {
         try {
+            $test = 'não foi';
             $userId = Auth::id();
             $user = User::find($userId);
 
@@ -406,6 +407,15 @@ class StudentPainel extends Controller
                     ]
                 );
 
+                // se for a segunda disciplina, pega a URL do WhatsApp mensagem de pagamento
+                if ($disciplinePerson->discipline->order == 2) {
+                    $whatsAppUrl = $send_internal_notification->handle("discipline_notification", "aproved", $userId);
+                    $test = 'foi';
+                }else{
+                    $send_internal_notification->handle("discipline_notification", "aproved", $userId);
+                    $test = $disciplinePerson->discipline->order;
+                }
+
                 // verifica se há próxima disciplina
                 if ($disciplinePerson->discipline->order < count($disciplinePerson->discipline->course->disciplines)) {
                     DisciplinePeople::updateOrCreate(
@@ -424,13 +434,6 @@ class StudentPainel extends Controller
                 // se for a última disciplina, pega a URL do WhatsApp
                 if ($disciplinePerson->discipline->order == count($disciplinePerson->discipline->course->disciplines)) {
                     $whatsAppUrl = $send_internal_notification->handle("course_notification", "aproved", $userId);
-                }
-
-                // se for a segunda disciplina, pega a URL do WhatsApp mensagem de pagamento
-                if ($disciplinePerson->discipline->order == 2) {
-                    $whatsAppUrl = $send_internal_notification->handle("discipline_notification", "aproved", $userId);
-                }else{
-                    $send_internal_notification->handle("discipline_notification", "aproved", $userId);
                 }
 
             } else {
@@ -457,7 +460,8 @@ class StudentPainel extends Controller
                 'success'       => true,
                 'message'       => 'Prova realizada com sucesso!',
                 'discipline_id' => $disciplinePerson->discipline->id,
-                'whatsapp_url'  => $whatsAppUrl // só vem se curso finalizado
+                'whatsapp_url'  => $whatsAppUrl, // só vem se curso finalizado
+                'teste' => $test,
             ]);
         } catch (\Throwable $throwable) {
             return response()->json([

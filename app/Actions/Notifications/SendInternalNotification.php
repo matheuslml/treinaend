@@ -14,6 +14,7 @@ class SendInternalNotification
 
     public function handle(string $type, string $function, int $user_id)
     {
+        //colocar o teste no /teste
         $user = User::findOrFail($user_id);
         $title   = '';
         $content = '';
@@ -23,7 +24,7 @@ class SendInternalNotification
             ->first();
 
         $latestDiscipline = $user->person->disciplines()
-            ->orderByDesc('created_at')
+            ->orderByDesc('order')
             ->first();
 
         switch ($type) {
@@ -33,11 +34,11 @@ class SendInternalNotification
                 break;
 
             case 'discipline_notification':
-                if($latestDiscipline?->order == 2 && $function === 'aproved'){
-                    $title = 'Aprovado na Disciplina';
+                if(($latestDiscipline->order == 2) && ($function == 'aproved')){
+                    $title = 'Aprovado na Disciplinaaqui';
                     $content = 'Para continuar o curso Faça o Pagamento';
                 }else{
-                    $title   = $function === 'aproved' ? 'Aprovado na Disciplina' : 'Não Aprovado na Disciplina';
+                    $title   = $function === 'aproved' ? 'Aprovado na Disciplina' . $latestDiscipline->order : 'Não Aprovado na Disciplina';
                     $content = $function === 'aproved'
                         ? "Disciplina: {$latestDiscipline?->name} foi realizada com sucesso."
                         : "Disciplina: {$latestDiscipline?->name} não foi realizada com sucesso.";
@@ -71,12 +72,12 @@ class SendInternalNotification
         ]);
 
         // Retorna a URL do WhatsApp apenas em course_notification aprovado
-        if ($type === 'course_notification' && $function === 'aproved') {
+        if ($type === 'course_notification' && $function == 'aproved') {
             return $this->sendWhatsAppMessage("{$title}\n{$content}");
         }
 
         // Retorna a URL do WhatsApp apenas em discipline_notification aprovado cobrança
-        if ($type === 'discipline_notification' && $latestDiscipline?->order == 2 && $function === 'aproved') {
+        if (($type === 'discipline_notification') && ($latestDiscipline->order == 2) && ($function == 'aproved')) {
             return $this->sendWhatsAppMessage("{$title}\n{$content}");
         }
 
