@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Str;
 use OwenIt\Auditing\Auditable as AuditableTrait;
@@ -20,6 +19,7 @@ class Notification extends Model implements Auditable
     protected $table = 'notifications';
 
     protected $fillable = [
+        'notification_template_id',
         'type_id',
         'status_id',
         'sender_id',
@@ -41,6 +41,11 @@ class Notification extends Model implements Auditable
     public function users(): BelongsToMany
     {
         return $this->belongsToMany(User::class);
+    }
+
+    public function notification_template(): BelongsTo
+    {
+        return $this->belongsTo(NotificationTemplate::class, 'notification_template_id');
     }
 
     public function type(): BelongsTo

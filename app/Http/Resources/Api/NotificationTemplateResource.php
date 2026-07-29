@@ -5,7 +5,7 @@ namespace App\Http\Resources\Api;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class NotificationResource extends JsonResource
+class NotificationTemplateResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,7 +17,6 @@ class NotificationResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'notification_template_id' => $this->notification_template_id,
             'type_id' => $this->type_id,
             'status_id' => $this->status_id,
             'sender_id' => $this->sender_id,

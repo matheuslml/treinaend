@@ -141,6 +141,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/noticia_tags', TagController::class);
     //Main - Notificações
     Route::resource('/notificacoes', NotificationController::class);
+    Route::resource('/notificacao_modelos', NotificationController::class);////////
     //Main - Ouvidoria ouvidoria_requisicoes
     Route::resource('/ouvidoria_manifestacoes', OmbudsmanController::class);
     Route::resource('/ouvidoria_acessos', TypeAccessController::class);

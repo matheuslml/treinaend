@@ -13,6 +13,9 @@ use App\Repositories\Eloquent\NotificationEloquentRepository;
 use App\Repositories\Eloquent\NotificationCreateEloquentRepository;
 use App\Repositories\Eloquent\NotificationUpdateEloquentRepository;
 use App\Repositories\Eloquent\NotificationUserEloquentRepository;
+use App\Repositories\Eloquent\NotificationTemplateEloquentRepository;
+use App\Repositories\Eloquent\NotificationTemplateCreateEloquentRepository;
+use App\Repositories\Eloquent\NotificationTemplateUpdateEloquentRepository;
 use App\Repositories\Eloquent\OccupationEloquentRepository;
 use App\Repositories\Eloquent\OccupationCreateEloquentRepository;
 use App\Repositories\Eloquent\OccupationUpdateEloquentRepository;
@@ -176,6 +179,9 @@ use App\Services\NotificationService;
 use App\Services\NotificationCreateService;
 use App\Services\NotificationUpdateService;
 use App\Services\NotificationUserService;
+use App\Services\NotificationTemplateService;
+use App\Services\NotificationTemplateCreateService;
+use App\Services\NotificationTemplateUpdateService;
 use App\Services\PersonService;
 use App\Services\PersonCreateService;
 use App\Services\PersonUpdateService;
@@ -341,6 +347,9 @@ class EloquentRepositoryProvider extends ServiceProvider
         NotificationCreateService::class => NotificationCreateEloquentRepository::class,
         NotificationUpdateService::class => NotificationUpdateEloquentRepository::class,
         NotificationUserService::class => NotificationUserEloquentRepository::class,
+        NotificationTemplateService::class => NotificationTemplateEloquentRepository::class,
+        NotificationTemplateCreateService::class => NotificationTemplateCreateEloquentRepository::class,
+        NotificationTemplateUpdateService::class => NotificationTemplateUpdateEloquentRepository::class,
         PersonService::class => PersonEloquentRepository::class,
         PersonCreateService::class => PersonCreateEloquentRepository::class,
         PersonUpdateService::class => PersonUpdateEloquentRepository::class,

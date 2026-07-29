@@ -133,7 +133,7 @@ $configData = Helper::applClasses();
                 <span class="menu-item text-truncate">Unidades</span>
               </a>
             </li>
-        </ul>
+          </ul>
         </li>
         <li class="nav-item  ">
           <a href="{{ route('exercicios.index') }}" class="d-flex align-items-center" target="_self">
@@ -148,10 +148,24 @@ $configData = Helper::applClasses();
           </a>
         </li>
         <li class="nav-item  ">
-          <a href="{{ route('notificacoes.index') }}" class="d-flex align-items-center" target="_self">
+          <a href="javascript:void(0)" class="d-flex align-items-center" target="_self">
             <i data-feather="bell"></i>
             <span class="menu-title text-truncate">Notificações</span>
           </a>
+          <ul class="menu-content">
+            <li >
+              <a href="{{ route('notificacoes.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Index</span>
+              </a>
+            </li>
+            <li>
+              <a href="{{ route('organizacoes.index') }}" class="d-flex align-items-center" target="_self">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate">Modelos</span>
+              </a>
+            </li>
+          </ul>
         </li>
       @endcan
 
