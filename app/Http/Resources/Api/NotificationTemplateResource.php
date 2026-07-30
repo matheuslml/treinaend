@@ -17,12 +17,11 @@ class NotificationTemplateResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'type_id' => $this->type_id,
-            'status_id' => $this->status_id,
-            'sender_id' => $this->sender_id,
             'title' => $this->title,
             'content' => $this->content,
-            'scheduled_at' => $this->scheduled_at,
+            'description' => $this->description,
+            'phone_number' => $this->phone_number,
+            'type' => $this->type
         ];
     }
 }

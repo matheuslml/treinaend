@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('notification_templates', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
-            $table->string('title')->nullable();
-            $table->string('code')->nullable();
-            $table->string('information')->nullable();
-            $table->enum('type', ['S', 'N', ''])->default('N')->nullable();
+            $table->string('content')->nullable();
+            $table->string('description')->nullable();
+            $table->string('phone_number')->nullable();
+            $table->enum('type', ['course_notification', 'discipline_notification'])->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

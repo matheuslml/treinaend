@@ -17,14 +17,11 @@ class NotificationTemplate extends Model implements Auditable
     protected $table = 'notification_templates';
 
     protected $fillable = [
-        'notification_template_id',
-        'type_id',
-        'status_id',
-        'sender_id',
         'title',
-        'slug',
         'content',
-        'scheduled_at'
+        'description',
+        'phone_number',
+        'type'
     ];
 
     protected $dates = [

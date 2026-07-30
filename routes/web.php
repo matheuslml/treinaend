@@ -23,6 +23,7 @@ use App\Http\Controllers\GalleryController;
 use App\Http\Controllers\LeadershipController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\NotificationTemplateController;
 use App\Http\Controllers\OccupationController;
 use App\Http\Controllers\OmbudsmanController;
 use App\Http\Controllers\OrganizationController;
@@ -141,7 +142,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/noticia_tags', TagController::class);
     //Main - Notificações
     Route::resource('/notificacoes', NotificationController::class);
-    Route::resource('/notificacao_modelos', NotificationController::class);////////
+    Route::resource('/notificacao_modelos', NotificationTemplateController::class);////////
     //Main - Ouvidoria ouvidoria_requisicoes
     Route::resource('/ouvidoria_manifestacoes', OmbudsmanController::class);
     Route::resource('/ouvidoria_acessos', TypeAccessController::class);

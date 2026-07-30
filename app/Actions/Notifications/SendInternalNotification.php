@@ -3,6 +3,7 @@
 namespace App\Actions\Notifications;
 
 use App\Models\Notification;
+use App\Models\NotificationTemplate;
 use App\Models\NotificationUser;
 use App\Models\User;
 use Exception;
@@ -14,7 +15,7 @@ class SendInternalNotification
 
     public function handle(string $type, string $function, int $user_id)
     {
-        //colocar o teste no /teste
+        //colocar o teste no /teste teste
         $user = User::findOrFail($user_id);
         $title   = '';
         $content = '';
@@ -35,7 +36,7 @@ class SendInternalNotification
 
             case 'discipline_notification':
                 if(($latestDiscipline->order == 2) && ($function == 'aproved')){
-                    $title = 'Aprovado na Disciplinaaqui';
+                    $title = 'Aprovado na Disciplina';
                     $content = 'Para continuar o curso Faça o Pagamento';
                 }else{
                     $title   = $function === 'aproved' ? 'Aprovado na Disciplina' . $latestDiscipline->order : 'Não Aprovado na Disciplina';
@@ -73,12 +74,12 @@ class SendInternalNotification
 
         // Retorna a URL do WhatsApp apenas em course_notification aprovado
         if ($type === 'course_notification' && $function == 'aproved') {
-            return $this->sendWhatsAppMessage("{$title}\n{$content}");
+            return $this->sendWhatsAppMessage('course_notification');
         }
 
         // Retorna a URL do WhatsApp apenas em discipline_notification aprovado cobrança
         if (($type === 'discipline_notification') && ($latestDiscipline->order == 2) && ($function == 'aproved')) {
-            return $this->sendWhatsAppMessage("{$title}\n{$content}");
+            return $this->sendWhatsAppMessage('discipline_notification');
         }
 
         return null;
@@ -87,10 +88,13 @@ class SendInternalNotification
     /**
      * Gera e retorna a URL do WhatsApp
      */
-    protected function sendWhatsAppMessage(string $message): string
+    protected function sendWhatsAppMessage(string $type): string
     {
-        $phoneNumber = '5522998973216';
-        $encodedMessage = urlencode($message);
+
+        $notification_template = NotificationTemplate::where('type', $type)->first();
+
+        $phoneNumber = $notification_template->phone_number;
+        $encodedMessage = urlencode($notification_template->title . ' - ' . $notification_template->content);
 
         return "https://wa.me/{$phoneNumber}?text={$encodedMessage}";
     }

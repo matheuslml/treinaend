@@ -160,7 +160,7 @@ $configData = Helper::applClasses();
               </a>
             </li>
             <li>
-              <a href="{{ route('organizacoes.index') }}" class="d-flex align-items-center" target="_self">
+              <a href="{{ route('notificacao_modelos.index') }}" class="d-flex align-items-center" target="_self">
                 <i data-feather="circle"></i>
                 <span class="menu-item text-truncate">Modelos</span>
               </a>

@@ -96,6 +96,10 @@ class DefaultInserts extends Migration
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Notificações', 'guard_name' => 'web']);
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Notificações', 'guard_name' => 'web']);
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Modelos de Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Criar Modelos de Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Modelos de Notificações', 'guard_name' => 'web']);
+        Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Deletar Modelos de Notificações', 'guard_name' => 'web']);
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Ver e Listar Banners', 'guard_name' => 'web']);
         Role::findByName('Administrador Master')->permissions()->firstOrCreate(['name' => 'Editar Banner', 'guard_name' => 'web']);
 

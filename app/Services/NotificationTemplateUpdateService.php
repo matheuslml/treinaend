@@ -17,12 +17,12 @@ class NotificationTemplateUpdateService
         //
     }
     
-    public function update(array $request)
+    public function update(array $request, $notification_template_id)
     {
         try {
             DB::beginTransaction();
             
-            $this->notificationTemplateService->update($request, $request['notification_template_id']);
+            $this->notificationTemplateService->update($request, $notification_template_id);
 
             DB::commit();
         } catch (Exception $exception) {
